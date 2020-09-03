@@ -1,0 +1,5 @@
+# Add any files here that need to be ignored by git
+
+# intelliJ Stuff, it's here because they did it in 314 & IDK why, so I can't say we don't need it
+.idea/
+*.iml
