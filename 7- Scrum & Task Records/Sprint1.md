@@ -19,7 +19,7 @@
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
-
+| 9/14 | 1, 2, 5, 12 | 3, 4, 11, 13 | Get User Stories Evaluated for importance |
 
 
 
