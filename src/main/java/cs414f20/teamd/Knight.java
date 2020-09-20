@@ -2,14 +2,11 @@ package cs414f20.teamd;
 
 import java.util.ArrayList;
 
-class Rook extends ChessPiece {
+class Knight extends ChessPiece {
     /**
      * This concrete class implements the methods for the abstract class ChessPiece
-     * for the rook piece in this variant of chess. A rook can move any number of
-     * squares horizontally or vertically, forward or backward, as long as it does
-     * not have to leap over other pieces. At the end of the move, it can occupy
-     * a previously empty square or capture (replace) an opponent's piece, but it
-     * cannot replace another piece of the same player.
+     * for the knight piece in this variant of chess. For simplicity, a knight may
+     * not move at all in this variant, and thus has no legal moves at any point.
      */
 
     public String toString() {
@@ -31,12 +28,12 @@ class Rook extends ChessPiece {
          * class). Each string in the list should represent a legal destination
          * for the piece. The order of the moves in the list is arbitrary. If there
          * are no legal moves, returns an empty ArrayList.
-         * 
-         * @return ArrayList representing the legal moves of the piece from the
-         *         current position
-         * @return An empty ArrayList if there are no legal moves available
+         * NOTE: For thie simple variant in assignment A2, knights may not move.
+         *       Therefore, this method will only ever return an empty ArrayList.
+         *
+         * @return An empty ArrayList (since a knight may not move)
          */
-        System.out.println("Not yet implemented");
-        return new ArrayList<String>();
-    }
+
+        return new ArrayList<>();
+    } 
 }

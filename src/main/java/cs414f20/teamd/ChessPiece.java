@@ -9,7 +9,7 @@ abstract class ChessPiece {
      * keeps a reference to the board that the piece is on (if any), the position
      * where the piece is located, and its color.
      */
-    
+
     public enum Color {
         WHITE, BLACK
     }
@@ -17,6 +17,11 @@ abstract class ChessPiece {
     protected int row;
     protected int column;
     protected Color color;
+
+    public ChessPiece() {
+        // No-arg constructor for concrete classes defaults to white
+        this(new ChessBoard(), Color.WHITE);
+    }
 
     public ChessPiece(ChessBoard board, Color color) {
         this.board = board;
