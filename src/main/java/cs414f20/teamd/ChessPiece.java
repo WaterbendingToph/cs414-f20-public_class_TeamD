@@ -4,6 +4,12 @@ import java.io.*;
 import java.util.ArrayList;
 
 abstract class ChessPiece {
+    /**
+     * This is the parent class for all the concrete chess piece classes. This class
+     * keeps a reference to the board that the piece is on (if any), the position
+     * where the piece is located, and its color.
+     */
+    
     public enum Color {
         WHITE, BLACK
     }
