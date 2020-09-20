@@ -70,7 +70,7 @@ public class ChessBoard {
          * @throws IllegalMoveException 
          */
 
-        System.out.println("Not yet implemented.");
+        System.out.println("Not yet implemented");
     }
 
     @Override
