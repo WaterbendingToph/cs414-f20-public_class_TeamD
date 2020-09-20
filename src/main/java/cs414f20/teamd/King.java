@@ -2,14 +2,13 @@ package cs414f20.teamd;
 
 import java.util.ArrayList;
 
-class Rook extends ChessPiece {
+public class King {
     /**
      * This concrete class implements the methods for the abstract class ChessPiece
-     * for the rook piece in this variant of chess. A rook can move any number of
-     * squares horizontally or vertically, forward or backward, as long as it does
-     * not have to leap over other pieces. At the end of the move, it can occupy
-     * a previously empty square or capture (replace) an opponent's piece, but it
-     * cannot replace another piece of the same player.
+     * for the king piece in this variant of chess. The king can only move one
+     * square in any direction. At the end of the move, it can occupy a previously 
+     * empty square or capture (replace) an opponent's piece, but it cannot replace 
+     * another piece of the same player.
      */
 
     public String toString() {
