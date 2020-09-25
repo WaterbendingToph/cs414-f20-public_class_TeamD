@@ -20,6 +20,10 @@
 #### Incomplete epics in Sprint Backlog 
 - None. This sprint was mostly about setup without an actual source code deliverable.
 
+#### Display of user stories completed and progress within the app
+
+## Retrospective
+
 #### What went well
 - We were able to get organized quickly. We were able to get the project set up and the template files input without having a full understanding of how to set up a project prior to the start of the semester.
 - Even though we had different preferences for development environments, we were able to set up a system that would allow us to work together from these separate environments without issues.
@@ -29,12 +33,3 @@
 - We accidentally committed a second version of our entire file structure. We had to redo our structure to remove the duplicate and change the way we committed work to avoid this type of error in the future. 
 - We waited too long at the beginning to start setting up the project. However, we worked hard to get back on track and implemented the Scrum system mentioned above to ensure we don't get behind for the rest of the semester.
 - We had conflicting availability early on, as well as some issues with the Cameron Peak fire and evactuations, that required us to be flexible with our meeting times.
-
-
-## Retrospective
-
-#### What went well
-
-#### Potential improvements
-
-#### What we will change next time
