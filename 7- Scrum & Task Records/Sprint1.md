@@ -3,18 +3,6 @@
 ## Plan
 ### Scrum Master: Dakota Golightly
 
-###Epics planned for this release.
-
-
-
-
-## Metrics - *purely for our own velocity tracking*
-
-| Statistic | # Planned | # Completed |
-| --- | ---: | ---: |
-
-
-
 ## Scrums
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
