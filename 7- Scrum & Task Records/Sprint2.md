@@ -2,10 +2,18 @@
 
 ### Scrum Master: Nick Cunningham
 
+## Planning##
+Epics planned for this release
+- 6 Registration
+- 7 Matchmaking
+- 10 Gameplay
+- 39 Login
+
 ## Scrums
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
+| *10/5* | *None* | *None* | *None* |
 
 ## Review
 
