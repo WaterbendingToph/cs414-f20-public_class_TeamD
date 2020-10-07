@@ -7,17 +7,18 @@ Epics planned for this release
 - 6 Registration
 - 7 Matchmaking
 - 10 Gameplay
-- 39 Login
+- 92 Login
 
 ## Scrums
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
 | *10/5* | *None* | *None* | *None* |
+| *10/7* | *None* | *#24, #21, #69, #78, #93* | *None* |
 
 ## Review
 
-#### Completed epics in Sprint Backlog 
+#### Completed epics in Sprint Backlog
 
 #### Incomplete epics in Sprint Backlog 
 
