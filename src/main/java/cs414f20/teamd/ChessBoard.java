@@ -134,10 +134,6 @@ public class ChessBoard {
         /*
          * This main method is provided in the A2.pdf for testing purposes only.
          */
-        ChessBoard board = new ChessBoard();
-        board.initialize();
-        System.out.println(board);
-        board.move("c2", "c4");
-        System.out.println(board);
+
     }
 }
