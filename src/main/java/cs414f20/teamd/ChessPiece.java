@@ -1,6 +1,5 @@
 package cs414f20.teamd;
 
-import java.io.*;
 import java.util.ArrayList;
 
 abstract class ChessPiece {
