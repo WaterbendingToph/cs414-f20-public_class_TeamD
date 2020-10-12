@@ -15,7 +15,8 @@ Epics planned for this release
 | :--- | :--- | :--- | :--- |
 | *10/5* | *None* | *None* | *None* |
 | *10/7* | *None* | *#24, #21, #69, #78, #93* | *None* |
-| *10/9* | *None* | *#21, #69, #78, #93* | *None* | *Waiting for database to be created* |
+| *10/9* | *None* | *#21, #69, #78, #93* | *None* |
+| *10/12* | *None* | *#21, #69, #78, #93, #94* | *Waiting on database creation* |
 
 ## Review
 
