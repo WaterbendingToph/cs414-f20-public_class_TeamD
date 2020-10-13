@@ -1,12 +1,9 @@
 import React from 'react';
-import Router from 'react';
-import Switch from 'react';
-import Route from 'react';
 import logo from './logo.svg';
-import Registration from "./Registration";
 import './App.css';
 import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
 import Login from "./Login";
+import Registration from "./Registration";
 
 function App() {
   return (
@@ -15,6 +12,7 @@ function App() {
         <div id='switches'>
           <Switch>
             <Route exact path="/" component={Login} />
+            <Route exact path="/Registration" component={Registration} />
           </Switch>
         </div>
       </Router>
