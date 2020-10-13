@@ -1,24 +1,22 @@
 import React from 'react';
+import Router from 'react';
+import Switch from 'react';
+import Route from 'react';
 import logo from './logo.svg';
+import Registration from "./Registration";
 import './App.css';
 
 function App() {
+  /// Removed because the component does not yet exist: <Route exact path="/" component={Login} />
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <div id='switches'>
+          <Switch>
+            <Route exact path="/Registration" component={Registration} />
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }
