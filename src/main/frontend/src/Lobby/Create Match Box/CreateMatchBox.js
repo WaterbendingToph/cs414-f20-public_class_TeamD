@@ -8,7 +8,8 @@ export default class CreateMatchBox extends Component{
         this.state = {
             showCreateMatch: false,
             playerID: "",
-            submitted: false
+            submitted: false,
+            listOfPlayers: []
         };
 
         this.toggle = this.toggleCM.bind(this);
@@ -19,7 +20,10 @@ export default class CreateMatchBox extends Component{
     submitPlayer(){
         if(this.state.playerID.length !== 0){
             console.log("Submitting playerID: " + this.state.playerID);
-            this.setState({submitted: true});
+            let currentPlayers = this.state.listOfPlayers;
+            currentPlayers.push(this.state.playerID);
+            console.log("List of players: " + this.state.listOfPlayers);
+            this.setState({submitted: true, listOfPlayers: currentPlayers});
         }
     }
 
@@ -53,6 +57,16 @@ export default class CreateMatchBox extends Component{
         );
     }
 
+    getCurrentPlayers(){
+        let currentPlayers = this.state.listOfPlayers;
+        currentPlayers.map(player => {
+            return(
+                <li>{player}</li>
+            );
+        });
+        return currentPlayers;
+    }
+
     render() {
         return(
             <div>
@@ -61,6 +75,10 @@ export default class CreateMatchBox extends Component{
                     <ModalHeader toggle={this.toggle}>Create Match</ModalHeader>
                     <ModalBody>
                         {this.renderForms()}
+                        <p>Current Players: </p>
+                        <ul>
+                            {this.getCurrentPlayers()}
+                        </ul>
                         <Button>Create Match</Button>
                     </ModalBody>
                 </Modal>
