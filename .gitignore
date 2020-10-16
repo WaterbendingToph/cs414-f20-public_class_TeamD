@@ -37,4 +37,6 @@ frontend-maven-plugin/target
 
 #macOS
 .DS_Store
-src/main/frontend/yarn.lock
+
+# Personally added
+.vscode\*

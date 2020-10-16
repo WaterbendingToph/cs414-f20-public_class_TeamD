@@ -2,7 +2,7 @@
 
 ### Scrum Master: Nick Cunningham
 
-## Planning##
+## Planning
 Epics planned for this release
 - 6 Registration
 - 7 Matchmaking
@@ -17,6 +17,8 @@ Epics planned for this release
 | *10/7* | *None* | *#24, #21, #69, #78, #93* | *None* |
 | *10/9* | *None* | *#21, #69, #78, #93* | *None* |
 | *10/12* | *None* | *#21, #69, #78, #93, #94* | *Waiting on database creation* |
+| *10/14* | *#24, #78, #93* | *#21, #44, #69, #94* | *None* |
+| *10/16* | *None* | *#21, #44, #69, #94, #110* | *None* |
 
 ## Review
 
