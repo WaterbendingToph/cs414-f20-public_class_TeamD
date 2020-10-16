@@ -1,9 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
 import Login from "./Login";
 import Registration from "./Registration";
+import Lobby from "./Lobby/Lobby";
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/registration" component={Registration} />
+            <Route exact path="/lobby" component={Lobby} />
           </Switch>
         </div>
       </Router>
