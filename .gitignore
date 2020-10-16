@@ -37,3 +37,7 @@ frontend-maven-plugin/target
 
 #macOS
 .DS_Store
+
+./src/main/frontend/package.json
+./src/main/frontend/package-lock.json
+./src/main/frontend/yarn.lock
