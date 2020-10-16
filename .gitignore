@@ -37,3 +37,6 @@ frontend-maven-plugin/target
 
 #macOS
 .DS_Store
+
+# Personally added
+.vscode\*
