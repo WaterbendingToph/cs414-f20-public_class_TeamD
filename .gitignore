@@ -40,3 +40,4 @@ frontend-maven-plugin/target
 
 # Personally added
 .vscode\*
+src/main/frontend/package-lock.json
