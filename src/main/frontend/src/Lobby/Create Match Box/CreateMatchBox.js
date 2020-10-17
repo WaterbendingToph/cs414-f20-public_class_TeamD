@@ -19,10 +19,8 @@ export default class CreateMatchBox extends Component{
 
     submitPlayer(){
         if(this.state.playerID.length !== 0){
-            console.log("Submitting playerID: " + this.state.playerID);
             let currentPlayers = this.state.listOfPlayers;
             currentPlayers.push(this.state.playerID);
-            console.log("List of players: " + this.state.listOfPlayers);
             this.setState({submitted: true, listOfPlayers: currentPlayers});
         }
     }
@@ -59,12 +57,13 @@ export default class CreateMatchBox extends Component{
 
     getCurrentPlayers(){
         let currentPlayers = this.state.listOfPlayers;
-        currentPlayers.map(player => {
-            return(
-                <li>{player}</li>
-            );
+        let ret = "";
+        currentPlayers.forEach(player => {
+            if(currentPlayers[0] !== player)
+                ret += ", ";
+            ret += player;
         });
-        return currentPlayers;
+        return ret+"\n";
     }
 
     render() {
@@ -76,9 +75,9 @@ export default class CreateMatchBox extends Component{
                     <ModalBody>
                         {this.renderForms()}
                         <p>Current Players: </p>
-                        <ul>
-                            {this.getCurrentPlayers()}
-                        </ul>
+                        {this.getCurrentPlayers()}
+                    </ModalBody>
+                    <ModalBody>
                         <Button>Create Match</Button>
                     </ModalBody>
                 </Modal>
