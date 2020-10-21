@@ -33,8 +33,6 @@ Epics planned for this release
 - 10 Gameplay
 - 92 Login
 
-#### Display of user stories completed and progress within the app
-
 ## Retrospective
 
 #### What went well
