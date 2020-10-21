@@ -10,6 +10,7 @@ Epics planned for this release
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
 | *10/19* | *#21, #44, #110* | *#45, #50, #75, #94* | *None* |
+| *10/21* | ** | *#45, #50, #75, #94* | *None* |
 
 ## Review
 
