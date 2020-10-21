@@ -37,3 +37,7 @@ frontend-maven-plugin/target
 
 #macOS
 .DS_Store
+
+# Personally added
+.vscode\*
+src/main/frontend/package-lock.json
