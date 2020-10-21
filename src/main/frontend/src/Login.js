@@ -4,8 +4,17 @@ export default class Login extends Component{
     render() {
         return(
             <div>
-                <h2 style={{textAlign: "center"} }>Login Component Loaded! YAY!</h2>
-                <a href={"/lobby/"}>Go to the Lobby</a>
+                <h1 style={ {textAlign: "center", border: "5px solid black"} }>Welcome to Omega Chess</h1>
+                <h2 style={ {textAlign: "center"} }>Returning User?</h2>
+                <h3 style={ {textAlign: "center"} }>Username:</h3>
+                <input type={"text"} placeholder={"Username Here"}/>
+                <h3 style={ {textAlign: "center"} }>Password:</h3>
+                <input type={"text"} placeholder={"Password Here"}/>
+                <button>Login</button>
+                <h2 style={ {textAlign: "center"} }>New User? Create an account</h2>
+                <input type={"text"} placeholder={"New Account Username"}/>
+                <input type={"text"} placeholder={"New Account Password"}/>
+                <button>Create a new Account</button>
             </div>
         )
     }
