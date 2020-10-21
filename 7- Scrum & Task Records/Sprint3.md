@@ -3,14 +3,17 @@
 ### Scrum Master: Sai Donepudi
 
 ## Planning
-Epics planned for this release
+- 6 Registration
+- 7 Matchmaking
+- 10 Gameplay
+- 92 Login
 
 ## Scrums
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
 | *10/19* | *#21, #44, #110* | *#45, #50, #75, #94* | *None* |
-| *10/21* | ** | *#45, #50, #75, #94* | *None* |
+| *10/21* | *None* | *#45, #50, #75, #94* | *None* |
 
 ## Review
 
