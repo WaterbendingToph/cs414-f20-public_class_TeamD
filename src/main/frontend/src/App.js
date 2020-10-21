@@ -4,6 +4,7 @@ import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
 import Login from "./Login";
 import Registration from "./Registration";
 import Lobby from "./Lobby/Lobby";
+import OngoingMatches from './Lobby/Ongoing Matches/OngoingMatches';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <Route exact path="/" component={Login} />
             <Route exact path="/registration" component={Registration} />
             <Route exact path="/lobby" component={Lobby} />
+            <Route exact path="/ongoingmatches" component={OngoingMatches} />
           </Switch>
         </div>
       </Router>
