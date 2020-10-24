@@ -9,6 +9,9 @@ public class LoginController {
     
     @GetMapping("/login")
     public Login login(@RequestParam String userID, String password) {
-        return new Login(userID, password);
+        Login currentLogin = new Login(userID, password);
+        currentLogin.loggedIn();
+        System.out.println(currentLogin);
+        return currentLogin;
     }
 }

@@ -4,7 +4,7 @@ public class Login {
     private String userID;
     private String password;
     private java.time.LocalDate date;
-
+    boolean loginSuccess;
 
     public Login() {
     }
@@ -27,13 +27,29 @@ public class Login {
         return this.date;
     }
 
+    public boolean getLoginSuccess() {
+        return this.loginSuccess;
+    }
+
     @Override
     public String toString() {
         return "{" +
             " userID='" + getUserID() + "'" +
             ", password='" + getPassword() + "'" +
             ", date='" + getDate() + "'" +
+            ", successfully logged in='" + getLoginSuccess() + "'" +
             "}";
     }
 
+    String queryDatabase() {
+        // ------------------------------TODO: ADD DATABASE QUERY HERE------------------------------ //
+        String dbResults = "TEST: User is logged in.";
+        return dbResults;
+    } 
+
+    boolean loggedIn() {
+        loginSuccess = queryDatabase() != null;
+        return loginSuccess;
+    }
 }
+
