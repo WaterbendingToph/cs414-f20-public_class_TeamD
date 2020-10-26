@@ -23,7 +23,7 @@ public class RegistrationController {
         if (!UserIDIsSanitary(newID))
             return "failure. Invalid ID submitted.";
 
-        //TODO: connect with RegisterUserInDatabase() to actually register the usual.
+        //TODO: connect with RegisterUserInDatabase() to actually register the user.
 
         return "false";
     }
