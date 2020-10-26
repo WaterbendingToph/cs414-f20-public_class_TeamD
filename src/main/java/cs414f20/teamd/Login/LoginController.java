@@ -12,6 +12,7 @@ public class LoginController {
         Login currentLogin = new Login(userID, password);
         currentLogin.loggedIn();
         System.out.println(currentLogin);
+        System.out.println(currentLogin.queryDatabase());
         return currentLogin;
     }
 }

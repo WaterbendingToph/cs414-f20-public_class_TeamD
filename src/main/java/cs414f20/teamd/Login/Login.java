@@ -34,6 +34,7 @@ public class Login {
     @Override
     public String toString() {
         return "{" +
+            "========== TEST: Login Object Sent to Controller==========\n" +
             " userID='" + getUserID() + "'" +
             ", password='" + getPassword() + "'" +
             ", date='" + getDate() + "'" +
