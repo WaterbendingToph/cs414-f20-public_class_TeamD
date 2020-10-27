@@ -5,9 +5,10 @@ import org.junit.jupiter.api.Test;
 
 public class LoginTest {
     @Test
-    void testCreateMatch() {
+    void testLogin() {
         Login test = new Login("Nick", "password");
         assertEquals("Nick", test.getUserID());
         assertEquals("password", test.getPassword());
+        assertTrue(test.loggedIn());
     }
 }

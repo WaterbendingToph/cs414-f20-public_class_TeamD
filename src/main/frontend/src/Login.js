@@ -13,8 +13,8 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userID: "Nick",
-            password: "password",
+            userID: "",
+            password: "",
         }
         this.onSubmit = this.onSubmit.bind(this);
     }
@@ -35,7 +35,7 @@ export default class Login extends Component {
 
     render() {
         return (
-            <Form>
+            <Form onSubmit={this.onSubmit}>
                 <h1 style={{ textAlign: "center", border: "5px solid black" }}>Welcome to Omega Chess</h1>
                 <h2 style={{ textAlign: "center" }}>Returning User?</h2>
                 <h3 style={{ textAlign: "center" }}>Username:</h3>

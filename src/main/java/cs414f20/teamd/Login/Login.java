@@ -1,10 +1,13 @@
 package cs414f20.teamd.Login;
 
+import cs414f20.teamd.DatabaseConnection.Database;
+
 public class Login {
     private String userID;
     private String password;
     private java.time.LocalDate date;
     boolean loginSuccess;
+    private Database db;
 
     public Login() {
     }
@@ -13,6 +16,7 @@ public class Login {
         this.userID = userID;
         this.password = password;
         this.date = java.time.LocalDate.now();
+        this.db = new Database();
     }
 
     public String getUserID() {
@@ -43,8 +47,9 @@ public class Login {
     }
 
     String queryDatabase() {
-        // ------------------------------TODO: ADD DATABASE QUERY HERE------------------------------ //
         String dbResults = "TEST: User is logged in.";
+        // ------------------------------TODO: ADD DATABASE QUERY HERE------------------------------ //
+        // String dbResults = db.getAllUsers(); <- Uses existing Database.java file
         return dbResults;
     } 
 
