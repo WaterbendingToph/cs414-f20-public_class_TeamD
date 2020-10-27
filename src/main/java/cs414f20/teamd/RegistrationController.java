@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RegistrationController {
     private ArrayList<Player> registeredUsers;
-    private String validIDRegex = "[a-z][A-Z][0-9]{1,16}";
+    private static String validIDRegex = "^[a-z,A-Z,0-9]{1,16}$";
 
 
     //Front-facing
     @GetMapping("/registration_request")
     public String UserIsRegistered(@RequestParam(value = "userID", defaultValue = "unknown") String requestedID){
+        if (!UserIDIsSanitary(requestedID))
+            return "failure. Invalid ID submitted.";
+
         return "" + UserIsRegisteredInDatabase(requestedID);
     }
     public String RegisterUser(@RequestParam(value = "userID", defaultValue = "") String newID){
@@ -31,7 +34,7 @@ public class RegistrationController {
 
     //Back-facing
     private boolean UserIsRegisteredInDatabase(String userID){//UNFINISHED
-        return true;
+        return false;
     }
     private void RegisterUserInDatabase(String id, String password){//UNFINISHED
         Player player = new Player(id, password);
@@ -41,7 +44,7 @@ public class RegistrationController {
 
 
     //Utility
-    private boolean UserIDIsSanitary(String potentialNewUserID){
+    public static boolean UserIDIsSanitary(String potentialNewUserID){
         Pattern pattern = Pattern.compile(validIDRegex);
         Matcher matcher = pattern.matcher(potentialNewUserID);
         return matcher.matches();
