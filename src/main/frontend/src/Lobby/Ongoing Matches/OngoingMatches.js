@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Table } from 'reactstrap';
 import {
     // BrowserRouter as Router,
     // Switch,
@@ -14,7 +15,7 @@ export default class OngoingMatches extends Component {
         super(props);
         this.state = {
             userID: "Nick",
-            matches = "Test Matches",
+            matches: "Test Matches",
         }
     }
 
