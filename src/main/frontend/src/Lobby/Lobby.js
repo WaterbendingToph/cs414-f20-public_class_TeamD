@@ -8,7 +8,7 @@ export default class Lobby extends Component{
             <div>
                 <h1>Welcome to the Lobby</h1>
                 <CreateMatchBox />
-                <a href={"/ongoingmatches/"}>Ongoing Matches</a>
+                <a href={"/matches/"}>Ongoing Matches</a>
             </div>
         )
     }
