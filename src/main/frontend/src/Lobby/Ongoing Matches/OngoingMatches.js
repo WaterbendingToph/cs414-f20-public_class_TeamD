@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Form } from 'reactstrap';
 import {
     // BrowserRouter as Router,
     // Switch,
@@ -14,8 +13,8 @@ export default class OngoingMatches extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userID: "",
-            matches = "",
+            userID: "Nick",
+            matches = "Test Matches",
         }
     }
 
@@ -33,6 +32,7 @@ export default class OngoingMatches extends Component {
                         </tr>
                     </thead>
                     <tbody>
+                        {/* TODO: Make this a loop that shows each ongoing match for the current user. */}
                         <tr>
                             <th scope="row">1</th>
                             <td>Go to Match</td>
