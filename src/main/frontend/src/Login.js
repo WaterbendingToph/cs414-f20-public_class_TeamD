@@ -1,4 +1,5 @@
-import React, { Component, Form } from 'react';
+import React, { Component } from 'react';
+import { Form } from 'reactstrap';
 import {
     // BrowserRouter as Router,
     // Switch,
@@ -20,7 +21,7 @@ export default class Login extends Component {
     }
 
     onSubmit() {
-        fetch("/login?user=" + this.state.userID + "&password=" + this.state.password)
+        fetch("/login?userID=" + this.state.userID + "&password=" + this.state.password)
             .then(res => res.json)
             .then(result => {
                 if (result.loginSuccess) {
@@ -30,7 +31,7 @@ export default class Login extends Component {
                         }}
                     />
                 }
-            )
+            })
     }
 
     render() {
