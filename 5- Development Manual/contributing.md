@@ -93,7 +93,7 @@ Since this project uses [React](https://reactjs.org/) as a front end framework, 
 
 To load the back end server, you must first securely connect to the CSU system. Using PowerShell (Windows) or the terminal (Mac/Linux), connect to the system via the following command:
 
->ssh -L 56247:faure.cs.colostate.edu:3306 <eid-username>@<machine-name>.cs.colostate.edu
+>ssh -L 56247:faure.cs.colostate.edu:3306 \<eid-username>@\<machine-name>.cs.colostate.edu
 
 replacing `<eid-username>` with your EID and `<machine-name>` with the identifier of your preferred lab machine. Once connected, you can perform the steps below to access the server. **You must remain connected to the CSU machine throughout development to maintain access to the back end server.**
 
