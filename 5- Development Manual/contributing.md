@@ -2,6 +2,7 @@
 ***Thanks for your interest in contributing to our project! Please read the guidelines below for adding or reviewing code before proceeding.***
 
 ---
+
 ## Adding Code
 **If you wish to add features or correct bugs in this project's code, please follow these instructions:**
 1. First, check out our [ZenHub board](https://github.com/WaterbendingToph/cs414-f20-public_class_TeamD/wiki/_new#workspaces/cs414-f20-public-class-teamd-5f515ce4b0b1cb001220e5f7/board?repos=292679509) or [Issues page](https://github.com/WaterbendingToph/cs414-f20-public_class_TeamD/issues) to see if an issue exists that addresses your concern.
@@ -27,6 +28,7 @@
 12. That's it! Thanks for contributing!
 
 ---
+
 ## Reviewing Code
 **If you have been asked to review code for changes made to this project, please follow these instructions:**
 1. First, review the Issue card and Pull Request for the issue you'd like to review, to ensure that you are sufficiently versed in the project to provide a constructive review. 
@@ -36,11 +38,11 @@
     - **Complete this step even if you believe you already have all dependencies**, as new ones are added regularly.
 5. Once dependencies have been loaded, test the code using the ***Testing*** section below.
 6. If the code passes all tests, review each edited file in GitHub.
-    - Navigate to the Pull Request for this change and clikc the *Files Changed* tab to view all changed files.
-    - Review each changed file
+    - Navigate to the Pull Request for this change and click the *Files Changed* tab to view all changed files.
+    - Review each changed file.
     - Focus first on whether the code accomplishes the stated objective from the Pull Request.
     - Then, focus on test coverage, adherance to applicable style guides (if any are in place at the time), and code cleanliness.
-    - Once you are satisfied with the state of a given file, click the *Viewed* checkbox to hide the file.
+    - Once you are satisfied with the state of a given file, click the *Viewed* checkbox to confirm that you have reviewed that file and collapse it.
 7. After reviewing all changed files, submit your review by clicking the *Review changes* link. 
     - If the Pull Request is ready to be merged, click the *Approve* button.
     - If changes need to be made, or you have questions before approving the change, select the appropriate button and then click *Submit review*.
@@ -52,6 +54,7 @@
 9. That's it! Thanks for contributing!
 
 ---
+
 ## Testing
 ***This project uses a combination of automated and user-driven testing. Most changes will require a combination of both.*** 
 
@@ -68,7 +71,7 @@ This testing involves user interaction with the front end websites and generally
 While this type of testing is difficult to encapsulate, some general guidelines can guide the reviewer. To illustrate these guidelines, we will use the example of adding the ability to move a bishop chess piece:
 
 1. **Test the intended outcome of the change:** Move the bishop in a diagonal fashion to different legal positions and ensure the move was processed properly.
-2. **Test several invalid outcomes of the change to ensure errors are produced:** Move the bishop in several illegal patterns to ensure that none are allowed to occur (either by automatically moving the piece back to its original location, producing a visible error message, etc.)
+2. **Test several invalid outcomes of the change to ensure errors are produced:** Move the bishop in several illegal patterns to ensure that none are allowed to occur (either by automatically moving the piece back to its original location, producing a visible error message, etc.) Examples of invalid moves would be jumping another piece, moving off the board, or moving in a non-diagonal fashion.
 3. **Test other components on the page to ensure they still work:** After completing a move, attempt to use the browser Back button to ensure the move persists. Navigate to other pages and return to this page. Test menus and other page components to ensure they still behave properly.
 
 Other tests can certainly be performed, but at a minimum, ***a reviewer should strive to test intended outcomes, unintended outcomes, and continued operation of other components***.
@@ -83,9 +86,21 @@ Since this project uses [React](https://reactjs.org/) as a front end framework, 
 4. As you make changes to the front end, they will automatically be updated in this browser window each time you save the changed file.
 
 ### Running the Back End
+
+***Since the database used in this project is stored on Colorado State University (CSU) Computer Science lab machines, the project is only available to users who have access to these machines. While the development server is not hosted on these machines, the database connections rely on access to them, and thus the Java files will not compile properly if you are not securely connected to one of these machines.***
+
+To load the back end server, you must first securely connect to the CSU system. Using PowerShell (Windows) or the terminal (Mac/Linux), connect to the system via the following command:
+
+>ssh -L 56247:faure.cs.colostate.edu:3306 <eid-username>@<machine-name>.cs.colostate.edu
+
+replacing `<eid-username>` with your EID and `<machine-name>` with the identifier of your preferred lab machine. Once connected, you can perform the steps below to access the server. **You must remain connected to the CSU machine throughout development to maintain access to the back end server.**
+
 This project uses [Apache Maven](https://maven.apache.org/) and [Spring Boot](https://spring.io/projects/spring-boot) as a project manager and back end framework, respectively. This allows for each packaging of builds, as well as testing of the back end components through a micro service. To test the back end, you must use these tools in tandem:
 
 1. First, you must package the project. To do this from the console, navigate to the root directory for the project ("*cs414-f20-public_class_TeamD*"). Then, run `mvn package` to compile and package the project. 
 2. Once the project is prepared, you can then run `mvn spring-boot:run` from the same directory to load the back end server.
 3. While React automatically loads a browser window, the back end server does not. To view the server, navigate a browser window to http://localhost:8080.
 4. To view changes in back end files or database connections, the project must be rebuilt using `mvn package` and then reloaded using `mvn spring-boot:run`. Changes are not hot-loaded into the browser like they are with React, since Java files must be recompiled with each change. 
+
+### Notes on Running the Server
+While front end changes can be made quickly with the hot loader feature, any changes that require communication with the back end will require a repackaging/reloading of the project. Because of this, we recommend loading the front end and back end servers simultaneously and using port 3000 to observe front end edits and only updating the back end when required.
