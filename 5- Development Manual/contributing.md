@@ -1,4 +1,4 @@
-# Contributing to This Project
+# Development Manual - Contributing to This Project
 ***Thanks for your interest in contributing to our project! Please read the guidelines below for adding or reviewing code before proceeding.***
 
 ---
