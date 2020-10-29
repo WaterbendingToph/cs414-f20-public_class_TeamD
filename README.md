@@ -1,3 +1,15 @@
 # Omega Chess
 ## public class teamD
-This template file will be used to update the repository's development manual.
+
+## Description
+This project is being developed to complete the requirements for Colorado State 
+University's *CS 414: Object-Oriented Programming* course for the Fall 2020 semester.
+
+## Installation
+- In the console, navigate to the directory where you would like the project to reside.
+- To download the latest version of the repository into this directory, run: 
+
+    - `git clone https://github.com/WaterbendingToph/cs414-f20-public_class_TeamD.git` 
+
+## Contributing
+- For information on contributing to this project, please references the `contributing.md` document in the `5 - Development Manual` folder.
