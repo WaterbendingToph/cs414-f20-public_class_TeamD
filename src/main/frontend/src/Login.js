@@ -39,7 +39,7 @@ export default class Login extends Component {
                 <input onChange={(event) => this.setState({ userID: event.target.value })} type={"text"} placeholder={"Username Here"} />
                 <h3 style={{ textAlign: "center" }}>Password:</h3>
                 <input onChange={(event) => this.setState({ password: event.target.value })} type={"text"} placeholder={"Password Here"} />
-                <button onClick={this.onSubmit}>Login</button>
+                <button onClick={this.onSubmit} type='button'>Login</button>
                 <h2 style={{ textAlign: "center" }}>New User? Create an account</h2>
                 <input type={"text"} placeholder={"New Account Username"} />
                 <input type={"text"} placeholder={"New Account Password"} />
