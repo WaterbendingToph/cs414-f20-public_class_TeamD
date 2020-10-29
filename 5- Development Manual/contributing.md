@@ -74,10 +74,12 @@ While this type of testing is difficult to encapsulate, some general guidelines 
 2. **Test several invalid outcomes of the change to ensure errors are produced:** Move the bishop in several illegal patterns to ensure that none are allowed to occur (either by automatically moving the piece back to its original location, producing a visible error message, etc.) Examples of invalid moves would be jumping another piece, moving off the board, or moving in a non-diagonal fashion.
 3. **Test other components on the page to ensure they still work:** After completing a move, attempt to use the browser Back button to ensure the move persists. Navigate to other pages and return to this page. Test menus and other page components to ensure they still behave properly.
 
-Other tests can certainly be performed, but at a minimum, ***a reviewer should strive to test intended outcomes, unintended outcomes, and continued operation of other components***.
+Other tests can certainly be performed, but at a minimum, **a reviewer should strive to test intended outcomes, unintended outcomes, and continued operation of other components**.
 
 ---
 ## Running the Server
+***This project uses two different servers in development, one each to handle the front and back end changes. The front end server should be used for any changes that are cosmetic only (i.e. chagnes that require no communication with the back end or database.) This allows for faster development by utilizing hot loading. Back end changes (or front end changes that require communication with the back end) should utilize the back end server for observing these changes. These changes will require more legwork to view, as described below.***
+
 ### Running the Front End
 Since this project uses [React](https://reactjs.org/) as a front end framework, you may use the "hot loader" feature to continuously test changes to front end components. To do this, you simply have to start the front end server and load it in a browser:
 1. In the console, navigate to the [`src/main/frontend`](https://github.com/WaterbendingToph/cs414-f20-public_class_TeamD/tree/master/src/main/frontend) directory. You should see the `package.json` file here.
