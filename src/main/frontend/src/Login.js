@@ -22,14 +22,10 @@ export default class Login extends Component {
 
     onSubmit() {
         fetch("/login?userID=" + this.state.userID + "&password=" + this.state.password)
-            .then(res => res.json)
+            .then(res => res.json())
             .then(result => {
                 if (result.loginSuccess) {
-                    <Redirect
-                        to={{
-                            pathname: "/lobby",
-                        }}
-                    />
+                    return <Redirect to="/lobby" />
                 }
             })
     }
@@ -40,7 +36,7 @@ export default class Login extends Component {
                 <h1 style={{ textAlign: "center", border: "5px solid black" }}>Welcome to Omega Chess</h1>
                 <h2 style={{ textAlign: "center" }}>Returning User?</h2>
                 <h3 style={{ textAlign: "center" }}>Username:</h3>
-                <input onChange={(event) => this.setState({ user: event.target.value })} type={"text"} placeholder={"Username Here"} />
+                <input onChange={(event) => this.setState({ userID: event.target.value })} type={"text"} placeholder={"Username Here"} />
                 <h3 style={{ textAlign: "center" }}>Password:</h3>
                 <input onChange={(event) => this.setState({ password: event.target.value })} type={"text"} placeholder={"Password Here"} />
                 <button onClick={this.onSubmit}>Login</button>
