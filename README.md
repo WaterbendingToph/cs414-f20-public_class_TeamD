@@ -12,7 +12,7 @@ University's *CS 414: Object-Oriented Programming* course for the Fall 2020 seme
     - `git clone https://github.com/WaterbendingToph/cs414-f20-public_class_TeamD.git` 
 
 ## Contributing
-- For information on contributing to this project, please reference the [`contributing.md`](https://github.com/WaterbendingToph/cs414-f20-public_class_TeamD/blob/create_dev_manual/5-%20Development%20Manual/contributing.md) document in the `5 - Development Manual` directory.
+- For information on contributing to this project, please reference the [`contributing.md`](https://github.com/WaterbendingToph/cs414-f20-public_class_TeamD/blob/master/5-%20Development%20Manual/contributing.md) document in the `5 - Development Manual` directory.
 
 ## Credits
 - Sai Donepudi
