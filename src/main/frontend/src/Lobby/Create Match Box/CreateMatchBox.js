@@ -44,7 +44,11 @@ export default class CreateMatchBox extends Component{
     startMatch(){
         fetch("/createMatch/?playerID="+ this.state.listOfPlayers.join(","))
             .then(res => res.json())
-            .then(res => console.log(res));
+            .then(data =>{
+                if(data.gameStarted && data.opponent !== ""){
+                    this.props.toGame();
+                }
+            });
     }
 
     renderForms(){

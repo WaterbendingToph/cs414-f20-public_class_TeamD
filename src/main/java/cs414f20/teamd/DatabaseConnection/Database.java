@@ -33,7 +33,24 @@ public class Database {
             System.err.println("Exception: " + e.getMessage());
         }
     }
+
+    public static void enterNewGame(int id, String whitePlayer, String blackPlayer){
+        final String board = "newBoard";
+        final String q = "INSERT INTO chessGames VALUES("+ id +",\"" + whitePlayer + "\",\""+ blackPlayer+"\",\""
+                          + board + "\",\""+ whitePlayer +"\","+ 0 +");";
+        try (
+             Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             Statement query = conn.createStatement();
+         ) {
+            query.executeUpdate(q);
+        } 
+        catch (Exception e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         getAllUsers();
+        enterNewGame(20, "me", "not me");
     }
 }

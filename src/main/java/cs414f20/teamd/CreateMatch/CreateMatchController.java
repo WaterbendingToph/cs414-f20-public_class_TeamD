@@ -12,11 +12,7 @@ public class CreateMatchController {
     @GetMapping("/createMatch")
     public CreateMatch createMatch(@RequestParam(value = "playerID") String[] playerIDList) {
         Random r = new Random();
-        long id = r.nextLong();
-        System.out.println("List of players are: ");
-        for(String name : playerIDList){
-            System.out.println("\t-"+name);
-        }
+        int id = r.nextInt();
         return new CreateMatch(Math.abs(id), playerIDList[0]);
     }
 }

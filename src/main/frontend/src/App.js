@@ -5,6 +5,7 @@ import Login from "./Login";
 import Registration from "./Registration";
 import Lobby from "./Lobby/Lobby";
 import OngoingMatches from './Lobby/Ongoing Matches/OngoingMatches';
+import BoardGame from './BoardGame/BoardGame';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route exact path="/registration" component={Registration} />
             <Route exact path="/lobby" component={Lobby} />
             <Route exact path="/ongoingmatches" component={OngoingMatches} />
+            <Route exact path="/game" component={BoardGame} />
           </Switch>
         </div>
       </Router>
