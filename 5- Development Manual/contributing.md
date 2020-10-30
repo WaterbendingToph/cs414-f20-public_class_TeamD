@@ -15,7 +15,7 @@
     - Well-documented issues also often include a checklist of tasks that allow for clear documention of completion progress, as well as clarity during review.
 4. Clone the repository via the instructions in the ***Installation*** section of the [README](https://github.com/WaterbendingToph/cs414-f20-public_class_TeamD/blob/master/README.md) file.
 5. Checkout a new branch with an up-to-date version of the master branch.
-6. In the console, navigate to the project's root directory ("*cs414-f20-public_class_TeamD*"). From this directory, you may load any dependencies that have not already been added to your local environment by running `npm i`.
+6. In the console, navigate to the project's front end directory ("*cs414-f20-public_class_TeamD/src/main/frontend*"). From this directory, you may load any dependencies that have not already been added to your local environment by running `npm i`.
     - **Complete this step even if you believe you already have all dependencies**, as new ones are added regularly.
 7. Once dependencies have been loaded, make your edits on your new branch using your IDE of choice.
     - This project has been designed to allow development on multiple IDEs. To date, project members have used VSCode, IntelliJ IDEA, Eclipse, and Sublime Text for development without issues. Git *should* ignore any files that are IDE-specific, but if you encounter an issue with a new IDE, please contact a team member or open an issue.
@@ -35,7 +35,7 @@
 1. First, review the Issue card and Pull Request for the issue you'd like to review, to ensure that you are sufficiently versed in the project to provide a constructive review. 
 2. Clone the repository via the instructions in the ***Installation*** section of the [README](https://github.com/WaterbendingToph/cs414-f20-public_class_TeamD/blob/master/README.md) file.
 3. Checkout the branch associated with the Pull Request you are reviewing.
-4. In the console, navigate to the project's root directory ("*cs414-f20-public_class_TeamD*"). From this directory, you may load any dependencies that have not already been added to your local environment by running `npm i`.
+4. In the console, navigate to the project's front end directory ("*cs414-f20-public_class_TeamD/src/main/frontend*"). From this directory, you may load any dependencies that have not already been added to your local environment by running `npm i`.
     - **Complete this step even if you believe you already have all dependencies**, as new ones are added regularly.
 5. Once dependencies have been loaded, test the code using the ***Testing*** section below.
 6. If the code passes all tests, review each edited file in GitHub.
@@ -90,7 +90,7 @@ Since this project uses [React](https://reactjs.org/) as a front end framework, 
 
 ### Running the Back End
 
-***Since the database used in this project is stored on Colorado State University (CSU) Computer Science lab machines, the project is only available to users who have access to these machines. While the development server is not hosted on these machines, the database connections rely on access to them, and thus the Java files will not compile properly if you are not securely connected to one of these machines.***
+***Since the database used in this project is stored on Colorado State University (CSU) Computer Science lab machines, the project is only available to users who have access to these machines. While the development server is not hosted on these machines, the database connections rely on access to them, and thus the project will not run properly if you are not securely connected to one of these machines.***
 
 To load the back end server, you must first securely connect to the CSU system. Using PowerShell (Windows) or the terminal (Mac/Linux), connect to the system via the following command:
 
