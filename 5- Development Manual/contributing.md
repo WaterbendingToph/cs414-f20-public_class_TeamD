@@ -9,16 +9,17 @@
 2. If you have a new issue you'd like to add, contact the repository administrator (currently Dakota Golighty) to gain write access to the repository.
 3. Once you have access to the repository, create a new issue on our ZenHub board.
     - Issues should include a brief description of the problem being addressed or feature being added.
+    - Issues are small problems to be fixed in a day or two to implement the features in a user story, so make sure that an appropriate user story needs this work. Update the description of the user story to include this new issue as well.
     - Issues should also include the *task* label, a complexity *estimate*, and the proper *milestone*/*epic* identifiers.
     - If you plan to work on the issue immediately, please *assign yourself* to the issue and place it in the *Doing* pipeline.
     - Well-documented issues also often include a checklist of tasks that allow for clear documention of completion progress, as well as clarity during review.
 4. Clone the repository via the instructions in the ***Installation*** section of the [README](https://github.com/WaterbendingToph/cs414-f20-public_class_TeamD/blob/master/README.md) file.
 5. Checkout a new branch with an up-to-date version of the master branch.
-6. In the console, navigate to the the project's root directory ("*cs414-f20-public_class_TeamD*"). From this directory, you may load any dependencies that have not already been added to your local environment by running `npm i`.
+6. In the console, navigate to the project's root directory ("*cs414-f20-public_class_TeamD*"). From this directory, you may load any dependencies that have not already been added to your local environment by running `npm i`.
     - **Complete this step even if you believe you already have all dependencies**, as new ones are added regularly.
 7. Once dependencies have been loaded, make your edits on your new branch using your IDE of choice.
     - This project has been designed to allow development on multiple IDEs. To date, project members have used VSCode, IntelliJ IDEA, Eclipse, and Sublime Text for development without issues. Git *should* ignore any files that are IDE-specific, but if you encounter an issue with a new IDE, please contact a team member or open an issue.
-    - Please keep in mind that files *outside* the */src* folder are used exclusively for the CS414 Fall 2020 semester project deliverables. As such, **these files should not be edited unless with express permission of the public_class_TeamD project team**.
+    - Please keep in mind that files *outside* the */src* folder are used exclusively for the CS414 Fall 2020 semester project deliverables. As such, **these files should not be edited except with express permission of the public_class_TeamD project team**.
 8. When you are happy with your changes, test them by completing the ***Testing*** section below.
 9. If your code has passed all tests, submit a Pull Request to have the changes included in master.
     - Feel free to select a team member to review your request. **All PRs must include at least one review by someone other than the submitter before being merged**.
@@ -34,7 +35,7 @@
 1. First, review the Issue card and Pull Request for the issue you'd like to review, to ensure that you are sufficiently versed in the project to provide a constructive review. 
 2. Clone the repository via the instructions in the ***Installation*** section of the [README](https://github.com/WaterbendingToph/cs414-f20-public_class_TeamD/blob/master/README.md) file.
 3. Checkout the branch associated with the Pull Request you are reviewing.
-4. In the console, navigate to the the project's root directory ("*cs414-f20-public_class_TeamD*"). From this directory, you may load any dependencies that have not already been added to your local environment by running `npm i`.
+4. In the console, navigate to the project's root directory ("*cs414-f20-public_class_TeamD*"). From this directory, you may load any dependencies that have not already been added to your local environment by running `npm i`.
     - **Complete this step even if you believe you already have all dependencies**, as new ones are added regularly.
 5. Once dependencies have been loaded, test the code using the ***Testing*** section below.
 6. If the code passes all tests, review each edited file in GitHub.
