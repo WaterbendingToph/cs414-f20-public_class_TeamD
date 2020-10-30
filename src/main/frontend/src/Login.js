@@ -25,7 +25,7 @@ export default class Login extends Component {
             .then(res => res.json())
             .then(result => {
                 if (result.loginSuccess) {
-                    return <Redirect to="/lobby" />
+                    this.props.history.push("/lobby");
                 }
             })
     }

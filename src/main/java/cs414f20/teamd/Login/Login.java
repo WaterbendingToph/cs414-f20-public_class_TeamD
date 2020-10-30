@@ -7,7 +7,7 @@ public class Login {
     private String password;
     private java.time.LocalDate date;
     boolean loginSuccess;
-    private Database db;
+    // private Database db;
 
     public Login() {
     }
@@ -16,7 +16,7 @@ public class Login {
         this.userID = userID;
         this.password = password;
         this.date = java.time.LocalDate.now();
-        this.db = new Database();
+        // this.db = new Database();
     }
 
     public String getUserID() {
