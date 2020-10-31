@@ -14,25 +14,45 @@ public class Database {
     // private final static String COLUMN = "username";
     private final static String QUERY = "SELECT * FROM greatestAccounts;";
 
-    private static void getAllUsers(){
+    public static void getAllUsers() {
         try (
-             // connect to the database and query
-             Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             Statement query = conn.createStatement();
-             ResultSet results = query.executeQuery(QUERY)
-         ) {
+                // connect to the database and query
+                Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+                Statement query = conn.createStatement();
+                ResultSet results = query.executeQuery(QUERY)
+        ) {
             // iterate through query results and print out the column values
             int count = 0;
             while (results.next()) {
                 System.out.printf("%6d %s", ++count, results.getString("personalID"));
                 System.out.printf("\t%s", results.getString("username"));
-                System.out.printf("\t%s\n", results.getString("password"));
+                System.out.printf("\t%s%n", results.getString("password"));
             }
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("Exception: " + e.getMessage());
         }
     }
+    
+    public static String tryLogin(String username, String password) {
+        String loginQuery = "SELECT username FROM greatestAccounts WHERE username = '" + username + "' AND password = '" + password + "';";
+        String userReturned = "";
+
+        try (
+            // connect to the database and query
+            Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Statement query = conn.createStatement();
+            ResultSet results = query.executeQuery(loginQuery)
+        ) {
+            while (results.next()) {
+                userReturned = results.getString("username");
+            }
+        } catch (Exception e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+        
+        return userReturned;
+    }
+
     public static void main(String[] args) {
         getAllUsers();
     }

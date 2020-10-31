@@ -10,9 +10,8 @@ public class LoginController {
     @GetMapping("/login")
     public Login login(@RequestParam String userID, String password) {
         Login currentLogin = new Login(userID, password);
-        currentLogin.loggedIn();
+        currentLogin.attemptLogin();
         System.out.println(currentLogin);
-        System.out.println(currentLogin.queryDatabase());
         return currentLogin;
     }
 }

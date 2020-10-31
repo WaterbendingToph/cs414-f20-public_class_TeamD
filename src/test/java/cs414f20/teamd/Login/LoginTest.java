@@ -6,9 +6,8 @@ import org.junit.jupiter.api.Test;
 public class LoginTest {
     @Test
     void testLogin() {
-        Login test = new Login("Nick", "password");
-        assertEquals("Nick", test.getUserID());
-        assertEquals("password", test.getPassword());
-        assertTrue(test.loggedIn());
+        Login test = new Login("nick", "42");
+        assertEquals("nick", test.getUserID());
+        assertEquals("42", test.getPassword());
     }
 }
