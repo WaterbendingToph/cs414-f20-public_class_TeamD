@@ -3,6 +3,7 @@ package cs414f20.teamd.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.Hashtable;
 import java.sql.ResultSet;
 
 public class Database {
@@ -34,10 +35,47 @@ public class Database {
         }
     }
 
-    public static void enterNewGame(int id, String whitePlayer, String blackPlayer){
-        final String board = "newBoard";
+    private static void setupBoard(Hashtable<String, String> board) {
+        String[] cols = {"a","b","c","d","e","f","g","h","i", "j"};
+        for(String col : cols) {
+            if(col.equals("b") || col.equals("i")) {
+                board.put("White rook", col+"0");
+                board.put("Black rook", col+"9");
+            }
+            else if(col.equals("a") || col.equals("j")) {
+                board.put("White Knight", col+"0");
+                board.put("Black Knight", col+"9");
+            }
+            else if(col.equals("c") || col.equals("h")) {
+                board.put("White Knight", col+"0");
+                board.put("Black Knight", col+"9");
+            }
+            else if(col.equals("d") || col.equals("g")) {
+                board.put("White Bishop", col+"0");
+                board.put("Black Bishop", col+"9");
+            }
+            else if(col.equals("e")) {
+                board.put("White Queen", col+"0");
+                board.put("Black Queen", col+"9");
+            }
+            else {
+                board.put("White King", col+"0");
+                board.put("Black King", col+"9");
+            }
+            board.put("White Pawn", col+"1");
+            board.put("Black Pawn", col+"8");
+        }
+        board.put("Black Wizard", "w3");
+        board.put("Black Wizard", "w4");
+        board.put("White Wizard", "w1");
+        board.put("White Wizard", "w2");
+    }
+
+    public static void enterNewGame(int id, String whitePlayer, String blackPlayer) {
+        Hashtable<String, String> board = new Hashtable<String, String>();
+        setupBoard(board);
         final String q = "INSERT INTO chessGames VALUES("+ id +",\"" + whitePlayer + "\",\""+ blackPlayer+"\",\""
-                          + board + "\",\""+ whitePlayer +"\","+ 0 +");";
+                          + board.toString() + "\",\""+ whitePlayer +"\","+ 0 +");";
         try (
              Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              Statement query = conn.createStatement();
@@ -50,7 +88,11 @@ public class Database {
     }
 
     public static void main(String[] args) {
-        getAllUsers();
-        enterNewGame(20, "me", "not me");
+        // getAllUsers();
+        // enterNewGame(20, "me", "not me");
+        Hashtable<String, String> board = new Hashtable<String, String>();
+        setupBoard(board);
+        System.out.println("Size of board: " + board.size());
+        System.out.println(board);
     }
 }

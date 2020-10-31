@@ -19,8 +19,7 @@ public class CreateMatch {
     }
 
     private void enterNewGameToDB(){
-        Database db = new Database();
-        db.enterNewGame(gameID, "currentPlayer", opponent);
+        Database.enterNewGame(gameID, "currentPlayer", opponent);
     }
 
     public long getGameID() {
