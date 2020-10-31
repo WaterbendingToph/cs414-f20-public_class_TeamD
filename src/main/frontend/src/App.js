@@ -16,7 +16,7 @@ function App() {
             <Route exact path="/" component={Login} />
             <Route exact path="/registration" component={Registration} />
             <Route exact path="/lobby" component={Lobby} />
-            <Route exact path="/ongoingmatches" component={OngoingMatches} />
+            <Route exact path="/matches" component={OngoingMatches} />
             <Route exact path="/game" component={BoardGame} />
           </Switch>
         </div>
