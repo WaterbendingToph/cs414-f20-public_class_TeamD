@@ -38,37 +38,40 @@ public class Database {
     private static void setupBoard(Hashtable<String, String> board) {
         String[] cols = {"a","b","c","d","e","f","g","h","i", "j"};
         for(String col : cols) {
+            int count = 0;
+            if(col.charAt(0) <= 'e')
+                count = 1;
             if(col.equals("b") || col.equals("i")) {
-                board.put("White rook", col+"0");
-                board.put("Black rook", col+"9");
+                board.put("White rook"+count, col+"0");
+                board.put("Black rook"+count, col+"9");
             }
             else if(col.equals("a") || col.equals("j")) {
-                board.put("White Knight", col+"0");
-                board.put("Black Knight", col+"9");
+                board.put("White Champion"+count, col+"0");
+                board.put("Black Champion"+count, col+"9");
             }
             else if(col.equals("c") || col.equals("h")) {
-                board.put("White Knight", col+"0");
-                board.put("Black Knight", col+"9");
+                board.put("White Knight"+count, col+"0");
+                board.put("Black Knight"+count, col+"9");
             }
             else if(col.equals("d") || col.equals("g")) {
-                board.put("White Bishop", col+"0");
-                board.put("Black Bishop", col+"9");
+                board.put("White Bishop"+count, col+"0");
+                board.put("Black Bishop"+count, col+"9");
             }
             else if(col.equals("e")) {
-                board.put("White Queen", col+"0");
-                board.put("Black Queen", col+"9");
+                board.put("White Queen"+count, col+"0");
+                board.put("Black Queen"+count, col+"9");
             }
             else {
-                board.put("White King", col+"0");
-                board.put("Black King", col+"9");
+                board.put("White King"+count, col+"0");
+                board.put("Black King"+count, col+"9");
             }
-            board.put("White Pawn", col+"1");
-            board.put("Black Pawn", col+"8");
+            board.put("White Pawn"+col, col+"1");
+            board.put("Black Pawn"+col, col+"8");
         }
-        board.put("Black Wizard", "w3");
-        board.put("Black Wizard", "w4");
-        board.put("White Wizard", "w1");
-        board.put("White Wizard", "w2");
+        board.put("Black Wizard0", "w3");
+        board.put("Black Wizard1", "w4");
+        board.put("White Wizard0", "w1");
+        board.put("White Wizard1", "w2");
     }
 
     public static void enterNewGame(int id, String whitePlayer, String blackPlayer) {
