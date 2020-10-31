@@ -25,7 +25,12 @@ export default class Login extends Component {
             .then(res => res.json())
             .then(result => {
                 if (result.loginSuccess) {
-                    this.props.history.push("/lobby");
+                    this.props.history.push({
+                        pathname: "/lobby",
+                        state: {
+                            username: this.state.userID,
+                        }
+                    });
                 }
             })
     }
