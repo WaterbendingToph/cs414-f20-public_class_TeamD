@@ -7,7 +7,7 @@ public class Login {
     private String password;
     private java.time.LocalDate date;
     boolean loginSuccess;
-    // private Database db;
+    String dbResults;
 
     public Login() {
     }
@@ -16,7 +16,6 @@ public class Login {
         this.userID = userID;
         this.password = password;
         this.date = java.time.LocalDate.now();
-        // this.db = new Database();
     }
 
     public String getUserID() {
@@ -43,19 +42,14 @@ public class Login {
             ", password='" + getPassword() + "'" +
             ", date='" + getDate() + "'" +
             ", successfully logged in='" + getLoginSuccess() + "'" +
+            ", database results='" + dbResults + "'" +
             "}";
     }
 
-    String queryDatabase() {
-        String dbResults = "TEST: User is logged in.";
-        // ------------------------------TODO: ADD DATABASE QUERY HERE------------------------------ //
-        // String dbResults = db.getAllUsers(); <- Uses existing Database.java file
-        return dbResults;
+    void attemptLogin() {
+        dbResults = Database.tryLogin(this.userID, this.password);
+        loginSuccess = dbResults.equals("");
     } 
 
-    boolean loggedIn() {
-        loginSuccess = queryDatabase() != null;
-        return loginSuccess;
-    }
 }
 
