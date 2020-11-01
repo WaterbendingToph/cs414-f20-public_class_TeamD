@@ -22,13 +22,22 @@
 ## Review
 
 #### Completed epics in Sprint Backlog
+- 6 Registration
+- 92 Login
 
 #### Incomplete epics in Sprint Backlog 
+- 7 Matchmaking
+- 10 Gameplay
 
 #### Display of user stories completed and progress within the app
+- 17 Registration
+- 42 Create Match
+- 99 Login
 
 ## Retrospective
 
 #### What went well
+We are able to communicate with everyone and are able to get our tasks done in time instead of sitting on a task to too long. We were able to plan our tasks so that we don't have any conflicting work with other people, meaning we were able to get our work done faster.
 
 #### Problems encountered and resolutions
+Some of our team members had some emergencies, like familiy emergencies and the fires near Cameron Peak, that came up unexpectedly so they had to stop working for some time to attend those emergencies. We had to replan our work and tasks that needed to be completed and work accordingly. 
