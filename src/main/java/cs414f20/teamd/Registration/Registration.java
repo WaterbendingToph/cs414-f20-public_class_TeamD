@@ -3,6 +3,8 @@ package cs414f20.teamd.Registration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import cs414f20.teamd.DatabaseConnection.Database;
+
 // import cs414f20.teamd.DatabaseConnection.Database;
 
 public class Registration {
@@ -10,9 +12,9 @@ public class Registration {
     private String password;
     private java.time.LocalDate date;
     boolean registrationSuccess;
-    String dbResults;
+    int dbResults = 0;
 
-    static String validIDRegex="^[a-zA-z0-9]{1,16}$";
+    static String validIDRegex="^[a-z,A-Z,0-9]{1,16}$";
 
     public Registration(String userID, String password) {
         this.userID = userID;
@@ -38,10 +40,10 @@ public class Registration {
 
     @Override
     public String toString() {
-        return "{" + "========== TEST: Registration Object Sent to Controller==========\n" + " userID='" + getUserID()
+        return "\n{" + "========== TEST: Registration Object Sent to Controller==========\n" + " userID='" + getUserID()
                 + "'" + ", password='" + getPassword() + "'" + ", date='" + getDate() + "'"
-                + ", successfully registered='" + getRegistrationSuccess() + "'" + ", database results='" + dbResults
-                + "'" + "}";
+                + ", successfully registered='" + getRegistrationSuccess() + "'" + ", database results='" + Integer.toString(dbResults)
+                + "'" + "}\n";
     }
 
     boolean userIDIsSanitary() {
@@ -51,10 +53,11 @@ public class Registration {
     }
     
     void registerUser() {
-        // dbResults = Database.tryLogin(this.userID, this.password);
         if (userIDIsSanitary()) {
-            dbResults = "Dummy - user registered!";
-            registrationSuccess = !dbResults.equals("");
+            dbResults = Database.registerUser(getUserID(), getPassword());
+        } else {
+            System.out.println("Invalid user ID! Please try again.");
         }
+        registrationSuccess = (dbResults == 1);
     }
 }

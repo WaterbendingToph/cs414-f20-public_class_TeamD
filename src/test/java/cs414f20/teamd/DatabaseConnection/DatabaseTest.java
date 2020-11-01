@@ -37,18 +37,40 @@ class DatabaseTest {
 	
 	@Test
 	void testDatabaseLoginQuery() {
-		try (
-	         Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-	         Statement query = conn.createStatement();
-	         ResultSet results = query.executeQuery("SELECT username FROM greatestAccounts WHERE username = 'nick' AND password = '42';");
-	    ) {
-	        while (results.next()) {
+		try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+				Statement query = conn.createStatement();
+				ResultSet results = query.executeQuery(
+						"SELECT username FROM greatestAccounts WHERE username = 'nick' AND password = '42';");) {
+			while (results.next()) {
 				String userReturned = results.getString("username");
 				assertEquals("nick", userReturned);
-	        }
-	    } 
-	    catch (Exception e) {
-	        fail("Unexpected error: " + e.getMessage());
-	    }
+			}
+		} catch (Exception e) {
+			fail("Unexpected error: " + e.getMessage());
+		}
+	}
+	
+	@Test
+	void testRegisterUserQuery() {
+		String invalidRegistrationQuery = "INSERT INTO greatestAccounts VALUES (NULL, 'nick', 'duplicate should not work');";
+        int dbResult = 0;
+        
+        Connection conn = null;
+        Statement query = null;
+        try {
+            // connect to the database and query
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            // executeUpdate returns the number of lines in the database that were
+            // affected by the query. When registering a user, this should be "1"
+            // if registration succeeded or "0" if not.
+            dbResult = query.executeUpdate(invalidRegistrationQuery);
+
+        } catch (Exception e) {
+            System.err.println("Exception: " + e.getMessage());
+		} finally {
+			Database.closeConnections(conn, query);
+		}
+		assertEquals(0, dbResult);
 	}
 }
