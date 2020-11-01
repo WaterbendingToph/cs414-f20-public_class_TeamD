@@ -9,8 +9,8 @@ import java.sql.ResultSet;
 public class Database {
     // connection information when using port forwarding from local host
     private final static String DB_URL = "jdbc:mysql://127.0.0.1:56247/publicclassteamd";
-    private final static String DB_USER = "sdonepud";
-    private final static String DB_PASSWORD = "*";
+    private final static String DB_USER = "nic1571";
+    private final static String DB_PASSWORD = "password";
     // SQL SELECT query statement
     // private final static String COLUMN = "username";
     private final static String QUERY = "SELECT * FROM greatestAccounts;";
