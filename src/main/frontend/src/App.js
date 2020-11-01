@@ -14,7 +14,7 @@ function App() {
         <div id='switches'>
           <Switch>
             <Route exact path="/" component={Login} />
-            <Route exact path="/registration" component={Registration} />
+            <Route exact path="/register" component={Registration} />
             <Route exact path="/lobby" component={Lobby} />
             <Route exact path="/matches" component={OngoingMatches} />
             <Route exact path="/game" component={BoardGame} />
