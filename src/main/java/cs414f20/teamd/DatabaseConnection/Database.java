@@ -87,6 +87,7 @@ public class Database {
         catch (Exception e) {
             System.err.println("Exception: " + e.getMessage());
         }
+    }
     
     public static String tryLogin(String username, String password) {
         String loginQuery = "SELECT username FROM greatestAccounts WHERE username = '" + username + "' AND password = '" + password + "';";
