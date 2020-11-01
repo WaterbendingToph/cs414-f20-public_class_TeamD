@@ -15,6 +15,7 @@ export default class CreateMatchBox extends Component{
         this.toggle = this.toggleCM.bind(this);
         this.changePlayer = this.changePlayer.bind(this);
         this.submitPlayer = this.submitPlayer.bind(this);
+        this.startMatch = this.startMatch.bind(this);
     }
 
     submitPlayer(){
@@ -38,6 +39,16 @@ export default class CreateMatchBox extends Component{
         if(this.state.submitted === true)
             return(<p style={{color: "rgb(0,200,0)"}}>Sent Invite!</p>);
         return "";
+    }
+
+    startMatch(){
+        fetch("/createMatch/?playerID="+ this.state.listOfPlayers.join(","))
+            .then(res => res.json())
+            .then(data =>{
+                if(data.gameStarted && data.opponent !== ""){
+                    this.props.toGame();
+                }
+            });
     }
 
     renderForms(){
@@ -78,7 +89,7 @@ export default class CreateMatchBox extends Component{
                         {this.getCurrentPlayers()}
                     </ModalBody>
                     <ModalBody>
-                        <Button>Create Match</Button>
+                        <Button onClick={this.startMatch}>Create Match</Button>
                     </ModalBody>
                 </Modal>
             </div>

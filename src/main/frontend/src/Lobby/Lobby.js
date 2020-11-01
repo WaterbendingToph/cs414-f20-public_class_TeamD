@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import OngoingMatches from './Ongoing Matches/OngoingMatches';
 import CreateMatchBox from "./Create Match Box/CreateMatchBox";
 
 export default class Lobby extends Component {
@@ -9,12 +8,16 @@ export default class Lobby extends Component {
             username: this.props.location.state.username,
         }
     }
+  
+    goToGamePlay(){
+          this.props.history.push("/game");
+    }
 
     render() {
         return(
             <div>
                 <h1>Welcome to the Lobby, {this.state.username}!</h1>
-                <CreateMatchBox />
+                <CreateMatchBox toGame={this.goToGamePlay.bind(this)} />
                 <a href={"/matches/"}>Ongoing Matches</a>
             </div>
         )

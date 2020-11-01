@@ -5,13 +5,14 @@ import static java.sql.DriverManager.getConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.Hashtable;
 import java.sql.ResultSet;
 
 public class Database {
     // connection information when using port forwarding from local host
     private final static String DB_URL = "jdbc:mysql://127.0.0.1:56247/publicclassteamd";
-    private final static String DB_USER = "sdonepud";
-    private final static String DB_PASSWORD = "831865987";
+    private final static String DB_USER = "nic1571";
+    private final static String DB_PASSWORD = "password";
     // SQL SELECT query statement
     // private final static String COLUMN = "username";
     private final static String QUERY = "SELECT * FROM greatestAccounts;";
@@ -34,6 +35,61 @@ public class Database {
         }
     }
 
+    private static void setupBoard(Hashtable<String, String> board) {
+        String[] cols = {"a","b","c","d","e","f","g","h","i", "j"};
+        for(String col : cols) {
+            int count = 0;
+            if(col.charAt(0) <= 'e')
+                count = 1;
+            if(col.equals("b") || col.equals("i")) {
+                board.put("White rook"+count, col+"0");
+                board.put("Black rook"+count, col+"9");
+            }
+            else if(col.equals("a") || col.equals("j")) {
+                board.put("White Champion"+count, col+"0");
+                board.put("Black Champion"+count, col+"9");
+            }
+            else if(col.equals("c") || col.equals("h")) {
+                board.put("White Knight"+count, col+"0");
+                board.put("Black Knight"+count, col+"9");
+            }
+            else if(col.equals("d") || col.equals("g")) {
+                board.put("White Bishop"+count, col+"0");
+                board.put("Black Bishop"+count, col+"9");
+            }
+            else if(col.equals("e")) {
+                board.put("White Queen"+count, col+"0");
+                board.put("Black Queen"+count, col+"9");
+            }
+            else {
+                board.put("White King"+count, col+"0");
+                board.put("Black King"+count, col+"9");
+            }
+            board.put("White Pawn"+col, col+"1");
+            board.put("Black Pawn"+col, col+"8");
+        }
+        board.put("Black Wizard0", "w3");
+        board.put("Black Wizard1", "w4");
+        board.put("White Wizard0", "w1");
+        board.put("White Wizard1", "w2");
+    }
+
+    public static void enterNewGame(int id, String whitePlayer, String blackPlayer) {
+        Hashtable<String, String> board = new Hashtable<String, String>();
+        setupBoard(board);
+        final String q = "INSERT INTO chessGames VALUES("+ id +",\"" + whitePlayer + "\",\""+ blackPlayer+"\",\""
+                          + board.toString() + "\",\""+ whitePlayer +"\","+ 0 +");";
+        try (
+             Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             Statement query = conn.createStatement();
+         ) {
+            query.executeUpdate(q);
+        } 
+        catch (Exception e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+    }
+    
     public static String tryLogin(String username, String password) {
         String loginQuery = "SELECT username FROM greatestAccounts WHERE username = '" + username + "' AND password = '"
                 + password + "';";
@@ -93,6 +149,11 @@ public class Database {
     }
 
     public static void main(String[] args) {
-        getAllUsers();
+        // getAllUsers();
+        // enterNewGame(20, "me", "not me");
+        // Hashtable<String, String> board = new Hashtable<String, String>();
+        // setupBoard(board);
+        // System.out.println("Size of board: " + board.size());
+        // System.out.println(board);
     }
 }

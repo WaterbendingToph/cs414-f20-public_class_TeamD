@@ -2,15 +2,24 @@ package cs414f20.teamd.CreateMatch;
 
 import java.time.LocalDate;
 
+import cs414f20.teamd.DatabaseConnection.Database;
+
 public class CreateMatch {
-    private long gameID;
+    private int gameID;
     private String opponent;
     private java.time.LocalDate date;
+    private boolean started;
 
-    public CreateMatch(long gameID, String opponent) {
+    public CreateMatch(int gameID, String opponent) {
         this.gameID = gameID;
         this.opponent = opponent;
         this.date = java.time.LocalDate.now();
+        this.started = true;
+        enterNewGameToDB();
+    }
+
+    private void enterNewGameToDB(){
+        Database.enterNewGame(gameID, "currentPlayer", opponent);
     }
 
     public long getGameID() {
@@ -23,5 +32,9 @@ public class CreateMatch {
 
     public java.time.LocalDate getLocalDate(){
         return date;
+    }
+
+    public boolean getGameStarted(){
+        return started;
     }
 }

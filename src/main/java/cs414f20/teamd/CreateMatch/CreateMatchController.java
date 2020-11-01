@@ -10,9 +10,9 @@ import java.util.Random;
 public class CreateMatchController {
 
     @GetMapping("/createMatch")
-    public CreateMatch createMatch(@RequestParam(value = "playerID") String playerID) {
+    public CreateMatch createMatch(@RequestParam(value = "playerID") String[] playerIDList) {
         Random r = new Random();
-        long id = r.nextLong();
-        return new CreateMatch(Math.abs(id), playerID);
+        int id = r.nextInt();
+        return new CreateMatch(Math.abs(id), playerIDList[0]);
     }
 }
