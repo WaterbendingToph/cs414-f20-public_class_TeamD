@@ -1,5 +1,7 @@
 package cs414f20.teamd.DatabaseConnection;
 
+import static java.sql.DriverManager.getConnection;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -17,10 +19,9 @@ public class Database {
     public static void getAllUsers() {
         try (
                 // connect to the database and query
-                Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+                Connection conn = getConnection(DB_URL, DB_USER, DB_PASSWORD);
                 Statement query = conn.createStatement();
-                ResultSet results = query.executeQuery(QUERY)
-        ) {
+                ResultSet results = query.executeQuery(QUERY)) {
             // iterate through query results and print out the column values
             int count = 0;
             while (results.next()) {
@@ -32,7 +33,7 @@ public class Database {
             System.err.println("Exception: " + e.getMessage());
         }
     }
-    
+
     public static String tryLogin(String username, String password) {
         String loginQuery = "SELECT username FROM greatestAccounts WHERE username = '" + username + "' AND password = '"
                 + password + "';";
@@ -40,7 +41,7 @@ public class Database {
 
         try (
                 // connect to the database and query
-                Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+                Connection conn = getConnection(DB_URL, DB_USER, DB_PASSWORD);
                 Statement query = conn.createStatement();
                 ResultSet results = query.executeQuery(loginQuery)) {
             while (results.next()) {
@@ -52,29 +53,43 @@ public class Database {
 
         return userReturned;
     }
-    
+
     public static int registerUser(String username, String password) {
         String registrationQuery = "INSERT INTO greatestAccounts VALUES (NULL, '" + username + "', '" + password
                 + "');";
-        int dbResult;
-
-        try (
-                // connect to the database and query
-                Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-                Statement query = conn.createStatement();
-                int result = query.executeUpdate(registrationQuery)) {
-
-// FIXME: issue with returning the integer from the executeUpdate and you apparently have to close the connections somehow.
-
-            dbResult = result;
-            query.close();
-            }
-        } catch (Exception e) {
-            System.err.println("Exception: " + e.getMessage());
-        }
+        int dbResult = 0;
         
+        Connection conn = null;
+        Statement query = null;
+        try {
+            // connect to the database and query
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            // executeUpdate returns the number of lines in the database that were
+            // affected by the query. When registering a user, this should be "1"
+            // if registration succeeded or "0" if not.
+            dbResult = query.executeUpdate(registrationQuery);
+
+        } catch (Exception e) {
+            System.err.println("Error while Registering User: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
 
         return dbResult;
+    }
+    
+    // Used for Statement queries (sent to database) that do not automatically
+    // close their connections.
+    static void closeConnections(Connection conn, Statement query) {
+        if ((conn != null) && (query != null)) {
+            try {
+                conn.close();
+                query.close();
+            } catch (Exception e) {
+                System.err.println("Database Error: " + e.getMessage());
+            }
+        }
     }
 
     public static void main(String[] args) {
