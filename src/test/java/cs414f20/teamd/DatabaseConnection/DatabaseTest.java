@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
@@ -50,5 +52,42 @@ class DatabaseTest {
 	    catch (Exception e) {
 	        fail("Unexpected error: " + e.getMessage());
 	    }
+	}
+	
+	@Test
+	void testCreateMatchQuery() {
+		Random r = new Random();
+		int id = r.nextInt();
+		Database.enterNewGame(id, "stevie", "bobby");
+		try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+				Statement query = conn.createStatement();
+				ResultSet results = query.executeQuery("SELECT * FROM chessGames WHERE gameID="+ id +";");) {
+			while (results.next()) {
+				int gameID = Integer.parseInt(results.getString("gameID"));
+				String white = results.getString("white_player");
+				String black = results.getString("black_player");
+				String currentP = results.getString("whose_turn");
+				String completed = results.getString("completed");
+				assertEquals(gameID, id);
+				assertEquals(white, "stevie");
+				assertEquals(black, "bobby");
+				assertEquals(currentP, "stevie");
+				assertEquals(completed, "0");
+				assertNotNull(results.getString("board"));
+			}
+		} catch (Exception e) {
+			fail("Unexpected error when CREATING MATCH: " + e.getMessage());
+		}
+		finally {
+			try {
+				Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+				Statement query = conn.createStatement();
+				String delete = "DELETE FROM chessGames WHERE white_player=\"stevie\";";
+				query.executeUpdate(delete);
+			} catch (SQLException e) {
+				fail("FAILED TO DELETE: " + e.getMessage());
+			}
+		}
+		
 	}
 }
