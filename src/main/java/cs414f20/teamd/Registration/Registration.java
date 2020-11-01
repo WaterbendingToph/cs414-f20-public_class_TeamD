@@ -51,12 +51,18 @@ public class Registration {
         Matcher matcher = pattern.matcher(this.userID);
         return matcher.matches();
     }
+
+    boolean passwordIsSanitary() {
+        Pattern pattern = Pattern.compile(validIDRegex);
+        Matcher matcher = pattern.matcher(this.password);
+        return matcher.matches();
+    }
     
     void registerUser() {
-        if (userIDIsSanitary()) {
-            dbResults = Database.registerUser(getUserID(), getPassword());
+        if (userIDIsSanitary() && passwordIsSanitary()) {
+            dbResults = Database.registerUser(this.userID, this.password);
         } else {
-            System.out.println("Invalid user ID! Please try again.");
+            System.out.println("Invalid user ID or password! Please try again.");
         }
         registrationSuccess = (dbResults == 1);
     }
