@@ -8,7 +8,7 @@ export default class Lobby extends Component {
             username: this.props.location.state.username,
         }
     }
-  
+
     goToGamePlay(){
           this.props.history.push("/game");
     }
