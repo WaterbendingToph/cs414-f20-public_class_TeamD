@@ -14,6 +14,7 @@ This Sprint, we want to complete Stories
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
 | 11/2 | *#95, #129, #98, #97, #80, #71, #76, #86, #87, #89, #90, #88* | *None* | *None* |
+| 11/4 | *None* | *None* | *None* |
 | 11/2 | *asdf* | *asdf* | *asdf* |
 
 ## Review
