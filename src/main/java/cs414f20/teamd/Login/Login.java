@@ -47,8 +47,7 @@ public class Login {
     }
 
     void attemptLogin() {
-        dbResults = Database.tryLogin(this.userID, this.password);
-        loginSuccess = !dbResults.equals("");
+        loginSuccess = Database.tryLogin(this.userID, this.password);
     } 
 
 }

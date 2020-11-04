@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.Hashtable;
+
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.sql.ResultSet;
 
 public class Database {
@@ -90,24 +93,21 @@ public class Database {
         }
     }
     
-    public static String tryLogin(String username, String password) {
-        String loginQuery = "SELECT username FROM greatestAccounts WHERE username = '" + username + "' AND password = '"
-                + password + "';";
-        String userReturned = "";
+    public static boolean tryLogin(String username, String password) {
+        String loginQuery = "SELECT * FROM greatestAccounts WHERE username = '" + username + "';";
 
         try (
-                // connect to the database and query
-                Connection conn = getConnection(DB_URL, DB_USER, DB_PASSWORD);
-                Statement query = conn.createStatement();
-                ResultSet results = query.executeQuery(loginQuery)) {
+            Connection conn = getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Statement query = conn.createStatement();
+            ResultSet results = query.executeQuery(loginQuery)) {
             while (results.next()) {
-                userReturned = results.getString("username");
+                if(BCrypt.checkpw(password, results.getString("password")))
+                    return true;
             }
         } catch (Exception e) {
             System.err.println("Exception: " + e.getMessage());
         }
-
-        return userReturned;
+        return false;
     }
 
     public static int registerUser(String username, String password) {

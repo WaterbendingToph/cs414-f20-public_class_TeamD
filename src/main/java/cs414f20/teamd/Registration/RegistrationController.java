@@ -10,7 +10,6 @@ public class RegistrationController {
     public Registration register(@RequestParam String userID, String password) {
         Registration currentRegistration = new Registration(userID, password);
         currentRegistration.registerUser();
-        System.out.println(currentRegistration);
         return currentRegistration;
     }
 }

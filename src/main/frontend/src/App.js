@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
-import Login from "./Login";
+import Login from "./Login/Login";
 import Registration from "./Registration";
 import Lobby from "./Lobby/Lobby";
 import OngoingMatches from './Lobby/Ongoing Matches/OngoingMatches';
