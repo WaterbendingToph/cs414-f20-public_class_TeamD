@@ -1,14 +1,5 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
-import {
-    // BrowserRouter as Router,
-    // Switch,
-    // Route,
-    // Link,
-    Redirect,
-    // useHistory,
-    // useLocation
-  } from "react-router-dom";
 
 export default class OngoingMatches extends Component {
     constructor(props) {

@@ -1,14 +1,5 @@
 import React, { Component } from 'react';
 import { Alert, Form } from 'reactstrap';
-import {
-    // BrowserRouter as Router,
-    // Switch,
-    // Route,
-    // Link,
-    Redirect,
-    // useHistory,
-    // useLocation
-  } from "react-router-dom";
 
 export default class Login extends Component {
     constructor(props) {
@@ -81,11 +72,11 @@ export default class Login extends Component {
                     <h3 style={{ textAlign: "center" }}>Username:</h3>
                     <input onChange={(event) => this.setState({ userID: event.target.value })} type={"text"} placeholder={"Username Here"} />
                     <h3 style={{ textAlign: "center" }}>Password:</h3>
-                    <input onChange={(event) => this.setState({ password: event.target.value })} type={"text"} placeholder={"Password Here"} />
+                    <input onChange={(event) => this.setState({ password: event.target.value })} type={"password"} placeholder={"Password Here"} />
                     <button onClick={this.onSubmit} type='button'>Login</button>
                     <h2 style={{ textAlign: "center" }}>New User? Create an account</h2>
                     <input onChange={(event) => this.setState({ userID: event.target.value })} type={"text"} placeholder={"New Account Username"} />
-                    <input onChange={(event) => this.setState({ password: event.target.value })} type={"text"} placeholder={"New Account Password"} />
+                    <input onChange={(event) => this.setState({ password: event.target.value })} type={"password"} placeholder={"New Account Password"} />
                     <button onClick={this.registerAccount} type='button'>Create Account</button>
                 </Form>
             </div>
