@@ -3,6 +3,8 @@ package cs414f20.teamd.Registration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import cs414f20.teamd.DatabaseConnection.Database;
 
 // import cs414f20.teamd.DatabaseConnection.Database;
@@ -51,10 +53,17 @@ public class Registration {
         Matcher matcher = pattern.matcher(this.userID);
         return matcher.matches();
     }
+
+    boolean passwordIsSanitary() {
+        Pattern pattern = Pattern.compile(validIDRegex);
+        Matcher matcher = pattern.matcher(this.password);
+        return matcher.matches();
+    }
     
     void registerUser() {
-        if (userIDIsSanitary()) {
-            dbResults = Database.registerUser(getUserID(), getPassword());
+        if (userIDIsSanitary() && passwordIsSanitary()) {
+            String hash = BCrypt.hashpw(getPassword(), BCrypt.gensalt());
+            dbResults = Database.registerUser(getUserID(), hash);
         } else {
             System.out.println("Invalid user ID! Please try again.");
         }
