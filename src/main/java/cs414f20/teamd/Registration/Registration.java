@@ -65,7 +65,7 @@ public class Registration {
             String hash = BCrypt.hashpw(getPassword(), BCrypt.gensalt());
             dbResults = Database.registerUser(getUserID(), hash);
         } else {
-            System.out.println("Invalid user ID! Please try again.");
+            System.out.println("Invalid user ID or password! Please try again.");
         }
         registrationSuccess = (dbResults == 1);
     }
