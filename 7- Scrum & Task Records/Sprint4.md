@@ -3,11 +3,11 @@
 ### Scrum Master: Victor Mumford
 
 ## Plan
-This Sprint, we want to complete Epics
-- _ Create Match
-- _ Make Move
-- _ Choose Opponent
-- _ Board Display
+This Sprint, we want to complete Stories
+- 42 Create Match
+- 64 Make Move
+- 43 Choose Opponent
+- 140 Board Display
 
 ## Scrums
 
