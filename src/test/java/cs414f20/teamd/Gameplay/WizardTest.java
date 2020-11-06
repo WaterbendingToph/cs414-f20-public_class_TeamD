@@ -1,4 +1,4 @@
-package cs414f20.teamd;
+package cs414f20.teamd.Gameplay;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;

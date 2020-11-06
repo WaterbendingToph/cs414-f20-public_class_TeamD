@@ -1,4 +1,4 @@
-package cs414f20.teamd;
+package cs414f20.teamd.Gameplay;
 
 import java.util.ArrayList;
 
@@ -17,12 +17,12 @@ abstract class ChessPiece {
     protected int column;
     protected Color color;
 
-    public ChessPiece() {
+    protected ChessPiece() {
         // No-arg constructor for concrete classes defaults to white
         this(new ChessBoard(), Color.WHITE);
     }
 
-    public ChessPiece(ChessBoard board, Color color) {
+    protected ChessPiece(ChessBoard board, Color color) {
         this.board = board;
         this.color = color;
     }
@@ -40,7 +40,13 @@ abstract class ChessPiece {
          * @see ChessPiece
          */
 
-        return "Not yet implemented";
+        // Convert the row and column indices to characters and return them with
+        // column first
+        char charRow = (char)(this.row + 48);
+        char charColumn = (char)(this.column + 97);
+        String currentPosition = "" + charRow + charColumn;
+
+        return currentPosition;
     }
 
     public void setPosition(String position) throws IllegalPositionException {
@@ -51,8 +57,15 @@ abstract class ChessPiece {
          * @param position The two-character position where the piece will be moved
          * @throws IllegalPositionException
          */
-        System.out.printf("The requested position is: %s.", position);
-        System.out.println("Not yet implemented");
+        // Ensure that the move is legal (i.e. the position is on the board)
+        if (position.charAt(0) >= 'a' && position.charAt(0) <= 'h' && position.charAt(1) >= '1'
+        		&& position.charAt(1) <= '8') {
+        	
+	        this.row = (int)(position.charAt(1) - 49);
+	        this.column = (int)(position.charAt(0) - 97);
+        } else {
+            throw new IllegalPositionException("Not a legal move.");
+        }
     }
 
     @Override

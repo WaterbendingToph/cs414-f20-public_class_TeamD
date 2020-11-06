@@ -1,14 +1,31 @@
-package cs414f20.teamd;
+package cs414f20.teamd.Gameplay;
 
 import java.util.ArrayList;
-public class Wizard {
 
+class Rook extends ChessPiece {
     /**
      * This concrete class implements the methods for the abstract class ChessPiece
-     * for the wizard piece in this variant of chess. The wizard moves in a similar
-     * to a knight, except in a 3x1 shape instead of 2x1. It can also move one square
-     * diagonally in any direction.
+     * for the rook piece in this variant of chess. A rook can move any number of
+     * squares horizontally or vertically, forward or backward, as long as it does
+     * not have to leap over other pieces. At the end of the move, it can occupy
+     * a previously empty square or capture (replace) an opponent's piece, but it
+     * cannot replace another piece of the same player.
      */
+
+    // No-arg constructor for concrete classes defaults to white
+    public Rook() {
+        super();
+    }
+    
+    // One-arg constructor for concrete class instantiation defaults to white
+    public Rook(ChessBoard board) {
+        super(board, Color.WHITE);
+    }
+
+    // Constructor with both arguments given
+    public Rook(ChessBoard board, Color color) {
+        super(board, color);
+    }
 
     public String toString() {
         /**
@@ -19,7 +36,7 @@ public class Wizard {
          * @return One-character Unicode representation of the piece (black or white)
          */
 
-        return "Not yet implemented.";
+        return this.color == Color.WHITE ? "\u2656" : "\u265C";
     }
 
     public ArrayList<String> legalMoves() {
@@ -35,7 +52,11 @@ public class Wizard {
          * @return An empty ArrayList if there are no legal moves available
          */
         
-        System.out.println("Not yet implemented");
-        return new ArrayList<>();
+        ArrayList<String> legalMoves = new ArrayList<>();
+
+        // TODO: Write code to iterate over potential moves for king piece.
+        legalMoves.add("Not yet implemented.");
+        
+        return legalMoves;
     }
 }

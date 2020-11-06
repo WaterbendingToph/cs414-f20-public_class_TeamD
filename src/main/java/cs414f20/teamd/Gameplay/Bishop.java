@@ -1,15 +1,31 @@
-package cs414f20.teamd;
+package cs414f20.teamd.Gameplay;
 
 import java.util.ArrayList;
 
-public class King {
+public class Bishop extends ChessPiece {
     /**
      * This concrete class implements the methods for the abstract class ChessPiece
-     * for the king piece in this variant of chess. The king can only move one
-     * square in any direction. At the end of the move, it can occupy a previously 
-     * empty square or capture (replace) an opponent's piece, but it cannot replace 
-     * another piece of the same player.
+     * for the bishop piece in this variant of chess. A bishop can move any number
+     * of squares diagonally in any direction, as long as it does not have to leap
+     * over other pieces. At the end of the move, it can occupy a previously empty
+     * square or capture (replace) an opponent's piece, but it cannot replace another
+     * piece of the same player.
      */
+
+    // No-arg constructor for concrete classes defaults to white
+    public Bishop() {
+        super();
+    }
+
+    // One-arg constructor for concrete class instantiation defaults to white
+    public Bishop(ChessBoard board) {
+        super(board, Color.WHITE);
+    }
+
+    // Constructor with both arguments given
+    public Bishop(ChessBoard board, Color color) {
+        super(board, color);
+    }
 
     public String toString() {
         /**
@@ -20,7 +36,7 @@ public class King {
          * @return One-character Unicode representation of the piece (black or white)
          */
 
-        return "Not yet implemented.";
+        return this.color == Color.WHITE ? "\u2657" : "\u265D";
     }
 
     public ArrayList<String> legalMoves() {
@@ -36,7 +52,11 @@ public class King {
          * @return An empty ArrayList if there are no legal moves available
          */
         
-        System.out.println("Not yet implemented");
-        return new ArrayList<>();
+        ArrayList<String> legalMoves = new ArrayList<>();
+
+        // TODO: Write code to iterate over potential moves for king piece.
+        legalMoves.add("Not yet implemented.");
+        
+        return legalMoves;
     }
 }
