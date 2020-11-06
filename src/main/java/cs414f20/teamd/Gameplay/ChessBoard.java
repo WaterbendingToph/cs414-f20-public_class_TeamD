@@ -1,6 +1,6 @@
 package cs414f20.teamd.Gameplay;
 
-import java.io.*;
+// import java.io.*;
 import cs414f20.teamd.Gameplay.ChessPiece.Color;
 
 public class ChessBoard {
@@ -205,8 +205,8 @@ public class ChessBoard {
     	// Change String position into a row and column for the board
         int fromRow = pieceToMove.row;
         int fromColumn = pieceToMove.column;
-        int toRow = (int)(toPosition.charAt(1) - 49);
-        int toColumn = (int)(toPosition.charAt(0) - 97);
+        int toRow = toPosition.charAt(1) - 49;
+        int toColumn = toPosition.charAt(0) - 97;
     	
     	// Ensure the move is legal for that piece. If it is, make the move.
         // If this moves captures a piece, the reference will be replaced on the board,
@@ -278,7 +278,7 @@ public class ChessBoard {
         return chess;
     }
     
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /*
          * This main method is provided for testing purposes only.
          */
