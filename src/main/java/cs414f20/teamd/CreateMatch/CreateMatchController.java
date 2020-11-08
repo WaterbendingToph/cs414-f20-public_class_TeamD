@@ -13,6 +13,6 @@ public class CreateMatchController {
     public CreateMatch createMatch(@RequestParam(value = "playerID") String[] playerIDList) {
         Random r = new Random();
         int id = r.nextInt();
-        return new CreateMatch(Math.abs(id), playerIDList[0]);
+        return new CreateMatch(Math.abs(id), playerIDList);
     }
 }

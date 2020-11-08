@@ -134,6 +134,35 @@ public class Database {
 
         return dbResult;
     }
+
+    public static boolean userExists(String opponent){
+        Connection conn = null;
+        Statement query = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\""+ opponent +"\";";
+            ResultSet results = query.executeQuery(queryStatement);
+            while (results.next()) {
+                if(results.getString("username").equals(opponent))
+                    return true;
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error while Registering User: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return false;
+    }
+
+    public static boolean userExists(String[] opponents){
+        for(String opponent : opponents){
+            if(userExists(opponent))
+                return true;
+        }
+        return false;
+    }
     
     // Used for Statement queries (sent to database) that do not automatically
     // close their connections.
