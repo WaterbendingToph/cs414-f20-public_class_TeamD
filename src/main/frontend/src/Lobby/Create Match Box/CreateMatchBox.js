@@ -8,7 +8,7 @@ export default class CreateMatchBox extends Component{
         this.state = {
             showCreateMatch: false,
             playerID: "",
-            submitted: false,
+            submitted: null,
             listOfPlayers: []
         };
 
@@ -28,6 +28,9 @@ export default class CreateMatchBox extends Component{
                         currentPlayers.push(this.state.playerID);
                         this.setState({submitted: true, listOfPlayers: currentPlayers});
                     }
+                    else{
+                        this.setState({submitted: false});
+                    }
                 });
         }
     }
@@ -44,7 +47,10 @@ export default class CreateMatchBox extends Component{
     didSendInvite(){
         if(this.state.submitted === true)
             return(<p style={{color: "rgb(0,200,0)"}}>Sent Invite!</p>);
-        return "";
+        else if(this.state.submitted === false)
+            return(<p style={{color: "rgb(200,0,0)"}}>Could not find user!</p>);
+        else
+            return "";
     }
 
     startMatch(){
