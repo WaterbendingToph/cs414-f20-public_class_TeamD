@@ -17,7 +17,7 @@ export default class Lobby extends Component {
         return(
             <div>
                 <h1>Welcome to the Lobby, {this.state.username}!</h1>
-                <CreateMatchBox toGame={this.goToGamePlay.bind(this)} />
+                <CreateMatchBox currentUser={this.state.username} toGame={this.goToGamePlay.bind(this)} />
                 <a href={"/matches/"}>Ongoing Matches</a>
             </div>
         )

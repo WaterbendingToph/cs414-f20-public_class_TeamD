@@ -20,9 +20,15 @@ export default class CreateMatchBox extends Component{
 
     submitPlayer(){
         if(this.state.playerID.length !== 0){
-            let currentPlayers = this.state.listOfPlayers;
-            currentPlayers.push(this.state.playerID);
-            this.setState({submitted: true, listOfPlayers: currentPlayers});
+            fetch("./sendInvite/?player=" + this.state.playerID + "&current=" + this.props.currentUser)
+                .then(res => res.json())
+                .then(data =>{
+                    if(data.foundPlayer){
+                        let currentPlayers = this.state.listOfPlayers;
+                        currentPlayers.push(this.state.playerID);
+                        this.setState({submitted: true, listOfPlayers: currentPlayers});
+                    }
+                });
         }
     }
 

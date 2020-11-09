@@ -163,6 +163,32 @@ public class Database {
         }
         return false;
     }
+
+    public static boolean sendInvite(String current, String opponent){
+        if(userExists(opponent) && userExists(opponent)){
+            Connection conn = null;
+            Statement query = null;
+            try {
+                conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+                query = conn.createStatement();
+                String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\""+ opponent +"\";";
+                ResultSet results = query.executeQuery(queryStatement);
+                String currentPlayers = "";
+                while (results.next()) {
+                    currentPlayers = results.getString("invites");
+                }
+                currentPlayers += current + ",";
+                queryStatement = "UPDATE greatestAccounts SET invites=\""+ currentPlayers +"\" WHERE username=\""+ opponent +"\";";
+                query.executeUpdate(queryStatement);
+                return true;
+            } catch (Exception e) {
+                System.err.println("Error while Sending Invites to User: " + e.getMessage());
+            } finally {
+                closeConnections(conn, query);
+            }
+        }
+        return false;
+    }
     
     // Used for Statement queries (sent to database) that do not automatically
     // close their connections.
