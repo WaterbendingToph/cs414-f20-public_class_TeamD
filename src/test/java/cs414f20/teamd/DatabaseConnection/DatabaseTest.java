@@ -51,7 +51,7 @@ class DatabaseTest {
 	
 	@Test
 	void testRegisterUserQuery() {
-		String invalidRegistrationQuery = "INSERT INTO greatestAccounts VALUES (NULL, 'nick', 'duplicate should not work');";
+		String invalidRegistrationQuery = "INSERT INTO greatestAccounts VALUES (NULL, 'nick', 'duplicate should not work', '');";
         int dbResult = 0;
         
         Connection conn = null;
