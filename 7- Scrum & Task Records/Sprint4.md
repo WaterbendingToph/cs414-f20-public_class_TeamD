@@ -16,6 +16,7 @@ This Sprint, we want to complete Stories
 | 11/2 | *#95, #129, #98, #97, #80, #71, #76, #86, #87, #89, #90, #88* | *None* | *None* |
 | 11/4 | *None* | *#141* | *None* |
 | 11/6 | *#141* | *#53, #77, #49* | *Sai moving back home* |
+| 11/9 | *#49, #152* | *#77, #53, #151, #146* | *None* |
 | 11/2 | *asdf* | *asdf* | *asdf* |
 
 ## Review
