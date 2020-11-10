@@ -1,62 +1,78 @@
 package cs414f20.teamd.Gameplay;
 
 import java.util.ArrayList;
+import java.util.List;
 
-class Rook extends ChessPiece {
-    /**
-     * This concrete class implements the methods for the abstract class ChessPiece
-     * for the rook piece in this variant of chess. A rook can move any number of
-     * squares horizontally or vertically, forward or backward, as long as it does
-     * not have to leap over other pieces. At the end of the move, it can occupy
-     * a previously empty square or capture (replace) an opponent's piece, but it
-     * cannot replace another piece of the same player.
-     */
+public class Rook extends ChessPiece {
 
-    // No-arg constructor for concrete classes defaults to white
-    public Rook() {
-        super();
-    }
-    
-    // One-arg constructor for concrete class instantiation defaults to white
-    public Rook(ChessBoard board) {
-        super(board, Color.WHITE);
-    }
-
-    // Constructor with both arguments given
-    public Rook(ChessBoard board, Color color) {
+    public Rook(ChessBoard board, ChessPiece.Color color) {
         super(board, color);
     }
 
+    @Override
     public String toString() {
-        /**
-         * Returns a one-character string corresponding to the Unicode representation
-         * of the piece. These Unicode values are given in the A2.pdf description.
-         * Note that the character returned must correspond to the correct color.
-         * 
-         * @return One-character Unicode representation of the piece (black or white)
-         */
-
-        return this.color == Color.WHITE ? "\u2656" : "\u265C";
+        if (color == ChessPiece.Color.WHITE)
+            return "\u2656";
+        else
+            return "\u265C";
     }
 
+    @Override
     public ArrayList<String> legalMoves() {
-        /**
-         * Returns all legal moves that this piece can make based on the rules of 
-         * this variant of chess (as described in the comment at the top of this
-         * class). Each string in the list should represent a legal destination
-         * for the piece. The order of the moves in the list is arbitrary. If there
-         * are no legal moves, returns an empty ArrayList.
-         * 
-         * @return ArrayList representing the legal moves of the piece from the
-         *         current position
-         * @return An empty ArrayList if there are no legal moves available
-         */
-        
-        ArrayList<String> legalMoves = new ArrayList<>();
+        ArrayList<String> legalMoves = new ArrayList<String>();
+        ArrayList<ArrayList<String>> potentialMovePaths = createPotentialPaths();
 
-        // TODO: Write code to iterate over potential moves for king piece.
-        legalMoves.add("Not yet implemented.");
-        
+        for (ArrayList<String> path : potentialMovePaths) {
+            ArrayList<String> moves = pathLegalMoves(path);
+            legalMoves.addAll(moves);
+        }
+
+        return legalMoves;
+    }
+
+    //Helper methods
+    private ArrayList<ArrayList<String>> createPotentialPaths(){
+        String currentPosition = getPosition();
+
+        ArrayList<ArrayList<String>> potentialPaths = new ArrayList<ArrayList<String>>();
+        for (int cardinalDirection = 0; cardinalDirection < 4; cardinalDirection++) {
+            potentialPaths.add(new ArrayList<String>());
+
+            for (int magnitude = 1; magnitude < 8; magnitude++) {
+                try {
+                    int xChange = (cardinalDirection       % 2) * ( 1 - 2 * (cardinalDirection / 2)) * magnitude;
+                    int yChange = ((cardinalDirection + 1) % 2) * (-1 + 2 * (cardinalDirection / 2)) * magnitude;
+                    potentialPaths.get(cardinalDirection).add(Helper.boundedMove(currentPosition, xChange, yChange));
+                } catch (IllegalPositionException ipe) {}
+            }
+        }
+
+        return potentialPaths;
+    }
+    private ArrayList<String> pathLegalMoves(ArrayList<String> path) {
+        ArrayList<String> legalMoves = new ArrayList<String>();
+
+        for (int indexOfSquareInPath = 0; indexOfSquareInPath < path.size(); indexOfSquareInPath++) {
+            String position = path.get(indexOfSquareInPath);
+
+            try {
+                if (!Helper.positionIsEmpty(board, position)) {
+                    ChessPiece checkPiece = board.getPiece(position);
+
+                    int inclusiveIndex = 0;
+                    if (checkPiece.color != this.color)
+                        inclusiveIndex = 1;
+
+                    List<String> swap = path.subList(0, indexOfSquareInPath + inclusiveIndex);
+                    path = new ArrayList<String>();
+                    path.addAll(swap);
+                }
+            } catch (IllegalPositionException ipe) {}
+
+            if (indexOfSquareInPath < path.size())
+                legalMoves.add(position);
+        }
+
         return legalMoves;
     }
 }

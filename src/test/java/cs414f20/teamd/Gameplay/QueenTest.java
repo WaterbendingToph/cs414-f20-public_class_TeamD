@@ -1,41 +1,31 @@
 package cs414f20.teamd.Gameplay;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 
-import cs414f20.teamd.Gameplay.ChessPiece.Color;
+import static org.junit.jupiter.api.Assertions.*;
 
 class QueenTest {
+    ChessBoard requisiteBoard;
 
-	@Test
-	void testDefaultQueenColor() {
-		ChessBoard testBoard = new ChessBoard();
-		Queen testQueen = new Queen();
-		Queen testBlackQueen = new Queen(testBoard, Color.BLACK);
-		
-		assertEquals(Color.WHITE, testQueen.color);
-		assertEquals(Color.BLACK, testBlackQueen.color);
-	}
-	
-	@Test
-	void testDefaultQueenString() {
-		ChessBoard testBoard = new ChessBoard();
-		Queen testQueen = new Queen();
-		Queen testBlackQueen = new Queen(testBoard, Color.BLACK);
-		String testWhiteQueenString = testQueen.toString();
-		String testBlackQueenString = testBlackQueen.toString();
-		
-		assertEquals("\u2655", testWhiteQueenString);
-		assertEquals("\u265B", testBlackQueenString);
-	}
-	
-	@Test
-	void testLegalMoves() {
-		Queen testQueen = new Queen();
-		ArrayList<String> validMoves = testQueen.legalMoves();
-		
-		assertTrue(validMoves.isEmpty());
-	}
+    @Test
+    void testToString() {
+        requisiteBoard = new ChessBoard();
 
+        Queen queen = new Queen(requisiteBoard, ChessPiece.Color.WHITE);
+        assertEquals("\u2655", queen.toString());
+
+        queen = new Queen(requisiteBoard, ChessPiece.Color.BLACK);
+        assertEquals("\u265B", queen.toString());
+    }
+
+    @Test
+    void legalMoves() {//TODO: Was not implemented for A2. So... implement.
+        requisiteBoard = new ChessBoard();
+
+        Queen queen = new Queen(requisiteBoard, ChessPiece.Color.WHITE);
+
+        assertArrayEquals((new ArrayList<String>()).toArray(), queen.legalMoves().toArray());
+    }
 }

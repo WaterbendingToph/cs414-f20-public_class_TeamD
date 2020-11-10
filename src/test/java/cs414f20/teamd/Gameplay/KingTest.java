@@ -1,32 +1,72 @@
 package cs414f20.teamd.Gameplay;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import cs414f20.teamd.Gameplay.ChessPiece.Color;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class KingTest {
+    ChessBoard requisiteBoard;
 
-	@Test
-	void testDefaultKingColor() {
-		ChessBoard testBoard = new ChessBoard();
-		King testKing = new King();
-		King testBlackKing = new King(testBoard, Color.BLACK);
-		
-		assertEquals(Color.WHITE, testKing.color);
-		assertEquals(Color.BLACK, testBlackKing.color);
-	}
-	
-	@Test
-	void testDefaultKingString() {
-		ChessBoard testBoard = new ChessBoard();
-		King testKing = new King();
-		King testBlackKing = new King(testBoard, Color.BLACK);
-		String testWhiteKingString = testKing.toString();
-		String testBlackKingString = testBlackKing.toString();
-		
-		assertEquals("\u2654", testWhiteKingString);
-		assertEquals("\u265A", testBlackKingString);
-	}
+    @Test
+    void testToString() {
+        requisiteBoard = new ChessBoard();
 
+        King king = new King(requisiteBoard, ChessPiece.Color.WHITE);
+        assertEquals("\u2654", king.toString());
+
+        king = new King(requisiteBoard, ChessPiece.Color.BLACK);
+        assertEquals("\u265A", king.toString());
+    }
+
+    @Test
+    void legalMoves() {
+        testFreeMovement();
+        testCornerMovement();
+        testSharedSpaceMovement();
+    }
+    private void testFreeMovement() {
+        requisiteBoard = new ChessBoard();
+        King king = new King(requisiteBoard, ChessPiece.Color.WHITE);
+        requisiteBoard.placePiece(king, "b2");
+
+        ArrayList<String> expectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"a1", "a2", "a3", "b1", "b3", "c1", "c2", "c3"}));
+        ArrayList<String> actualMoves = king.legalMoves();
+        expectedMoves.sort(Comparator.naturalOrder());
+        actualMoves.sort(Comparator.naturalOrder());
+
+        assertArrayEquals(expectedMoves.toArray(), actualMoves.toArray());
+    }
+    private void testCornerMovement() {
+        requisiteBoard = new ChessBoard();
+        King king = new King(requisiteBoard, ChessPiece.Color.WHITE);
+        requisiteBoard.placePiece(king, "a1");
+
+        ArrayList<String> expectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"a2", "b2", "b1"}));
+        ArrayList<String> actualMoves = king.legalMoves();
+        expectedMoves.sort(Comparator.naturalOrder());
+        actualMoves.sort(Comparator.naturalOrder());
+
+        assertArrayEquals(expectedMoves.toArray(), actualMoves.toArray());
+    }
+    private void testSharedSpaceMovement() {
+        requisiteBoard = new ChessBoard();
+        King king = new King(requisiteBoard, ChessPiece.Color.WHITE);
+        requisiteBoard.placePiece(king, "b2");
+
+        Pawn allyPawn = new Pawn(requisiteBoard, ChessPiece.Color.WHITE);
+        requisiteBoard.placePiece(allyPawn, "b1");
+        Pawn foePawn = new Pawn(requisiteBoard, ChessPiece.Color.BLACK);
+        requisiteBoard.placePiece(foePawn, "b3");
+
+        ArrayList<String> expectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"a1", "a2", "a3", "b3", "c1", "c2", "c3"}));
+        ArrayList<String> actualMoves = king.legalMoves();
+        expectedMoves.sort(Comparator.naturalOrder());
+        actualMoves.sort(Comparator.naturalOrder());
+
+        assertArrayEquals(expectedMoves.toArray(), actualMoves.toArray());
+    }
 }
