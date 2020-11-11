@@ -112,7 +112,7 @@ public class Database {
 
     public static int registerUser(String username, String password) {
         String registrationQuery = "INSERT INTO greatestAccounts VALUES (NULL, '" + username + "', '" + password
-                + "');";
+                + "', '');";
         int dbResult = 0;
         
         Connection conn = null;
@@ -201,6 +201,50 @@ public class Database {
                 System.err.println("Database Error: " + e.getMessage());
             }
         }
+    }
+
+    public static String[] getUserInvites(String current){
+        Connection conn = null;
+        Statement query = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\""+ current +"\";";
+            ResultSet results = query.executeQuery(queryStatement);
+            while (results.next()) {
+                String invites = results.getString("invites");
+                return invites.split(",");
+            }
+        } catch (Exception e) {
+            System.err.println("Error while Getting Invites to User: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return null;
+    }
+
+    public static boolean deleteInvite(String current, String player){
+        Connection conn = null;
+        Statement query = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\""+ current +"\";";
+            ResultSet results = query.executeQuery(queryStatement);
+            String newInvites = "";
+            while (results.next()) {
+                String invites = results.getString("invites");
+                newInvites = invites.replace(player+",", "");
+            }
+            queryStatement = "UPDATE greatestAccounts SET invites=\""+ newInvites +"\" WHERE username=\""+ current +"\";";
+            query.executeUpdate(queryStatement);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error while Getting Invites to User: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return false;
     }
 
     public static void main(String[] args) {

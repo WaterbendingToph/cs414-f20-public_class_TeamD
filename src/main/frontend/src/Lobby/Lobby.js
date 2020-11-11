@@ -21,7 +21,7 @@ export default class Lobby extends Component {
             <Grid>
                 <Grid className={style.Header} item>
                     <h1>Welcome to the Lobby, {this.state.username}!</h1>
-                    <InviteBox />
+                    <InviteBox current={this.state.username}/>
                 </Grid>
                 <Grid item>
                     <CreateMatchBox currentUser={this.state.username} toGame={this.goToGamePlay.bind(this)} />

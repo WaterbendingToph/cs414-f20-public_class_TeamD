@@ -1,4 +1,4 @@
-package cs414f20.teamd.SendInvite;
+package cs414f20.teamd.Invites;
 
 import cs414f20.teamd.DatabaseConnection.Database;
 

@@ -9,7 +9,8 @@ class CreateMatchTest {
     @Test
     void testCreateMatch() {
         LocalDate date = java.time.LocalDate.now();
-        CreateMatch cm = new CreateMatch(1, "Steve");
+        String[] testPlayers = {"Steve", "Bob"};
+        CreateMatch cm = new CreateMatch(1, testPlayers);
         assertEquals(date, cm.getLocalDate());
         assertEquals(1, cm.getGameID());
         assertEquals("Steve", cm.getOpponnet());

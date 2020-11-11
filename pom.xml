@@ -15,7 +15,7 @@
 	<description>CS 414 Fall 2020 - Team D Semester Project</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>14</java.version>
 		<frontend-src-dir>${project.basedir}/src/main/frontend</frontend-src-dir>
 		<node.version>v12.18.3</node.version>
 		<yarn.version>v1.22.5</yarn.version>
