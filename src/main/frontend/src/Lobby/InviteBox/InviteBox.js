@@ -24,9 +24,23 @@ export default class InviteBox extends Component {
         this.setState({showInvites: current})
     }
 
+    deleteUser(user){
+        let newInvites = this.state.invites.filter(player =>{
+            return player !== user;
+        })
+        fetch("/deleteInvite?current="+ this.props.current +"&player=" + user)
+            .then(res => res.text())
+            .then(data => {
+                console.log("Rtrieved from back: " + data)
+                if(data !== "false"){
+                    this.setState({invites: newInvites})
+                }
+            });
+    }
+
     getInvites(){
         let invites = this.state.invites.map(user => {
-            return(<li>{user} <CheckIcon /> <NotInterestedIcon /></li>);
+            return(<li>{user} <CheckIcon /> <NotInterestedIcon onClick={this.deleteUser.bind(this, user)}/></li>);
         });
         return(
             <div>

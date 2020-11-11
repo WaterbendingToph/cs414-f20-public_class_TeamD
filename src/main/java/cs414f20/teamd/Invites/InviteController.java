@@ -22,5 +22,6 @@ public class InviteController {
     @GetMapping("/deleteInvite")
     public boolean deleteInvite(@RequestParam(value = "current") String current, @RequestParam(value = "player") String player) {
         return Database.deleteInvite(current, player);
+        // return false;
     }
 }
