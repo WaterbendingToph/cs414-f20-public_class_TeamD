@@ -2,6 +2,9 @@ package cs414f20.teamd;
 
 import java.io.*;
 
+import cs414f20.teamd.Gameplay.IllegalMoveException;
+import cs414f20.teamd.Gameplay.IllegalPositionException;
+
 public class ChessBoard {
     /**
      * This class stores the state of a board and its pieces.

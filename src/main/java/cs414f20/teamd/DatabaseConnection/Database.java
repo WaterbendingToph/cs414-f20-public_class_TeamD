@@ -5,9 +5,13 @@ import static java.sql.DriverManager.getConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
+
+import cs414f20.teamd.RetrievePlayers;
 
 import java.sql.ResultSet;
 
@@ -245,6 +249,25 @@ public class Database {
             closeConnections(conn, query);
         }
         return false;
+    }
+
+    public static List<String> retrieveUsers(String player){
+        List<String> ret = new ArrayList<>();
+        Connection conn = null;
+        Statement query = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            ResultSet results = query.executeQuery("SELECT * FROM greatestAccounts WHERE username LIKE \""+ player +"%\";");
+            while (results.next()) {
+                ret.add(results.getString("username"));
+            }
+        } catch (Exception e) {
+            System.err.println("Error while Retrieving User: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return ret;
     }
 
     public static void main(String[] args) {

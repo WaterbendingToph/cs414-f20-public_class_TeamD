@@ -40,7 +40,7 @@ export default class InviteBox extends Component {
 
     getInvites(){
         let invites = this.state.invites.map(user => {
-            return(<li>{user} <CheckIcon /> <NotInterestedIcon onClick={this.deleteUser.bind(this, user)}/></li>);
+            return(<li key={user}>{user} <CheckIcon /> <NotInterestedIcon onClick={this.deleteUser.bind(this, user)}/></li>);
         });
         return(
             <div>
