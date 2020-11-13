@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import Square from "./Square";
 
+const green = '#065535';
+const blue = '#050627';
+
+
 export default class BoardGame extends Component{
 
     constructor(props) {
@@ -26,8 +30,6 @@ export default class BoardGame extends Component{
     }
 
     setupDefaultRow1() {
-        const green = '#065535';
-        const blue = '#050627';
         return (
             <tr >
                 <td><Square backgroundColor={green} /></td>
@@ -46,8 +48,6 @@ export default class BoardGame extends Component{
     }
 
     setupDefaultRow10() {
-        const green = '#065535';
-        const blue = '#050627';
         return(
             <tr>
                 <td><Square backgroundColor={blue}/></td>
@@ -66,8 +66,6 @@ export default class BoardGame extends Component{
     }
 
     setupPawnsRow2() {
-        const green = '#065535';
-        const blue = '#050627';
         return(
             <tr>
                 <td><Square backgroundColor={blue}/></td>
@@ -85,8 +83,6 @@ export default class BoardGame extends Component{
     }
 
     setupPawnsRow9() {
-        const green = '#065535';
-        const blue = '#050627';
         return(
             <tr >
             <td><Square backgroundColor={green} /></td>
@@ -104,8 +100,6 @@ export default class BoardGame extends Component{
     }
 
     setupBlankRow1(){
-        const green = '#065535';
-        const blue = '#050627';
         return (
             <tr >
                 <td><Square backgroundColor={green} /></td>
@@ -123,8 +117,6 @@ export default class BoardGame extends Component{
     }
 
     setupBlankRow2(){
-        const green = '#065535';
-        const blue = '#050627';
         return(
             <tr>
                 <td><Square backgroundColor={blue}/></td>
@@ -156,7 +148,6 @@ export default class BoardGame extends Component{
                 {this.state.row8}
                 {this.state.row9}
                 {this.state.row10}
-
             </div>
         );
     }
