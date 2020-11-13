@@ -1,4 +1,4 @@
-package cs414f20.teamd;
+package cs414f20.teamd.Gameplay;
 
 import java.util.ArrayList;
 public class Champion {

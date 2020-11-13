@@ -1,14 +1,13 @@
-package cs414f20.teamd;
+package cs414f20.teamd.Gameplay;
 
 import java.util.ArrayList;
+public class Wizard {
 
-public class King {
     /**
      * This concrete class implements the methods for the abstract class ChessPiece
-     * for the king piece in this variant of chess. The king can only move one
-     * square in any direction. At the end of the move, it can occupy a previously 
-     * empty square or capture (replace) an opponent's piece, but it cannot replace 
-     * another piece of the same player.
+     * for the wizard piece in this variant of chess. The wizard moves in a similar
+     * to a knight, except in a 3x1 shape instead of 2x1. It can also move one square
+     * diagonally in any direction.
      */
 
     public String toString() {

@@ -1,5 +1,7 @@
 package cs414f20.teamd;
 
+import java.io.*;
+
 public class ChessBoard {
     /**
      * This class stores the state of a board and its pieces.
