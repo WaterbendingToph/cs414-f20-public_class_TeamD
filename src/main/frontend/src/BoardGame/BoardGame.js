@@ -7,19 +7,21 @@ export default class BoardGame extends Component{
         super(props);
         this.state = {
             row1: this.setupDefaultRow1(),
-            row2: this.setupBlankRow2(),
+            row2: this.setupPawnsRow2(),
             row3: this.setupBlankRow1(),
             row4: this.setupBlankRow2(),
             row5: this.setupBlankRow1(),
             row6: this.setupBlankRow2(),
             row7: this.setupBlankRow1(),
             row8: this.setupBlankRow2(),
-            row9: this.setupBlankRow1(),
+            row9: this.setupPawnsRow9(),
             row10: this.setupDefaultRow10()
         }
         this.setupDefaultRow1 = this.setupDefaultRow1.bind(this);
+        this.setupPawnsRow2 = this.setupPawnsRow2.bind(this);
         this.setupBlankRow1 = this.setupBlankRow1.bind(this);
         this.setupBlankRow2 = this.setupBlankRow2.bind(this);
+        this.setupPawnsRow9 = this.setupPawnsRow9.bind(this);
         this.setupDefaultRow10 = this.setupDefaultRow10.bind(this);
     }
 
@@ -60,6 +62,44 @@ export default class BoardGame extends Component{
                 <td><Square backgroundColor={green}/></td>
             </tr>
 
+        );
+    }
+
+    setupPawnsRow2() {
+        const green = '#065535';
+        const blue = '#050627';
+        return(
+            <tr>
+                <td><Square backgroundColor={blue}/></td>
+                <td><Square backgroundColor={green}/></td>
+                <td><Square backgroundColor={blue}/></td>
+                <td><Square backgroundColor={green}/></td>
+                <td><Square backgroundColor={blue}/></td>
+                <td><Square backgroundColor={green}/></td>
+                <td><Square backgroundColor={blue}/></td>
+                <td><Square backgroundColor={green}/></td>
+                <td><Square backgroundColor={blue}/></td>
+                <td><Square backgroundColor={green}/></td>
+            </tr>
+        );
+    }
+
+    setupPawnsRow9() {
+        const green = '#065535';
+        const blue = '#050627';
+        return(
+            <tr >
+            <td><Square backgroundColor={green} /></td>
+            <td><Square backgroundColor={blue} /></td>
+            <td><Square backgroundColor={green} /></td>
+            <td><Square backgroundColor={blue} /></td>
+            <td><Square backgroundColor={green} /></td>
+            <td><Square backgroundColor={blue} /></td>
+            <td><Square backgroundColor={green} /></td>
+            <td><Square backgroundColor={blue} /></td>
+            <td><Square backgroundColor={green} /></td>
+            <td><Square backgroundColor={blue} /></td>
+        </tr>
         );
     }
 
