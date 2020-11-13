@@ -8,7 +8,7 @@ import cs414f20.teamd.RetrievePlayers;
 import cs414f20.teamd.DatabaseConnection.Database;
 
 @RestController
-public class InviteController {
+public class InvitesController {
 
     @GetMapping("/getUser")
     public RetrievePlayers getUser(@RequestParam(value = "player") String player) {

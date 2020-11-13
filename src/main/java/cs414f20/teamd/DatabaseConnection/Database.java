@@ -11,8 +11,6 @@ import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import cs414f20.teamd.RetrievePlayers;
-
 import java.sql.ResultSet;
 
 public class Database {
@@ -169,7 +167,12 @@ public class Database {
     }
 
     public static boolean sendInvite(String current, String opponent){
-        if(userExists(opponent) && userExists(opponent)){
+        String[] existingInvites = getUserInvites(opponent);
+        for(String user: existingInvites){
+            if(user.equals(current))
+                return false;
+        }
+        if(userExists(current) && userExists(opponent)){
             Connection conn = null;
             Statement query = null;
             try {

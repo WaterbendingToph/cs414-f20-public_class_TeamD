@@ -39,16 +39,19 @@ export default class InviteBox extends Component {
     }
 
     getInvites(){
-        let invites = this.state.invites.map(user => {
-            return(<li key={user}>{user} <CheckIcon /> <NotInterestedIcon onClick={this.deleteUser.bind(this, user)}/></li>);
-        });
-        return(
-            <div>
-                <ul>
-                    {invites}
-                </ul>
-            </div>
-        );
+        if(this.state.invites.length !== 0){
+            let invites = this.state.invites.map(user => {
+                if(user !== "")
+                    return(<li key={user}>{user} <CheckIcon /> <NotInterestedIcon onClick={this.deleteUser.bind(this, user)}/></li>);
+            });
+            return(
+                <div>
+                    <ul>
+                        {invites}
+                    </ul>
+                </div>
+            );
+        }
     }
 
     render() {
