@@ -139,6 +139,7 @@ export default class CreateMatchBox extends Component{
     }
 
     render() {
+        let dontStart = this.state.listOfPlayers.length === 0
         return(
             <div>
                 <Button onClick={this.toggle}>Create New Match</Button>
@@ -150,7 +151,7 @@ export default class CreateMatchBox extends Component{
                         {this.getCurrentPlayers()}
                     </ModalBody>
                     <ModalBody>
-                        <Button onClick={this.startMatch}>Create Match</Button>
+                        <Button onClick={this.startMatch} disabled={dontStart}>Create Match</Button>
                     </ModalBody>
                 </Modal>
             </div>
