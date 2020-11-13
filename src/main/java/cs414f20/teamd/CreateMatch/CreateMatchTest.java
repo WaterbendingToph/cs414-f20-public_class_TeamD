@@ -13,6 +13,6 @@ class CreateMatchTest {
         CreateMatch cm = new CreateMatch(1, "Jimmy", testPlayers);
         assertEquals(date, cm.getLocalDate());
         assertEquals(1, cm.getGameID());
-        assertEquals("Steve", cm.getOpponnet());
+        assertEquals(testPlayers, cm.getOpponnet());
     }
 }
