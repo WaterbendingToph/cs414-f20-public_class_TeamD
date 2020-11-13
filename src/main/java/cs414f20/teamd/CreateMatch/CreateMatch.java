@@ -6,17 +6,19 @@ import cs414f20.teamd.DatabaseConnection.Database;
 
 public class CreateMatch {
     private int gameID;
+    private String current;
     private String[] opponents;
     private LocalDate date;
     private boolean started;
 
-    public CreateMatch(int gameID, String[] opponents) {
+    public CreateMatch(int gameID, String current, String[] opponents) {
+        this.current = current;
         this.gameID = gameID;
         this.opponents = opponents;
         this.date = java.time.LocalDate.now();
         this.started = findPlayers(opponents);
-        // if(this.started)
-        //     enterNewGameToDB();
+        if(this.started)
+            enterNewGameToDB();
     }
 
     private boolean findPlayers(String[] opponents){
@@ -24,7 +26,7 @@ public class CreateMatch {
     }
 
     private void enterNewGameToDB(){
-        Database.enterNewGame(gameID, "currentPlayer", opponents[0]);
+        Database.enterNewGame(gameID, this.current, opponents[0]);
     }
 
     public long getGameID() {

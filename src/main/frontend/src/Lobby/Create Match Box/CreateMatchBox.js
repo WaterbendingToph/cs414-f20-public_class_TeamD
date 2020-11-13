@@ -39,7 +39,7 @@ export default class CreateMatchBox extends Component{
     }
 
     startMatch(){
-        fetch("/createMatch/?playerID="+ this.state.listOfPlayers.join(","))
+        fetch("/createMatch/?playerID="+ this.state.listOfPlayers.join(",") + "&current="+this.props.currentUser)
             .then(res => res.json())
             .then(data =>{
                 if(data.gameStarted && data.opponent !== ""){
