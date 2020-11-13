@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, InputGroup } from 'reactstrap';
-import { Table, TableRow, TableCell, TableBody } from "@material-ui/core";
+import { Table, TableRow, TableCell, TableHead, TableBody } from "@material-ui/core";
 import CheckIcon from '@material-ui/icons/Check';
 
 export default class CreateMatchBox extends Component{
@@ -98,12 +98,12 @@ export default class CreateMatchBox extends Component{
             })
             return(
                 <Table>
-                    {/* <TableHead>
+                    <TableHead>
                         <TableRow>
                             <TableCell>Users</TableCell>
                             <TableCell align="left">Send Invite?</TableCell>
                         </TableRow>
-                    </TableHead> */}
+                    </TableHead>
                     <TableBody>
                         {results}
                     </TableBody>
