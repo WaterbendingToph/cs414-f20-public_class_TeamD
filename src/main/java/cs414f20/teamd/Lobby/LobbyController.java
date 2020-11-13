@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LobbyController {
     
     @GetMapping("/lobby")
-    public Lobby login(@RequestParam String userID, String password) {
+    public Lobby lobby(@RequestParam String userID, String password) {
         Lobby currentLobby = new Lobby(userID, password);
         System.out.println(currentLobby);
         return currentLobby;
