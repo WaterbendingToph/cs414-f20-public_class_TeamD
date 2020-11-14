@@ -4,20 +4,16 @@ export default class Square extends Component{
 
     constructor(props){
         super(props);
-        this.state = {
-            piece : null,
-            backgroundColor : null,
-        }
+        this.backgroundColor = props.backgroundColor;
     }
 
 
     render(){
-        const color_ = this.props.backgroundColor;
         return (
             <div style = {{
-                backgroundColor: color_,
-                width: '75px',
-                height: '75px',
+                backgroundColor: this.props.backgroundColor,
+                width: '50px',
+                height: '50px',
                 border: "2px solid",
                 borderColor : this.props.backgroundColor } } >
             </div>);
