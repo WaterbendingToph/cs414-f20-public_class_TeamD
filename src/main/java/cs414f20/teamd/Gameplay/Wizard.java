@@ -10,9 +10,8 @@ public class Wizard extends ChessPiece{
 
     /**
      * This concrete class implements the methods for the abstract class ChessPiece
-     * for the wizard piece in this variant of chess. The wizard moves in a similar
-     * to a knight, except in a 3x1 shape instead of 2x1. It can also move one square
-     * diagonally in any direction.
+     * for the wizard piece in this variant of chess. The wizard can hop in a 3x1 pattern,
+     * or move one space diagonally in any direction (1x1).
      */
 
     @Override
