@@ -14,6 +14,7 @@ public class Champion extends ChessPiece {
      * spaces in the cardinal directions, or exactly two spaces diagonally.
      */
 
+    @Override
     public String toString() {
         if (color == ChessPiece.Color.WHITE)
             return "\u2616";
