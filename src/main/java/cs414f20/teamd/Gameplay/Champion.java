@@ -1,7 +1,12 @@
 package cs414f20.teamd.Gameplay;
 
 import java.util.ArrayList;
-public class Champion {
+
+public class Champion extends ChessPiece {
+
+    public Champion(ChessBoard board, Color color) {
+        super(board, color);
+    }
 
     /**
      * This concrete class implements the methods for the abstract class ChessPiece
@@ -10,15 +15,10 @@ public class Champion {
      */
 
     public String toString() {
-        /**
-         * Returns a one-character string corresponding to the Unicode representation
-         * of the piece. These Unicode values are given in the A2.pdf description.
-         * Note that the character returned must correspond to the correct color.
-         * 
-         * @return One-character Unicode representation of the piece (black or white)
-         */
-
-        return "Not yet implemented.";
+        if (color == ChessPiece.Color.WHITE)
+            return "\u2616";
+        else
+            return "\u2617";
     }
 
     public ArrayList<String> legalMoves() {
