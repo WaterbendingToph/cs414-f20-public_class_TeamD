@@ -10,6 +10,10 @@ export default class Square extends Component{
         this.setDisplayedPiece = this.setDisplayedPiece.bind(this);
     }
 
+    // ********************* NOTE TO PERSON IMPLEMENTING THE ON-CLICK *********************
+    //                       WHITE IS USED AS A BACKGROUND COLOR FOR FILLER SQUARES TO DISPLAY BOARD CORRECTLY
+    //                       IF THE BACKGROUND COLOR IS WHITE, THE ON-CLICK SHOULD NOT DO ANYTHING
+
     setDisplayedPiece(pieceColor, piece){
         switch (piece) {
             case "pawn":

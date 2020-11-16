@@ -75,6 +75,7 @@ export default class BoardGame extends Component{
     setupDefaultBackRowWhite() {
         return (
             <tr >
+                <td><Square backgroundColor={white}/></td>
                 <td><Square backgroundColor={orange} color={"white"} piece={"champion"}/></td>
                 <td><Square backgroundColor={blue} color={"white"} piece={"rook"}/></td>
                 <td><Square backgroundColor={orange} color={"white"} piece={"knight"}/></td>
@@ -93,6 +94,7 @@ export default class BoardGame extends Component{
     setupDefaultBackRowBlack() {
         return(
             <tr>
+                <td><Square backgroundColor={white}/></td>
                 <td><Square backgroundColor={blue} color={"black"} piece={"champion"}/></td>
                 <td><Square backgroundColor={orange} color={"black"} piece={"rook"}/></td>
                 <td><Square backgroundColor={blue} color={"black"} piece={"knight"}/></td>
@@ -111,6 +113,7 @@ export default class BoardGame extends Component{
     setupPawnsRow2() {
         return(
             <tr>
+                <td><Square backgroundColor={white}/></td>
                 <td><Square backgroundColor={blue} color={"white"} piece={"pawn"}/></td>
                 <td><Square backgroundColor={orange} color={"white"} piece={"pawn"}/></td>
                 <td><Square backgroundColor={blue} color={"white"} piece={"pawn"}/></td>
@@ -128,16 +131,17 @@ export default class BoardGame extends Component{
     setupPawnsRow9() {
         return(
             <tr >
-            <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
-            <td><Square backgroundColor={blue} color={"black"} piece={"pawn"}/></td>
-            <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
-            <td><Square backgroundColor={blue} color={"black"} piece={"pawn"}/></td>
-            <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
-            <td><Square backgroundColor={blue} color={"black"} piece={"pawn"}/></td>
-            <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
-            <td><Square backgroundColor={blue} color={"black"} piece={"pawn"}/></td>
-            <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
-            <td><Square backgroundColor={blue} color={"black"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={blue} color={"black"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={blue} color={"black"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={blue} color={"black"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={blue} color={"black"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={blue} color={"black"} piece={"pawn"}/></td>
         </tr>
         );
     }
@@ -145,6 +149,7 @@ export default class BoardGame extends Component{
     setupBlankRow1(){
         return (
             <tr >
+                <td><Square backgroundColor={white}/></td>
                 <td><Square backgroundColor={orange} /></td>
                 <td><Square backgroundColor={blue} /></td>
                 <td><Square backgroundColor={orange} /></td>
@@ -162,6 +167,7 @@ export default class BoardGame extends Component{
     setupBlankRow2(){
         return(
             <tr>
+                <td><Square backgroundColor={white}/></td>
                 <td><Square backgroundColor={blue}/></td>
                 <td><Square backgroundColor={orange}/></td>
                 <td><Square backgroundColor={blue}/></td>
@@ -179,21 +185,22 @@ export default class BoardGame extends Component{
 
     render(){
         return (
-            <div className="App">
-                <h1>Currently the default chessboard setup!</h1>
-                <div align={'center'}>{this.state.row0}</div>
-                <div align={'center'}>{this.state.row1}</div>
-                <div align={'center'}>{this.state.row2}</div>
-                <div align={'center'}>{this.state.row3}</div>
-                <div align={'center'}>{this.state.row4}</div>
-                <div align={'center'}>{this.state.row5}</div>
-                <div align={'center'}>{this.state.row6}</div>
-                <div align={'center'}>{this.state.row7}</div>
-                <div align={'center'}>{this.state.row8}</div>
-                <div align={'center'}>{this.state.row9}</div>
-                <div align={'center'}>{this.state.row10}</div>
-                <div align={'center'}>{this.state.row11}</div>
-            </div>
+            <table className="App" style={{width:"auto"}}  align={'center'}>
+                <tbody>
+                {this.state.row0}
+                    {this.state.row1}
+                    {this.state.row2}
+                    {this.state.row3}
+                    {this.state.row4}
+                    {this.state.row5}
+                    {this.state.row6}
+                    {this.state.row7}
+                    {this.state.row8}
+                    {this.state.row9}
+                    {this.state.row10}
+                    {this.state.row11}
+                </tbody>
+            </table>
         );
     }
 }
