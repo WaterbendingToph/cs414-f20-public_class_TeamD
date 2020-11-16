@@ -294,7 +294,7 @@ public class Database {
                 String blackPlayer = results.getString("black_player");
                 String whoseTurn = results.getString("whose_turn");
 
-                String opponent = whitePlayer.equals(username) ? whitePlayer : blackPlayer;
+                String opponent = whitePlayer.equals(username) ? blackPlayer : whitePlayer;
 
                 match.add(gameID);
                 match.add(opponent);
