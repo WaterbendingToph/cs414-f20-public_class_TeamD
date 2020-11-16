@@ -187,7 +187,7 @@ export default class BoardGame extends Component{
         return (
             <table className="App" style={{width:"auto"}}  align={'center'}>
                 <tbody>
-                {this.state.row0}
+                    {this.state.row0}
                     {this.state.row1}
                     {this.state.row2}
                     {this.state.row3}

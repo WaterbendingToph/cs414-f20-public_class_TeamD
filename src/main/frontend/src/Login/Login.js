@@ -24,7 +24,8 @@ export default class Login extends Component {
                     this.props.history.push({
                         pathname: "/lobby",
                         state: {
-                            username: this.state.userID,
+                            userID: this.state.userID,
+                            password: this.state.password,
                         }
                     });
                 } else {

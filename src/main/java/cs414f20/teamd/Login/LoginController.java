@@ -11,6 +11,7 @@ public class LoginController {
     public Login login(@RequestParam String userID, String password) {
         Login currentLogin = new Login(userID, password);
         currentLogin.attemptLogin();
+        System.out.println(currentLogin);
         return currentLogin;
     }
 }
