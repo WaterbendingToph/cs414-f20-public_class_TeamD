@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import CreateMatchBox from "./Create Match Box/CreateMatchBox";
+import { Grid } from '@material-ui/core';
+import InviteBox from "./InviteBox/InviteBox";
+import style from "./Lobby.module.css";
 
 export default class Lobby extends Component {
     constructor(props) {
@@ -36,11 +39,17 @@ export default class Lobby extends Component {
 
     render() {
         return(
-            <div>
-                <h1>Welcome to the Lobby, {this.state.userID}!</h1>
-                <CreateMatchBox toGame={this.goToGamePlay.bind(this)} />
-                <Button onClick={this.ongoingMatches} type='button'>Ongoing Matches</Button>
-            </div>
+            <Grid>
+                <Grid className={style.Header} item>
+                    <h1>Welcome to the Lobby, {this.state.username}!</h1>
+                    <InviteBox current={this.state.username}/>
+                </Grid>
+                <Grid item>
+                    <CreateMatchBox currentUser={this.state.username} toGame={this.goToGamePlay.bind(this)} />
+                    <Button onClick={this.ongoingMatches} type='button'>Ongoing Matches</Button>
+                </Grid>
+            </Grid>
+
         )
     }
 }

@@ -5,7 +5,9 @@ import static java.sql.DriverManager.getConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -134,6 +136,66 @@ public class Database {
 
         return dbResult;
     }
+
+    public static boolean userExists(String opponent){
+        Connection conn = null;
+        Statement query = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\""+ opponent +"\";";
+            ResultSet results = query.executeQuery(queryStatement);
+            while (results.next()) {
+                if(results.getString("username").equals(opponent))
+                    return true;
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error while Registering User: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return false;
+    }
+
+    public static boolean userExists(String[] opponents){
+        for(String opponent : opponents){
+            if(userExists(opponent))
+                return true;
+        }
+        return false;
+    }
+
+    public static boolean sendInvite(String current, String opponent){
+        String[] existingInvites = getUserInvites(opponent);
+        for(String user: existingInvites){
+            if(user.equals(current))
+                return false;
+        }
+        if(userExists(current) && userExists(opponent)){
+            Connection conn = null;
+            Statement query = null;
+            try {
+                conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+                query = conn.createStatement();
+                String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\""+ opponent +"\";";
+                ResultSet results = query.executeQuery(queryStatement);
+                String currentPlayers = "";
+                while (results.next()) {
+                    currentPlayers = results.getString("invites");
+                }
+                currentPlayers += current + ",";
+                queryStatement = "UPDATE greatestAccounts SET invites=\""+ currentPlayers +"\" WHERE username=\""+ opponent +"\";";
+                query.executeUpdate(queryStatement);
+                return true;
+            } catch (Exception e) {
+                System.err.println("Error while Sending Invites to User: " + e.getMessage());
+            } finally {
+                closeConnections(conn, query);
+            }
+        }
+        return false;
+    }
     
     // Used for Statement queries (sent to database) that do not automatically
     // close their connections.
@@ -146,6 +208,69 @@ public class Database {
                 System.err.println("Database Error: " + e.getMessage());
             }
         }
+    }
+
+    public static String[] getUserInvites(String current){
+        Connection conn = null;
+        Statement query = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\""+ current +"\";";
+            ResultSet results = query.executeQuery(queryStatement);
+            while (results.next()) {
+                String invites = results.getString("invites");
+                return invites.split(",");
+            }
+        } catch (Exception e) {
+            System.err.println("Error while Getting Invites to User: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return null;
+    }
+
+    public static boolean deleteInvite(String current, String player){
+        Connection conn = null;
+        Statement query = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\""+ current +"\";";
+            ResultSet results = query.executeQuery(queryStatement);
+            String newInvites = "";
+            while (results.next()) {
+                String invites = results.getString("invites");
+                newInvites = invites.replace(player+",", "");
+            }
+            queryStatement = "UPDATE greatestAccounts SET invites=\""+ newInvites +"\" WHERE username=\""+ current +"\";";
+            query.executeUpdate(queryStatement);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error while Getting Invites to User: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return false;
+    }
+
+    public static List<String> retrieveUsers(String player){
+        List<String> ret = new ArrayList<>();
+        Connection conn = null;
+        Statement query = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            ResultSet results = query.executeQuery("SELECT * FROM greatestAccounts WHERE username LIKE \""+ player +"%\";");
+            while (results.next()) {
+                ret.add(results.getString("username"));
+            }
+        } catch (Exception e) {
+            System.err.println("Error while Retrieving User: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return ret;
     }
 
     public static void main(String[] args) {

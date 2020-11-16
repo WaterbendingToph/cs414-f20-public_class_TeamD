@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import { Button, Modal, ModalHeader, ModalBody, InputGroupAddon,
-        Form, FormGroup, Label, Input, InputGroup } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, InputGroup } from 'reactstrap';
+import { Table, TableRow, TableCell, TableHead, TableBody } from "@material-ui/core";
+import CheckIcon from '@material-ui/icons/Check';
 
 export default class CreateMatchBox extends Component{
     constructor(props){
@@ -8,26 +9,28 @@ export default class CreateMatchBox extends Component{
         this.state = {
             showCreateMatch: false,
             playerID: "",
-            submitted: false,
-            listOfPlayers: []
+            submitted: null,
+            listOfPlayers: [],
+            searchResults: [],
+            failedInvites: []
         };
 
         this.toggle = this.toggleCM.bind(this);
         this.changePlayer = this.changePlayer.bind(this);
-        this.submitPlayer = this.submitPlayer.bind(this);
         this.startMatch = this.startMatch.bind(this);
     }
 
-    submitPlayer(){
-        if(this.state.playerID.length !== 0){
-            let currentPlayers = this.state.listOfPlayers;
-            currentPlayers.push(this.state.playerID);
-            this.setState({submitted: true, listOfPlayers: currentPlayers});
-        }
-    }
-
     changePlayer(event){
-        this.setState({playerID: event.target.value});
+        let player = event.target.value;
+        if(player.length > 0){
+            fetch("/getUser?player="+player)
+                .then(res => res.json())
+                .then(data =>{
+                    data.playersInDB = data.playersInDB.filter(player => player !== this.props.currentUser)
+                    this.setState({searchResults: data.playersInDB})
+            });
+        }
+        this.setState({playerID: player});
     }
 
     toggleCM(){
@@ -35,31 +38,90 @@ export default class CreateMatchBox extends Component{
         this.setState({showCreateMatch: setCM});
     }
 
-    didSendInvite(){
-        if(this.state.submitted === true)
-            return(<p style={{color: "rgb(0,200,0)"}}>Sent Invite!</p>);
-        return "";
+    startMatch(){
+        // fetch("/createMatch/?playerID="+ this.state.listOfPlayers.join(",") + "&current="+this.props.currentUser)
+        //     .then(res => res.json())
+        //     .then(data =>{
+        //         if(data.gameStarted && data.opponent !== ""){
+        //             this.props.toGame();
+        //         }
+        //     });
+        this.props.toGame();
     }
 
-    startMatch(){
-        fetch("/createMatch/?playerID="+ this.state.listOfPlayers.join(","))
-            .then(res => res.json())
-            .then(data =>{
-                if(data.gameStarted && data.opponent !== ""){
-                    this.props.toGame();
+    sendInvite(player){
+        if(player !== this.props.currentUser){
+            fetch("./sendInvite/?player=" + player + "&current=" + this.props.currentUser)
+                .then(res => res.json())
+                .then(data =>{
+                    if(data.foundPlayer){
+                        let currentPlayers = this.state.listOfPlayers;
+                        currentPlayers = currentPlayers.concat(data.sentInvites);
+                        currentPlayers = currentPlayers.filter(player => player !== this.props.currentUser)
+                        this.setState({submitted: true, listOfPlayers: currentPlayers, failedInvites: data.failedToSend});
+                    }
+                    else{
+                        this.setState({submitted: false, failedInvites: data.failedToSend});
+                    }
                 }
-            });
+            );
+        }
+    }
+
+    renderSearchResults(){
+        if(this.state.playerID === "")
+            return <p></p>;
+        else if(this.state.searchResults.length === 0){
+            return(
+                <Table>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell>
+                                No players found!
+                            </TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            );
+        }
+        else{
+            let results = this.state.searchResults.map(player => {
+                return(
+                    <TableRow key={player}>
+                        <TableCell>
+                            {player} 
+                        </TableCell>
+                        <TableCell>
+                            <CheckIcon onClick={this.sendInvite.bind(this, player)}/>
+                        </TableCell>
+                    </TableRow>
+                );
+            })
+            return(
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Users</TableCell>
+                            <TableCell align="left">Send Invite?</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {results}
+                    </TableBody>
+                </Table>
+            );
+        }
     }
 
     renderForms(){
         return(
             <Form>
                 <FormGroup>
-                    <Label>Send Invitation{this.didSendInvite()}</Label>
+                    <Label>Send Invitation</Label>
                     <InputGroup>
                         <Input name="player_id" id="enter_player_id" placeholder="Enter player username"
                                onChange={this.changePlayer}/>
-                        <InputGroupAddon addonType="append"><Button onClick={this.submitPlayer}>Send</Button></InputGroupAddon>
+                        {this.renderSearchResults()}
                     </InputGroup>
                 </FormGroup>
             </Form>
@@ -78,6 +140,7 @@ export default class CreateMatchBox extends Component{
     }
 
     render() {
+        let dontStart = this.state.listOfPlayers.length === 0
         return(
             <div>
                 <Button onClick={this.toggle}>Create New Match</Button>
@@ -85,11 +148,11 @@ export default class CreateMatchBox extends Component{
                     <ModalHeader toggle={this.toggle}>Create Match</ModalHeader>
                     <ModalBody>
                         {this.renderForms()}
-                        <p>Current Players: </p>
+                        <p>Sent Invites to: </p>
                         {this.getCurrentPlayers()}
                     </ModalBody>
                     <ModalBody>
-                        <Button onClick={this.startMatch}>Create Match</Button>
+                        <Button onClick={this.startMatch} disabled={dontStart}>Create Match</Button>
                     </ModalBody>
                 </Modal>
             </div>
