@@ -136,19 +136,20 @@ export default class BoardGame extends Component{
 
     render(){
         return (
-            <div className="App">
-                <h1>Currently the default chessboard setup!</h1>
-                <div align={'center'}>{this.state.row1}</div>
-                <div align={'center'}>{this.state.row2}</div>
-                <div align={'center'}>{this.state.row3}</div>
-                <div align={'center'}>{this.state.row4}</div>
-                <div align={'center'}>{this.state.row5}</div>
-                <div align={'center'}>{this.state.row6}</div>
-                <div align={'center'}>{this.state.row7}</div>
-                <div align={'center'}>{this.state.row8}</div>
-                <div align={'center'}>{this.state.row9}</div>
-                <div align={'center'}>{this.state.row10}</div>
-            </div>
+            <table className="App" align={'center'}>
+                <tbody>
+                    {this.state.row1}
+                    {this.state.row2}
+                    {this.state.row3}
+                    {this.state.row4}
+                    {this.state.row5}
+                    {this.state.row6}
+                    {this.state.row7}
+                    {this.state.row8}
+                    {this.state.row9}
+                    {this.state.row10}
+                </tbody>
+            </table>
         );
     }
 }
