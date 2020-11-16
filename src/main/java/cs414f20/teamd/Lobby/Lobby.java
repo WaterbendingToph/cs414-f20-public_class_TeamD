@@ -1,9 +1,12 @@
 package cs414f20.teamd.Lobby;
 
+import cs414f20.teamd.DatabaseConnection.Database;
+
 public class Lobby {
     private String userID;
     private String password;
     private java.time.LocalDate date;
+    boolean loginSuccess;
 
     public Lobby() {
     }
@@ -26,6 +29,10 @@ public class Lobby {
         return this.date;
     }
 
+    public boolean getLoginSuccess() {
+        return this.loginSuccess;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -33,7 +40,11 @@ public class Lobby {
             " userID='" + getUserID() + "'" +
             ", password='" + getPassword() + "'" +
             ", date='" + getDate() + "'" +
+            ", successfully logged in='" + getLoginSuccess() + "'" +
             "}";
     }
 
+    void attemptLogin() {
+        loginSuccess = Database.tryLogin(this.userID, this.password);
+    } 
 }
