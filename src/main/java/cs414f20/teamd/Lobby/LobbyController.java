@@ -10,6 +10,7 @@ public class LobbyController {
     @GetMapping("/lobby")
     public Lobby lobby(@RequestParam String userID, String password) {
         Lobby currentLobby = new Lobby(userID, password);
+        currentLobby.attemptLogin();
         System.out.println(currentLobby);
         return currentLobby;
     }

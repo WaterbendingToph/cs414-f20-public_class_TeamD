@@ -27,7 +27,7 @@ export default class Lobby extends Component {
                     this.props.history.push({
                         pathname: "/matches",
                         state: {
-                            username: this.state.userID,
+                            userID: this.state.userID,
                             password: this.state.password,
                         }
                     });
@@ -41,11 +41,11 @@ export default class Lobby extends Component {
         return(
             <Grid>
                 <Grid className={style.Header} item>
-                    <h1>Welcome to the Lobby, {this.state.username}!</h1>
-                    <InviteBox current={this.state.username}/>
+                    <h1>Welcome to the Lobby, {this.state.userID}!</h1>
+                    <InviteBox current={this.state.userID}/>
                 </Grid>
                 <Grid item>
-                    <CreateMatchBox currentUser={this.state.username} toGame={this.goToGamePlay.bind(this)} />
+                    <CreateMatchBox currentUser={this.state.userID} toGame={this.goToGamePlay.bind(this)} />
                     <Button onClick={this.ongoingMatches} type='button'>Ongoing Matches</Button>
                 </Grid>
             </Grid>
