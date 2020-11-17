@@ -21,20 +21,18 @@ export default class OngoingMatches extends Component {
 
     populateMatches() {
         if (this.state.matches.length !== 0) {
-            let allMatches = this.state.matches.map(match => {
-                return (
-                    <div>
-                        <td key={match}>{match} {match[0]} </td>
+            let allMatches = this.state.matches.map(match =>
+                    <tr>
+                        <td key={match}>{match[0]} </td>
                         <td>Go to match</td>
-                        <td key={match}>{match} {match[1]} </td>
-                        <td key={match}>{match} {match[2]} </td>
-                    </div>
-                )
-            });
+                        <td key={match}>{match[1]} </td>
+                        <td key={match}>{match[2]} </td>
+                    </tr>
+            )
             return (
-                <tr>
+                <>
                     { allMatches }
-                </tr>
+                </>
             )
         }
     }
@@ -54,7 +52,7 @@ export default class OngoingMatches extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        { this.populateMatches() }
+                        { this.populateMatches() } 
                     </tbody>
                 </Table>
             </div>
