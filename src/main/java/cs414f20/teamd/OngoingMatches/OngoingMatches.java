@@ -37,7 +37,7 @@ public class OngoingMatches {
             "}";
     }
 
-    void queryDatabase() {
+    public void queryDatabase() {
         this.matches = Database.getOngoingMatches(userID);
     } 
 
