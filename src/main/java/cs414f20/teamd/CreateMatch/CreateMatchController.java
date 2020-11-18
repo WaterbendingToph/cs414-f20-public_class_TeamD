@@ -9,6 +9,11 @@ import java.util.Random;
 @RestController
 public class CreateMatchController {
 
+    @GetMapping("/searchForNewMatch")
+    public Searching searchingNewGame(@RequestParam(value = "current") String current) {
+        return new Searching(current);
+    }
+
     @GetMapping("/createMatch")
     public CreateMatch createMatch(@RequestParam(value = "current") String current, @RequestParam(value = "playerID") String[] playerIDList) {
         Random r = new Random();

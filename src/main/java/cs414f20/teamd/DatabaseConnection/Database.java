@@ -273,6 +273,10 @@ public class Database {
         return ret;
     }
 
+    public static boolean setSearching(){
+        return false;
+    }
+
     public static void main(String[] args) {
         // getAllUsers();
         // enterNewGame(20, "me", "not me");
