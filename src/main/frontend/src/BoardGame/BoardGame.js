@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import Square from "./Square";
 
-const orange = '#a85e00';
-const blue = '#001883';
-const white = '#ffffff'
+const orange = '#ffc002';
+const blue = '#8e6a00';
+const white = '#ffffff';
 
 
 export default class BoardGame extends Component{
