@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import Square from "./Square";
+import { Grid } from "@material-ui/core";
+import { CircleLoader } from "react-spinners";
+import style from "./BoardGame.module.css";
 
 const orange = '#a85e00';
 const blue = '#001883';
@@ -23,6 +26,9 @@ export default class BoardGame extends Component{
             row9: this.setupPawnsRow9(),
             row10: this.setupDefaultBackRowBlack(),
             row11: this.setupDefaultWizardRowBlack()
+            searching: false,
+            userID: this.props.location.state.userID,
+            password: this.props.location.state.password
         }
         this.setupDefaultWizardRowWhite = this.setupDefaultWizardRowWhite.bind(this);
         this.setupDefaultBackRowWhite = this.setupDefaultBackRowWhite.bind(this);
@@ -184,23 +190,34 @@ export default class BoardGame extends Component{
     }
 
     render(){
-        return (
-            <table className="App" style={{width:"auto"}}  align={'center'}>
-                <tbody>
-                    {this.state.row0}
-                    {this.state.row1}
-                    {this.state.row2}
-                    {this.state.row3}
-                    {this.state.row4}
-                    {this.state.row5}
-                    {this.state.row6}
-                    {this.state.row7}
-                    {this.state.row8}
-                    {this.state.row9}
-                    {this.state.row10}
-                    {this.state.row11}
-                </tbody>
-            </table>
-        );
+        if(this.state.searching === false)
+            return(
+                <div>
+                    <h2>Waiting for other players to join...</h2>
+                    <Grid className={style.Spinner}>
+                        <CircleLoader size={100} color={"orange"}/>
+                    </Grid>
+                </div>
+            );
+        else{
+            return (
+                <table className="App" style={{width:"auto"}} align={'center'}>
+                    <tbody>
+                        {this.state.row0}
+                        {this.state.row1}
+                        {this.state.row2}
+                        {this.state.row3}
+                        {this.state.row4}
+                        {this.state.row5}
+                        {this.state.row6}
+                        {this.state.row7}
+                        {this.state.row8}
+                        {this.state.row9}
+                        {this.state.row10}
+                        {this.state.row11}
+                    </tbody>
+                </table>
+            );
+        }
     }
 }
