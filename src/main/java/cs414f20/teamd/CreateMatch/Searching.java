@@ -20,6 +20,6 @@ public class Searching {
     }
 
     private void setSearching(){
-        searching = Database.setSearching();
+        searching = Database.setSearching(current);
     }
 }

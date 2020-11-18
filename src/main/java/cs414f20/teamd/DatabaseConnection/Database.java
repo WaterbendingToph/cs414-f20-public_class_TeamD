@@ -273,7 +273,20 @@ public class Database {
         return ret;
     }
 
-    public static boolean setSearching(){
+    public static boolean setSearching(String current){
+        Connection conn = null;
+        Statement query = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "UPDATE greatestAccounts SET searching_for_new_game=1 WHERE username=\""+ current +"\";";
+            query.executeUpdate(queryStatement);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error while Setting New Game: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
         return false;
     }
 
