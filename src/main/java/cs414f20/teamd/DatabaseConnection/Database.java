@@ -114,7 +114,7 @@ public class Database {
 
     public static int registerUser(String username, String password) {
         String registrationQuery = "INSERT INTO greatestAccounts VALUES (NULL, '" + username + "', '" + password
-                + "', '');";
+                + "', '', 0);";
         int dbResult = 0;
         
         Connection conn = null;
