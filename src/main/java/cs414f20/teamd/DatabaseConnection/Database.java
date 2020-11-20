@@ -290,6 +290,59 @@ public class Database {
         return false;
     }
 
+    public static boolean getIsSearching(String player){
+        Connection conn = null;
+        Statement query = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\""+ player +"\";";
+            ResultSet results = query.executeQuery(queryStatement);
+            while (results.next()) {
+                return results.getBoolean("searching_for_new_game");
+            }
+        } catch (Exception e) {
+            System.err.println("Error while Get Searching: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return false;
+    }
+
+    public static boolean acceptInvite(String current, String opponent){
+        Connection conn = null;
+        Statement query = null;
+        boolean searching = false;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\""+ current +"\";";
+            ResultSet results = query.executeQuery(queryStatement);
+            while (results.next()) {
+                String[] currentUserInvites = getUserInvites(current);
+                for(String player : currentUserInvites){
+                    if(player.equals(opponent)){
+                        searching = getIsSearching(opponent);
+                        if(searching){
+                            query.executeUpdate("UPDATE greatestAccounts SET searching_for_new_game = 0 WHERE username = \""+ opponent +"\";");
+                            return true;
+                        }
+                        else
+                            return false;
+                    }
+                }
+                return false;
+            }
+        } catch (Exception e) {
+            System.err.println("Error while Accepting Invites: " + e.getMessage());
+        } finally {
+            if(searching)
+                deleteInvite(current, opponent);
+            closeConnections(conn, query);
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         // getAllUsers();
         // enterNewGame(20, "me", "not me");

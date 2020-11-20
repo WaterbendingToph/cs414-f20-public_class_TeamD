@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Modal, ModalBody, ModalHeader } from 'reactstrap';
+import { Modal, ModalBody, ModalHeader, Alert } from 'reactstrap';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import CheckIcon from '@material-ui/icons/Check';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
@@ -9,7 +9,8 @@ export default class InviteBox extends Component {
         super(props);
         this.state = {
             showInvites: false,
-            invites: []
+            invites: [],
+            failAccept: false
         }
     }
 
@@ -38,11 +39,15 @@ export default class InviteBox extends Component {
             });
     }
 
+    acceptInvite(user){
+        console.log("Accepting: ", user);
+    }
+
     getInvites(){
         if(this.state.invites.length !== 0){
             let invites = this.state.invites.map(user => {
                 if(user !== "")
-                    return(<li key={user}>{user} <CheckIcon /> <NotInterestedIcon onClick={this.deleteUser.bind(this, user)}/></li>);
+                    return(<li key={user}>{user} <CheckIcon onClick={this.acceptInvite.bind(this, user)}/> <NotInterestedIcon onClick={this.deleteUser.bind(this, user)}/></li>);
             });
             return(
                 <div>
@@ -54,11 +59,16 @@ export default class InviteBox extends Component {
         }
     }
 
+    toggleFailAccept(){
+        this.setState({ failAccept: !this.state.failAccept })
+    }
+
     render() {
         return(
             <div>
                 <MailOutlineIcon onClick={this.toggle.bind(this)} />
                 <Modal isOpen={this.state.showInvites} toggle={this.toggle.bind(this)}>
+                    <Alert color="danger" isOpen={this.state.failAccept} toggle={this.toggleFailAccept.bind(this)}>Invite has expired</Alert>
                     <ModalHeader>
                         Invitations
                     </ModalHeader>

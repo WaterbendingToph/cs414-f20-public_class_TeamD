@@ -10,6 +10,11 @@ import cs414f20.teamd.DatabaseConnection.Database;
 @RestController
 public class InvitesController {
 
+    @GetMapping("/acceptInvite")
+    public AcceptInvite acceptInvite(@RequestParam(value = "current") String current, @RequestParam(value = "player") String player) {
+        return new AcceptInvite(current, player);
+    }   
+
     @GetMapping("/getUser")
     public RetrievePlayers getUser(@RequestParam(value = "player") String player) {
         return new RetrievePlayers(player);
