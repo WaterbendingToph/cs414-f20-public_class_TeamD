@@ -15,7 +15,7 @@ export default class Lobby extends Component {
         this.ongoingMatches = this.ongoingMatches.bind(this);
     }
 
-    goToGamePlay(){
+    goToGamePlay(wait = true){
         fetch("/searchForNewMatch?current="+this.state.userID)
             .then(res => res.json())
             .then(data => {
@@ -23,7 +23,7 @@ export default class Lobby extends Component {
                     this.props.history.push({
                         pathname: "/game",
                         state:{
-                            searching: true,
+                            searching: wait,
                             userID: this.state.userID,
                             password: this.props.location.state.password
                         }
@@ -56,7 +56,7 @@ export default class Lobby extends Component {
             <Grid>
                 <Grid className={style.Header} item>
                     <h1>Welcome to the Lobby, {this.state.userID}!</h1>
-                    <InviteBox current={this.state.userID}/>
+                    <InviteBox current={this.state.userID} toGame={this.goToGamePlay.bind(this)}/>
                 </Grid>
                 <Grid item>
                     <CreateMatchBox currentUser={this.state.userID} toGame={this.goToGamePlay.bind(this)} />

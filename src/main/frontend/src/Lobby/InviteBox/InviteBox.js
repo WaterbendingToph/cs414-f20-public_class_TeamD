@@ -17,7 +17,12 @@ export default class InviteBox extends Component {
     componentDidMount(){
         fetch("/getInvites/?current=" + this.props.current)
             .then(res => res.json())
-            .then(data => this.setState({invites: data.invitesFromPlayers}));
+            .then(data =>{
+                data.invitesFromPlayers = data.invitesFromPlayers.filter(player =>{
+                    return player !== "";
+                })
+                this.setState({invites: data.invitesFromPlayers})}
+            );
     }
 
     toggle(){
@@ -32,7 +37,6 @@ export default class InviteBox extends Component {
         fetch("/deleteInvite?current="+ this.props.current +"&player=" + user)
             .then(res => res.text())
             .then(data => {
-                console.log("Rtrieved from back: " + data)
                 if(data !== "false"){
                     this.setState({invites: newInvites})
                 }
@@ -40,7 +44,25 @@ export default class InviteBox extends Component {
     }
 
     acceptInvite(user){
-        console.log("Accepting: ", user);
+        fetch("acceptInvite?current="+ this.props.current +"&player=" + user)
+            .then(res => res.json())
+            .then(data => {
+                if(data.accepted === false){
+                    let newInvites = this.state.invites.filter(player =>{
+                        return player !== user;
+                    })
+                    this.setState({failAccept: true, invites: newInvites})
+                }
+                else{
+                    fetch("/createMatch/?playerID="+ user + "&current="+this.props.current)
+                        .then(res => res.json())
+                        .then(data =>{
+                            if(data.gameStarted && data.opponent !== ""){
+                                this.props.toGame(false);
+                            }
+                        });
+                }
+            });
     }
 
     getInvites(){
@@ -55,6 +77,11 @@ export default class InviteBox extends Component {
                         {invites}
                     </ul>
                 </div>
+            );
+        }
+        else{
+            return(
+                <p>You do not have any invites!</p>
             );
         }
     }

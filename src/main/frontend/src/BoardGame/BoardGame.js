@@ -23,7 +23,7 @@ export default class BoardGame extends Component{
             row8: this.setupBlankRow2(),
             row9: this.setupPawnsRow9(),
             row10: this.setupDefaultRow10(),
-            searching: false,
+            searching: this.props.location.state.searching,
             userID: this.props.location.state.userID,
             password: this.props.location.state.password
         }
@@ -141,7 +141,7 @@ export default class BoardGame extends Component{
     }
 
     render(){
-        if(this.state.searching === false)
+        if(this.state.searching === true)
             return(
                 <div>
                     <h2>Waiting for other players to join...</h2>
