@@ -9,8 +9,13 @@ import java.util.Random;
 @RestController
 public class CreateMatchController {
 
+    @GetMapping("/pingForNewMatch")
+    public Ping pingForNewMatch(@RequestParam(value = "current") String current) {
+        return new Ping(current);
+    }
+
     @GetMapping("/searchForNewMatch")
-    public Searching searchingNewGame(@RequestParam(value = "current") String current) {
+    public Searching setSearchingNewGame(@RequestParam(value = "current") String current) {
         return new Searching(current);
     }
 
