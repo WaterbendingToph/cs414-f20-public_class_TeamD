@@ -16,7 +16,7 @@ export default class Lobby extends Component {
     }
 
     goToGamePlay(){
-          this.props.history.push("/game");
+        this.props.history.push("/game");
     }
 
     ongoingMatches() {
