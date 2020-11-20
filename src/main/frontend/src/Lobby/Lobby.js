@@ -16,21 +16,7 @@ export default class Lobby extends Component {
     }
 
     goToGamePlay(){
-        fetch("/searchForNewMatch?current="+this.state.userID)
-            .then(res => res.json())
-            .then(data => {
-                if(data.searching === true){
-                    this.props.history.push({
-                        pathname: "/game",
-                        state:{
-                            searching: true,
-                            userID: this.state.userID,
-                            password: this.props.location.state.password
-                        }
-                    });
-                }
-            }
-        );
+        this.props.history.push("/game");
     }
 
     ongoingMatches() {
