@@ -10,6 +10,7 @@ public class OngoingMatchesController {
     @GetMapping("/matches")
     public OngoingMatches matches(@RequestParam String userID) {
         OngoingMatches currentMatches = new OngoingMatches(userID);
+        currentMatches.queryDatabase();
         System.out.println(currentMatches);
         return currentMatches;
     }
