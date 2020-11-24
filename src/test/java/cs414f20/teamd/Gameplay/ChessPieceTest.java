@@ -25,23 +25,23 @@ class ChessPieceTest {
         requisiteBoard = new ChessBoard();
 
         Pawn pawn = new Pawn(requisiteBoard, ChessPiece.Color.BLACK);
-        requisiteBoard.placePiece(pawn, "a3");
+        assert(requisiteBoard.placePiece(pawn, "a3"));
         assertEquals("a3", pawn.getPosition());
 
         pawn = new Pawn(requisiteBoard, ChessPiece.Color.WHITE);
-        requisiteBoard.placePiece(pawn, "c1");
+        assert(requisiteBoard.placePiece(pawn, "c1"));
         assertEquals("c1", pawn.getPosition());
 
         pawn = new Pawn(requisiteBoard, ChessPiece.Color.WHITE);
-        requisiteBoard.placePiece(pawn, "w1");
+        assert(requisiteBoard.placePiece(pawn, "w1"));
         assertEquals("w1", pawn.getPosition());
 
         pawn = new Pawn(requisiteBoard, ChessPiece.Color.BLACK);
-        requisiteBoard.placePiece(pawn, "d9");
+        assert(requisiteBoard.placePiece(pawn, "d9"));
         assertEquals("d9", pawn.getPosition());
 
         pawn = new Pawn(requisiteBoard, ChessPiece.Color.WHITE);
-        requisiteBoard.placePiece(pawn, "j0");
+        assert(requisiteBoard.placePiece(pawn, "j0"));
         assertEquals("j0", pawn.getPosition());
     }
 
@@ -71,7 +71,7 @@ class ChessPieceTest {
     }
 
     @Test
-    void legalMovesTest() {     // TODO: DOESN'T THIS JUST TEST TO SEE IF THE LEGAL MOVES ARE ARRAYLISTS? CHECK WITH VICTOR ABOUT THAT LATER
+    void legalMovesTest() {
         requisiteBoard = new ChessBoard();
 
         ChessPiece piece = new Bishop(requisiteBoard, ChessPiece.Color.BLACK);

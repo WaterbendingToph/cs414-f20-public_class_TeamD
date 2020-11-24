@@ -30,16 +30,16 @@ public abstract class ChessPiece {
         if (row > 9) {
             letter = 'w';
             if (row == 10 && column == 0)
-                number = 1;
+                number = '1';
             else if (row == 10 && column == 1)
-                number = 2;
+                number = '2';
             else if (row == 11 && column == 0)
-                number = 3;
+                number = '3';
             else /* row == 11 && column == 1, written this way to kill warning */
-                number = 4;
+                number = '4';
         } else {
             letter = (char) ((char) (column) + 'a');
-            number = (char) ((char) (row) + '1');
+            number = (char) ((char) (row) + '0');
         }
 
         return "" + letter + number;

@@ -21,7 +21,6 @@ public class ChessBoard {
     public void initialize(){
         initializePawns();
         initializeCastleFolk();
-        intializeWizards();
     }
 
     private void initializePawns(){
@@ -44,7 +43,6 @@ public class ChessBoard {
         ArrayList<ChessPiece> pieces = new ArrayList<>();
         ChessPiece.Color color = ChessPiece.Color.BLACK;
         for (int i = 0; i < 2; i++){
-            pieces.add(new Champion(this, color));
             pieces.add(new Rook(this, color));
             pieces.add(new Knight(this, color));
             pieces.add(new Bishop(this, color));
@@ -53,14 +51,13 @@ public class ChessBoard {
             pieces.add(new Bishop(this, color));
             pieces.add(new Knight(this, color));
             pieces.add(new Rook(this, color));
-            pieces.add(new Champion(this, color));
 
             int row;
             if (i == 0)
                 row = 9;
             else
                 row = 0;
-            for (int j = 0; j < 10; j++){
+            for (int j = 0; j < 8; j++){
                 ChessPiece piece = pieces.get(j);
 
                 try {
@@ -72,24 +69,6 @@ public class ChessBoard {
             pieces.removeAll(pieces);
             color = ChessPiece.Color.WHITE;
         }
-    }
-
-    private void intializeWizards() {
-        Wizard whiteWizard = new Wizard(this, ChessPiece.Color.WHITE);
-        Wizard whiteWizard1 = new Wizard(this, ChessPiece.Color.WHITE);
-        Wizard blackWizard = new Wizard(this, ChessPiece.Color.BLACK);
-        Wizard blackWizard1 = new Wizard(this, ChessPiece.Color.BLACK);
-
-        try {
-            board[11][0] = whiteWizard;
-            board[11][1] = whiteWizard1;
-            board[12][0] = blackWizard;
-            board[12][1] = blackWizard1;
-            whiteWizard.setPosition(Helper.arrayIndicesToPosition(11, 0));
-            whiteWizard1.setPosition(Helper.arrayIndicesToPosition(11, 1));
-            blackWizard.setPosition(Helper.arrayIndicesToPosition(12, 0));
-            blackWizard1.setPosition(Helper.arrayIndicesToPosition(12, 1));
-        } catch (IllegalPositionException ipe) { /* intentional do nothing */ }
     }
 
     public ChessPiece getPiece(String position) throws IllegalPositionException {
@@ -112,14 +91,14 @@ public class ChessBoard {
         int[] boardPositions = convertPositionToBoardIndices(position);
 
         board[boardPositions[0]] [boardPositions[1]] = piece;
-        try { piece.setPosition(position); } catch (IllegalPositionException e) { /* intentional do nothing */ }
+        try { piece.setPosition(position); } catch (IllegalPositionException e) { return false; }
 
         return true;
     }
 
     public void move(String fromPosition, String toPosition) throws IllegalMoveException {
         try {
-            if (!Helper.isBoundedPosition(fromPosition) || Helper.positionIsEmpty(this, fromPosition) || !Helper.isBoundedPosition(toPosition))
+            if (Helper.positionIsEmpty(this, fromPosition) || !Helper.isBoundedPosition(toPosition))
                 throw new IllegalMoveException();
 
             ChessPiece piece = getPiece(fromPosition);
@@ -208,13 +187,13 @@ public class ChessBoard {
         if (position.charAt(0) == 'w') {
             switch (position.charAt(1)) {
                 case '1':
-                    return new int[]{11, 0};
+                    return new int[]{10, 0};
                 case '2':
-                    return new int[]{11, 1};
+                    return new int[]{10, 1};
                 case '3':
-                    return new int[]{12, 0};
+                    return new int[]{11, 0};
                 case '4':
-                    return new int[]{12, 1};
+                    return new int[]{11, 1};
             }
         }
 
