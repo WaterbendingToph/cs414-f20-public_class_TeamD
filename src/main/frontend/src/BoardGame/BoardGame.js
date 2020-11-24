@@ -25,7 +25,9 @@ export default class BoardGame extends Component{
             row10: this.setupDefaultRow10(),
             searching: this.props.location.state.searching,
             userID: this.props.location.state.userID,
-            password: this.props.location.state.password
+            password: this.props.location.state.password,
+            players: this.props.location.state.players,
+            timers: []
         }
         this.setupDefaultRow1 = this.setupDefaultRow1.bind(this);
         this.setupPawnsRow2 = this.setupPawnsRow2.bind(this);
@@ -33,6 +35,29 @@ export default class BoardGame extends Component{
         this.setupBlankRow2 = this.setupBlankRow2.bind(this);
         this.setupPawnsRow9 = this.setupPawnsRow9.bind(this);
         this.setupDefaultRow10 = this.setupDefaultRow10.bind(this);
+        this.pingForNewMatch = this.pingForNewMatch.bind(this);
+    }
+
+    pingForNewMatch(current, players){
+        fetch("/pingForNewMatch?current="+ current +"&players=" + players)
+            .then(res => res.json())
+            .then(data => {
+                if(data.isNewMatchCreated){
+                    this.setState({searching: false, gameID: data.gameID});
+                }
+                else{
+                    let timers = this.state.timers;
+                    let timer = setTimeout(this.pingForNewMatch, 3*1000, current, players);
+                    timers.push(timer)
+                    this.setState({timers: timers});
+                }
+            });
+    }
+
+    clearTimers(){
+        this.state.timers.forEach( timer => {
+            clearTimeout(timer);
+        })
     }
 
     setupDefaultRow1() {
@@ -141,7 +166,8 @@ export default class BoardGame extends Component{
     }
 
     render(){
-        if(this.state.searching === true)
+        if(this.state.searching === true){
+            this.pingForNewMatch(this.state.userID, this.state.players.join(","));
             return(
                 <div>
                     <h2>Waiting for other players to join...</h2>
@@ -150,7 +176,9 @@ export default class BoardGame extends Component{
                     </Grid>
                 </div>
             );
+        }
         else{
+            this.clearTimers();
             return (
                 <table className="App" align={'center'}>
                     <tbody>

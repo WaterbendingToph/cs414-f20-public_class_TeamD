@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -41,37 +42,32 @@ public class Database {
     }
 
     private static void setupBoard(Hashtable<String, String> board) {
-        String[] cols = {"a","b","c","d","e","f","g","h","i", "j"};
-        for(String col : cols) {
+        String[] cols = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" };
+        for (String col : cols) {
             int count = 0;
-            if(col.charAt(0) <= 'e')
+            if (col.charAt(0) <= 'e')
                 count = 1;
-            if(col.equals("b") || col.equals("i")) {
-                board.put("White rook"+count, col+"0");
-                board.put("Black rook"+count, col+"9");
+            if (col.equals("b") || col.equals("i")) {
+                board.put("White rook" + count, col + "0");
+                board.put("Black rook" + count, col + "9");
+            } else if (col.equals("a") || col.equals("j")) {
+                board.put("White Champion" + count, col + "0");
+                board.put("Black Champion" + count, col + "9");
+            } else if (col.equals("c") || col.equals("h")) {
+                board.put("White Knight" + count, col + "0");
+                board.put("Black Knight" + count, col + "9");
+            } else if (col.equals("d") || col.equals("g")) {
+                board.put("White Bishop" + count, col + "0");
+                board.put("Black Bishop" + count, col + "9");
+            } else if (col.equals("e")) {
+                board.put("White Queen" + count, col + "0");
+                board.put("Black Queen" + count, col + "9");
+            } else {
+                board.put("White King" + count, col + "0");
+                board.put("Black King" + count, col + "9");
             }
-            else if(col.equals("a") || col.equals("j")) {
-                board.put("White Champion"+count, col+"0");
-                board.put("Black Champion"+count, col+"9");
-            }
-            else if(col.equals("c") || col.equals("h")) {
-                board.put("White Knight"+count, col+"0");
-                board.put("Black Knight"+count, col+"9");
-            }
-            else if(col.equals("d") || col.equals("g")) {
-                board.put("White Bishop"+count, col+"0");
-                board.put("Black Bishop"+count, col+"9");
-            }
-            else if(col.equals("e")) {
-                board.put("White Queen"+count, col+"0");
-                board.put("Black Queen"+count, col+"9");
-            }
-            else {
-                board.put("White King"+count, col+"0");
-                board.put("Black King"+count, col+"9");
-            }
-            board.put("White Pawn"+col, col+"1");
-            board.put("Black Pawn"+col, col+"8");
+            board.put("White Pawn" + col, col + "1");
+            board.put("Black Pawn" + col, col + "8");
         }
         board.put("Black Wizard0", "w3");
         board.put("Black Wizard1", "w4");
@@ -82,28 +78,24 @@ public class Database {
     public static void enterNewGame(int id, String whitePlayer, String blackPlayer) {
         Hashtable<String, String> board = new Hashtable<String, String>();
         setupBoard(board);
-        final String q = "INSERT INTO chessGames VALUES("+ id +",\"" + whitePlayer + "\",\""+ blackPlayer+"\",\""
-                          + board.toString() + "\",\""+ whitePlayer +"\","+ 0 +");";
-        try (
-             Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             Statement query = conn.createStatement();
-         ) {
+        final String q = "INSERT INTO chessGames VALUES(" + id + ",\"" + whitePlayer + "\",\"" + blackPlayer + "\",\""
+                + board.toString() + "\",\"" + whitePlayer + "\"," + 0 + ");";
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+                Statement query = conn.createStatement();) {
             query.executeUpdate(q);
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("Exception: " + e.getMessage());
         }
     }
-    
+
     public static boolean tryLogin(String username, String password) {
         String loginQuery = "SELECT * FROM greatestAccounts WHERE username = '" + username + "';";
 
-        try (
-            Connection conn = getConnection(DB_URL, DB_USER, DB_PASSWORD);
-            Statement query = conn.createStatement();
-            ResultSet results = query.executeQuery(loginQuery)) {
+        try (Connection conn = getConnection(DB_URL, DB_USER, DB_PASSWORD);
+                Statement query = conn.createStatement();
+                ResultSet results = query.executeQuery(loginQuery)) {
             while (results.next()) {
-                if(BCrypt.checkpw(password, results.getString("password")))
+                if (BCrypt.checkpw(password, results.getString("password")))
                     return true;
             }
         } catch (Exception e) {
@@ -116,7 +108,7 @@ public class Database {
         String registrationQuery = "INSERT INTO greatestAccounts VALUES (NULL, '" + username + "', '" + password
                 + "', '');";
         int dbResult = 0;
-        
+
         Connection conn = null;
         Statement query = null;
         try {
@@ -137,16 +129,16 @@ public class Database {
         return dbResult;
     }
 
-    public static boolean userExists(String opponent){
+    public static boolean userExists(String opponent) {
         Connection conn = null;
         Statement query = null;
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             query = conn.createStatement();
-            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\""+ opponent +"\";";
+            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\"" + opponent + "\";";
             ResultSet results = query.executeQuery(queryStatement);
             while (results.next()) {
-                if(results.getString("username").equals(opponent))
+                if (results.getString("username").equals(opponent))
                     return true;
             }
 
@@ -158,34 +150,35 @@ public class Database {
         return false;
     }
 
-    public static boolean userExists(String[] opponents){
-        for(String opponent : opponents){
-            if(userExists(opponent))
+    public static boolean userExists(String[] opponents) {
+        for (String opponent : opponents) {
+            if (userExists(opponent))
                 return true;
         }
         return false;
     }
 
-    public static boolean sendInvite(String current, String opponent){
+    public static boolean sendInvite(String current, String opponent) {
         String[] existingInvites = getUserInvites(opponent);
-        for(String user: existingInvites){
-            if(user.equals(current))
+        for (String user : existingInvites) {
+            if (user.equals(current))
                 return false;
         }
-        if(userExists(current) && userExists(opponent)){
+        if (userExists(current) && userExists(opponent)) {
             Connection conn = null;
             Statement query = null;
             try {
                 conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
                 query = conn.createStatement();
-                String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\""+ opponent +"\";";
+                String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\"" + opponent + "\";";
                 ResultSet results = query.executeQuery(queryStatement);
                 String currentPlayers = "";
                 while (results.next()) {
                     currentPlayers = results.getString("invites");
                 }
                 currentPlayers += current + ",";
-                queryStatement = "UPDATE greatestAccounts SET invites=\""+ currentPlayers +"\" WHERE username=\""+ opponent +"\";";
+                queryStatement = "UPDATE greatestAccounts SET invites=\"" + currentPlayers + "\" WHERE username=\""
+                        + opponent + "\";";
                 query.executeUpdate(queryStatement);
                 return true;
             } catch (Exception e) {
@@ -196,7 +189,7 @@ public class Database {
         }
         return false;
     }
-    
+
     // Used for Statement queries (sent to database) that do not automatically
     // close their connections.
     static void closeConnections(Connection conn, Statement query) {
@@ -210,13 +203,13 @@ public class Database {
         }
     }
 
-    public static String[] getUserInvites(String current){
+    public static String[] getUserInvites(String current) {
         Connection conn = null;
         Statement query = null;
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             query = conn.createStatement();
-            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\""+ current +"\";";
+            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\"" + current + "\";";
             ResultSet results = query.executeQuery(queryStatement);
             while (results.next()) {
                 String invites = results.getString("invites");
@@ -230,20 +223,21 @@ public class Database {
         return null;
     }
 
-    public static boolean deleteInvite(String current, String player){
+    public static boolean deleteInvite(String current, String player) {
         Connection conn = null;
         Statement query = null;
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             query = conn.createStatement();
-            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\""+ current +"\";";
+            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\"" + current + "\";";
             ResultSet results = query.executeQuery(queryStatement);
             String newInvites = "";
             while (results.next()) {
                 String invites = results.getString("invites");
-                newInvites = invites.replace(player+",", "");
+                newInvites = invites.replace(player + ",", "");
             }
-            queryStatement = "UPDATE greatestAccounts SET invites=\""+ newInvites +"\" WHERE username=\""+ current +"\";";
+            queryStatement = "UPDATE greatestAccounts SET invites=\"" + newInvites + "\" WHERE username=\"" + current
+                    + "\";";
             query.executeUpdate(queryStatement);
             return true;
         } catch (Exception e) {
@@ -254,14 +248,15 @@ public class Database {
         return false;
     }
 
-    public static List<String> retrieveUsers(String player){
+    public static List<String> retrieveUsers(String player) {
         List<String> ret = new ArrayList<>();
         Connection conn = null;
         Statement query = null;
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             query = conn.createStatement();
-            ResultSet results = query.executeQuery("SELECT * FROM greatestAccounts WHERE username LIKE \""+ player +"%\";");
+            ResultSet results = query
+                    .executeQuery("SELECT * FROM greatestAccounts WHERE username LIKE \"" + player + "%\";");
             while (results.next()) {
                 ret.add(results.getString("username"));
             }
@@ -273,13 +268,14 @@ public class Database {
         return ret;
     }
 
-    public static boolean setSearching(String current){
+    public static boolean setSearching(String current) {
         Connection conn = null;
         Statement query = null;
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             query = conn.createStatement();
-            String queryStatement = "UPDATE greatestAccounts SET searching_for_new_game=1 WHERE username=\""+ current +"\";";
+            String queryStatement = "UPDATE greatestAccounts SET searching_for_new_game=1 WHERE username=\"" + current
+                    + "\";";
             query.executeUpdate(queryStatement);
             return true;
         } catch (Exception e) {
@@ -290,13 +286,13 @@ public class Database {
         return false;
     }
 
-    public static boolean getIsSearching(String player){
+    public static boolean getIsSearching(String player) {
         Connection conn = null;
         Statement query = null;
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             query = conn.createStatement();
-            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\""+ player +"\";";
+            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\"" + player + "\";";
             ResultSet results = query.executeQuery(queryStatement);
             while (results.next()) {
                 return results.getBoolean("searching_for_new_game");
@@ -309,25 +305,26 @@ public class Database {
         return false;
     }
 
-    public static boolean acceptInvite(String current, String opponent){
+    public static boolean acceptInvite(String current, String opponent) {
         Connection conn = null;
         Statement query = null;
         boolean searching = false;
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             query = conn.createStatement();
-            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\""+ current +"\";";
+            String queryStatement = "SELECT * FROM greatestAccounts WHERE username=\"" + current + "\";";
             ResultSet results = query.executeQuery(queryStatement);
             while (results.next()) {
                 String[] currentUserInvites = getUserInvites(current);
-                for(String player : currentUserInvites){
-                    if(player.equals(opponent)){
+                for (String player : currentUserInvites) {
+                    if (player.equals(opponent)) {
                         searching = getIsSearching(opponent);
-                        if(searching){
-                            query.executeUpdate("UPDATE greatestAccounts SET searching_for_new_game = 0 WHERE username = \""+ opponent +"\";");
+                        if (searching) {
+                            query.executeUpdate(
+                                    "UPDATE greatestAccounts SET searching_for_new_game = 0 WHERE username = \""
+                                            + opponent + "\";");
                             return true;
-                        }
-                        else
+                        } else
                             return false;
                     }
                 }
@@ -336,11 +333,33 @@ public class Database {
         } catch (Exception e) {
             System.err.println("Error while Accepting Invites: " + e.getMessage());
         } finally {
-            if(searching)
+            if (searching)
                 deleteInvite(current, opponent);
             closeConnections(conn, query);
         }
         return false;
+    }
+
+    public static String pingNewMatch(String current, String[] players) {
+        Connection conn = null;
+        Statement query = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT * FROM chessGames WHERE black_player=\"" + current + "\";";
+            ResultSet results = query.executeQuery(queryStatement);
+            while (results.next()) {
+                boolean completed = results.getBoolean("completed");
+                String opponent = results.getString("white_player");
+                if (!completed && Arrays.asList(players).contains(opponent))
+                    return results.getString("gameID");
+            }
+        } catch (Exception e) {
+            System.err.println("Error while Get Searching: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return "";
     }
 
     public static void main(String[] args) {

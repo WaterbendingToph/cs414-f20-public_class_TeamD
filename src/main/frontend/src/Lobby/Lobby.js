@@ -15,7 +15,7 @@ export default class Lobby extends Component {
         this.ongoingMatches = this.ongoingMatches.bind(this);
     }
 
-    goToGamePlay(wait = true){
+    goToGamePlay(wait = true, players=[]){
         fetch("/searchForNewMatch?current="+this.state.userID)
             .then(res => res.json())
             .then(data => {
@@ -25,7 +25,8 @@ export default class Lobby extends Component {
                         state:{
                             searching: wait,
                             userID: this.state.userID,
-                            password: this.props.location.state.password
+                            password: this.props.location.state.password,
+                            players: players
                         }
                     });
                 }
