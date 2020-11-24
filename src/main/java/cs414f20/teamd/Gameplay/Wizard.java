@@ -24,10 +24,56 @@ public class Wizard extends ChessPiece{
 
     @Override
     public ArrayList<String> legalMoves() {
-        ArrayList<String> legalMoves = new ArrayList<String>();
+        ArrayList<JavaDoesntHaveTuples> unboundedOptions = ValidMoveOffsets();
 
-        //
+        String position = this.getPosition();
+        ArrayList<String> boundedOptions = new ArrayList<String>();
+        for (JavaDoesntHaveTuples unboundedOption : unboundedOptions)
+            try {
+                boundedOptions.add(Helper.boundedMove(position, unboundedOption.x, unboundedOption.y));
+            } catch (IllegalPositionException e) {}
+
+        ArrayList<String> legalMoves = new ArrayList<String>();
+        for (String boundedOption : boundedOptions) {
+            try {
+                ChessPiece testPiece = this.board.getPiece(boundedOption);
+
+                if (testPiece != null) {
+                    if (testPiece.color == this.color)
+                        continue;
+                }
+                else legalMoves.add(boundedOption);
+            } catch (IllegalPositionException e) {}
+        }
 
         return legalMoves;
     }
+
+    private class JavaDoesntHaveTuples {
+        public int x;
+        public int y;
+
+        public JavaDoesntHaveTuples(int newX, int newY) {
+            x = newX;
+            y = newY;
+        }
+    }//DUPLICATION WITH CHAMPION
+    private ArrayList<JavaDoesntHaveTuples> ValidMoveOffsets() {
+        ArrayList<JavaDoesntHaveTuples> javaOverheadCanBeGross = new ArrayList<JavaDoesntHaveTuples>();
+
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-3, -1));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-3, 1));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-1, -3));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-1, -1));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-1, 1));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-1, 3));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(1, -3));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(1, -1));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(1, 1));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(1, 3));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(3, -1));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(3, 1));
+
+        return javaOverheadCanBeGross;
+    }//DUPLICATION WITH CHAMPION
 }
