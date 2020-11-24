@@ -1,13 +1,12 @@
 package cs414f20.teamd.Gameplay;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ChessBoard {
     private ChessPiece[][] board;
-    private static final List<Character> validLetters = Arrays.asList(new Character[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'});//HEAVY DUPLICATION WITH ChessPiece
-    private static final List<Character> validNumbers = Arrays.asList(new Character[]{'1', '2', '3', '4', '5', '6', '7', '8'});
+    private static final List<Character> validLetters = Helper.validLetters;
+    private static final List<Character> validNumbers = Helper.validNumbers;
 
 
     ChessBoard() {
@@ -30,11 +29,11 @@ public class ChessBoard {
                 pawn = new Pawn(this, ChessPiece.Color.WHITE);
                 board[row][column] = pawn;
                 pawn.setPosition(Helper.arrayIndicesToPosition(row, column));
-            } catch (IllegalPositionException ipe){}
+            } catch (IllegalPositionException ipe){ /* intentional do nothing */ }
         }
     }
     private void initializeCastleFolk() {
-        ArrayList<ChessPiece> pieces = new ArrayList<ChessPiece>();
+        ArrayList<ChessPiece> pieces = new ArrayList<>();
         ChessPiece.Color color = ChessPiece.Color.BLACK;
         for (int i = 0; i < 2; i++){
             pieces.add(new Rook(this, color));
@@ -53,7 +52,7 @@ public class ChessBoard {
                 try {
                     board[row][j] = piece;
                     piece.setPosition(Helper.arrayIndicesToPosition(row, j));
-                } catch (IllegalPositionException ipe) {}
+                } catch (IllegalPositionException ipe) { /* intentional do nothing */ }
             }
 
             pieces.removeAll(pieces);
@@ -61,20 +60,15 @@ public class ChessBoard {
         }
     }
 
-    public ChessPiece getPiece(String position) throws IllegalPositionException {//HEAVY DUPLICATION WITH ChessPiece
+    public ChessPiece getPiece(String position) throws IllegalPositionException {
         if (!Helper.isBoundedPosition(position))
             throw new IllegalPositionException();
 
-        char positionLetter = position.charAt(0);
-        char positionNumber = position.charAt(1);
+        int[] boardPositions = convertPositionToBoardIndices(position);
 
-        int row = validNumbers.indexOf((char) positionNumber);
-        int column = validLetters.indexOf((char) positionLetter);
-
-        return board[row][column];
-    }//HEAVY DUPLICATION WITH "position" TO board[][] CONVERSION.
-
-    public boolean placePiece(ChessPiece piece, String position){//HEAVY DUPLICATION WITH "position" TO board[][] CONVERSION.
+        return board[boardPositions[0]] [boardPositions[1]];
+    }
+    public boolean placePiece(ChessPiece piece, String position){
         try {
             if (!Helper.positionIsEmpty(this, position))
                 return false;
@@ -82,19 +76,15 @@ public class ChessBoard {
             return false;
         }
 
-        char positionLetter = position.charAt(0);
-        char positionNumber = position.charAt(1);
+        int[] boardPositions = convertPositionToBoardIndices(position);
 
-        int row = validNumbers.indexOf((char) positionNumber);
-        int column = validLetters.indexOf((char) positionLetter);
-
-        board[row][column] = piece;
-        try { piece.setPosition(position); } catch (IllegalPositionException e) {}
+        board[boardPositions[0]] [boardPositions[1]] = piece;
+        try { piece.setPosition(position); } catch (IllegalPositionException e) { /* intentional do nothing */ }
 
         return true;
-    }//HEAVY DUPLICATION WITH "position" TO board[][] CONVERSION.
+    }
 
-    public void move(String fromPosition, String toPosition) throws IllegalMoveException {//HEAVY DUPLICATION WITH "position" TO board[][] CONVERSION.
+    public void move(String fromPosition, String toPosition) throws IllegalMoveException {
         try {
             if (Helper.positionIsEmpty(this, fromPosition) || !Helper.isBoundedPosition(toPosition))
                 throw new IllegalMoveException();
@@ -105,14 +95,13 @@ public class ChessBoard {
             if (moves.size() == 0 || !moves.contains(toPosition))
                 throw new IllegalMoveException();
 
-            char positionLetter = fromPosition.charAt(0);//HEAVY DUPLICATION WITH "position" TO board[][] CONVERSION.
-            char positionNumber = fromPosition.charAt(1);
-            int fromRow = validNumbers.indexOf((char) positionNumber);
-            int fromCol = validLetters.indexOf((char) positionLetter);
-            positionLetter = toPosition.charAt(0);
-            positionNumber = toPosition.charAt(1);
-            int toRow = validNumbers.indexOf((char) positionNumber);
-            int toCol = validLetters.indexOf((char) positionLetter);//HEAVY DUPLICATION WITH "position" TO board[][] CONVERSION.
+            int[] boardPositions = convertPositionToBoardIndices(fromPosition);
+            int fromRow = boardPositions[0];
+            int fromCol = boardPositions[1];
+
+            boardPositions = convertPositionToBoardIndices(toPosition);
+            int toRow = boardPositions[0];
+            int toCol = boardPositions[1];
 
             board[toRow][toCol] = board[fromRow][fromCol];
             board[fromRow][fromCol] = null;
@@ -120,7 +109,7 @@ public class ChessBoard {
             piece.setPosition(toPosition);
         } catch (IllegalPositionException e) {
             throw new IllegalMoveException(); }
-    }//HEAVY DUPLICATION WITH "position" TO board[][] CONVERSION.
+    }
 
     public String toString(){
         // From the Canvas page: https://colostate.instructure.com/courses/106587/files/16341487/download?wrap=1
@@ -170,7 +159,7 @@ public class ChessBoard {
         return chess;
     }
 
-    //Taken from the assignment specification
+    //Taken from the assignment specification - for testing purposes only
     public static void main(String[] args) {
         ChessBoard board = new ChessBoard();
         board.initialize();
@@ -179,5 +168,15 @@ public class ChessBoard {
             board.move("c2", "c4");
         } catch (IllegalMoveException ime){}
         System.out.println(board);
+    }
+
+    private int[] convertPositionToBoardIndices(String position) {
+        char positionLetter = position.charAt(0);
+        char positionNumber = position.charAt(1);
+
+        int row = validNumbers.indexOf(positionNumber);
+        int column = validLetters.indexOf(positionLetter);
+
+        return new int[]{row, column};
     }
 }

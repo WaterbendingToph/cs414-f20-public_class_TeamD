@@ -1,18 +1,17 @@
 package cs414f20.teamd.Gameplay;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public abstract class ChessPiece {
-    public enum Color {WHITE, BLACK};
+    public enum Color {WHITE, BLACK}
     protected ChessBoard board;
     protected int row;
     protected int column;
     protected Color color;
 
-    private static final List<Character> validLetters = Arrays.asList(new Character[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'});//HEAVY DUPLICATION WITH ChessBoard
-    private static final List<Character> validNumbers = Arrays.asList(new Character[]{'1', '2', '3', '4', '5', '6', '7', '8'});
+    private static final List<Character> validLetters = Helper.validLetters;
+    private static final List<Character> validNumbers = Helper.validNumbers;
 
 
     public ChessPiece(ChessBoard board, Color color){
@@ -31,15 +30,15 @@ public abstract class ChessPiece {
         return "" + letter + number;
     }
 
-    public void setPosition(String position) throws IllegalPositionException {//HEAVY DUPLICATION WITH ChessBoard
+    public void setPosition(String position) throws IllegalPositionException {
         if (!Helper.isBoundedPosition(position))
             throw new IllegalPositionException();
 
         char positionLetter = position.charAt(0);
         char positionNumber = position.charAt(1);
 
-        row = validNumbers.indexOf((char) positionNumber);
-        column = validLetters.indexOf((char) positionLetter);
+        row = validNumbers.indexOf(positionNumber);
+        column = validLetters.indexOf(positionLetter);
     }
 
     abstract public String toString();

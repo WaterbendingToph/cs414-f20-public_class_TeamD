@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Helper {
-    private static final List<Character> validLetters = Arrays.asList(new Character[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'});//HEAVY DUPLICATION WITH ChessPiece
-    private static final List<Character> validNumbers = Arrays.asList(new Character[]{'1', '2', '3', '4', '5', '6', '7', '8'});
+    public static final List<Character> validLetters = Arrays.asList('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h');
+    public static final List<Character> validNumbers = Arrays.asList('1', '2', '3', '4', '5', '6', '7', '8');
 
     //Helper methods
     public static boolean positionIsEmpty(ChessBoard board, String position) throws IllegalPositionException {
