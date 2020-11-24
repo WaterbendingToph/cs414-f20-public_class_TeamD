@@ -7,35 +7,44 @@ public class ChessBoard {
     private ChessPiece[][] board;
     private static final List<Character> validLetters = Helper.validLetters;
     private static final List<Character> validNumbers = Helper.validNumbers;
+    private static final List<Character> validWizardNumbers = Helper.validWizardNumbers;
 
 
     ChessBoard() {
-        board = new ChessPiece[8][8];
+        board = new ChessPiece[12][];
+        for (int i = 0; i < 10; i++)
+            board[i] = new ChessPiece[10];
+        board[10] = new ChessPiece[2];
+        board[11] = new ChessPiece[2];
     }
 
     public void initialize(){
         initializePawns();
         initializeCastleFolk();
+        intializeWizards();
     }
+
     private void initializePawns(){
-        for (int column = 0; column < 8; column++){
+        for (int column = 0; column < 10; column++){
             try {
-                int row = 6;
+                int row = 1;
                 Pawn pawn = new Pawn(this, ChessPiece.Color.BLACK);
                 board[row][column] = pawn;
                 pawn.setPosition(Helper.arrayIndicesToPosition(row, column));
 
-                row = 1;
+                row = 8;
                 pawn = new Pawn(this, ChessPiece.Color.WHITE);
                 board[row][column] = pawn;
                 pawn.setPosition(Helper.arrayIndicesToPosition(row, column));
             } catch (IllegalPositionException ipe){ /* intentional do nothing */ }
         }
     }
+
     private void initializeCastleFolk() {
         ArrayList<ChessPiece> pieces = new ArrayList<>();
         ChessPiece.Color color = ChessPiece.Color.BLACK;
         for (int i = 0; i < 2; i++){
+            pieces.add(new Champion(this, color));
             pieces.add(new Rook(this, color));
             pieces.add(new Knight(this, color));
             pieces.add(new Bishop(this, color));
@@ -44,9 +53,14 @@ public class ChessBoard {
             pieces.add(new Bishop(this, color));
             pieces.add(new Knight(this, color));
             pieces.add(new Rook(this, color));
+            pieces.add(new Champion(this, color));
 
-            for (int j = 0; j < 8; j++){
-                int row = 7 * (1 - i);
+            int row;
+            if (i == 0)
+                row = 9;
+            else
+                row = 0;
+            for (int j = 0; j < 10; j++){
                 ChessPiece piece = pieces.get(j);
 
                 try {
@@ -60,6 +74,24 @@ public class ChessBoard {
         }
     }
 
+    private void intializeWizards() {
+        Wizard whiteWizard = new Wizard(this, ChessPiece.Color.WHITE);
+        Wizard whiteWizard1 = new Wizard(this, ChessPiece.Color.WHITE);
+        Wizard blackWizard = new Wizard(this, ChessPiece.Color.BLACK);
+        Wizard blackWizard1 = new Wizard(this, ChessPiece.Color.BLACK);
+
+        try {
+            board[11][0] = whiteWizard;
+            board[11][1] = whiteWizard1;
+            board[12][0] = blackWizard;
+            board[12][1] = blackWizard1;
+            whiteWizard.setPosition(Helper.arrayIndicesToPosition(11, 0));
+            whiteWizard1.setPosition(Helper.arrayIndicesToPosition(11, 1));
+            blackWizard.setPosition(Helper.arrayIndicesToPosition(12, 0));
+            blackWizard1.setPosition(Helper.arrayIndicesToPosition(12, 1));
+        } catch (IllegalPositionException ipe) { /* intentional do nothing */ }
+    }
+
     public ChessPiece getPiece(String position) throws IllegalPositionException {
         if (!Helper.isBoundedPosition(position))
             throw new IllegalPositionException();
@@ -68,6 +100,7 @@ public class ChessBoard {
 
         return board[boardPositions[0]] [boardPositions[1]];
     }
+
     public boolean placePiece(ChessPiece piece, String position){
         try {
             if (!Helper.positionIsEmpty(this, position))
@@ -86,7 +119,7 @@ public class ChessBoard {
 
     public void move(String fromPosition, String toPosition) throws IllegalMoveException {
         try {
-            if (Helper.positionIsEmpty(this, fromPosition) || !Helper.isBoundedPosition(toPosition))
+            if (!Helper.isBoundedPosition(fromPosition) || Helper.positionIsEmpty(this, fromPosition) || !Helper.isBoundedPosition(toPosition))
                 throw new IllegalMoveException();
 
             ChessPiece piece = getPiece(fromPosition);
@@ -111,6 +144,7 @@ public class ChessBoard {
             throw new IllegalMoveException(); }
     }
 
+    //Taken from the a2 assignment specification - for testing purposes only
     public String toString(){
         // From the Canvas page: https://colostate.instructure.com/courses/106587/files/16341487/download?wrap=1
         String chess = "";
@@ -159,7 +193,7 @@ public class ChessBoard {
         return chess;
     }
 
-    //Taken from the assignment specification - for testing purposes only
+    //Taken from the a2 assignment specification - for testing purposes only
     public static void main(String[] args) {
         ChessBoard board = new ChessBoard();
         board.initialize();
@@ -171,6 +205,19 @@ public class ChessBoard {
     }
 
     private int[] convertPositionToBoardIndices(String position) {
+        if (position.charAt(0) == 'w') {
+            switch (position.charAt(1)) {
+                case '1':
+                    return new int[]{11, 0};
+                case '2':
+                    return new int[]{11, 1};
+                case '3':
+                    return new int[]{12, 0};
+                case '4':
+                    return new int[]{12, 1};
+            }
+        }
+
         char positionLetter = position.charAt(0);
         char positionNumber = position.charAt(1);
 
