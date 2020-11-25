@@ -22,6 +22,7 @@ This Sprint, we want to complete Stories
 | 11/16 | *#53, #46, #54, #55, #145, #156* | *#79, #146, #149, #151* | *None* |
 | 11/18 | *#146, #160* | *#79, #149, #151, #163* | *None* |
 | 11/20 | *None* | *#51, #79, #149, #151, #163* | *Some SSH connectivity issues* |
+| 11/25 | *#149, #151* | *#51, #79, #163* | *Fall break* |
 | 11/2 | *asdf* | *asdf* | *asdf* |
 
 ## Review
