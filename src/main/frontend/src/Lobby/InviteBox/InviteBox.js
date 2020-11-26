@@ -58,7 +58,7 @@ export default class InviteBox extends Component {
                         .then(res => res.json())
                         .then(data =>{
                             if(data.gameStarted && data.opponent !== ""){
-                                this.props.toGame(false);
+                                this.props.toGame(false, [], data.gameID);
                             }
                         });
                 }

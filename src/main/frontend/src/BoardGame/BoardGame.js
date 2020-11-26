@@ -27,6 +27,7 @@ export default class BoardGame extends Component{
             userID: this.props.location.state.userID,
             password: this.props.location.state.password,
             players: this.props.location.state.players,
+            gameID: this.props.location.state.gameID,
             timers: []
         }
         this.setupDefaultRow1 = this.setupDefaultRow1.bind(this);
@@ -178,6 +179,7 @@ export default class BoardGame extends Component{
             );
         }
         else{
+            console.log("Current game: ", this.state.gameID)
             this.clearTimers();
             return (
                 <table className="App" align={'center'}>
