@@ -11,8 +11,8 @@ export default class BoardGame extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            row0: this.setupDefaultWizardRowWhite(),
-            row1: this.setupDefaultBackRowWhite(),
+            row0: this.setupDefaultWizardRowBlack(),
+            row1: this.setupDefaultBackRowBlack(),
             row2: this.setupPawnsRow2(),
             row3: this.setupBlankRow1(),
             row4: this.setupBlankRow2(),
@@ -21,8 +21,8 @@ export default class BoardGame extends Component{
             row7: this.setupBlankRow1(),
             row8: this.setupBlankRow2(),
             row9: this.setupPawnsRow9(),
-            row10: this.setupDefaultBackRowBlack(),
-            row11: this.setupDefaultWizardRowBlack()
+            row10: this.setupDefaultBackRowWhite(),
+            row11: this.setupDefaultWizardRowWhite()
         }
         this.setupDefaultWizardRowWhite = this.setupDefaultWizardRowWhite.bind(this);
         this.setupDefaultBackRowWhite = this.setupDefaultBackRowWhite.bind(this);
@@ -110,7 +110,7 @@ export default class BoardGame extends Component{
         );
     }
 
-    setupPawnsRow2() {
+    setupPawnsRow9() {
         return(
             <tr>
                 <td><Square backgroundColor={white}/></td>
@@ -128,7 +128,7 @@ export default class BoardGame extends Component{
         );
     }
 
-    setupPawnsRow9() {
+    setupPawnsRow2() {
         return(
             <tr >
                 <td><Square backgroundColor={white}/></td>
