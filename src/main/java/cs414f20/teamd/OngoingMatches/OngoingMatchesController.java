@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class OngoingMatchesController {
     
     @GetMapping("/matches")
-    public OngoingMatches matches(@RequestParam String userID) {
-        OngoingMatches currentMatches = new OngoingMatches(userID);
+    public OngoingMatches matches(@RequestParam String userID, String password) {
+        OngoingMatches currentMatches = new OngoingMatches(userID, password);
         currentMatches.queryDatabase();
         System.out.println(currentMatches);
         return currentMatches;
