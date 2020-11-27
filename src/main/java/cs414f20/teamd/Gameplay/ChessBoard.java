@@ -27,12 +27,12 @@ public class ChessBoard {
         for (int column = 0; column < 10; column++){
             try {
                 int row = 1;
-                Pawn pawn = new Pawn(this, ChessPiece.Color.BLACK);
+                Pawn pawn = new Pawn(this, ChessPiece.Color.WHITE);
                 board[row][column] = pawn;
                 pawn.setPosition(Helper.arrayIndicesToPosition(row, column));
 
                 row = 8;
-                pawn = new Pawn(this, ChessPiece.Color.WHITE);
+                pawn = new Pawn(this, ChessPiece.Color.BLACK);
                 board[row][column] = pawn;
                 pawn.setPosition(Helper.arrayIndicesToPosition(row, column));
             } catch (IllegalPositionException ipe){ /* intentional do nothing */ }
