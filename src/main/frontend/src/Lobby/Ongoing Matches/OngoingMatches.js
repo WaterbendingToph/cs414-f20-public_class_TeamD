@@ -5,8 +5,35 @@ export default class OngoingMatches extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userID: "Nick",
-            matches: "Test Matches",
+            userID: this.props.location.state.userID,
+            password: this.props.location.state.password,
+            matches: [],
+        }
+    }
+
+    componentDidMount() {
+        fetch("/matches?userID=" + this.state.userID)
+            .then(res => res.json())
+            .then(result => {
+                this.setState({ matches: result.matches })
+            });
+    }
+
+    populateMatches() {
+        if (this.state.matches.length !== 0) {
+            let allMatches = this.state.matches.map(match =>
+                    <tr key={match}>
+                        <td> {match[0]} </td>
+                        <td>Go to match</td> 
+                        <td> {match[1]} </td>
+                        <td> {match[2]} </td>
+                    </tr>
+            )
+            return (
+                <>
+                    { allMatches }
+                </>
+            )
         }
     }
 
@@ -24,25 +51,7 @@ export default class OngoingMatches extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* TODO: Make this a loop that shows each ongoing match for the current user. */}
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Go to Match</td>
-                            <td>Dakota</td>
-                            <td>Your Move</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Go to Match</td>
-                            <td>Victor</td>
-                            <td>Their Move</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Go to Match</td>
-                            <td>Sai</td>
-                            <td>Your Move</td>
-                        </tr>
+                        { this.populateMatches() } 
                     </tbody>
                 </Table>
             </div>

@@ -18,7 +18,7 @@ public class CreateMatchController {
     public Searching setSearchingNewGame(@RequestParam(value = "current") String current) {
         return new Searching(current);
     }
-
+  
     @GetMapping("/createMatch")
     public CreateMatch createMatch(@RequestParam(value = "current") String current, @RequestParam(value = "playerID") String[] playerIDList) {
         Random r = new Random();

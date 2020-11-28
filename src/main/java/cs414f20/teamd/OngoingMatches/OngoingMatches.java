@@ -1,18 +1,18 @@
 package cs414f20.teamd.OngoingMatches;
 
-// import cs414f20.teamd.DatabaseConnection.Database;
+import cs414f20.teamd.DatabaseConnection.Database;
+
+import java.util.List;
 
 public class OngoingMatches {
     private String userID;
-    // private Database db;
-    private String matches;
+    private List<List<String>> matches;
 
     public OngoingMatches() {
     }
 
     public OngoingMatches(String userID) {
         this.userID = userID;
-        // this.db = new Database();
     }
 
     public String getUserID() {
@@ -23,7 +23,7 @@ public class OngoingMatches {
         return this.matches != null;
     }
 
-    public String getMatches() {
+    public List<List<String>> getMatches() {
         return this.matches;
     }
 
@@ -37,10 +37,8 @@ public class OngoingMatches {
             "}";
     }
 
-    void queryDatabase() {
-        this.matches = "TEST: User has ongoing matches";
-        // ------------------------------TODO: ADD DATABASE QUERY HERE------------------------------ //
-        // String dbResults = db.getAllUsers(); <- Uses existing Database.java file
+    public void queryDatabase() {
+        this.matches = Database.getOngoingMatches(userID);
     } 
 
     

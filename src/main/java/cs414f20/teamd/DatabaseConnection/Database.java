@@ -106,7 +106,7 @@ public class Database {
 
     public static int registerUser(String username, String password) {
         String registrationQuery = "INSERT INTO greatestAccounts VALUES (NULL, '" + username + "', '" + password
-                + "', '');";
+                + "', '', 0);";
         int dbResult = 0;
 
         Connection conn = null;
@@ -267,8 +267,9 @@ public class Database {
         }
         return ret;
     }
-
-    public static boolean setSearching(String current) {
+  
+  
+  public static boolean setSearching(String current) {
         Connection conn = null;
         Statement query = null;
         try {
@@ -284,6 +285,43 @@ public class Database {
             closeConnections(conn, query);
         }
         return false;
+    }
+  
+  public static List<List<String>> getOngoingMatches(String username) {
+        List<List<String>> matches = new ArrayList<>();
+        Connection conn = null;
+        Statement query = null;
+
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+
+            String queryStatement = "SELECT gameID, white_player, black_player, whose_turn FROM "
+                                  + "chessGames WHERE white_player = '" + username + "' OR black_player = '" + username + "';";
+            ResultSet results = query.executeQuery(queryStatement);
+
+            while (results.next()) {
+                List<String> match = new ArrayList<>();
+
+                String gameID = results.getString("gameID");
+                String whitePlayer = results.getString("white_player");
+                String blackPlayer = results.getString("black_player");
+                String whoseTurn = results.getString("whose_turn");
+
+                String opponent = whitePlayer.equals(username) ? blackPlayer : whitePlayer;
+
+                match.add(gameID);
+                match.add(opponent);
+                match.add(whoseTurn);
+
+                matches.add(match);
+            }
+        } catch (Exception e) {
+            System.err.println("Error while Getting Invites to User: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return matches;
     }
 
     public static boolean getIsSearching(String player) {
