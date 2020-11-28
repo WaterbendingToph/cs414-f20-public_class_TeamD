@@ -127,7 +127,7 @@ public class ChessBoard {
         String returnString = "";
 
         ChessPiece w1Piece, w2Piece, w3Piece, w4Piece;
-        String w1 = "-", w2 = "-", w3 = "-", w4 = "-";
+        String w1 = " ", w2 = " ", w3 = " ", w4 = " ";
         w1Piece = board[10][0];
         w2Piece = board[10][1];
         w3Piece = board[11][0];
@@ -141,13 +141,14 @@ public class ChessBoard {
         if (w4Piece != null)
             w4 = w4Piece.toString();
 
+        String topAnnotation = " w4                              w3\n";
         String topRow = "[" + w4 + "]------------------------------[" + w3 + "]\n";
 
         String middleRows = "";
         for (int row = 9; row >= 0; row--){
-            String middleRow = " | ";
+            String middleRow = row + "| ";
             for (int col = 0; col < 10; col++) {
-                String content = "-";
+                String content = " ";
                 if (board[row][col] != null)
                     content = board[row][col].toString();
                 middleRow += "[" + content + "]";
@@ -157,9 +158,10 @@ public class ChessBoard {
             middleRows += middleRow;
         }
 
-        String bottomRow = "[" + w1 + "]------------------------------[" + w2 + "]\n";
+        String bottomRow = "[" + w1 + "]-a--b--c--d--e--f--g--h--i--j-[" + w2 + "]\n";
+        String bottomAnnotation = " w1                              w2\n";
 
-        returnString = topRow + middleRows + bottomRow;
+        returnString = topAnnotation + topRow + middleRows + bottomRow + bottomAnnotation;
 
         return returnString;
     }
