@@ -23,9 +23,14 @@ class ChampionTest {
 	void legalMoves() {
 		ChessBoard testBoard = new ChessBoard();
 		Champion champion = new Champion(testBoard, ChessPiece.Color.BLACK);
-
 		legalMovesFromOpenCenter(testBoard, champion);
+
+		testBoard = new ChessBoard();
+		champion = new Champion(testBoard, ChessPiece.Color.BLACK);
 		legalMovesDiagonalHopping(testBoard, champion);
+
+		testBoard = new ChessBoard();
+		champion = new Champion(testBoard, ChessPiece.Color.BLACK);
 		legalMovesCardinalSliding(testBoard, champion);
 	}
 	private void legalMovesFromOpenCenter(ChessBoard testBoard, Champion champion) {
@@ -71,7 +76,7 @@ class ChampionTest {
 		ArrayList<String> actualMoves = legalMoves;
 		expectedMoves.sort(Comparator.naturalOrder());
 		actualMoves.sort(Comparator.naturalOrder());
-
+		
 		assertArrayEquals(expectedMoves.toArray(), actualMoves.toArray());
 	}//NOTE: DUPLICATED WITH WizardTest
 }

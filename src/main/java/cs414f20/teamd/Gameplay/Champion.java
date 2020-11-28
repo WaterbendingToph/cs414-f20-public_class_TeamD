@@ -33,7 +33,6 @@ public class Champion extends ChessPiece {
                 boundedOptions.add(Helper.boundedMove(position, unboundedOptions.get(i).x, unboundedOptions.get(i).y));
             } catch (IllegalPositionException e) {}
 
-
         ArrayList<String> legalMoves = new ArrayList<String>();
         for (String option : boundedOptions) {
             try {
@@ -48,8 +47,11 @@ public class Champion extends ChessPiece {
                 if (testPiece != null) {
                     if (testPiece.color == this.color)
                         continue;
+                    else
+                        legalMoves.add(option);
                 }
-                else legalMoves.add(option);
+                else
+                    legalMoves.add(option);
             } catch (IllegalPositionException e) {}
         }
 
