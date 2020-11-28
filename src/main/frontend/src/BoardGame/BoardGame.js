@@ -179,7 +179,6 @@ export default class BoardGame extends Component{
             );
         }
         else{
-            console.log("Current game: ", this.state.gameID)
             this.clearTimers();
             return (
                 <table className="App" align={'center'}>
