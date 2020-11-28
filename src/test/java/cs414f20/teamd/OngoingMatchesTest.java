@@ -10,6 +10,7 @@ class OngoingMatchesTest {
     void testMatches() {
         OngoingMatches test = new OngoingMatches("Nick");
         assertEquals("Nick", test.getUserID());
-        assertEquals(null, test.getMatches());
+        test.queryDatabase();
+        assertNotNull(test.getMatches());
     }
 }
