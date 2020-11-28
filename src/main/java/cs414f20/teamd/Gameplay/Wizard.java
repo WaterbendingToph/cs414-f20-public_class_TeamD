@@ -38,11 +38,11 @@ public class Wizard extends ChessPiece{
             try {
                 ChessPiece testPiece = this.board.getPiece(boundedOption);
 
-                if (testPiece != null) {
+                if (testPiece != null)
                     if (testPiece.color == this.color)
                         continue;
-                }
-                else legalMoves.add(boundedOption);
+
+                legalMoves.add(boundedOption);
             } catch (IllegalPositionException e) {}
         }
 

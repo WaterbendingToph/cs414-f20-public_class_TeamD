@@ -23,9 +23,14 @@ class WizardTest {
 	void legalMoves() {
 		ChessBoard testBoard = new ChessBoard();
 		Wizard wizard = new Wizard(testBoard, ChessPiece.Color.WHITE);
-
 		legalMovesFromOpenCorner(testBoard, wizard);
+
+		testBoard = new ChessBoard();
+		wizard = new Wizard(testBoard, ChessPiece.Color.WHITE);
 		legalMovesFromOpenCenter(testBoard, wizard);
+
+		testBoard = new ChessBoard();
+		wizard = new Wizard(testBoard, ChessPiece.Color.WHITE);
 		legalMovesFromCrowdedCorner(testBoard, wizard);
 	}
 	private void legalMovesFromOpenCorner(ChessBoard testBoard, Wizard wizard) {
@@ -41,9 +46,11 @@ class WizardTest {
 	private void legalMovesFromCrowdedCorner(ChessBoard testBoard, Wizard wizard) {
 		Pawn enemy = new Pawn(testBoard, ChessPiece.Color.BLACK);
 		Pawn ally = new Pawn(testBoard, ChessPiece.Color.WHITE);
+
 		testBoard.placePiece(wizard, "w2");
 		testBoard.placePiece(enemy, "j2");
 		testBoard.placePiece(ally, "h0");
+
 		String[] expectedMovesArray = {"j0", "j2"};
 		assertExpectedMovesEqualLegalMoves(expectedMovesArray, wizard.legalMoves());
 	}
