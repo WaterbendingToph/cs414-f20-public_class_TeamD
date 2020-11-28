@@ -31,7 +31,7 @@ class ChampionTest {
 
 		testBoard = new ChessBoard();
 		champion = new Champion(testBoard, ChessPiece.Color.BLACK);
-		legalMovesCardinalSliding(testBoard, champion);
+		legalMovesCardinalHopping(testBoard, champion);
 	}
 	private void legalMovesFromOpenCenter(ChessBoard testBoard, Champion champion) {
 		testBoard.placePiece(champion, "c2");
@@ -53,7 +53,7 @@ class ChampionTest {
 		String[] expectedMovesArray = {"w1", "b0", "b2", "b3", "a1", "c1", "d1"};
 		assertExpectedMovesEqualLegalMoves(expectedMovesArray, champion.legalMoves());
 	}
-	private void legalMovesCardinalSliding(ChessBoard testBoard, Champion champion) {
+	private void legalMovesCardinalHopping(ChessBoard testBoard, Champion champion) {
 		Pawn blockingEnemy = new Pawn(testBoard, ChessPiece.Color.WHITE);
 		Pawn blockedEnemy1 = new Pawn(testBoard, ChessPiece.Color.WHITE);
 		Pawn blockingAlly = new Pawn(testBoard, ChessPiece.Color.BLACK);
@@ -67,7 +67,7 @@ class ChampionTest {
 		testBoard.placePiece(blockedEnemy2, "f2");
 		testBoard.placePiece(targetEnemy, "h0");
 
-		String[] expectedMovesArray = {"h3", "h1", "h0", "i2", "j2", "j0", "j4", "f0", "f4"};
+		String[] expectedMovesArray = {"h4", "h3", "h1", "h0", "i2", "j2", "j0", "j4", "f0", "f2", "f4"};
 		assertExpectedMovesEqualLegalMoves(expectedMovesArray, champion.legalMoves());
 	}
 

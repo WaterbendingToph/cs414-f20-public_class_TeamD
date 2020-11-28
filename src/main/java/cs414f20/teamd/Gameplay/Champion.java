@@ -28,9 +28,9 @@ public class Champion extends ChessPiece {
 
         String position = this.getPosition();
         ArrayList<String> boundedOptions = new ArrayList<String>();
-        for (int i = 0; i < unboundedOptions.size(); i++)
+        for (JavaDoesntHaveTuples unboundedOption : unboundedOptions)
             try {
-                boundedOptions.add(Helper.boundedMove(position, unboundedOptions.get(i).x, unboundedOptions.get(i).y));
+                boundedOptions.add(Helper.boundedMove(position, unboundedOption.x, unboundedOption.y));
             } catch (IllegalPositionException e) {}
 
         ArrayList<String> legalMoves = new ArrayList<String>();
@@ -38,44 +38,15 @@ public class Champion extends ChessPiece {
             try {
                 ChessPiece testPiece = this.board.getPiece(option);
 
-                if (MoveOptionIsCardinalAndTwoAway(position, option)) {
-                    String spaceBetween = SpaceBetweenTwoSpacesThatAreTwoAway(position, option);
-                    if (this.board.getPiece(spaceBetween) != null)
-                        continue;
-                }
-
-                if (testPiece != null) {
+                if (testPiece != null)
                     if (testPiece.color == this.color)
                         continue;
-                    else
-                        legalMoves.add(option);
-                }
-                else
-                    legalMoves.add(option);
+
+                legalMoves.add(option);
             } catch (IllegalPositionException e) {}
         }
 
         return legalMoves;
-    }
-
-    private boolean MoveOptionIsCardinalAndTwoAway(String position, String option) {
-        char posX = position.charAt(0);
-        char posY = position.charAt(1);
-        char optX = option.charAt(0);
-        char optY = option.charAt(1);
-
-        if (posX == 'w' || optX == 'w')
-            return false;
-
-        return (Math.abs(posX - optX) == 2 ^ Math.abs(posY - optY) == 2);
-    }
-    private String SpaceBetweenTwoSpacesThatAreTwoAway(String position, String option) {
-        char posX = position.charAt(0);
-        char posY = position.charAt(1);
-        char optX = option.charAt(0);
-        char optY = option.charAt(1);
-
-        return "" + ((char) ((posX + optX) / 2)) + ((char) ((posY + optY) / 2));
     }
 
     private class JavaDoesntHaveTuples {
