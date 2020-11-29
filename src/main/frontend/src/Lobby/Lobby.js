@@ -16,6 +16,7 @@ export default class Lobby extends Component {
     }
 
     goToGamePlay(wait = true, players=[], id=null){
+        console.log("Going to game: wait= " + wait + ", players= " + players + ", id= " + id);
         fetch("/searchForNewMatch?current="+this.state.userID)
             .then(res => res.json())
             .then(data => {

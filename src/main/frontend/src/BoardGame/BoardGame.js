@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import Square from "./Square";
+import { Grid } from "@material-ui/core";
+import { CircleLoader } from "react-spinners";
+import style from "./BoardGame.module.css";
 
 const orange = '#ffc002';
 const blue = '#8e6a00';
@@ -36,10 +39,9 @@ export default class BoardGame extends Component{
         this.setupBlankRow1 = this.setupBlankRow1.bind(this);
         this.setupBlankRow2 = this.setupBlankRow2.bind(this);
         this.setupPawnsRow9 = this.setupPawnsRow9.bind(this);
-        this.setupDefaultRow10 = this.setupDefaultRow10.bind(this);
-        this.pingForNewMatch = this.pingForNewMatch.bind(this);
         this.setupDefaultBackRowBlack = this.setupDefaultBackRowBlack.bind(this);
         this.setupDefaultWizardRowBlack = this.setupDefaultWizardRowBlack.bind(this);
+        this.pingForNewMatch = this.pingForNewMatch.bind(this);
     }
 
     pingForNewMatch(current, players){
@@ -50,10 +52,16 @@ export default class BoardGame extends Component{
                     this.setState({searching: false, gameID: data.gameID});
                 }
                 else{
-                    let timers = this.state.timers;
-                    let timer = setTimeout(this.pingForNewMatch, 3*1000, current, players);
-                    timers.push(timer)
-                    this.setState({timers: timers});
+                    try{
+                        let pastTimers = this.state.timers;
+                        let timer = setTimeout(this.pingForNewMatch, 3*1000, current, players);
+                        pastTimers.push(timer)
+                        this.setState({timers: pastTimers});
+                    }
+                    catch(error){
+                        if(error instanceof TypeError)
+                            setTimeout(this.pingForNewMatch, 3*1000, current, players);
+                    }
                 }
             });
     }
