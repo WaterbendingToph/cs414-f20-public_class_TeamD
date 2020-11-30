@@ -1,7 +1,12 @@
 package cs414f20.teamd.Gameplay;
 
 import java.util.ArrayList;
-public class Champion {
+
+public class Champion extends ChessPiece {
+
+    public Champion(ChessBoard board, Color color) {
+        super(board, color);
+    }
 
     /**
      * This concrete class implements the methods for the abstract class ChessPiece
@@ -9,32 +14,67 @@ public class Champion {
      * spaces in the cardinal directions, or exactly two spaces diagonally.
      */
 
+    @Override
     public String toString() {
-        /**
-         * Returns a one-character string corresponding to the Unicode representation
-         * of the piece. These Unicode values are given in the A2.pdf description.
-         * Note that the character returned must correspond to the correct color.
-         * 
-         * @return One-character Unicode representation of the piece (black or white)
-         */
-
-        return "Not yet implemented.";
+        if (color == ChessPiece.Color.WHITE)
+            return "\u2616";
+        else
+            return "\u2617";
     }
 
+    @Override
     public ArrayList<String> legalMoves() {
-        /**
-         * Returns all legal moves that this piece can make based on the rules of 
-         * this variant of chess (as described in the comment at the top of this
-         * class). Each string in the list should represent a legal destination
-         * for the piece. The order of the moves in the list is arbitrary. If there
-         * are no legal moves, returns an empty ArrayList.
-         * 
-         * @return ArrayList representing the legal moves of the piece from the
-         *         current position
-         * @return An empty ArrayList if there are no legal moves available
-         */
-        
-        System.out.println("Not yet implemented");
-        return new ArrayList<>();
+        ArrayList<JavaDoesntHaveTuples> unboundedOptions = ValidMoveOffsets();
+
+        String position = this.getPosition();
+        ArrayList<String> boundedOptions = new ArrayList<String>();
+        for (JavaDoesntHaveTuples unboundedOption : unboundedOptions)
+            try {
+                boundedOptions.add(Helper.boundedMove(position, unboundedOption.x, unboundedOption.y));
+            } catch (IllegalPositionException e) {}
+
+        ArrayList<String> legalMoves = new ArrayList<String>();
+        for (String option : boundedOptions) {
+            try {
+                ChessPiece testPiece = this.board.getPiece(option);
+
+                if (testPiece != null)
+                    if (testPiece.color == this.color)
+                        continue;
+
+                legalMoves.add(option);
+            } catch (IllegalPositionException e) {}
+        }
+
+        return legalMoves;
     }
+
+    private class JavaDoesntHaveTuples {
+        public int x;
+        public int y;
+
+        public JavaDoesntHaveTuples(int newX, int newY) {
+            x = newX;
+            y = newY;
+        }
+    }//DUPLICATION WITH WIZARD
+    private ArrayList<JavaDoesntHaveTuples> ValidMoveOffsets() {
+        ArrayList<JavaDoesntHaveTuples> javaOverheadCanBeGross = new ArrayList<JavaDoesntHaveTuples>();
+
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-2, -2));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-2, 0));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-2, 2));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-1, 0));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(0, -2));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(0, -1));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(0, 0));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(0, 1));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(0, 2));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(1, 0));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(2, -2));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(2, 0));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(2, 2));
+
+        return javaOverheadCanBeGross;
+    }//DUPLICATION WITH WIZARD
 }

@@ -1,41 +1,79 @@
 package cs414f20.teamd.Gameplay;
 
 import java.util.ArrayList;
-public class Wizard {
+
+public class Wizard extends ChessPiece{
+
+    public Wizard(ChessBoard board, Color color) {
+        super(board, color);
+    }
 
     /**
      * This concrete class implements the methods for the abstract class ChessPiece
-     * for the wizard piece in this variant of chess. The wizard moves in a similar
-     * to a knight, except in a 3x1 shape instead of 2x1. It can also move one square
-     * diagonally in any direction.
+     * for the wizard piece in this variant of chess. The wizard can hop in a 3x1 pattern,
+     * or move one space diagonally in any direction (1x1).
      */
 
+    @Override
     public String toString() {
-        /**
-         * Returns a one-character string corresponding to the Unicode representation
-         * of the piece. These Unicode values are given in the A2.pdf description.
-         * Note that the character returned must correspond to the correct color.
-         * 
-         * @return One-character Unicode representation of the piece (black or white)
-         */
-
-        return "Not yet implemented.";
+        if (color == ChessPiece.Color.WHITE)
+            return "\u263D";
+        else
+            return "\u263C";
     }
 
+    @Override
     public ArrayList<String> legalMoves() {
-        /**
-         * Returns all legal moves that this piece can make based on the rules of 
-         * this variant of chess (as described in the comment at the top of this
-         * class). Each string in the list should represent a legal destination
-         * for the piece. The order of the moves in the list is arbitrary. If there
-         * are no legal moves, returns an empty ArrayList.
-         * 
-         * @return ArrayList representing the legal moves of the piece from the
-         *         current position
-         * @return An empty ArrayList if there are no legal moves available
-         */
-        
-        System.out.println("Not yet implemented");
-        return new ArrayList<>();
+        ArrayList<JavaDoesntHaveTuples> unboundedOptions = ValidMoveOffsets();
+
+        String position = this.getPosition();
+        ArrayList<String> boundedOptions = new ArrayList<String>();
+        for (JavaDoesntHaveTuples unboundedOption : unboundedOptions)
+            try {
+                boundedOptions.add(Helper.boundedMove(position, unboundedOption.x, unboundedOption.y));
+            } catch (IllegalPositionException e) {}
+
+        ArrayList<String> legalMoves = new ArrayList<String>();
+        for (String boundedOption : boundedOptions) {
+            try {
+                ChessPiece testPiece = this.board.getPiece(boundedOption);
+
+                if (testPiece != null)
+                    if (testPiece.color == this.color)
+                        continue;
+
+                legalMoves.add(boundedOption);
+            } catch (IllegalPositionException e) {}
+        }
+
+        return legalMoves;
     }
+
+    private class JavaDoesntHaveTuples {
+        public int x;
+        public int y;
+
+        public JavaDoesntHaveTuples(int newX, int newY) {
+            x = newX;
+            y = newY;
+        }
+    }//DUPLICATION WITH CHAMPION
+    private ArrayList<JavaDoesntHaveTuples> ValidMoveOffsets() {
+        ArrayList<JavaDoesntHaveTuples> javaOverheadCanBeGross = new ArrayList<JavaDoesntHaveTuples>();
+
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-3, -1));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-3, 1));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-1, -3));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-1, -1));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-1, 1));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-1, 3));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(1, -3));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(1, -1));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(1, 1));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(1, 3));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(3, -1));
+        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(3, 1));
+
+        return javaOverheadCanBeGross;
+    }//DUPLICATION WITH CHAMPION
 }
