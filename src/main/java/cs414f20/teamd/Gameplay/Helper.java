@@ -59,19 +59,19 @@ public class Helper {
         String newPosition = "";
 
         if (y == '1') {
-            newPosition += 'a' + '0';
+            newPosition += 'a' + "" + '0';
             return boundedMove(newPosition, xChange - 1, yChange - 1);
         }
         if (y == '2') {
-            newPosition += 'j' + '0';
+            newPosition += 'j' + "" + '0';
             return boundedMove(newPosition, xChange + 1, yChange - 1);
         }
         if (y == '3') {
-            newPosition += 'j' + '9';
+            newPosition += 'j' + "" + '9';
             return boundedMove(newPosition, xChange + 1, yChange + 1);
         }
         if (y == '4') {
-            newPosition += 'a' + '9';
+            newPosition += 'a' + "" + '9';
             return boundedMove(newPosition, xChange - 1, yChange + 1);
         }
 
