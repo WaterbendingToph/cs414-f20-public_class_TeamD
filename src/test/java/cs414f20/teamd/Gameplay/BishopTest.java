@@ -59,7 +59,6 @@ class BishopTest {
         board.placePiece(blockedEnemy, "d7");
         board.placePiece(targetEnemy2, "i8");
         board.placePiece(blockedEnemy2, "w3");
-        System.out.println(board.toString());
 
         String[] expectedMoves = {"w1", "a0", "b1", "c2", "d3", "e4", "g6", "h7", "i8", "e6"};
 
