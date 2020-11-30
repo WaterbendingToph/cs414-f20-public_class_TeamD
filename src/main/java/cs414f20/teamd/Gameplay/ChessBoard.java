@@ -7,7 +7,6 @@ public class ChessBoard {
     private ChessPiece[][] board;
     private static final List<Character> validLetters = Helper.validLetters;
     private static final List<Character> validNumbers = Helper.validNumbers;
-    private static final List<Character> validWizardNumbers = Helper.validWizardNumbers;
 
 
     ChessBoard() {
@@ -187,13 +186,13 @@ public class ChessBoard {
         if (position.charAt(0) == 'w') {
             switch (position.charAt(1)) {
                 case '1':
-                    return new int[]{10, 0};
-                case '2':
-                    return new int[]{10, 1};
-                case '3':
                     return new int[]{11, 0};
-                case '4':
+                case '2':
                     return new int[]{11, 1};
+                case '3':
+                    return new int[]{10, 0};
+                case '4':
+                    return new int[]{10, 1};
             }
         }
 

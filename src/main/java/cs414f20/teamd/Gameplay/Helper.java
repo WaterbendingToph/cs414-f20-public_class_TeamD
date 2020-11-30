@@ -20,13 +20,11 @@ public class Helper {
         if (position.length() != 2)
             return false;
 
-        Character positionLetter = position.charAt(0);
-        Character positionNumber = position.charAt(1);
+        char positionLetter = position.charAt(0);
+        char positionNumber = position.charAt(1);
 
         if (positionLetter == 'w') {
-            if (validWizardNumbers.contains(positionNumber) )
-                return true;
-            return false;
+            return validWizardNumbers.contains(positionNumber);
         }
 
         return validLetters.contains(positionLetter) && validNumbers.contains(positionNumber);
@@ -38,16 +36,63 @@ public class Helper {
 
         char x = startPosition.charAt(0);
         char y = startPosition.charAt(1);
+        String newPosition;
+
+        if (x == 'w')
+            return boundedMoveFromWizardSquare(y, xChange, yChange);
 
         x = (char) ((int)x + xChange);
         y = (char) ((int)y + yChange);
 
-        String newPosition = "" + x + y;
+        if (hasCornerCharacters(x,y) )
+            newPosition = translateCornerCharacters(x,y);
+        else
+            newPosition = "" + x + y;
 
         if (!isBoundedPosition(newPosition))
             throw new IllegalPositionException();
 
         return newPosition;
+    }
+
+    private static String boundedMoveFromWizardSquare(char y, int xChange , int yChange) throws IllegalPositionException{
+        String newPosition = "";
+
+        if (y == '1') {
+            newPosition += 'a' + '0';
+            return boundedMove(newPosition, xChange - 1, yChange - 1);
+        }
+        if (y == '2') {
+            newPosition += 'j' + '0';
+            return boundedMove(newPosition, xChange + 1, yChange - 1);
+        }
+        if (y == '3') {
+            newPosition += 'j' + '9';
+            return boundedMove(newPosition, xChange + 1, yChange + 1);
+        }
+        if (y == '4') {
+            newPosition += 'a' + '9';
+            return boundedMove(newPosition, xChange - 1, yChange + 1);
+        }
+
+        throw new IllegalPositionException();
+    }
+
+    private static Boolean hasCornerCharacters(char x, char y){
+        return (x == '~' || x == 'k') || (y == '/' || y == ':');
+    }
+
+    private static String translateCornerCharacters(char x, char y) throws IllegalPositionException{
+        if (x == '`' && y == '/')
+            return "w1";
+        else if (x == '`' && y == ':')
+            return "w4";
+        else if (x == 'k' && y == '/')
+            return "w2";
+        else if (x == 'k' && y == ':')
+            return "w3";
+        else
+            throw new IllegalPositionException();
     }
 
     public static String arrayIndicesToPosition(int row, int column) throws IllegalPositionException {
