@@ -1,11 +1,6 @@
 package cs414f20.teamd.Gameplay;
 
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class BishopTest {
@@ -28,20 +23,47 @@ class BishopTest {
     void legalMoves() {
         ChessBoard requisiteBoard = new ChessBoard();
         bishop = new Bishop(requisiteBoard, ChessPiece.Color.BLACK);
+        legalMovesOpenCenter(requisiteBoard, bishop);
 
-        try {
-            bishop.setPosition("b2");
-        } catch (IllegalPositionException ime) {
-            System.out.println("Oops");
-        }
+        requisiteBoard = new ChessBoard();
+        bishop = new Bishop(requisiteBoard, ChessPiece.Color.BLACK);
+        legalMovesOpenCorner(requisiteBoard, bishop);
 
-        String[] tofu = {"a1", "c3", "d4", "e5", "f6", "g7", "h8", "a3", "c1"};
-        ArrayList<String> expectedValidMoves = new ArrayList<String>(Arrays.asList(tofu));
-        ArrayList<String> actualValidMoves = bishop.legalMoves();
+        requisiteBoard = new ChessBoard();
+        bishop = new Bishop(requisiteBoard, ChessPiece.Color.BLACK);
+        legalMovesCrowdedCenter(requisiteBoard, bishop);
+    }
 
-        expectedValidMoves.sort(Comparator.naturalOrder());
-        actualValidMoves.sort(Comparator.naturalOrder());
+    void legalMovesOpenCenter(ChessBoard board, Bishop bishop) {
+        board.placePiece(bishop, "f5");
+        String[] tofu = {"w1", "a0", "b1", "c2", "d3", "e4", "g6", "h7", "i8", "j9", "w3", "b9", "c8", "d7", "e6", "g4", "h3", "i2", "j1"};
+        TestHelper.assertExpectedMovesEqualLegalMoves(tofu, bishop.legalMoves());
+    }
+    void legalMovesOpenCorner(ChessBoard board, Bishop bishop) {
+        board.placePiece(bishop, "w4");
+        String[] expectedMoves = {"a9", "b8", "c7", "d6", "e5", "f4", "g3", "h2", "i1", "j0", "w2"};
+        TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, bishop.legalMoves());
+    }
+    void legalMovesCrowdedCenter(ChessBoard board, Bishop bishop) {
+        Pawn targetEnemy = new Pawn(board, ChessPiece.Color.WHITE);
+        Pawn blockingAlly = new Pawn(board, ChessPiece.Color.BLACK);
+        Pawn blockingEnemy = new Pawn(board, ChessPiece.Color.WHITE);
+        Pawn blockedEnemy = new Pawn(board, ChessPiece.Color.WHITE);
+        Pawn targetEnemy2 = new Pawn(board, ChessPiece.Color.WHITE);
+        Pawn blockedEnemy2 = new Pawn(board, ChessPiece.Color.WHITE);
 
-        assertArrayEquals(expectedValidMoves.toArray(), actualValidMoves.toArray());
-    }//NOTE: There is opportunity for a test here to account for the bishop having its path blocked by friend or foe, like the RookTest.
+        board.placePiece(bishop, "f5");
+        board.placePiece(targetEnemy, "w1");
+        board.placePiece(blockingAlly, "g4");
+        board.placePiece(blockingEnemy, "e6");
+        board.placePiece(blockedEnemy, "d7");
+        board.placePiece(targetEnemy2, "i8");
+        board.placePiece(blockedEnemy2, "w3");
+        System.out.println(board.toString());
+
+        String[] expectedMoves = {"w1", "a0", "b1", "c2", "d3", "e4", "g6", "h7", "i8", "e6"};
+
+        TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, bishop.legalMoves());
+    }
+
 }
