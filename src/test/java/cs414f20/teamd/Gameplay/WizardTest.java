@@ -2,9 +2,6 @@ package cs414f20.teamd.Gameplay;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 
 
 class WizardTest {
@@ -36,12 +33,12 @@ class WizardTest {
 	private void legalMovesFromOpenCorner(ChessBoard testBoard, Wizard wizard) {
 		testBoard.placePiece(wizard, "w1");
 		String[] expectedMovesArray = {"a2", "a0", "c0"};
-		assertExpectedMovesEqualLegalMoves(expectedMovesArray, wizard.legalMoves());
+		TestHelper.assertExpectedMovesEqualLegalMoves(expectedMovesArray, wizard.legalMoves());
 	}
 	private void legalMovesFromOpenCenter(ChessBoard testBoard, Wizard wizard) {
 		testBoard.placePiece(wizard, "d3");
 		String[] expectedMovesArray = {"a4", "a2", "c6", "c4", "c2", "c0", "e6", "e4", "e2", "e0", "g4", "g2"};
-		assertExpectedMovesEqualLegalMoves(expectedMovesArray, wizard.legalMoves());
+		TestHelper.assertExpectedMovesEqualLegalMoves(expectedMovesArray, wizard.legalMoves());
 	}
 	private void legalMovesFromCrowdedCorner(ChessBoard testBoard, Wizard wizard) {
 		Pawn enemy = new Pawn(testBoard, ChessPiece.Color.BLACK);
@@ -52,15 +49,6 @@ class WizardTest {
 		testBoard.placePiece(ally, "h0");
 
 		String[] expectedMovesArray = {"j0", "j2"};
-		assertExpectedMovesEqualLegalMoves(expectedMovesArray, wizard.legalMoves());
+		TestHelper.assertExpectedMovesEqualLegalMoves(expectedMovesArray, wizard.legalMoves());
 	}
-
-	private void assertExpectedMovesEqualLegalMoves(String[] expectedMovesArray, ArrayList<String> legalMoves) {
-		ArrayList<String> expectedMoves = new ArrayList<String>(Arrays.asList(expectedMovesArray));
-		ArrayList<String> actualMoves = legalMoves;
-		expectedMoves.sort(Comparator.naturalOrder());
-		actualMoves.sort(Comparator.naturalOrder());
-
-		assertArrayEquals(expectedMoves.toArray(), actualMoves.toArray());
-	}//NOTE: DUPLICATED WITH ChampionTest
 }
