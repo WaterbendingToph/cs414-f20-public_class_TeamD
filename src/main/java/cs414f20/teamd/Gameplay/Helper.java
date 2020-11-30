@@ -79,7 +79,7 @@ public class Helper {
     }
 
     private static Boolean hasCornerCharacters(char x, char y){
-        return (x == '~' || x == 'k') || (y == '/' || y == ':');
+        return (x == '~' || x == 'k') && (y == '/' || y == ':');
     }
 
     private static String translateCornerCharacters(char x, char y) throws IllegalPositionException{
@@ -98,9 +98,35 @@ public class Helper {
     public static String arrayIndicesToPosition(int row, int column) throws IllegalPositionException {
         String position = ("" + (char)('a' + column)) + ("" + (char)('1' + row));
 
+
+        if (arrayIndicesReferenceCorners(row, column))
+            position = cornerArrayIndicesToPosition(row, column);
+
         if (!isBoundedPosition(position))
             throw new IllegalPositionException();
 
         return position;
     }
+
+    private static boolean arrayIndicesReferenceCorners(int row, int column) {
+        return (row == 10 || row == 11) && (column == 0 || column == 1);
+    }
+
+    private static String cornerArrayIndicesToPosition(int row, int column) {
+        int switcher = row * 100 + column;
+
+        switch(switcher) {
+            case 1000:
+                return "w1";
+            case 1001:
+                return "w2";
+            case 1100:
+                return "w3";
+            case 1101:
+                return "w4";
+            default: return "error";
+        }
+
+    }
+
 }
