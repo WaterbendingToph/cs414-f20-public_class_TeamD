@@ -2,10 +2,11 @@ package cs414f20.teamd.Gameplay;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Pawn extends ChessPiece {
     int pawnDirection;
-    ArrayList<String> startingPositions;
+    List<String> startingPositions;
 
     public Pawn(ChessBoard board, Color color) {
         super(board, color);
@@ -14,10 +15,10 @@ public class Pawn extends ChessPiece {
     private void pawnDirectionSetup(){
         if (color == Color.WHITE) {
             pawnDirection = 1;
-            startingPositions = new ArrayList<String>(Arrays.asList(new String[]{"a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2"}));
+            startingPositions = Arrays.asList(new String[]{"a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"});
         } else {
             pawnDirection = -1;
-            startingPositions = new ArrayList<String>(Arrays.asList(new String[]{"a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7"}));
+            startingPositions = Arrays.asList(new String[]{"a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8"});
         }
     }
 
@@ -32,7 +33,6 @@ public class Pawn extends ChessPiece {
     @Override
     public ArrayList<String> legalMoves() {
         ArrayList<String> legalMoves = new ArrayList<String>();
-        String currentPosition = getPosition();
 
         forwardLegalMoves(legalMoves);
         diagonalLegalMoves(legalMoves);
