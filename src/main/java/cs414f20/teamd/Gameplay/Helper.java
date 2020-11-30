@@ -96,8 +96,7 @@ public class Helper {
     }
 
     public static String arrayIndicesToPosition(int row, int column) throws IllegalPositionException {
-        String position = ("" + (char)('a' + column)) + ("" + (char)('1' + row));
-
+        String position = ("" + (char)('a' + column)) + ("" + (char)('0' + row));
 
         if (arrayIndicesReferenceCorners(row, column))
             position = cornerArrayIndicesToPosition(row, column);
