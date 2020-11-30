@@ -23,6 +23,7 @@ This Sprint, we want to complete Stories
 | 11/18 | *#146, #160* | *#79, #149, #151, #163* | *None* |
 | 11/20 | *None* | *#51, #79, #149, #151, #163* | *Some SSH connectivity issues* |
 | 11/25 | *#149, #151* | *#51, #79, #163* | *Fall break* |
+| 11/30 | *None* | *#51, #79, #163, #168* | *PR backlog, Victor can't test PRs that require connectivity.* |
 | 11/2 | *asdf* | *asdf* | *asdf* |
 
 ## Review
@@ -40,4 +41,4 @@ This Sprint, we want to complete Stories
 - asdf
 
 #### Problems encountered and resolutions
-- asdf
+- Letting PRs pile up. 
