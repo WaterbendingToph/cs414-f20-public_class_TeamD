@@ -79,7 +79,7 @@ public class Helper {
     }
 
     private static Boolean hasCornerCharacters(char x, char y){
-        return (x == '~' || x == 'k') && (y == '/' || y == ':');
+        return (x == '`' || x == 'k') && (y == '/' || y == ':');
     }
 
     private static String translateCornerCharacters(char x, char y) throws IllegalPositionException{
