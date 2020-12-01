@@ -34,25 +34,6 @@ class QueenTest {
     private void legalMovesOpenCenter(ChessBoard board, Queen queen) {
         board.placePiece(queen, "f4");
 
-        /*ArrayList<String> expectedMovesArrayList = new ArrayList<String>();
-        for (char col = 'a'; col <= 'j'; col++)
-            expectedMovesArrayList.add(col + "" + 4);
-        for (int i = 0; i <= 9; i++)
-            expectedMovesArrayList.add("f" + i);
-        for (int i = -4; i <= 4; i++)
-            expectedMovesArrayList.add((char)('f' + i) + "" + (4 + i));
-        for (int i = -5; i <= 4; i++)
-            expectedMovesArrayList.add((char)('f' + i) + "" + (4 - i));
-        expectedMovesArrayList.add("w4");
-        expectedMovesArrayList.add("w2");
-
-        expectedMovesArrayList.sort(Comparator.naturalOrder());
-        expectedMovesArrayList.remove("f4");
-        expectedMovesArrayList.remove("f4");
-        expectedMovesArrayList.remove("f4");
-        expectedMovesArrayList.remove("f4");
-        System.out.println(expectedMovesArrayList);*/
-
         String[] expectedMoves = {"a4", "a9", "b0", "b4", "b8", "c1", "c4", "c7", "d2", "d4", "d6", "e3", "e4", "e5",
                 "f0", "f1", "f2", "f3", "f5", "f6", "f7", "f8", "f9", "g3", "g4", "g5", "h2", "h4", "h6", "i1", "i4",
                 "i7", "j0", "j4", "j8", "w2", "w4"};
