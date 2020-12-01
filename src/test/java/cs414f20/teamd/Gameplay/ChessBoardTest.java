@@ -16,11 +16,11 @@ class ChessBoardTest {
         for (char letter = 'a'; letter <= 'i'; letter++){
             try{testPiece = chessBoard.getPiece("" + letter + '1');} catch (IllegalPositionException ipe){ fail(); }
             assertEquals(testPiece.getClass(), Pawn.class);
-            assertEquals(testPiece.color, ChessPiece.Color.BLACK);
+            assertEquals(testPiece.color, ChessPiece.Color.WHITE);
 
             try{testPiece = chessBoard.getPiece("" + letter + '8');} catch (IllegalPositionException ipe){fail(); }
             assertEquals(testPiece.getClass(), Pawn.class);
-            assertEquals(testPiece.color, ChessPiece.Color.WHITE);
+            assertEquals(testPiece.color, ChessPiece.Color.BLACK);
         }
 
         ArrayList<Class> blackRow = new ArrayList<>();
