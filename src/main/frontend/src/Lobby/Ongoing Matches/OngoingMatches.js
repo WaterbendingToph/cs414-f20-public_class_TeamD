@@ -12,6 +12,7 @@ export default class OngoingMatches extends Component {
         }
         this.onSubmit = this.onSubmit.bind(this);
         this.populateMatches = this.populateMatches.bind(this);
+        this.goToMatch = this.goToMatch.bind(this);
     }
 
     componentDidMount() {
@@ -31,13 +32,14 @@ export default class OngoingMatches extends Component {
             )
         } else {
             let allMatches = this.state.matches.map(match =>
-                <tr key={match}>
-                    <td>
-                    <Button color="link">{match[0]}</Button>
-                    </td>
-                    <td> {match[1]} </td>
-                    <td> {match[2]} </td>
-                </tr>
+                    <tr key={match}>
+                        <td> {match[0]} </td>
+                        <td>
+                            <Button onClick={this.goToMatch} type='button'>Go To Match</Button>
+                        </td> 
+                        <td> {match[1]} </td>
+                        <td> {match[2]} </td>
+                    </tr>
             )
             return (
                 <>
@@ -56,13 +58,13 @@ export default class OngoingMatches extends Component {
         }
     }
 
-    onSubmit() {
-        fetch("/login?userID=" + this.state.userID + "&password=" + this.state.password)
+    goToMatch() {
+        fetch("/matches?userID=" + this.state.userID + "&password=" + this.state.password)
             .then(res => res.json())
             .then(result => {
                 if (result.loginSuccess) {
                     this.props.history.push({
-                        pathname: "/lobby",
+                        pathname: "/matches",
                         state: {
                             userID: this.state.userID,
                             password: this.state.password,
