@@ -28,29 +28,24 @@ class KingTest {
         testCornerMovement();
         testSharedSpaceMovement();
     }
+
     private void testFreeMovement() {
         requisiteBoard = new ChessBoard();
         King king = new King(requisiteBoard, ChessPiece.Color.WHITE);
         requisiteBoard.placePiece(king, "b2");
 
-        ArrayList<String> expectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"a1", "a2", "a3", "b1", "b3", "c1", "c2", "c3"}));
-        ArrayList<String> actualMoves = king.legalMoves();
-        expectedMoves.sort(Comparator.naturalOrder());
-        actualMoves.sort(Comparator.naturalOrder());
+        String[] expectedMoves = {"a1", "a2", "a3", "b1", "b3", "c1", "c2", "c3"};
 
-        assertArrayEquals(expectedMoves.toArray(), actualMoves.toArray());
+        TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, king.legalMoves());
     }
     private void testCornerMovement() {
         requisiteBoard = new ChessBoard();
         King king = new King(requisiteBoard, ChessPiece.Color.WHITE);
-        requisiteBoard.placePiece(king, "a1");
+        requisiteBoard.placePiece(king, "a0");
 
-        ArrayList<String> expectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"a2", "b2", "b1"}));
-        ArrayList<String> actualMoves = king.legalMoves();
-        expectedMoves.sort(Comparator.naturalOrder());
-        actualMoves.sort(Comparator.naturalOrder());
+        String[] expectedMoves = {"a1", "b0", "b1", "w1"};
 
-        assertArrayEquals(expectedMoves.toArray(), actualMoves.toArray());
+        TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, king.legalMoves());
     }
     private void testSharedSpaceMovement() {
         requisiteBoard = new ChessBoard();
@@ -62,11 +57,8 @@ class KingTest {
         Pawn foePawn = new Pawn(requisiteBoard, ChessPiece.Color.BLACK);
         requisiteBoard.placePiece(foePawn, "b3");
 
-        ArrayList<String> expectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"a1", "a2", "a3", "b3", "c1", "c2", "c3"}));
-        ArrayList<String> actualMoves = king.legalMoves();
-        expectedMoves.sort(Comparator.naturalOrder());
-        actualMoves.sort(Comparator.naturalOrder());
+        String[] expectedMoves = {"a1", "a2", "a3", "b3", "c1", "c2", "c3"};
 
-        assertArrayEquals(expectedMoves.toArray(), actualMoves.toArray());
+        TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, king.legalMoves());
     }
 }
