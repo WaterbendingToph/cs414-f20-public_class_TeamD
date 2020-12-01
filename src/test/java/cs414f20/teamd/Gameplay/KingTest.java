@@ -1,11 +1,6 @@
 package cs414f20.teamd.Gameplay;
 
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class KingTest {
