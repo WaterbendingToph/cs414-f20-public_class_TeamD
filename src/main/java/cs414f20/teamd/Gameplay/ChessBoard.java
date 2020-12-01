@@ -122,53 +122,47 @@ public class ChessBoard {
             throw new IllegalMoveException(); }
     }
 
-    //Taken from the a2 assignment specification - for testing purposes only
-    public String toString(){
-        // From the Canvas page: https://colostate.instructure.com/courses/106587/files/16341487/download?wrap=1
-        String chess = "";
-        String upperLeft = "\u250C";
-        String upperRight = "\u2510";
-        String horizontalLine = "\u2500";
-        String horizontal3 = horizontalLine + "\u3000" + horizontalLine;
-        String verticalLine = "\u2502";
-        String upperT = "\u252C";
-        String bottomLeft = "\u2514";
-        String bottomRight = "\u2518";
-        String bottomT = "\u2534";
-        String plus = "\u253C";
-        String leftT = "\u251C";
-        String rightT = "\u2524";
-        String topLine = upperLeft;
-        for (int i = 0; i < 7; i++) {
-            topLine += horizontal3 + upperT;
-        }
-        topLine += horizontal3 + upperRight;
-        String bottomLine = bottomLeft;
-        for (int i = 0; i < 7; i++) {
-            bottomLine += horizontal3 + bottomT;
-        }
-        bottomLine += horizontal3 + bottomRight;
-        chess += topLine + "\n";
-        for (int row = 7; row >= 0; row--) {
-            String midLine = "";
-            for (int col = 0; col < 8; col++) {
-                if (board[row][col] == null) {
-                    midLine += verticalLine + " \u3000 ";
-                } else {
-                    midLine += verticalLine + " " + board[row][col] + " ";
-                }
+    public String toString() {
+        String returnString = "";
+
+        ChessPiece w1Piece, w2Piece, w3Piece, w4Piece;
+        String w1 = " ", w2 = " ", w3 = " ", w4 = " ";
+        w1Piece = board[10][0];
+        w2Piece = board[10][1];
+        w3Piece = board[11][0];
+        w4Piece = board[11][1];
+        if (w1Piece != null)
+            w1 = w1Piece.toString();
+        if (w2Piece != null)
+            w2 = w2Piece.toString();
+        if (w3Piece != null)
+            w3 = w3Piece.toString();
+        if (w4Piece != null)
+            w4 = w4Piece.toString();
+
+        String topAnnotation = " w4                              w3\n";
+        String topRow = "[" + w4 + "]------------------------------[" + w3 + "]\n";
+
+        String middleRows = "";
+        for (int row = 9; row >= 0; row--){
+            String middleRow = row + "| ";
+            for (int col = 0; col < 10; col++) {
+                String content = " ";
+                if (board[row][col] != null)
+                    content = board[row][col].toString();
+                middleRow += "[" + content + "]";
             }
-            midLine += verticalLine;
-            String midLine2 = leftT;
-            for (int i = 0; i < 7; i++) {
-                midLine2 += horizontal3 + plus;
-            }
-            midLine2 += horizontal3 + rightT;
-            chess += midLine + "\n";
-            if (row >= 1) chess += midLine2 + "\n";
+            middleRow += " | \n";
+
+            middleRows += middleRow;
         }
-        chess += bottomLine;
-        return chess;
+
+        String bottomRow = "[" + w1 + "]-a--b--c--d--e--f--g--h--i--j-[" + w2 + "]\n";
+        String bottomAnnotation = " w1                              w2\n";
+
+        returnString = topAnnotation + topRow + middleRows + bottomRow + bottomAnnotation;
+
+        return returnString;
     }
 
     //Taken from the a2 assignment specification - for testing purposes only
