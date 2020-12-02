@@ -59,7 +59,7 @@ class QueenTest {
         board.placePiece(ally2, "g4");
         board.placePiece(ally3, "g5");
 
-        String[] expectedMoves = {"e3", "e4", "e5", "f0", "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9"};
+        String[] expectedMoves = {"e3", "e4", "e5", "f0", "f1", "f2", "f3", "f5", "f6", "f7", "f8", "f9"};
 
         TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, queen.legalMoves());
     }
