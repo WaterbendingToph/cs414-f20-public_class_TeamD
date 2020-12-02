@@ -11,24 +11,41 @@ class ChessBoardTest {
     void initializeTest() {
         chessBoard = new ChessBoard();
         chessBoard.initialize();
+
+        initializeTestPawns();
+        initializeTestCastleFolk();
+        initializeTestWizards();
+
+        System.out.println(chessBoard.toString());
+    }
+    private void initializeTestPawns() {
         ChessPiece testPiece = null;
 
-        for (char letter = 'a'; letter <= 'i'; letter++){
-            try{testPiece = chessBoard.getPiece("" + letter + '1');} catch (IllegalPositionException ipe){ fail(); }
-            assertEquals(testPiece.getClass(), Pawn.class);
-            assertEquals(testPiece.color, ChessPiece.Color.WHITE);
+        for (char letter = 'a'; letter <= 'j'; letter++){
+            try {
+                testPiece = chessBoard.getPiece("" + letter + '1');
+            } catch (IllegalPositionException ipe) { fail(); }
 
-            try{testPiece = chessBoard.getPiece("" + letter + '8');} catch (IllegalPositionException ipe){fail(); }
-            assertEquals(testPiece.getClass(), Pawn.class);
-            assertEquals(testPiece.color, ChessPiece.Color.BLACK);
+            assertEquals(Pawn.class, testPiece.getClass());
+            assertEquals(ChessPiece.Color.WHITE, testPiece.color);
+
+            try {
+                testPiece = chessBoard.getPiece("" + letter + '8');
+            } catch (IllegalPositionException ipe) {fail(); }
+
+            assertEquals(Pawn.class, testPiece.getClass());
+            assertEquals(ChessPiece.Color.BLACK, testPiece.color);
         }
-
+    }
+    private void initializeTestCastleFolk() {
         ArrayList<Class> blackRow = new ArrayList<>();
         ArrayList<Class> whiteRow = new ArrayList<>();
         ArrayList<ArrayList<Class>> rows = new ArrayList<>();
         rows.add(blackRow);
         rows.add(whiteRow);
-        for (ArrayList<Class> row : rows){
+
+        for (ArrayList<Class> row : rows) {
+            row.add(Champion.class);
             row.add(Rook.class);
             row.add(Knight.class);
             row.add(Bishop.class);
@@ -37,18 +54,43 @@ class ChessBoardTest {
             row.add(Bishop.class);
             row.add(Knight.class);
             row.add(Rook.class);
+            row.add(Champion.class);
 
             char number = '9';
             if (row == whiteRow)
                 number = '0';
 
-            for (char letter = 'b'; letter <= 'h'; letter++){
-                try{testPiece = chessBoard.getPiece("" + letter + number);} catch (IllegalPositionException ipe){ fail(); }
-                Class testClass = row.get((int)letter - 'a');
-                assertEquals(testPiece.getClass(), testClass);
+            ChessPiece testPiece = null;
+            for (char letter = 'a'; letter <= 'j'; letter++){
+                try {
+                    testPiece = chessBoard.getPiece("" + letter + number);
+                } catch (IllegalPositionException ipe) { fail(); }
+
+                Class testClass = row.get((int) letter - 'a');
+                assertEquals(testClass, testPiece.getClass());
             }
         }
     }
+    private void initializeTestWizards() {
+        try {
+            ChessPiece testPiece = chessBoard.getPiece("w1");
+            assertEquals(Wizard.class, testPiece.getClass());
+            assertEquals(ChessPiece.Color.WHITE, testPiece.color);
+
+            testPiece = chessBoard.getPiece("w2");
+            assertEquals(Wizard.class, testPiece.getClass());
+            assertEquals(ChessPiece.Color.WHITE, testPiece.color);
+
+            testPiece = chessBoard.getPiece("w3");
+            assertEquals(Wizard.class, testPiece.getClass());
+            assertEquals(ChessPiece.Color.BLACK, testPiece.color);
+
+            testPiece = chessBoard.getPiece("w4");
+            assertEquals(Wizard.class, testPiece.getClass());
+            assertEquals(ChessPiece.Color.BLACK, testPiece.color);
+        } catch (IllegalPositionException e) { fail(); }
+    }
+
 
 
     @org.junit.jupiter.api.Test
