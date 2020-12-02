@@ -7,7 +7,6 @@ export default class OngoingMatches extends Component {
         this.state = {
             userID: this.props.location.state.userID,
             password: this.props.location.state.password,
-            loginFailed: false,
             matches: [],
         }
         this.onSubmit = this.onSubmit.bind(this);
@@ -58,22 +57,18 @@ export default class OngoingMatches extends Component {
         }
     }
 
-    goToMatch(matchID) {
+    goToMatch(gameID) {
         fetch("/matches?userID=" + this.state.userID + "&password=" + this.state.password)
             .then(res => res.json())
             .then(result => {
-                if (result.loginSuccess) {
-                    this.props.history.push({
-                        pathname: "/matches", //================== TODO: Make this pathname the correct one for the game controller ================== //
-                        state: {
-                            userID: this.state.userID,
-                            password: this.state.password,
-                            matchID: matchID,
-                        }
-                    });
-                } else {
-                    this.setState({ loginFailed: true })
-                }
+                this.props.history.push({
+                    pathname: "/game", //================== TODO: Make this pathname the correct one for the game controller ================== //
+                    state: {
+                        userID: this.state.userID,
+                        password: this.state.password,
+                        gameID: gameID,
+                    }
+                });
             })
     }
 
