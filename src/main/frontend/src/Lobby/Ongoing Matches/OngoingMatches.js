@@ -33,7 +33,7 @@ export default class OngoingMatches extends Component {
                     <tr key={match}>
                         <td> {match[0]} </td>
                         <td>
-                            <Button onClick={ this.goToMatch.bind(this, match[0]) } type='link'>Go To Match</Button>
+                            <Button onClick={ this.goToMatch.bind(this, match[0]) } type='link'>Go to match</Button>
                         </td> 
                         <td> {match[1]} </td>
                         <td> {match[2]} </td>
@@ -44,6 +44,7 @@ export default class OngoingMatches extends Component {
                     <thead>
                         <tr>
                             <th>Match ID</th>
+                            <th>Match Link</th>
                             <th>Opponent</th>
                             <th>Next Move</th>
                         </tr>
