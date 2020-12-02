@@ -118,6 +118,15 @@ public class ChessBoard {
             board[fromRow][fromCol] = null;
 
             piece.setPosition(toPosition);
+
+            if (piece instanceof Pawn)
+                ((Pawn) piece).justMovedMultipleOffStart();
+            else
+                for ( int i = 0; i < 10; i++)
+                    for (int j = 0; j < 10; j++ )
+                        if (getPiece("" + ('a' + i) + ('0' + j) ) instanceof Pawn)
+                            ((Pawn) getPiece("" + ('a' + i) + ('0' + j) )).resetJustMovedMultipleOffStart();
+
         } catch (IllegalPositionException e) {
             throw new IllegalMoveException(); }
     }
