@@ -55,14 +55,6 @@ public class OngoingMatches {
     public void queryDatabase() {
         if (attemptLogin()) {
             this.matches = Database.getOngoingMatches(this.userID);
-            // if (this.matches.isEmpty()) {
-            //     List<String> emptyMatch = new ArrayList<>();
-            //     emptyMatch.add("None");
-            //     emptyMatch.add("");
-            //     emptyMatch.add("");
-            //     this.matches.add(emptyMatch);
-            // }
         }
     }
-
 }

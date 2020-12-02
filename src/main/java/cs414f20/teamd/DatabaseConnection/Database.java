@@ -300,7 +300,7 @@ public class Database {
             query = conn.createStatement();
 
             String queryStatement = "SELECT gameID, white_player, black_player, whose_turn FROM "
-                    + "chessGames WHERE white_player = '" + username + "' OR black_player = '" + username + "';";
+                                  + "chessGames WHERE completed = 0 AND (white_player = '" + username + "' OR black_player = '" + username + "');";
             ResultSet results = query.executeQuery(queryStatement);
 
             while (results.next()) {
