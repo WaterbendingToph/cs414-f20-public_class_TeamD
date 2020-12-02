@@ -17,7 +17,24 @@ public class Knight extends ChessPiece {
     }
 
     @Override
-    public ArrayList<String> legalMoves() {//TODO: Was not implemented for A2. So... implement.
-        return new ArrayList<String>();
+    public ArrayList<String> legalMoves() {
+        ArrayList<String> legalMoves = new ArrayList<>();
+        int[][] legalMoveDistances = {{-2, 1}, {-1, 2}, {1, 2}, {2, 1}, {2, -1}, {1, -2}, {-1, -2}, {-2, -1}};
+
+            for (int i = 0; i < 8; i++) {
+                try {
+                    String potentialMove = Helper.boundedMove(getPosition(), legalMoveDistances[i][0], legalMoveDistances[i][1]);
+
+                    ChessPiece testPiece = board.getPiece(potentialMove);
+
+                    if (testPiece != null)
+                        if (testPiece.color == color)
+                            continue;
+
+                    legalMoves.add(potentialMove);
+                } catch (IllegalPositionException ipe) { /* intentional do nothing */ }
+            }
+
+        return legalMoves;
     }
 }
