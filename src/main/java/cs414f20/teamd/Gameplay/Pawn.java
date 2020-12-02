@@ -14,10 +14,10 @@ public class Pawn extends ChessPiece {
     private void pawnDirectionSetup(){
         if (color == Color.WHITE) {
             pawnDirection = 1;
-            startingPositions = new ArrayList<String>(Arrays.asList(new String[]{"a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2"}));
+            startingPositions = new ArrayList<String>(Arrays.asList(new String[]{"a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"}));
         } else {
             pawnDirection = -1;
-            startingPositions = new ArrayList<String>(Arrays.asList(new String[]{"a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7"}));
+            startingPositions = new ArrayList<String>(Arrays.asList(new String[]{"a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8"}));
         }
     }
 
@@ -50,6 +50,10 @@ public class Pawn extends ChessPiece {
 
             if (startingPositions.contains(currentPosition)) {
                 checkPosition = Helper.boundedMove(currentPosition, 0, pawnDirection * 2);
+                if (Helper.positionIsEmpty(board, checkPosition))
+                    legalMoves.add(checkPosition);
+
+                checkPosition = Helper.boundedMove(currentPosition, 0, pawnDirection * 3);
                 if (Helper.positionIsEmpty(board, checkPosition))
                     legalMoves.add(checkPosition);
             }

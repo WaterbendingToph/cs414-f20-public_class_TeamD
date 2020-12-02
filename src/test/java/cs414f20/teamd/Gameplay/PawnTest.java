@@ -33,11 +33,11 @@ class PawnTest {
         Pawn whitePawn = new Pawn(requisiteBoard, ChessPiece.Color.WHITE);
         Pawn blackPawn = new Pawn(requisiteBoard, ChessPiece.Color.BLACK);
 
-        requisiteBoard.placePiece(whitePawn, "b2");
-        requisiteBoard.placePiece(blackPawn, "b7");
+        requisiteBoard.placePiece(whitePawn, "b1");
+        requisiteBoard.placePiece(blackPawn, "b8");
 
-        ArrayList<String> whiteExpectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"b3", "b4"}));
-        ArrayList<String> blackExpectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"b6", "b5"}));
+        ArrayList<String> whiteExpectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"b2", "b3", "b4"}));
+        ArrayList<String> blackExpectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"b7", "b6", "b5"}));
         ArrayList<String> whiteActualMoves = whitePawn.legalMoves();
         ArrayList<String> blackActualMoves = blackPawn.legalMoves();
 
