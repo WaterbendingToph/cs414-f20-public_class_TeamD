@@ -9,11 +9,9 @@ import java.util.Comparator;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RookTest {
-    ChessBoard requisiteBoard;
-
     @Test
     void testToString() {
-        requisiteBoard = new ChessBoard();
+        ChessBoard requisiteBoard = new ChessBoard();
 
         Rook rook = new Rook(requisiteBoard, ChessPiece.Color.WHITE);
         assertEquals("\u2656", rook.toString());
@@ -24,22 +22,41 @@ class RookTest {
 
     @Test
     void legalMoves() {
-        requisiteBoard = new ChessBoard();
+        ChessBoard board = new ChessBoard();
+        Rook rook = new Rook(board, ChessPiece.Color.BLACK);
+        legalMovesOpenCenter(board, rook);
 
-        Rook rook = new Rook(requisiteBoard, ChessPiece.Color.BLACK);
-        Queen obstacle = new Queen(requisiteBoard, ChessPiece.Color.BLACK);
-        Queen target = new Queen(requisiteBoard, ChessPiece.Color.WHITE);
+        board = new ChessBoard();
+        rook = new Rook(board, ChessPiece.Color.BLACK);
+        legalMovesCrowdedCenter(board, rook);
 
-        requisiteBoard.placePiece(rook, "c3");
-        requisiteBoard.placePiece(obstacle, "a3");
-        requisiteBoard.placePiece(target, "g3");
+        board = new ChessBoard();
+        rook = new Rook(board, ChessPiece.Color.BLACK);
+        legalMovesOpenCorner(board, rook);
+    }
 
-        ArrayList<String> expectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"b3", "c1", "c2", "c4", "c5", "c6", "c7", "c8", "d3", "e3", "f3", "g3"}));
-        ArrayList<String> actualMoves = rook.legalMoves();
+    void legalMovesOpenCenter(ChessBoard board, Rook rook) {
+        board.placePiece(rook, "e4");
+        String[] expectedMoves = {"e0", "e1", "e2", "e3", "e5", "e6", "e7", "e8", "e9",
+                "a4", "b4", "c4", "d4", "f4", "g4", "h4", "i4", "j4"};
+        TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, rook.legalMoves());
+    }
+    void legalMovesCrowdedCenter(ChessBoard board, Rook rook) {
+        Queen obstacle = new Queen(board, ChessPiece.Color.BLACK);
+        Queen target = new Queen(board, ChessPiece.Color.WHITE);
 
-        expectedMoves.sort(Comparator.naturalOrder());
-        actualMoves.sort(Comparator.naturalOrder());
+        board.placePiece(obstacle, "a3");
+        board.placePiece(rook, "c3");
+        board.placePiece(target, "g3");
 
-        assertArrayEquals(expectedMoves.toArray(), actualMoves.toArray());
+        String[] expectedMoves = {"b3", "c0", "c1", "c2", "c4", "c5", "c6", "c7", "c8", "c9", "d3", "e3", "f3", "g3"};
+
+        TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, rook.legalMoves());
+    }
+    void legalMovesOpenCorner(ChessBoard board, Rook rook) {
+        board.placePiece(rook, "a0");
+        String[] expectedMoves = {"a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9",
+                "b0", "c0", "d0", "e0", "f0", "g0", "h0", "i0", "j0"};
+        TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, rook.legalMoves());
     }
 }
