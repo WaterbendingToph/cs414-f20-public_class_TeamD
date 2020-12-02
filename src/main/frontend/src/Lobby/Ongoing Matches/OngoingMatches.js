@@ -9,9 +9,8 @@ export default class OngoingMatches extends Component {
             password: this.props.location.state.password,
             matches: [],
         }
-        this.onSubmit = this.onSubmit.bind(this);
+        this.returnToLobby = this.returnToLobby.bind(this);
         this.populateMatches = this.populateMatches.bind(this);
-        this.goToMatch = this.goToMatch.bind(this);
     }
 
     componentDidMount() {
@@ -34,7 +33,7 @@ export default class OngoingMatches extends Component {
                     <tr key={match}>
                         <td> {match[0]} </td>
                         <td>
-                            <Button onClick={this.goToMatch(match[0])} type='link'>Go To Match</Button>
+                            <Button onClick={ this.goToMatch.bind(this, match[0]) } type='link'>Go To Match</Button>
                         </td> 
                         <td> {match[1]} </td>
                         <td> {match[2]} </td>
@@ -57,7 +56,7 @@ export default class OngoingMatches extends Component {
         }
     }
 
-    onSubmit() {
+    returnToLobby() {
         fetch("/login?userID=" + this.state.userID + "&password=" + this.state.password)
             .then(res => res.json())
             .then(result => {
@@ -76,25 +75,21 @@ export default class OngoingMatches extends Component {
     }
 
     goToMatch(gameID) {
-        fetch("/matches?userID=" + this.state.userID + "&password=" + this.state.password)
-            .then(res => res.json())
-            .then(result => {
-                this.props.history.push({
-                    pathname: "/game",
-                    state: {
-                        userID: this.state.userID,
-                        password: this.state.password,
-                        gameID: gameID,
-                    }
-                });
-            })
+        this.props.history.push({
+            pathname: "/game",
+            state: {
+                userID: this.state.userID,
+                password: this.state.password,
+                gameID: gameID,
+            }
+        });
     }
 
     render() {
         return (
             <div>
                 <h2 style={{ textAlign: "center" }}>Ongoing Matches</h2>
-                <Button onClick={ this.onSubmit } type='button'>Return to Lobby</Button>
+                <Button onClick={ this.returnToLobby } type='button'>Return to Lobby</Button>
                 <Table>
                     { this.populateMatches() }
                 </Table>
