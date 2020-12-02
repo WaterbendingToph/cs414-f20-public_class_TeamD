@@ -34,7 +34,7 @@ export default class OngoingMatches extends Component {
                     <tr key={match}>
                         <td> {match[0]} </td>
                         <td>
-                            <Button onClick={this.goToMatch(match[0])} type='button'>Go To Match</Button>
+                            <Button onClick={this.goToMatch(match[0])} type='link'>Go To Match</Button>
                         </td> 
                         <td> {match[1]} </td>
                         <td> {match[2]} </td>
@@ -57,12 +57,30 @@ export default class OngoingMatches extends Component {
         }
     }
 
+    onSubmit() {
+        fetch("/login?userID=" + this.state.userID + "&password=" + this.state.password)
+            .then(res => res.json())
+            .then(result => {
+                if (result.loginSuccess) {
+                    this.props.history.push({
+                        pathname: "/lobby",
+                        state: {
+                            userID: this.state.userID,
+                            password: this.state.password,
+                        }
+                    });
+                } else {
+                    this.setState({ loginFailed: true })
+                }
+            })
+    }
+
     goToMatch(gameID) {
         fetch("/matches?userID=" + this.state.userID + "&password=" + this.state.password)
             .then(res => res.json())
             .then(result => {
                 this.props.history.push({
-                    pathname: "/game", //================== TODO: Make this pathname the correct one for the game controller ================== //
+                    pathname: "/game",
                     state: {
                         userID: this.state.userID,
                         password: this.state.password,
