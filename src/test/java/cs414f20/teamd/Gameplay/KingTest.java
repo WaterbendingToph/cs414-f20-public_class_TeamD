@@ -45,7 +45,7 @@ class KingTest {
         King king = new King(requisiteBoard, ChessPiece.Color.WHITE);
         requisiteBoard.placePiece(king, "a1");
 
-        ArrayList<String> expectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"a2", "b2", "b1"}));
+        ArrayList<String> expectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"a0", "b0", "a2", "b2", "b1"}));
         ArrayList<String> actualMoves = king.legalMoves();
         expectedMoves.sort(Comparator.naturalOrder());
         actualMoves.sort(Comparator.naturalOrder());

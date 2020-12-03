@@ -6,12 +6,10 @@ import java.util.Arrays;
 public class Pawn extends ChessPiece {
     int pawnDirection;
     ArrayList<String> startingPositions;
-    public boolean justMovedMultipleOffStart;
 
     public Pawn(ChessBoard board, Color color) {
         super(board, color);
         pawnDirectionSetup();
-        justMovedMultipleOffStart = false;
     }
     private void pawnDirectionSetup(){
         if (color == Color.WHITE) {
@@ -67,30 +65,15 @@ public class Pawn extends ChessPiece {
         try {
             checkPosition = Helper.boundedMove(currentPosition, -1, pawnDirection);
             if (!Helper.positionIsEmpty(board, checkPosition))
-                if (board.getPiece(checkPosition).color != color || canEnPassant(checkPosition) )
+                if (board.getPiece(checkPosition).color != color)
                     legalMoves.add(checkPosition);
         } catch (IllegalPositionException ipe) {}
 
         try {
             checkPosition = Helper.boundedMove(currentPosition, 1, pawnDirection);
             if (!Helper.positionIsEmpty(board, checkPosition))
-                if (board.getPiece(checkPosition).color != color || canEnPassant(checkPosition) )
+                if (board.getPiece(checkPosition).color != color)
                     legalMoves.add(checkPosition);
         } catch (IllegalPositionException ipe) {}
     }
-
-    private boolean canEnPassant(String checkPosition) {
-        try {
-            return board.getPiece(checkPosition) instanceof Pawn && ((Pawn) board.getPiece(checkPosition)).justMovedMultipleOffStart;
-        } catch (IllegalPositionException ide) { return false; }
-    }
-
-    public void justMovedMultipleOffStart() {
-        justMovedMultipleOffStart = true;
-    }
-
-    public void resetJustMovedMultipleOffStart() {
-        justMovedMultipleOffStart = false;
-    }
-
 }
