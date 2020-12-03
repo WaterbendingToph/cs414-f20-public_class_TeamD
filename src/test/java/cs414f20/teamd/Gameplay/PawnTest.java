@@ -31,8 +31,8 @@ class PawnTest {
         requisiteBoard.placePiece(whitePawn, "b1");
         requisiteBoard.placePiece(blackPawn, "b8");
 
-        String[] whiteExpectedMoves = {"b2", "b3"};
-        String[] blackExpectedMoves = {"b6", "b7"};
+        String[] whiteExpectedMoves = {"b2", "b3", "b4"};
+        String[] blackExpectedMoves = {"b7", "b6", "b5"};
 
         TestHelper.assertExpectedMovesEqualLegalMoves(whiteExpectedMoves, whitePawn.legalMoves());
         TestHelper.assertExpectedMovesEqualLegalMoves(blackExpectedMoves, blackPawn.legalMoves());

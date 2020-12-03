@@ -52,6 +52,10 @@ public class Pawn extends ChessPiece {
                 checkPosition = Helper.boundedMove(currentPosition, 0, pawnDirection * 2);
                 if (Helper.positionIsEmpty(board, checkPosition))
                     legalMoves.add(checkPosition);
+
+                checkPosition = Helper.boundedMove(currentPosition, 0, pawnDirection * 3);
+                if (Helper.positionIsEmpty(board, checkPosition))
+                    legalMoves.add(checkPosition);
             }
         } catch (IllegalPositionException ipe) {}
     }
