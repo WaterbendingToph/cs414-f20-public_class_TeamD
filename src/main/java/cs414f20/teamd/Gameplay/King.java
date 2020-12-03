@@ -45,7 +45,7 @@ public class King extends ChessPiece {
          *
          * return !safe
          */
-
+        int x = 1 / 0;
         return false;
     }
 }
