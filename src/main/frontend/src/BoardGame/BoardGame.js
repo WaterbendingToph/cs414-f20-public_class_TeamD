@@ -225,8 +225,6 @@ export default class BoardGame extends Component{
 
     render(){
         if(this.state.searching === true){
-            // const d = new Date(); 
-            // console.log("Current date: " + d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0]);
             this.pingForNewMatch(this.state.userID, this.state.players.join(","));
             return(
                 <div>
