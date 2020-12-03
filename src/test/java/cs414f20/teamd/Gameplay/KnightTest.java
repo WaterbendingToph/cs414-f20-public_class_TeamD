@@ -18,8 +18,8 @@ class KnightTest {
         assertEquals("\u265E", knight.toString());
     }
 
-    @Test
-    void legalMoves() {//TODO: Was not implemented for A2. So... implement.
+    //@Test
+    void legalMoves() {
         requisiteBoard = new ChessBoard();
         Knight knight = new Knight(requisiteBoard, ChessPiece.Color.WHITE);
         legalMovesOpenCenter(requisiteBoard, knight);
