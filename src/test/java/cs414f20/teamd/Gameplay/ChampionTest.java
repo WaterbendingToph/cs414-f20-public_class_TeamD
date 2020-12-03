@@ -2,9 +2,6 @@ package cs414f20.teamd.Gameplay;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 
 
 class ChampionTest {
@@ -36,7 +33,7 @@ class ChampionTest {
 	private void legalMovesFromOpenCenter(ChessBoard testBoard, Champion champion) {
 		testBoard.placePiece(champion, "c2");
 		String[] expectedMovesArray = {"a2", "b2", "d2", "e2", "c0", "c1", "c3", "c4", "a0", "a4", "e0", "e4"};
-		assertExpectedMovesEqualLegalMoves(expectedMovesArray, champion.legalMoves());
+		TestHelper.assertExpectedMovesEqualLegalMoves(expectedMovesArray, champion.legalMoves());
 	}
 	private void legalMovesDiagonalHopping(ChessBoard testBoard, Champion champion) {
 		Pawn hoppableEnemy = new Pawn(testBoard, ChessPiece.Color.WHITE);
@@ -51,7 +48,7 @@ class ChampionTest {
 		testBoard.placePiece(blockingAlly, "d3");
 
 		String[] expectedMovesArray = {"w1", "b0", "b2", "b3", "a1", "c1", "d1"};
-		assertExpectedMovesEqualLegalMoves(expectedMovesArray, champion.legalMoves());
+		TestHelper.assertExpectedMovesEqualLegalMoves(expectedMovesArray, champion.legalMoves());
 	}
 	private void legalMovesCardinalHopping(ChessBoard testBoard, Champion champion) {
 		Pawn blockingEnemy = new Pawn(testBoard, ChessPiece.Color.WHITE);
@@ -68,15 +65,6 @@ class ChampionTest {
 		testBoard.placePiece(targetEnemy, "h0");
 
 		String[] expectedMovesArray = {"h4", "h3", "h1", "h0", "i2", "j2", "j0", "j4", "f0", "f2", "f4"};
-		assertExpectedMovesEqualLegalMoves(expectedMovesArray, champion.legalMoves());
+		TestHelper.assertExpectedMovesEqualLegalMoves(expectedMovesArray, champion.legalMoves());
 	}
-
-	private void assertExpectedMovesEqualLegalMoves(String[] expectedMovesArray, ArrayList<String> legalMoves) {
-		ArrayList<String> expectedMoves = new ArrayList<String>(Arrays.asList(expectedMovesArray));
-		ArrayList<String> actualMoves = legalMoves;
-		expectedMoves.sort(Comparator.naturalOrder());
-		actualMoves.sort(Comparator.naturalOrder());
-		
-		assertArrayEquals(expectedMoves.toArray(), actualMoves.toArray());
-	}//NOTE: DUPLICATED WITH WizardTest
 }

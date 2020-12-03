@@ -1,11 +1,6 @@
 package cs414f20.teamd.Gameplay;
 
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class PawnTest {
@@ -26,28 +21,23 @@ class PawnTest {
     void legalMoves() {
         testFromStart();
         testFromNotStart();
+        //testEnPassant();
     }
+
     private void testFromStart() {
         requisiteBoard = new ChessBoard();
 
         Pawn whitePawn = new Pawn(requisiteBoard, ChessPiece.Color.WHITE);
         Pawn blackPawn = new Pawn(requisiteBoard, ChessPiece.Color.BLACK);
 
-        requisiteBoard.placePiece(whitePawn, "b2");
-        requisiteBoard.placePiece(blackPawn, "b7");
+        requisiteBoard.placePiece(whitePawn, "b1");
+        requisiteBoard.placePiece(blackPawn, "b8");
 
-        ArrayList<String> whiteExpectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"b3", "b4"}));
-        ArrayList<String> blackExpectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"b6", "b5"}));
-        ArrayList<String> whiteActualMoves = whitePawn.legalMoves();
-        ArrayList<String> blackActualMoves = blackPawn.legalMoves();
+        String[] whiteExpectedMoves = {"b2", "b3", "b4"};
+        String[] blackExpectedMoves = {"b7", "b6", "b5"};
 
-        whiteExpectedMoves.sort(Comparator.naturalOrder());
-        blackExpectedMoves.sort(Comparator.naturalOrder());
-        whiteActualMoves.sort(Comparator.naturalOrder());
-        blackActualMoves.sort(Comparator.naturalOrder());
-
-        assertArrayEquals(whiteExpectedMoves.toArray(), whiteActualMoves.toArray());
-        assertArrayEquals(blackExpectedMoves.toArray(), blackActualMoves.toArray());
+        TestHelper.assertExpectedMovesEqualLegalMoves(whiteExpectedMoves, whitePawn.legalMoves());
+        TestHelper.assertExpectedMovesEqualLegalMoves(blackExpectedMoves, blackPawn.legalMoves());
     }
     private void testFromNotStart() {
         requisiteBoard = new ChessBoard();
@@ -62,10 +52,37 @@ class PawnTest {
         requisiteBoard.placePiece(obstacle, "b4");
         requisiteBoard.placePiece(target, "c4");
 
-        ArrayList<String> whiteExpectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"c4"}));
-        ArrayList<String> blackExpectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"b5"}));
+        String[] whiteExpectedMoves = {"c4"};
+        String[] blackExpectedMoves = {"b5"};
 
-        assertArrayEquals(whiteExpectedMoves.toArray(), whitePawn.legalMoves().toArray());
-        assertArrayEquals(blackExpectedMoves.toArray(), blackPawn.legalMoves().toArray());
+        TestHelper.assertExpectedMovesEqualLegalMoves(whiteExpectedMoves, whitePawn.legalMoves());
+        TestHelper.assertExpectedMovesEqualLegalMoves(blackExpectedMoves, blackPawn.legalMoves());
+    }
+    private void testEnPassant() {
+        requisiteBoard = new ChessBoard();
+
+        Pawn blackPawnStill = new Pawn(requisiteBoard, ChessPiece.Color.BLACK);
+        Pawn blackPawnCapturing = new Pawn(requisiteBoard, ChessPiece.Color.BLACK);
+        Pawn whitePawnCaptured = new Pawn(requisiteBoard, ChessPiece.Color.WHITE);
+
+        requisiteBoard.placePiece(blackPawnStill, "a5");
+        requisiteBoard.placePiece(blackPawnCapturing, "b4");
+        requisiteBoard.placePiece(whitePawnCaptured, "a4");
+
+        String[] expectedMoves = {"b3", "a3"};
+
+        TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, blackPawnCapturing.legalMoves());
+
+        try {
+            requisiteBoard.move("b4", "a3");
+        } catch (IllegalMoveException e) { fail(); }
+
+        try {
+            ChessPiece testPiece = requisiteBoard.getPiece("a3");
+            assertEquals(blackPawnCapturing, testPiece);
+
+            testPiece = requisiteBoard.getPiece("a4");
+            assertNull(testPiece);
+        } catch (IllegalPositionException e) { fail(); }
     }
 }
