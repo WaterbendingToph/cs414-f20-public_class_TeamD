@@ -14,8 +14,6 @@ class ChessBoardTest {
         initializeTestPawns();
         initializeTestCastleFolk();
         initializeTestWizards();
-
-        System.out.println(chessBoard.toString());
     }
     private void initializeTestPawns() {
         ChessPiece testPiece = null;
