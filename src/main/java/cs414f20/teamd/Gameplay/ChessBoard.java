@@ -20,6 +20,7 @@ public class ChessBoard {
     public void initialize(){
         initializePawns();
         initializeCastleFolk();
+        initializeWizards();
     }
 
     private void initializePawns(){
@@ -42,6 +43,7 @@ public class ChessBoard {
         ArrayList<ChessPiece> pieces = new ArrayList<>();
         ChessPiece.Color color = ChessPiece.Color.BLACK;
         for (int i = 0; i < 2; i++){
+            pieces.add(new Champion(this, color));
             pieces.add(new Rook(this, color));
             pieces.add(new Knight(this, color));
             pieces.add(new Bishop(this, color));
@@ -50,24 +52,44 @@ public class ChessBoard {
             pieces.add(new Bishop(this, color));
             pieces.add(new Knight(this, color));
             pieces.add(new Rook(this, color));
+            pieces.add(new Champion(this, color));
 
             int row;
             if (i == 0)
                 row = 9;
             else
                 row = 0;
-            for (int j = 0; j < 8; j++){
+            for (int j = 0; j < 10; j++){
                 ChessPiece piece = pieces.get(j);
 
                 try {
                     board[row][j] = piece;
                     piece.setPosition(Helper.arrayIndicesToPosition(row, j));
-                } catch (IllegalPositionException ipe) { /* intentional do nothing */ }
+                } catch (IllegalPositionException ipe) { /* intentional do nothing, this will not be hit */ }
             }
 
             pieces.removeAll(pieces);
             color = ChessPiece.Color.WHITE;
         }
+    }
+
+    private void initializeWizards() {
+        Wizard white1 = new Wizard(this, ChessPiece.Color.WHITE);
+        Wizard white2 = new Wizard(this, ChessPiece.Color.WHITE);
+        Wizard black1 = new Wizard(this, ChessPiece.Color.BLACK);
+        Wizard black2 = new Wizard(this, ChessPiece.Color.BLACK);
+        board[10][0] = black1;
+        board[10][1] = black2;
+        board[11][0] = white1;
+        board[11][1] = white2;
+
+        try {
+            white1.setPosition("w1");
+            white2.setPosition("w2");
+            black1.setPosition("w3");
+            black2.setPosition("w4");
+        } catch (IllegalPositionException ipe) { /* intentional do nothing, this will not be hit */ }
+
     }
 
     public ChessPiece getPiece(String position) throws IllegalPositionException {
