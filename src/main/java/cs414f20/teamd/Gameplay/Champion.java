@@ -24,11 +24,11 @@ public class Champion extends ChessPiece {
 
     @Override
     public ArrayList<String> legalMoves() {
-        ArrayList<JavaDoesntHaveTuples> unboundedOptions = ValidMoveOffsets();
+        ArrayList<Helper.PseudoTuple> unboundedOptions = ValidMoveOffsets();
 
         String position = this.getPosition();
         ArrayList<String> boundedOptions = new ArrayList<String>();
-        for (JavaDoesntHaveTuples unboundedOption : unboundedOptions)
+        for (Helper.PseudoTuple unboundedOption : unboundedOptions)
             try {
                 boundedOptions.add(Helper.boundedMove(position, unboundedOption.x, unboundedOption.y));
             } catch (IllegalPositionException e) {}
@@ -49,32 +49,23 @@ public class Champion extends ChessPiece {
         return legalMoves;
     }
 
-    private class JavaDoesntHaveTuples {
-        public int x;
-        public int y;
+    private ArrayList<Helper.PseudoTuple> ValidMoveOffsets() {
+        ArrayList<Helper.PseudoTuple> tuples = new ArrayList<Helper.PseudoTuple>();
 
-        public JavaDoesntHaveTuples(int newX, int newY) {
-            x = newX;
-            y = newY;
-        }
-    }//DUPLICATION WITH WIZARD
-    private ArrayList<JavaDoesntHaveTuples> ValidMoveOffsets() {
-        ArrayList<JavaDoesntHaveTuples> javaOverheadCanBeGross = new ArrayList<JavaDoesntHaveTuples>();
+        tuples.add(new Helper.PseudoTuple(-2, -2));
+        tuples.add(new Helper.PseudoTuple(-2, 0));
+        tuples.add(new Helper.PseudoTuple(-2, 2));
+        tuples.add(new Helper.PseudoTuple(-1, 0));
+        tuples.add(new Helper.PseudoTuple(0, -2));
+        tuples.add(new Helper.PseudoTuple(0, -1));
+        tuples.add(new Helper.PseudoTuple(0, 0));
+        tuples.add(new Helper.PseudoTuple(0, 1));
+        tuples.add(new Helper.PseudoTuple(0, 2));
+        tuples.add(new Helper.PseudoTuple(1, 0));
+        tuples.add(new Helper.PseudoTuple(2, -2));
+        tuples.add(new Helper.PseudoTuple(2, 0));
+        tuples.add(new Helper.PseudoTuple(2, 2));
 
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-2, -2));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-2, 0));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-2, 2));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-1, 0));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(0, -2));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(0, -1));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(0, 0));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(0, 1));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(0, 2));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(1, 0));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(2, -2));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(2, 0));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(2, 2));
-
-        return javaOverheadCanBeGross;
-    }//DUPLICATION WITH WIZARD
+        return tuples;
+    }
 }

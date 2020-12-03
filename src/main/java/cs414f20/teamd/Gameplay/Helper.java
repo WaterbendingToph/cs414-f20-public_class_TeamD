@@ -128,4 +128,14 @@ public class Helper {
 
     }
 
+	
+    protected static class PseudoTuple {
+        public int x;
+        public int y;
+
+        public PseudoTuple(int newX, int newY) {
+            x = newX;
+            y = newY;
+        }
+    }
 }

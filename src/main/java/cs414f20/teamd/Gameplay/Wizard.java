@@ -24,11 +24,11 @@ public class Wizard extends ChessPiece{
 
     @Override
     public ArrayList<String> legalMoves() {
-        ArrayList<JavaDoesntHaveTuples> unboundedOptions = ValidMoveOffsets();
+        ArrayList<Helper.PseudoTuple> unboundedOptions = ValidMoveOffsets();
 
         String position = this.getPosition();
         ArrayList<String> boundedOptions = new ArrayList<String>();
-        for (JavaDoesntHaveTuples unboundedOption : unboundedOptions)
+        for (Helper.PseudoTuple unboundedOption : unboundedOptions)
             try {
                 boundedOptions.add(Helper.boundedMove(position, unboundedOption.x, unboundedOption.y));
             } catch (IllegalPositionException e) {}
@@ -49,31 +49,22 @@ public class Wizard extends ChessPiece{
         return legalMoves;
     }
 
-    private class JavaDoesntHaveTuples {
-        public int x;
-        public int y;
+    private ArrayList<Helper.PseudoTuple> ValidMoveOffsets() {
+        ArrayList<Helper.PseudoTuple> tuples = new ArrayList<Helper.PseudoTuple>();
 
-        public JavaDoesntHaveTuples(int newX, int newY) {
-            x = newX;
-            y = newY;
-        }
-    }//DUPLICATION WITH CHAMPION
-    private ArrayList<JavaDoesntHaveTuples> ValidMoveOffsets() {
-        ArrayList<JavaDoesntHaveTuples> javaOverheadCanBeGross = new ArrayList<JavaDoesntHaveTuples>();
+        tuples.add(new Helper.PseudoTuple(-3, -1));
+        tuples.add(new Helper.PseudoTuple(-3, 1));
+        tuples.add(new Helper.PseudoTuple(-1, -3));
+        tuples.add(new Helper.PseudoTuple(-1, -1));
+        tuples.add(new Helper.PseudoTuple(-1, 1));
+        tuples.add(new Helper.PseudoTuple(-1, 3));
+        tuples.add(new Helper.PseudoTuple(1, -3));
+        tuples.add(new Helper.PseudoTuple(1, -1));
+        tuples.add(new Helper.PseudoTuple(1, 1));
+        tuples.add(new Helper.PseudoTuple(1, 3));
+        tuples.add(new Helper.PseudoTuple(3, -1));
+        tuples.add(new Helper.PseudoTuple(3, 1));
 
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-3, -1));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-3, 1));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-1, -3));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-1, -1));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-1, 1));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(-1, 3));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(1, -3));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(1, -1));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(1, 1));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(1, 3));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(3, -1));
-        javaOverheadCanBeGross.add(new JavaDoesntHaveTuples(3, 1));
-
-        return javaOverheadCanBeGross;
-    }//DUPLICATION WITH CHAMPION
+        return tuples;
+    }
 }

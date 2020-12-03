@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table } from 'reactstrap';
+import { Button, Table } from 'reactstrap';
 
 export default class OngoingMatches extends Component {
     constructor(props) {
@@ -9,10 +9,12 @@ export default class OngoingMatches extends Component {
             password: this.props.location.state.password,
             matches: [],
         }
+        this.returnToLobby = this.returnToLobby.bind(this);
+        this.populateMatches = this.populateMatches.bind(this);
     }
 
     componentDidMount() {
-        fetch("/matches?userID=" + this.state.userID)
+        fetch("/matches?userID=" + this.state.userID + "&password=" + this.state.password)
             .then(res => res.json())
             .then(result => {
                 this.setState({ matches: result.matches })
@@ -20,39 +22,77 @@ export default class OngoingMatches extends Component {
     }
 
     populateMatches() {
-        if (this.state.matches.length !== 0) {
+        if (this.state.matches.length < 1) {
+            return (
+                <>
+                    You have no ongoing matches to display.
+                </>
+            )
+        } else {
             let allMatches = this.state.matches.map(match =>
                     <tr key={match}>
                         <td> {match[0]} </td>
-                        <td>Go to match</td> 
+                        <td>
+                            <Button onClick={ this.goToMatch.bind(this, match[0]) } type='link'>Go to match</Button>
+                        </td> 
                         <td> {match[1]} </td>
                         <td> {match[2]} </td>
                     </tr>
             )
             return (
                 <>
-                    { allMatches }
+                    <thead>
+                        <tr>
+                            <th>Match ID</th>
+                            <th>Match Link</th>
+                            <th>Opponent</th>
+                            <th>Next Move</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        { allMatches } 
+                    </tbody>
                 </>
             )
         }
+    }
+
+    returnToLobby() {
+        fetch("/login?userID=" + this.state.userID + "&password=" + this.state.password)
+            .then(res => res.json())
+            .then(result => {
+                if (result.loginSuccess) {
+                    this.props.history.push({
+                        pathname: "/lobby",
+                        state: {
+                            userID: this.state.userID,
+                            password: this.state.password,
+                        }
+                    });
+                } else {
+                    this.setState({ loginFailed: true })
+                }
+            })
+    }
+
+    goToMatch(gameID) {
+        this.props.history.push({
+            pathname: "/game",
+            state: {
+                userID: this.state.userID,
+                password: this.state.password,
+                gameID: gameID,
+            }
+        });
     }
 
     render() {
         return (
             <div>
                 <h2 style={{ textAlign: "center" }}>Ongoing Matches</h2>
+                <Button onClick={ this.returnToLobby } type='button'>Return to Lobby</Button>
                 <Table>
-                    <thead>
-                        <tr>
-                            <th>Match ID</th>
-                            <th>Link</th>
-                            <th>Opponent</th>
-                            <th>Next Move</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        { this.populateMatches() } 
-                    </tbody>
+                    { this.populateMatches() }
                 </Table>
             </div>
         )

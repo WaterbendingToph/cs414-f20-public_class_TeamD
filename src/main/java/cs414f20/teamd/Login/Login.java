@@ -7,7 +7,6 @@ public class Login {
     private String password;
     private java.time.LocalDate date;
     boolean loginSuccess;
-    String dbResults;
 
     public Login() {
     }
@@ -42,7 +41,6 @@ public class Login {
             ", password='" + getPassword() + "'" +
             ", date='" + getDate() + "'" +
             ", successfully logged in='" + getLoginSuccess() + "'" +
-            ", database results='" + dbResults + "'" +
             "}";
     }
 
