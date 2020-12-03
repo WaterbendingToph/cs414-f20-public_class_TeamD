@@ -23,6 +23,7 @@ class KingTest {
         testCornerMovement();
         testSharedSpaceMovement();
         //testCastling();
+
     }
 
     private void testFreeMovement() {
@@ -113,5 +114,19 @@ class KingTest {
             testPiece = requisiteBoard.getPiece("g9");
             assertEquals(rook, testPiece);
         } catch (IllegalPositionException e) { fail(); }
+    }
+
+    //@Test
+    void inCheck() {
+        requisiteBoard = new ChessBoard();
+
+        King king = new King(requisiteBoard, ChessPiece.Color.WHITE);
+        Pawn enemyPawn = new Pawn(requisiteBoard, ChessPiece.Color.BLACK);
+
+        requisiteBoard.placePiece(king, "a0");
+        assertFalse(king.inCheck());
+
+        requisiteBoard.placePiece(enemyPawn, "b1");
+        assertTrue(king.inCheck());
     }
 }
