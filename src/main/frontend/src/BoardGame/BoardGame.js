@@ -16,21 +16,21 @@ export default class BoardGame extends Component{
         this.state = {
             row0: this.setupDefaultWizardRowWhite(),
             row1: this.setupDefaultBackRowWhite(),
-            row2: this.setupPawnsRow2(),
+            row2: this.setupPawnsRow9(),
             row3: this.setupBlankRow1(),
             row4: this.setupBlankRow2(),
             row5: this.setupBlankRow1(),
             row6: this.setupBlankRow2(),
             row7: this.setupBlankRow1(),
             row8: this.setupBlankRow2(),
-            row9: this.setupPawnsRow9(),
+            row9: this.setupPawnsRow2(),
             row10: this.setupDefaultBackRowBlack(),
             row11: this.setupDefaultWizardRowBlack(),
-            searching: this.props.location.state.searching,
             userID: this.props.location.state.userID,
             password: this.props.location.state.password,
-            players: this.props.location.state.players,
             gameID: this.props.location.state.gameID,
+            searching: this.props.location.state.searching,
+            players: this.props.location.state.players,
             timers: [],
             start_search_date: new Date()
         }
@@ -150,7 +150,7 @@ export default class BoardGame extends Component{
         );
     }
 
-    setupPawnsRow2() {
+    setupPawnsRow9() {
         return(
             <tr>
                 <td><Square backgroundColor={white}/></td>
@@ -168,7 +168,7 @@ export default class BoardGame extends Component{
         );
     }
 
-    setupPawnsRow9() {
+    setupPawnsRow2() {
         return(
             <tr >
                 <td><Square backgroundColor={white}/></td>
@@ -240,18 +240,18 @@ export default class BoardGame extends Component{
             return (
               <table className="App" style={{width:"auto"}} align={'center'}>
                 <tbody>
-                    {this.state.row0}
-                    {this.state.row1}
-                    {this.state.row2}
-                    {this.state.row3}
-                    {this.state.row4}
-                    {this.state.row5}
-                    {this.state.row6}
-                    {this.state.row7}
-                    {this.state.row8}
-                    {this.state.row9}
-                    {this.state.row10}
                     {this.state.row11}
+                    {this.state.row10}
+                    {this.state.row9}
+                    {this.state.row8}
+                    {this.state.row7}
+                    {this.state.row6}
+                    {this.state.row5}
+                    {this.state.row4}
+                    {this.state.row3}
+                    {this.state.row2}
+                    {this.state.row1}
+                    {this.state.row0}
                 </tbody>
             </table>
         );
