@@ -5,6 +5,8 @@ import static java.sql.DriverManager.getConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
@@ -77,9 +79,11 @@ public class Database {
 
     public static void enterNewGame(int id, String whitePlayer, String blackPlayer) {
         Hashtable<String, String> board = new Hashtable<String, String>();
+        Timestamp currentDate = new Timestamp(System.currentTimeMillis());
         setupBoard(board);
         final String q = "INSERT INTO chessGames VALUES(" + id + ",\"" + whitePlayer + "\",\"" + blackPlayer + "\",\""
-                + board.toString() + "\",\"" + whitePlayer + "\"," + 0 + ");";
+                + board.toString() + "\",\"" + whitePlayer + "\"," + 0 + ", '" + currentDate + "');";
+        System.out.println("The query is: " + q);
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
                 Statement query = conn.createStatement();) {
             query.executeUpdate(q);
@@ -267,9 +271,8 @@ public class Database {
         }
         return ret;
     }
-  
-  
-  public static boolean setSearching(String current) {
+
+    public static boolean setSearching(String current) {
         Connection conn = null;
         Statement query = null;
         try {
@@ -286,8 +289,8 @@ public class Database {
         }
         return false;
     }
-  
-  public static List<List<String>> getOngoingMatches(String username) {
+
+    public static List<List<String>> getOngoingMatches(String username) {
         List<List<String>> matches = new ArrayList<>();
         Connection conn = null;
         Statement query = null;
@@ -297,7 +300,7 @@ public class Database {
             query = conn.createStatement();
 
             String queryStatement = "SELECT gameID, white_player, black_player, whose_turn FROM "
-                                  + "chessGames WHERE white_player = '" + username + "' OR black_player = '" + username + "';";
+                    + "chessGames WHERE white_player = '" + username + "' OR black_player = '" + username + "';";
             ResultSet results = query.executeQuery(queryStatement);
 
             while (results.next()) {
@@ -378,13 +381,13 @@ public class Database {
         return false;
     }
 
-    public static String pingNewMatch(String current, String[] players) {
+    public static String pingNewMatch(String current, String[] players, java.sql.Timestamp date) {
         Connection conn = null;
         Statement query = null;
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             query = conn.createStatement();
-            String queryStatement = "SELECT * FROM chessGames WHERE black_player=\"" + current + "\";";
+            String queryStatement = "SELECT * FROM chessGames WHERE black_player=\"" + current + "\" AND start_date>'"+ date +"';";
             ResultSet results = query.executeQuery(queryStatement);
             while (results.next()) {
                 boolean completed = results.getBoolean("completed");
@@ -407,5 +410,15 @@ public class Database {
         // setupBoard(board);
         // System.out.println("Size of board: " + board.size());
         // System.out.println(board);
+        String testDate = "2020-09-11 13:43:38";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            java.util.Date date = formatter.parse(testDate);
+            System.out.println("Normal date: " + date);
+            java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
+            System.out.println("SQL date: " + sqlDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

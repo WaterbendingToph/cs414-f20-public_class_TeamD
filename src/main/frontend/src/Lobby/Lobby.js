@@ -16,24 +16,37 @@ export default class Lobby extends Component {
     }
 
     goToGamePlay(wait = true, players=[], id=null){
-        console.log("Going to game: wait= " + wait + ", players= " + players + ", id= " + id);
-        fetch("/searchForNewMatch?current="+this.state.userID)
-            .then(res => res.json())
-            .then(data => {
-                if(data.searching === true){
-                    this.props.history.push({
-                        pathname: "/game",
-                        state:{
-                            searching: wait,
-                            userID: this.state.userID,
-                            password: this.props.location.state.password,
-                            players: players,
-                            gameID: id
-                        }
-                    });
+        if(wait){
+            fetch("/searchForNewMatch?current="+this.state.userID)
+                .then(res => res.json())
+                .then(data => {
+                    if(data.searching === true){
+                        this.props.history.push({
+                            pathname: "/game",
+                            state:{
+                                searching: wait,
+                                userID: this.state.userID,
+                                password: this.props.location.state.password,
+                                players: players,
+                                gameID: id
+                            }
+                        });
+                    }
                 }
-            }
-        );
+            );
+        }
+        else{
+            this.props.history.push({
+                pathname: "/game",
+                state:{
+                    searching: wait,
+                    userID: this.state.userID,
+                    password: this.props.location.state.password,
+                    players: players,
+                    gameID: id
+                }
+            });
+        }
     }
 
     ongoingMatches() {

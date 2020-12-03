@@ -10,8 +10,8 @@ import java.util.Random;
 public class CreateMatchController {
 
     @GetMapping("/pingForNewMatch")
-    public Ping pingForNewMatch(@RequestParam(value = "current") String current, @RequestParam(value = "players") String[] players) {
-        return new Ping(current, players);
+    public Ping pingForNewMatch(@RequestParam(value = "current") String current, @RequestParam(value = "players") String[] players,@RequestParam(value = "date") String date) {
+        return new Ping(current, players, date);
     }
 
     @GetMapping("/searchForNewMatch")

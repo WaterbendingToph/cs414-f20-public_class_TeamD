@@ -31,7 +31,8 @@ export default class BoardGame extends Component{
             password: this.props.location.state.password,
             players: this.props.location.state.players,
             gameID: this.props.location.state.gameID,
-            timers: []
+            timers: [],
+            start_search_date: new Date()
         }
         this.setupDefaultWizardRowWhite = this.setupDefaultWizardRowWhite.bind(this);
         this.setupDefaultBackRowWhite = this.setupDefaultBackRowWhite.bind(this);
@@ -45,7 +46,8 @@ export default class BoardGame extends Component{
     }
 
     pingForNewMatch(current, players){
-        fetch("/pingForNewMatch?current="+ current +"&players=" + players)
+        const d = this.state.start_search_date; 
+        fetch("/pingForNewMatch?current="+ current +"&players=" + players+"&date=" + d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0])
             .then(res => res.json())
             .then(data => {
                 if(data.isNewMatchCreated){
@@ -223,6 +225,8 @@ export default class BoardGame extends Component{
 
     render(){
         if(this.state.searching === true){
+            // const d = new Date(); 
+            // console.log("Current date: " + d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0]);
             this.pingForNewMatch(this.state.userID, this.state.players.join(","));
             return(
                 <div>
