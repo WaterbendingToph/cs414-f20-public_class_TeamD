@@ -18,7 +18,7 @@ public class King extends ChessPiece {
 
     @Override
     public ArrayList<String> legalMoves() {
-        ArrayList<String> legalMoves = new ArrayList<String>();
+        ArrayList<String> legalMoves = new ArrayList<>();
 
         String currentPosition = getPosition();
         for (int col = -1; col < 2; col++)
@@ -29,7 +29,7 @@ public class King extends ChessPiece {
                         legalMoves.add(newPosition);
                     else if (board.getPiece(newPosition).color != color)
                         legalMoves.add(newPosition);
-                } catch (IllegalPositionException e) {}
+                } catch (IllegalPositionException e) { /* intentional do nothing */ }
 
         return legalMoves;
     }

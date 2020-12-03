@@ -14,10 +14,10 @@ public class Pawn extends ChessPiece {
     private void pawnDirectionSetup(){
         if (color == Color.WHITE) {
             pawnDirection = 1;
-            startingPositions = new ArrayList<String>(Arrays.asList(new String[]{"a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"}));
+            startingPositions = new ArrayList<>(Arrays.asList("a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"));
         } else {
             pawnDirection = -1;
-            startingPositions = new ArrayList<String>(Arrays.asList(new String[]{"a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8"}));
+            startingPositions = new ArrayList<>(Arrays.asList("a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8"));
         }
     }
 
@@ -31,7 +31,7 @@ public class Pawn extends ChessPiece {
 
     @Override
     public ArrayList<String> legalMoves() {
-        ArrayList<String> legalMoves = new ArrayList<String>();
+        ArrayList<String> legalMoves = new ArrayList<>();
 
         forwardLegalMoves(legalMoves);
         diagonalLegalMoves(legalMoves);
@@ -39,7 +39,7 @@ public class Pawn extends ChessPiece {
         return legalMoves;
     }
     private void forwardLegalMoves(ArrayList<String> legalMoves){
-        String checkPosition = "";
+        String checkPosition;
         String currentPosition = getPosition();
 
         try {
@@ -56,10 +56,10 @@ public class Pawn extends ChessPiece {
                 if (Helper.positionIsEmpty(board, checkPosition))
                     legalMoves.add(checkPosition);
             }
-        } catch (IllegalPositionException ipe) {}
+        } catch (IllegalPositionException ipe) { /* intentional do nothing */ }
     }
     private void diagonalLegalMoves(ArrayList<String> legalMoves){
-        String checkPosition = "";
+        String checkPosition;
         String currentPosition = getPosition();
 
         try {
@@ -67,13 +67,13 @@ public class Pawn extends ChessPiece {
             if (!Helper.positionIsEmpty(board, checkPosition))
                 if (board.getPiece(checkPosition).color != color)
                     legalMoves.add(checkPosition);
-        } catch (IllegalPositionException ipe) {}
+        } catch (IllegalPositionException ipe) { /* intentional do nothing */ }
 
         try {
             checkPosition = Helper.boundedMove(currentPosition, 1, pawnDirection);
             if (!Helper.positionIsEmpty(board, checkPosition))
                 if (board.getPiece(checkPosition).color != color)
                     legalMoves.add(checkPosition);
-        } catch (IllegalPositionException ipe) {}
+        } catch (IllegalPositionException ipe) { /* intentional do nothing */ }
     }
 }

@@ -19,7 +19,7 @@ public class Rook extends ChessPiece {
 
     @Override
     public ArrayList<String> legalMoves() {
-        ArrayList<String> legalMoves = new ArrayList<String>();
+        ArrayList<String> legalMoves = new ArrayList<>();
         ArrayList<ArrayList<String>> potentialMovePaths = createPotentialPaths();
 
         for (ArrayList<String> path : potentialMovePaths) {
@@ -34,23 +34,23 @@ public class Rook extends ChessPiece {
     private ArrayList<ArrayList<String>> createPotentialPaths(){
         String currentPosition = getPosition();
 
-        ArrayList<ArrayList<String>> potentialPaths = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> potentialPaths = new ArrayList<>();
         for (int cardinalDirection = 0; cardinalDirection < 4; cardinalDirection++) {
-            potentialPaths.add(new ArrayList<String>());
+            potentialPaths.add(new ArrayList<>());
 
             for (int magnitude = 1; magnitude < 10; magnitude++) {
                 try {
                     int xChange = (cardinalDirection       % 2) * ( 1 - 2 * (cardinalDirection / 2)) * magnitude;
                     int yChange = ((cardinalDirection + 1) % 2) * (-1 + 2 * (cardinalDirection / 2)) * magnitude;
                     potentialPaths.get(cardinalDirection).add(Helper.boundedMove(currentPosition, xChange, yChange));
-                } catch (IllegalPositionException ipe) {}
+                } catch (IllegalPositionException ipe) { /* intentional do nothing */ }
             }
         }
 
         return potentialPaths;
     }
     private ArrayList<String> pathLegalMoves(ArrayList<String> path) {
-        ArrayList<String> legalMoves = new ArrayList<String>();
+        ArrayList<String> legalMoves = new ArrayList<>();
 
         for (int indexOfSquareInPath = 0; indexOfSquareInPath < path.size(); indexOfSquareInPath++) {
             String position = path.get(indexOfSquareInPath);
@@ -64,10 +64,10 @@ public class Rook extends ChessPiece {
                         inclusiveIndex = 1;
 
                     List<String> swap = path.subList(0, indexOfSquareInPath + inclusiveIndex);
-                    path = new ArrayList<String>();
+                    path = new ArrayList<>();
                     path.addAll(swap);
                 }
-            } catch (IllegalPositionException ipe) {}
+            } catch (IllegalPositionException ipe) { /* intentional do nothing */ }
 
             if (indexOfSquareInPath < path.size())
                 legalMoves.add(position);
