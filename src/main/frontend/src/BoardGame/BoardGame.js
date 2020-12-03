@@ -22,7 +22,10 @@ export default class BoardGame extends Component{
             row8: this.setupBlankRow2(),
             row9: this.setupPawnsRow2(),
             row10: this.setupDefaultBackRowBlack(),
-            row11: this.setupDefaultWizardRowBlack()
+            row11: this.setupDefaultWizardRowBlack(),
+            userID: this.props.location.state.userID,
+            password: this.props.location.state.password,
+            gameID: this.props.location.state.gameID,
         }
         this.setupDefaultWizardRowWhite = this.setupDefaultWizardRowWhite.bind(this);
         this.setupDefaultBackRowWhite = this.setupDefaultBackRowWhite.bind(this);
@@ -183,7 +186,7 @@ export default class BoardGame extends Component{
         );
     }
 
-    render(){
+    render() {
         return (
             <table className="App" style={{width:"auto"}} align={'center'}>
                 <tbody>
