@@ -21,7 +21,9 @@ class PawnTest {
     void legalMoves() {
         testFromStart();
         testFromNotStart();
+        //testEnPassant();
     }
+
     private void testFromStart() {
         requisiteBoard = new ChessBoard();
 
@@ -55,5 +57,32 @@ class PawnTest {
 
         TestHelper.assertExpectedMovesEqualLegalMoves(whiteExpectedMoves, whitePawn.legalMoves());
         TestHelper.assertExpectedMovesEqualLegalMoves(blackExpectedMoves, blackPawn.legalMoves());
+    }
+    private void testEnPassant() {
+        requisiteBoard = new ChessBoard();
+
+        Pawn blackPawnStill = new Pawn(requisiteBoard, ChessPiece.Color.BLACK);
+        Pawn blackPawnCapturing = new Pawn(requisiteBoard, ChessPiece.Color.BLACK);
+        Pawn whitePawnCaptured = new Pawn(requisiteBoard, ChessPiece.Color.WHITE);
+
+        requisiteBoard.placePiece(blackPawnStill, "a5");
+        requisiteBoard.placePiece(blackPawnCapturing, "b4");
+        requisiteBoard.placePiece(whitePawnCaptured, "a4");
+
+        String[] expectedMoves = {"b3", "a3"};
+
+        TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, blackPawnCapturing.legalMoves());
+
+        try {
+            requisiteBoard.move("b4", "a3");
+        } catch (IllegalMoveException e) { fail(); }
+
+        try {
+            ChessPiece testPiece = requisiteBoard.getPiece("a3");
+            assertEquals(blackPawnCapturing, testPiece);
+
+            testPiece = requisiteBoard.getPiece("a4");
+            assertNull(testPiece);
+        } catch (IllegalPositionException e) { fail(); }
     }
 }
