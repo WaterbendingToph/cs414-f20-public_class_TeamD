@@ -33,12 +33,6 @@ class PawnTest {
         requisiteBoard.placePiece(whitePawn, "b1");
         requisiteBoard.placePiece(blackPawn, "b8");
 
-        ArrayList<String> whiteExpectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"b2", "b3", "b4"}));
-        ArrayList<String> blackExpectedMoves = new ArrayList<String>(Arrays.asList(new String[]{"b7", "b6", "b5"}));
-        ArrayList<String> whiteActualMoves = whitePawn.legalMoves();
-        ArrayList<String> blackActualMoves = blackPawn.legalMoves();
-
-
         String[] whiteExpectedMoves = {"b2", "b3", "b4"};
         String[] blackExpectedMoves = {"b7", "b6", "b5"};
 
