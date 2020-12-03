@@ -77,6 +77,9 @@ class ChessPieceTest {
         ChessPiece piece = new Bishop(requisiteBoard, ChessPiece.Color.BLACK);
         assertEquals(ArrayList.class, piece.legalMoves().getClass());
 
+        piece = new Champion(requisiteBoard, ChessPiece.Color.BLACK);
+        assertEquals(ArrayList.class, piece.legalMoves().getClass());
+
         piece = new King(requisiteBoard, ChessPiece.Color.BLACK);
         assertEquals(ArrayList.class, piece.legalMoves().getClass());
 
@@ -90,6 +93,9 @@ class ChessPieceTest {
         assertEquals(ArrayList.class, piece.legalMoves().getClass());
 
         piece = new Rook(requisiteBoard, ChessPiece.Color.BLACK);
+        assertEquals(ArrayList.class, piece.legalMoves().getClass());
+
+        piece = new Wizard(requisiteBoard, ChessPiece.Color.BLACK);
         assertEquals(ArrayList.class, piece.legalMoves().getClass());
     }
 }

@@ -1,12 +1,11 @@
 package cs414f20.teamd.Gameplay;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-
 import static org.junit.jupiter.api.Assertions.*;
+
 
 class RookTest {
     @Test
@@ -38,7 +37,7 @@ class RookTest {
     void legalMovesOpenCenter(ChessBoard board, Rook rook) {
         board.placePiece(rook, "e4");
         String[] expectedMoves = {"e0", "e1", "e2", "e3", "e5", "e6", "e7", "e8", "e9",
-                "a4", "b4", "c4", "d4", "f4", "g4", "h4", "i4", "j4"};
+                                  "a4", "b4", "c4", "d4", "f4", "g4", "h4", "i4", "j4"};
         TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, rook.legalMoves());
     }
     void legalMovesCrowdedCenter(ChessBoard board, Rook rook) {
@@ -56,7 +55,7 @@ class RookTest {
     void legalMovesOpenCorner(ChessBoard board, Rook rook) {
         board.placePiece(rook, "a0");
         String[] expectedMoves = {"a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9",
-                "b0", "c0", "d0", "e0", "f0", "g0", "h0", "i0", "j0"};
+                                  "b0", "c0", "d0", "e0", "f0", "g0", "h0", "i0", "j0"};
         TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, rook.legalMoves());
     }
 }

@@ -33,4 +33,19 @@ public class King extends ChessPiece {
 
         return legalMoves;
     }
+
+    public boolean inCheck() {
+        // Pseudocode outline
+        /* enemies = AllEnemies();
+         * safe = True
+         *
+         * for enemy in enemies:
+         *   if this.getPosition() in enemy.legalMoves():
+         *     safe = False
+         *
+         * return !safe
+         */
+        int x = 1 / 0;
+        return false;
+    }
 }

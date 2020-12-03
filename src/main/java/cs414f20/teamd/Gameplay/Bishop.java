@@ -38,7 +38,7 @@ public class Bishop extends ChessPiece {
         for (int diagonalDirection = 0; diagonalDirection < 4; diagonalDirection++){
             potentialPaths.add(new ArrayList<>());
 
-            for (int squaresMoved = 1; squaresMoved < 8; squaresMoved++) {//Get all possible moves on board.
+            for (int squaresMoved = 1; squaresMoved < 12; squaresMoved++) {//Get all possible moves on board.
                 try {
                     int xChange = (1 - 2 * (diagonalDirection / 2)) * squaresMoved;
                     int yChange = (1 - 2 * (diagonalDirection % 2)) * squaresMoved;
