@@ -2,10 +2,7 @@ package cs414f20.teamd.DatabaseConnection;
 
 import static java.sql.DriverManager.getConnection;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.text.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,8 +10,6 @@ import java.util.Hashtable;
 import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
-
-import java.sql.ResultSet;
 
 public class Database {
     // connection information when using port forwarding from local host
@@ -422,6 +417,32 @@ public class Database {
             closeConnections(conn, query);
         }
         return playerWhoseTurnItIs;
+    }
+
+    public static ArrayList<String> getBoardState(String gameID) {
+        Connection conn = null;
+        Statement query = null;
+        ArrayList<String> results = new ArrayList<>();
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT board FROM chessGames WHERE gameID= \'" + gameID + "\';";
+            ResultSet queryResults = query.executeQuery(queryStatement);
+            while (queryResults.next() ) {
+                results.add(queryResults.getString("board"));
+            }
+            String temp = results.get(0);
+            results.clear();
+            for(String s: temp.split("'"))
+                results.add(s.trim() );
+
+        } catch (Exception e) {
+            System.err.println("Error while getting state of the board" + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+
+        return results;
     }
 
     public static void main(String[] args) {

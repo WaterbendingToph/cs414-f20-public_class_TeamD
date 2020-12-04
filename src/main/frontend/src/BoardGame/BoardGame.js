@@ -4,8 +4,8 @@ import { Grid } from "@material-ui/core";
 import { CircleLoader } from "react-spinners";
 import style from "./BoardGame.module.css";
 
-const orange = '#ffc002';
-const blue = '#8e6a00';
+const yellow = '#ffc002';
+const orange = '#8e6a00';
 const white = '#ffffff';
 
 
@@ -46,6 +46,7 @@ export default class BoardGame extends Component{
         this.setupDefaultWizardRowBlack = this.setupDefaultWizardRowBlack.bind(this);
         this.pingForNewMatch = this.pingForNewMatch.bind(this);
         this.getWhoseTurn = this.getWhoseTurn.bind(this);
+        this.getBoard = this.getBoard.bind(this);
     }
 
     pingForNewMatch(current, players){
@@ -74,12 +75,21 @@ export default class BoardGame extends Component{
     getWhoseTurn() {
         const gameID = this.state.gameID;
         fetch("/getWhoseTurn?gameID=" + gameID)
-            .then(res => res.text())
+            .then(res => res.text() )
             .then(result => {
                 if (result === this.state.userID)
                     this.setState({yourTurn: true});
 
             });
+    }
+
+    getBoard() {
+        const gameID = this.state.gameID;
+        fetch("/getBoard?gameID=" + gameID)
+            .then(res => res.text() )
+            .then(board => {
+                console.log(board)
+            })
     }
 
     clearTimers(){
@@ -91,18 +101,18 @@ export default class BoardGame extends Component{
     setupDefaultWizardRowWhite(){
         return(
             <tr>
+                <td><Square backgroundColor={yellow} color={"white"} piece={"wizard"}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
                 <td><Square backgroundColor={orange} color={"white"} piece={"wizard"}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={blue} color={"white"} piece={"wizard"}/></td>
             </tr>
         );
     }
@@ -110,18 +120,18 @@ export default class BoardGame extends Component{
     setupDefaultWizardRowBlack(){
         return (
             <tr>
-                <td><Square backgroundColor={blue} color={"black"} piece={"wizard"}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
                 <td><Square backgroundColor={orange} color={"black"} piece={"wizard"}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={yellow} color={"black"} piece={"wizard"}/></td>
             </tr>
         );
     }
@@ -130,16 +140,16 @@ export default class BoardGame extends Component{
         return (
             <tr >
                 <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={orange} color={"white"} piece={"champion"}/></td>
-                <td><Square backgroundColor={blue} color={"white"} piece={"rook"}/></td>
-                <td><Square backgroundColor={orange} color={"white"} piece={"knight"}/></td>
-                <td><Square backgroundColor={blue} color={"white"} piece={"bishop"}/></td>
-                <td><Square backgroundColor={orange} color={"white"} piece={"queen"}/></td>
-                <td><Square backgroundColor={blue} color={"white"} piece={"king"}/></td>
-                <td><Square backgroundColor={orange} color={"white"} piece={"bishop"}/></td>
-                <td><Square backgroundColor={blue} color={"white"} piece={"knight"}/></td>
+                <td><Square backgroundColor={yellow} color={"white"} piece={"champion"}/></td>
                 <td><Square backgroundColor={orange} color={"white"} piece={"rook"}/></td>
-                <td><Square backgroundColor={blue} color={"white"} piece={"champion"}/></td>
+                <td><Square backgroundColor={yellow} color={"white"} piece={"knight"}/></td>
+                <td><Square backgroundColor={orange} color={"white"} piece={"bishop"}/></td>
+                <td><Square backgroundColor={yellow} color={"white"} piece={"queen"}/></td>
+                <td><Square backgroundColor={orange} color={"white"} piece={"king"}/></td>
+                <td><Square backgroundColor={yellow} color={"white"} piece={"bishop"}/></td>
+                <td><Square backgroundColor={orange} color={"white"} piece={"knight"}/></td>
+                <td><Square backgroundColor={yellow} color={"white"} piece={"rook"}/></td>
+                <td><Square backgroundColor={orange} color={"white"} piece={"champion"}/></td>
             </tr>
         );
 
@@ -149,16 +159,16 @@ export default class BoardGame extends Component{
         return(
             <tr>
                 <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={blue} color={"black"} piece={"champion"}/></td>
-                <td><Square backgroundColor={orange} color={"black"} piece={"rook"}/></td>
-                <td><Square backgroundColor={blue} color={"black"} piece={"knight"}/></td>
-                <td><Square backgroundColor={orange} color={"black"} piece={"bishop"}/></td>
-                <td><Square backgroundColor={blue} color={"black"} piece={"queen"}/></td>
-                <td><Square backgroundColor={orange} color={"black"} piece={"king"}/></td>
-                <td><Square backgroundColor={blue} color={"black"} piece={"bishop"}/></td>
-                <td><Square backgroundColor={orange} color={"black"} piece={"knight"}/></td>
-                <td><Square backgroundColor={blue} color={"black"} piece={"rook"}/></td>
                 <td><Square backgroundColor={orange} color={"black"} piece={"champion"}/></td>
+                <td><Square backgroundColor={yellow} color={"black"} piece={"rook"}/></td>
+                <td><Square backgroundColor={orange} color={"black"} piece={"knight"}/></td>
+                <td><Square backgroundColor={yellow} color={"black"} piece={"bishop"}/></td>
+                <td><Square backgroundColor={orange} color={"black"} piece={"queen"}/></td>
+                <td><Square backgroundColor={yellow} color={"black"} piece={"king"}/></td>
+                <td><Square backgroundColor={orange} color={"black"} piece={"bishop"}/></td>
+                <td><Square backgroundColor={yellow} color={"black"} piece={"knight"}/></td>
+                <td><Square backgroundColor={orange} color={"black"} piece={"rook"}/></td>
+                <td><Square backgroundColor={yellow} color={"black"} piece={"champion"}/></td>
             </tr>
 
         );
@@ -168,16 +178,16 @@ export default class BoardGame extends Component{
         return(
             <tr>
                 <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={blue} color={"white"} piece={"pawn"}/></td>
                 <td><Square backgroundColor={orange} color={"white"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={blue} color={"white"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={yellow} color={"white"} piece={"pawn"}/></td>
                 <td><Square backgroundColor={orange} color={"white"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={blue} color={"white"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={yellow} color={"white"} piece={"pawn"}/></td>
                 <td><Square backgroundColor={orange} color={"white"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={blue} color={"white"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={yellow} color={"white"} piece={"pawn"}/></td>
                 <td><Square backgroundColor={orange} color={"white"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={blue} color={"white"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={yellow} color={"white"} piece={"pawn"}/></td>
                 <td><Square backgroundColor={orange} color={"white"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={yellow} color={"white"} piece={"pawn"}/></td>
             </tr>
         );
     }
@@ -186,16 +196,16 @@ export default class BoardGame extends Component{
         return(
             <tr >
                 <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={yellow} color={"black"} piece={"pawn"}/></td>
                 <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={blue} color={"black"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={yellow} color={"black"} piece={"pawn"}/></td>
                 <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={blue} color={"black"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={yellow} color={"black"} piece={"pawn"}/></td>
                 <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={blue} color={"black"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={yellow} color={"black"} piece={"pawn"}/></td>
                 <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={blue} color={"black"} piece={"pawn"}/></td>
+                <td><Square backgroundColor={yellow} color={"black"} piece={"pawn"}/></td>
                 <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={blue} color={"black"} piece={"pawn"}/></td>
         </tr>
         );
     }
@@ -204,16 +214,16 @@ export default class BoardGame extends Component{
         return (
             <tr >
                 <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={yellow} /></td>
                 <td><Square backgroundColor={orange} /></td>
-                <td><Square backgroundColor={blue} /></td>
+                <td><Square backgroundColor={yellow} /></td>
                 <td><Square backgroundColor={orange} /></td>
-                <td><Square backgroundColor={blue} /></td>
+                <td><Square backgroundColor={yellow} /></td>
                 <td><Square backgroundColor={orange} /></td>
-                <td><Square backgroundColor={blue} /></td>
+                <td><Square backgroundColor={yellow} /></td>
                 <td><Square backgroundColor={orange} /></td>
-                <td><Square backgroundColor={blue} /></td>
+                <td><Square backgroundColor={yellow} /></td>
                 <td><Square backgroundColor={orange} /></td>
-                <td><Square backgroundColor={blue} /></td>
             </tr>
         );
     }
@@ -222,16 +232,16 @@ export default class BoardGame extends Component{
         return(
             <tr>
                 <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={blue}/></td>
                 <td><Square backgroundColor={orange}/></td>
-                <td><Square backgroundColor={blue}/></td>
+                <td><Square backgroundColor={yellow}/></td>
                 <td><Square backgroundColor={orange}/></td>
-                <td><Square backgroundColor={blue}/></td>
+                <td><Square backgroundColor={yellow}/></td>
                 <td><Square backgroundColor={orange}/></td>
-                <td><Square backgroundColor={blue}/></td>
+                <td><Square backgroundColor={yellow}/></td>
                 <td><Square backgroundColor={orange}/></td>
-                <td><Square backgroundColor={blue}/></td>
+                <td><Square backgroundColor={yellow}/></td>
                 <td><Square backgroundColor={orange}/></td>
+                <td><Square backgroundColor={yellow}/></td>
             </tr>
 
         );
@@ -244,7 +254,7 @@ export default class BoardGame extends Component{
                 <div>
                     <h2>Waiting for other players to join...</h2>
                     <Grid className={style.Spinner}>
-                        <CircleLoader size={100} color={"orange"}/>
+                        <CircleLoader size={100} color={"yellow"}/>
                     </Grid>
                 </div>
             );
@@ -252,6 +262,7 @@ export default class BoardGame extends Component{
         else{
             this.clearTimers();
             this.getWhoseTurn();
+            this.getBoard();
             let turn = <h1>It is your turn, {this.state.userID}</h1>;
             if (!this.state.yourTurn)
                 turn = <h1>It is not your turn, {this.state.userID}</h1>
