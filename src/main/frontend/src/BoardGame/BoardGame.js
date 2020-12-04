@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import Square from "./Square";
+import { Grid } from "@material-ui/core";
+import { CircleLoader } from "react-spinners";
+import style from "./BoardGame.module.css";
 
 const orange = '#ffc002';
 const blue = '#8e6a00';
@@ -26,6 +29,10 @@ export default class BoardGame extends Component{
             userID: this.props.location.state.userID,
             password: this.props.location.state.password,
             gameID: this.props.location.state.gameID,
+            searching: this.props.location.state.searching,
+            players: this.props.location.state.players,
+            timers: [],
+            start_search_date: new Date()
         }
         this.setupDefaultWizardRowWhite = this.setupDefaultWizardRowWhite.bind(this);
         this.setupDefaultBackRowWhite = this.setupDefaultBackRowWhite.bind(this);
@@ -35,6 +42,36 @@ export default class BoardGame extends Component{
         this.setupPawnsRow9 = this.setupPawnsRow9.bind(this);
         this.setupDefaultBackRowBlack = this.setupDefaultBackRowBlack.bind(this);
         this.setupDefaultWizardRowBlack = this.setupDefaultWizardRowBlack.bind(this);
+        this.pingForNewMatch = this.pingForNewMatch.bind(this);
+    }
+
+    pingForNewMatch(current, players){
+        const d = this.state.start_search_date; 
+        fetch("/pingForNewMatch?current="+ current +"&players=" + players+"&date=" + d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0])
+            .then(res => res.json())
+            .then(data => {
+                if(data.isNewMatchCreated){
+                    this.setState({searching: false, gameID: data.gameID});
+                }
+                else{
+                    try{
+                        let pastTimers = this.state.timers;
+                        let timer = setTimeout(this.pingForNewMatch, 3*1000, current, players);
+                        pastTimers.push(timer)
+                        this.setState({timers: pastTimers});
+                    }
+                    catch(error){
+                        if(error instanceof TypeError)
+                            setTimeout(this.pingForNewMatch, 3*1000, current, players);
+                    }
+                }
+            });
+    }
+
+    clearTimers(){
+        this.state.timers.forEach( timer => {
+            clearTimeout(timer);
+        })
     }
 
     setupDefaultWizardRowWhite(){
@@ -186,9 +223,22 @@ export default class BoardGame extends Component{
         );
     }
 
-    render() {
-        return (
-            <table className="App" style={{width:"auto"}} align={'center'}>
+    render(){
+        if(this.state.searching === true){
+            this.pingForNewMatch(this.state.userID, this.state.players.join(","));
+            return(
+                <div>
+                    <h2>Waiting for other players to join...</h2>
+                    <Grid className={style.Spinner}>
+                        <CircleLoader size={100} color={"orange"}/>
+                    </Grid>
+                </div>
+            );
+        }
+        else{
+            this.clearTimers();
+            return (
+              <table className="App" style={{width:"auto"}} align={'center'}>
                 <tbody>
                     {this.state.row11}
                     {this.state.row10}
@@ -205,5 +255,6 @@ export default class BoardGame extends Component{
                 </tbody>
             </table>
         );
+        }
     }
 }

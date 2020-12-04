@@ -9,6 +9,16 @@ import java.util.Random;
 @RestController
 public class CreateMatchController {
 
+    @GetMapping("/pingForNewMatch")
+    public Ping pingForNewMatch(@RequestParam(value = "current") String current, @RequestParam(value = "players") String[] players,@RequestParam(value = "date") String date) {
+        return new Ping(current, players, date);
+    }
+
+    @GetMapping("/searchForNewMatch")
+    public Searching setSearchingNewGame(@RequestParam(value = "current") String current) {
+        return new Searching(current);
+    }
+  
     @GetMapping("/createMatch")
     public CreateMatch createMatch(@RequestParam(value = "current") String current, @RequestParam(value = "playerID") String[] playerIDList) {
         Random r = new Random();

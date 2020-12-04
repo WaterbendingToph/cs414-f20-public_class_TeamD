@@ -15,8 +15,38 @@ export default class Lobby extends Component {
         this.ongoingMatches = this.ongoingMatches.bind(this);
     }
 
-    goToGamePlay(){
-        this.props.history.push("/game");
+    goToGamePlay(wait = true, players=[], id=null){
+        if(wait){
+            fetch("/searchForNewMatch?current="+this.state.userID)
+                .then(res => res.json())
+                .then(data => {
+                    if(data.searching === true){
+                        this.props.history.push({
+                            pathname: "/game",
+                            state:{
+                                searching: wait,
+                                userID: this.state.userID,
+                                password: this.props.location.state.password,
+                                players: players,
+                                gameID: id
+                            }
+                        });
+                    }
+                }
+            );
+        }
+        else{
+            this.props.history.push({
+                pathname: "/game",
+                state:{
+                    searching: wait,
+                    userID: this.state.userID,
+                    password: this.props.location.state.password,
+                    players: players,
+                    gameID: id
+                }
+            });
+        }
     }
 
     ongoingMatches() {
@@ -42,7 +72,7 @@ export default class Lobby extends Component {
             <Grid>
                 <Grid className={style.Header} item>
                     <h1>Welcome to the Lobby, {this.state.userID}!</h1>
-                    <InviteBox current={this.state.userID}/>
+                    <InviteBox current={this.state.userID} toGame={this.goToGamePlay.bind(this)}/>
                 </Grid>
                 <Grid item>
                     <CreateMatchBox currentUser={this.state.userID} toGame={this.goToGamePlay.bind(this)} />
