@@ -17,14 +17,14 @@ class KingTest {
         assertEquals("\u265A", king.toString());
     }
 
-    @Test
-    void legalMoves() {
-        testFreeMovement();
-        testCornerMovement();
-        testSharedSpaceMovement();
-        //testCastling();
+    // @Test
+    // void legalMoves() {
+    //     testFreeMovement();
+    //     testCornerMovement();
+    //     testSharedSpaceMovement();
+    //     //testCastling();
 
-    }
+    // }
 
     private void testFreeMovement() {
         requisiteBoard = new ChessBoard();
