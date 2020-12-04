@@ -72,8 +72,9 @@ export default class BoardGame extends Component{
     }
 
     getWhoseTurn() {
-        const yourName = this.state.userID;
-        fetch("/getWhoseTurn?gameID=" + yourName)
+        const gameID = this.state.gameID;
+        fetch("/getWhoseTurn?gameID=" + gameID)
+            .then(res => res.text())
             .then(result => {
                 if (result === this.state.userID)
                     this.setState({yourTurn: true});
