@@ -252,10 +252,12 @@ export default class BoardGame extends Component{
         else{
             this.clearTimers();
             this.getWhoseTurn();
-            if (this.state.yourTurn) {
+            let turn = <h1>It is your turn, {this.state.userID}</h1>;
+            if (!this.state.yourTurn)
+                turn = <h1>It is not your turn, {this.state.userID}</h1>
                 return (
                     <Grid>
-                        <h1>It is your turn, {this.state.userID}</h1>
+                        {turn}
                         <table className="App" style={{width: "auto"}} align={'center'}>
                             <tbody>
                             {this.state.row11}
@@ -274,29 +276,6 @@ export default class BoardGame extends Component{
                         </table>
                     </Grid>
                 );
-            }
-            else if (!this.state.yourTurn) {
-                return (
-                    <Grid>
-                        <h1>It is not your turn, {this.state.userID}</h1>
-                        <table className="App" style={{width: "auto"}} align={'center'}>
-                            <tbody>
-                            {this.state.row11}
-                            {this.state.row10}
-                            {this.state.row9}
-                            {this.state.row8}
-                            {this.state.row7}
-                            {this.state.row6}
-                            {this.state.row5}
-                            {this.state.row4}
-                            {this.state.row3}
-                            {this.state.row2}
-                            {this.state.row1}
-                            {this.state.row0}
-                            </tbody>
-                        </table>
-                    </Grid>)
-            }
         }
     }
 }
