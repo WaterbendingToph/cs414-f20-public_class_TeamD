@@ -403,6 +403,27 @@ public class Database {
         return "";
     }
 
+    public static String getWhoseTurn(String gameID) {
+        Connection conn = null;
+        Statement query = null;
+        String playerWhoseTurnItIs = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT * FROM chessGames WHERE gameID= \"" + gameID + "\";";
+            ResultSet results = query.executeQuery(queryStatement);
+            while ( results.next() ) {
+                playerWhoseTurnItIs = results.getString("whose_turn");
+            }
+        } catch (Exception e) {
+            System.err.println("Error while getting whose turn it is " + e.getMessage());
+            playerWhoseTurnItIs = "ERROR";
+        } finally {
+            closeConnections(conn, query);
+        }
+        return playerWhoseTurnItIs;
+    }
+
     public static void main(String[] args) {
         // getAllUsers();
         // enterNewGame(20, "me", "not me");

@@ -7,6 +7,7 @@ public class ChessBoard {
     private ChessPiece[][] board;
     private static final List<Character> validLetters = Helper.validLetters;
     private static final List<Character> validNumbers = Helper.validNumbers;
+    public String whoseTurn;
 
 
     ChessBoard() {
@@ -15,6 +16,9 @@ public class ChessBoard {
             board[i] = new ChessPiece[10];
         board[10] = new ChessPiece[2];
         board[11] = new ChessPiece[2];
+    }
+    ChessBoard(String theirTurn) {
+        whoseTurn = theirTurn;
     }
 
     public void initialize(){

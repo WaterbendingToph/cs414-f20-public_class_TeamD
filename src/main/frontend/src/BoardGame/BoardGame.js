@@ -32,7 +32,9 @@ export default class BoardGame extends Component{
             searching: this.props.location.state.searching,
             players: this.props.location.state.players,
             timers: [],
-            start_search_date: new Date()
+            start_search_date: new Date(),
+            yourTurn: null,
+            testResults: "unchanged"
         }
         this.setupDefaultWizardRowWhite = this.setupDefaultWizardRowWhite.bind(this);
         this.setupDefaultBackRowWhite = this.setupDefaultBackRowWhite.bind(this);
@@ -43,6 +45,7 @@ export default class BoardGame extends Component{
         this.setupDefaultBackRowBlack = this.setupDefaultBackRowBlack.bind(this);
         this.setupDefaultWizardRowBlack = this.setupDefaultWizardRowBlack.bind(this);
         this.pingForNewMatch = this.pingForNewMatch.bind(this);
+        this.getWhoseTurn = this.getWhoseTurn.bind(this);
     }
 
     pingForNewMatch(current, players){
@@ -65,6 +68,16 @@ export default class BoardGame extends Component{
                             setTimeout(this.pingForNewMatch, 3*1000, current, players);
                     }
                 }
+            });
+    }
+
+    getWhoseTurn() {
+        const yourName = this.state.userID;
+        fetch("/getWhoseTurn?gameID=" + yourName)
+            .then(result => {
+                if (result === this.state.userID)
+                    this.setState({yourTurn: true});
+
             });
     }
 
@@ -237,24 +250,52 @@ export default class BoardGame extends Component{
         }
         else{
             this.clearTimers();
-            return (
-              <table className="App" style={{width:"auto"}} align={'center'}>
-                <tbody>
-                    {this.state.row11}
-                    {this.state.row10}
-                    {this.state.row9}
-                    {this.state.row8}
-                    {this.state.row7}
-                    {this.state.row6}
-                    {this.state.row5}
-                    {this.state.row4}
-                    {this.state.row3}
-                    {this.state.row2}
-                    {this.state.row1}
-                    {this.state.row0}
-                </tbody>
-            </table>
-        );
+            this.getWhoseTurn();
+            if (this.state.yourTurn) {
+                return (
+                    <Grid>
+                        <h1>It is your turn, {this.state.userID}</h1>
+                        <table className="App" style={{width: "auto"}} align={'center'}>
+                            <tbody>
+                            {this.state.row11}
+                            {this.state.row10}
+                            {this.state.row9}
+                            {this.state.row8}
+                            {this.state.row7}
+                            {this.state.row6}
+                            {this.state.row5}
+                            {this.state.row4}
+                            {this.state.row3}
+                            {this.state.row2}
+                            {this.state.row1}
+                            {this.state.row0}
+                            </tbody>
+                        </table>
+                    </Grid>
+                );
+            }
+            else if (!this.state.yourTurn) {
+                return (
+                    <Grid>
+                        <h1>It is not your turn, {this.state.userID}</h1>
+                        <table className="App" style={{width: "auto"}} align={'center'}>
+                            <tbody>
+                            {this.state.row11}
+                            {this.state.row10}
+                            {this.state.row9}
+                            {this.state.row8}
+                            {this.state.row7}
+                            {this.state.row6}
+                            {this.state.row5}
+                            {this.state.row4}
+                            {this.state.row3}
+                            {this.state.row2}
+                            {this.state.row1}
+                            {this.state.row0}
+                            </tbody>
+                        </table>
+                    </Grid>)
+            }
         }
     }
 }
