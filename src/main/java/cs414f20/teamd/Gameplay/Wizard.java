@@ -27,13 +27,13 @@ public class Wizard extends ChessPiece{
         ArrayList<Helper.PseudoTuple> unboundedOptions = ValidMoveOffsets();
 
         String position = this.getPosition();
-        ArrayList<String> boundedOptions = new ArrayList<String>();
+        ArrayList<String> boundedOptions = new ArrayList<>();
         for (Helper.PseudoTuple unboundedOption : unboundedOptions)
             try {
                 boundedOptions.add(Helper.boundedMove(position, unboundedOption.x, unboundedOption.y));
-            } catch (IllegalPositionException e) {}
+            } catch (IllegalPositionException e) { /* intentional do nothing */ }
 
-        ArrayList<String> legalMoves = new ArrayList<String>();
+        ArrayList<String> legalMoves = new ArrayList<>();
         for (String boundedOption : boundedOptions) {
             try {
                 ChessPiece testPiece = this.board.getPiece(boundedOption);
@@ -43,14 +43,14 @@ public class Wizard extends ChessPiece{
                         continue;
 
                 legalMoves.add(boundedOption);
-            } catch (IllegalPositionException e) {}
+            } catch (IllegalPositionException e) { /* intentional do nothing */ }
         }
 
         return legalMoves;
     }
 
     private ArrayList<Helper.PseudoTuple> ValidMoveOffsets() {
-        ArrayList<Helper.PseudoTuple> tuples = new ArrayList<Helper.PseudoTuple>();
+        ArrayList<Helper.PseudoTuple> tuples = new ArrayList<>();
 
         tuples.add(new Helper.PseudoTuple(-3, -1));
         tuples.add(new Helper.PseudoTuple(-3, 1));

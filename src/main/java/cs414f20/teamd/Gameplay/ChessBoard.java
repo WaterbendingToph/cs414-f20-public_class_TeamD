@@ -140,6 +140,8 @@ public class ChessBoard {
             board[fromRow][fromCol] = null;
 
             piece.setPosition(toPosition);
+
+
         } catch (IllegalPositionException e) {
             throw new IllegalMoveException(); }
     }

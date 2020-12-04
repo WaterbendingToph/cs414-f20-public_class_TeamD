@@ -16,7 +16,7 @@ class QueenTest {
         assertEquals("\u265B", queen.toString());
     }
 
-    //@Test
+    @Test
     void legalMoves() {
         ChessBoard testBoard = new ChessBoard();
         Queen queen = new Queen(testBoard, ChessPiece.Color.WHITE);
@@ -29,6 +29,10 @@ class QueenTest {
         testBoard = new ChessBoard();
         queen = new Queen(testBoard, ChessPiece.Color.WHITE);
         legalMovesOpenCorner(testBoard, queen);
+
+        testBoard = new ChessBoard();
+        queen = new Queen(testBoard, ChessPiece.Color.WHITE);
+        legalMovesCardinalStretch(testBoard, queen);
     }
 
     private void legalMovesOpenCenter(ChessBoard board, Queen queen) {
@@ -64,6 +68,13 @@ class QueenTest {
     private void legalMovesOpenCorner(ChessBoard board, Queen queen) {
         board.placePiece(queen, "w3");
         String[] expectedMoves = {"w1", "a0", "b1", "c2", "d3", "e4", "f5", "g6", "h7", "i8", "j9"};
+        TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, queen.legalMoves());
+    }
+    private void legalMovesCardinalStretch(ChessBoard board, Queen queen) {
+        board.placePiece(queen, "j9");
+        String[] expectedMoves = {"w1", "a0", "b1", "c2", "d3", "e4", "f5", "g6", "h7", "i8", "w3",
+                                    "a9", "b9", "c9", "d9", "e9", "f9", "g9", "h9", "i9",
+                                    "j0", "j1", "j2", "j3", "j4", "j5", "j6", "j7", "j8"};
         TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, queen.legalMoves());
     }
 }

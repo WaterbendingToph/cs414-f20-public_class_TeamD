@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class TestHelper {
     static void assertExpectedMovesEqualLegalMoves(String[] expectedMovesArray, ArrayList<String> legalMoves) {
-        ArrayList<String> expectedMoves = new ArrayList<String>(Arrays.asList(expectedMovesArray));
+        ArrayList<String> expectedMoves = new ArrayList<>(Arrays.asList(expectedMovesArray));
         ArrayList<String> actualMoves = legalMoves;
         expectedMoves.sort(Comparator.naturalOrder());
         actualMoves.sort(Comparator.naturalOrder());

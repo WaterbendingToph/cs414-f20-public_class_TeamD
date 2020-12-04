@@ -39,7 +39,6 @@ class KingTest {
         requisiteBoard = new ChessBoard();
         King king = new King(requisiteBoard, ChessPiece.Color.WHITE);
         requisiteBoard.placePiece(king, "a0");
-
         String[] expectedMoves = {"a1", "b0", "b1", "w1"};
 
         TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, king.legalMoves());

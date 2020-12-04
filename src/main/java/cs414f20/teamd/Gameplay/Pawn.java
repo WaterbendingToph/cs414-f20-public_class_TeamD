@@ -32,7 +32,8 @@ public class Pawn extends ChessPiece {
 
     @Override
     public ArrayList<String> legalMoves() {
-        ArrayList<String> legalMoves = new ArrayList<String>();
+        ArrayList<String> legalMoves = new ArrayList<>();
+
 
         forwardLegalMoves(legalMoves);
         diagonalLegalMoves(legalMoves);
@@ -40,7 +41,7 @@ public class Pawn extends ChessPiece {
         return legalMoves;
     }
     private void forwardLegalMoves(ArrayList<String> legalMoves){
-        String checkPosition = "";
+        String checkPosition;
         String currentPosition = getPosition();
 
         try {
@@ -57,10 +58,10 @@ public class Pawn extends ChessPiece {
                 if (Helper.positionIsEmpty(board, checkPosition))
                     legalMoves.add(checkPosition);
             }
-        } catch (IllegalPositionException ipe) {}
+        } catch (IllegalPositionException ipe) { /* intentional do nothing */ }
     }
     private void diagonalLegalMoves(ArrayList<String> legalMoves){
-        String checkPosition = "";
+        String checkPosition;
         String currentPosition = getPosition();
 
         try {
@@ -68,14 +69,13 @@ public class Pawn extends ChessPiece {
             if (!Helper.positionIsEmpty(board, checkPosition))
                 if (board.getPiece(checkPosition).color != color)
                     legalMoves.add(checkPosition);
-        } catch (IllegalPositionException ipe) {}
+        } catch (IllegalPositionException ipe) { /* intentional do nothing */ }
 
         try {
             checkPosition = Helper.boundedMove(currentPosition, 1, pawnDirection);
             if (!Helper.positionIsEmpty(board, checkPosition))
                 if (board.getPiece(checkPosition).color != color)
                     legalMoves.add(checkPosition);
-        } catch (IllegalPositionException ipe) {}
+        } catch (IllegalPositionException ipe) { /* intentional do nothing */ }
     }
-
 }

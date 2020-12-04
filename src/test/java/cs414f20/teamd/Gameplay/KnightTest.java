@@ -1,7 +1,6 @@
 package cs414f20.teamd.Gameplay;
 
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class KnightTest {
@@ -18,7 +17,7 @@ class KnightTest {
         assertEquals("\u265E", knight.toString());
     }
 
-    //@Test
+    @Test
     void legalMoves() {
         requisiteBoard = new ChessBoard();
         Knight knight = new Knight(requisiteBoard, ChessPiece.Color.WHITE);
@@ -38,6 +37,7 @@ class KnightTest {
         String[] expectedMoves = {"c3", "c5", "d2", "d6", "f2", "f6", "g3", "g5"};
         TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, knight.legalMoves());
     }
+
     private void legalMovesCrowdedCenter(ChessBoard board, Knight knight) {
         board.placePiece(knight, "e4");
 
@@ -55,6 +55,7 @@ class KnightTest {
 
         TestHelper.assertExpectedMovesEqualLegalMoves(expectedMoves, knight.legalMoves());
     }
+
     private void legalMovesCrowdedCorner(ChessBoard board, Knight knight) {
         Knight enemyKnight = new Knight(board, ChessPiece.Color.BLACK);
 
