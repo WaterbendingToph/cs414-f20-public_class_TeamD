@@ -23,7 +23,7 @@ public class Bishop extends ChessPiece {
         ArrayList<ArrayList<String>> potentialMovePaths = createPotentialPaths();
 
         for (ArrayList<String> path : potentialMovePaths) {
-            ArrayList<String> moves = pathLegalMoves(path);
+            ArrayList<String> moves = Helper.pathLegalMoves(path, this);
             legalMoves.addAll(moves);
         }
 
@@ -48,31 +48,5 @@ public class Bishop extends ChessPiece {
         }
 
         return potentialPaths;
-    }
-    private ArrayList<String> pathLegalMoves(ArrayList<String> path) {
-        ArrayList<String> legalMoves = new ArrayList<>();
-
-        for (int squareIndex = 0; squareIndex < path.size(); squareIndex++) {
-            String position = path.get(squareIndex);
-
-            try {
-                if (!Helper.positionIsEmpty(board, position)) {
-                    ChessPiece checkPiece = board.getPiece(position);
-
-                    int inclusiveIndex = 0;
-                    if (checkPiece.color != this.color)
-                        inclusiveIndex = 1;
-
-                    List<String> swap = path.subList(0, squareIndex + inclusiveIndex);
-                    path = new ArrayList<>();
-                    path.addAll(swap);
-                }
-            } catch (IllegalPositionException ipe) { /* intentional do nothing */ }
-
-            if (squareIndex < path.size())
-                legalMoves.add(position);
-        }
-
-        return legalMoves;
     }
 }

@@ -1,5 +1,6 @@
 package cs414f20.teamd.Gameplay;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -128,7 +129,34 @@ public class Helper {
 
     }
 
-	
+
+    protected static ArrayList<String> pathLegalMoves(ArrayList<String> path, ChessPiece checkingPiece) {
+        ArrayList<String> legalMoves = new ArrayList<>();
+
+        for (int indexOfSquareInPath = 0; indexOfSquareInPath < path.size(); indexOfSquareInPath++) {
+            String position = path.get(indexOfSquareInPath);
+
+            try {
+                if (!positionIsEmpty(checkingPiece.board, position)) {
+                    ChessPiece checkPiece = checkingPiece.board.getPiece(position);
+
+                    int inclusiveIndex = 0;
+                    if (checkPiece.color != checkingPiece.color)
+                        inclusiveIndex = 1;
+
+                    List<String> swap = path.subList(0, indexOfSquareInPath + inclusiveIndex);
+                    path = new ArrayList<>();
+                    path.addAll(swap);
+                }
+            } catch (IllegalPositionException ipe) { /* intentional do nothing */ }
+
+            if (indexOfSquareInPath < path.size())
+                legalMoves.add(position);
+        }
+
+        return legalMoves;
+    }
+
     protected static class PseudoTuple {
         public int x;
         public int y;
