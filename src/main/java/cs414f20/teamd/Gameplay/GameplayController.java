@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 @RestController
 public class GameplayController {
@@ -15,7 +16,7 @@ public class GameplayController {
         return Database.getWhoseTurn(gameID);
     }
 
-    @GetMapping("/getBoard")
+    @GetMapping("/getBoardState")
     public String getBoardState(@RequestParam(value = "gameID")String gameID) {
         ArrayList<String> boardState = Database.getBoardState(gameID);
         trimProperly(boardState);
@@ -31,8 +32,7 @@ public class GameplayController {
         String replacement = board.get(0).substring(1, board.get(0).length() - 1);
         String[] temp = replacement.split(",");
         board.clear();
-        for (String s: temp)
-            board.add(s);
+        Collections.addAll(board, temp);
     }
 
 

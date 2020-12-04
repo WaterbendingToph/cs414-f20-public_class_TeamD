@@ -85,7 +85,7 @@ export default class BoardGame extends Component{
 
     getBoard() {
         const gameID = this.state.gameID;
-        fetch("/getBoard?gameID=" + gameID)
+        fetch("/getBoardState?gameID=" + gameID)
             .then(res => res.text() )
             .then(board => {
                 console.log(board)

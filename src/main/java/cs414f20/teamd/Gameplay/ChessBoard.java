@@ -1,6 +1,5 @@
 package cs414f20.teamd.Gameplay;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -230,101 +229,102 @@ public class ChessBoard {
         ChessPiece.Color Black = ChessPiece.Color.BLACK;
         try {
             for (String thisPiece : boardState) {
+                String position = thisPiece.substring(thisPiece.length() - 2);
                 if (thisPiece.contains("Black Pawn")) {
                     Pawn pawn = new Pawn(this, Black);
-                    placePiece(pawn, thisPiece.substring(thisPiece.length() - 2));
-                    pawn.setPosition(thisPiece.substring(thisPiece.length() - 2));
+                    placePiece(pawn, position);
+                    pawn.setPosition(position);
                 }
 
                 if (thisPiece.contains("Black rook")) {
                     Rook rook = new Rook(this, Black);
-                    placePiece(rook, thisPiece.substring(thisPiece.length() - 2));
-                    rook.setPosition(thisPiece.substring(thisPiece.length() - 2));
+                    placePiece(rook, position);
+                    rook.setPosition(position);
                 }
 
                 if (thisPiece.contains("Black Knight")) {
                     Knight knight = new Knight(this, Black);
-                    placePiece(knight, thisPiece.substring(thisPiece.length() - 2));
-                    knight.setPosition(thisPiece.substring(thisPiece.length() - 2));
+                    placePiece(knight, position);
+                    knight.setPosition(position);
                 }
 
                 if (thisPiece.contains("Black Bishop")) {
                     Bishop bishop = new Bishop(this, Black);
-                    placePiece(bishop, thisPiece.substring(thisPiece.length() - 2));
-                    bishop.setPosition(thisPiece.substring(thisPiece.length() - 2));
+                    placePiece(bishop, position);
+                    bishop.setPosition(position);
                 }
 
                 if (thisPiece.contains("Black Queen")) {
                     Queen queen = new Queen(this, Black);
-                    placePiece(queen, thisPiece.substring(thisPiece.length() - 2));
-                    queen.setPosition(thisPiece.substring(thisPiece.length() - 2));
+                    placePiece(queen, position);
+                    queen.setPosition(position);
                 }
 
                 if (thisPiece.contains("Black King")) {
                     King king = new King(this, Black);
-                    placePiece(king, thisPiece.substring(thisPiece.length() - 2));
-                    king.setPosition(thisPiece.substring(thisPiece.length() - 2));
+                    placePiece(king, position);
+                    king.setPosition(position);
                 }
 
                 if (thisPiece.contains("Black Champion")) {
                     Champion champion = new Champion(this, Black);
-                    placePiece(champion, thisPiece.substring(thisPiece.length() - 2));
-                    champion.setPosition(thisPiece.substring(thisPiece.length() - 2));
+                    placePiece(champion, position);
+                    champion.setPosition(position);
                 }
 
                 if (thisPiece.contains("Black Wizard")) {
                     Wizard wizard = new Wizard(this, Black);
-                    placePiece(wizard, thisPiece.substring(thisPiece.length() - 2));
-                    wizard.setPosition(thisPiece.substring(thisPiece.length() - 2));
+                    placePiece(wizard, position);
+                    wizard.setPosition(position);
                 }
 
 
                 if (thisPiece.contains("White Pawn")) {
                     Pawn pawn = new Pawn(this, White);
-                    placePiece(pawn, thisPiece.substring(thisPiece.length() - 2));
-                    pawn.setPosition(thisPiece.substring(thisPiece.length() - 2));
+                    placePiece(pawn, position);
+                    pawn.setPosition(position);
                 }
 
                 if (thisPiece.contains("White rook")) {
                     Rook rook = new Rook(this, White);
-                    placePiece(rook, thisPiece.substring(thisPiece.length() - 2));
-                    rook.setPosition(thisPiece.substring(thisPiece.length() - 2));
+                    placePiece(rook, position);
+                    rook.setPosition(position);
                 }
 
                 if (thisPiece.contains("White Knight")) {
                     Knight knight = new Knight(this, White);
-                    placePiece(knight, thisPiece.substring(thisPiece.length() - 2));
-                    knight.setPosition(thisPiece.substring(thisPiece.length() - 2));
+                    placePiece(knight, position);
+                    knight.setPosition(position);
                 }
 
                 if (thisPiece.contains("White Bishop")) {
                     Bishop bishop = new Bishop(this, White);
-                    placePiece(bishop, thisPiece.substring(thisPiece.length() - 2));
-                    bishop.setPosition(thisPiece.substring(thisPiece.length() - 2));
+                    placePiece(bishop, position);
+                    bishop.setPosition(position);
                 }
 
                 if (thisPiece.contains("White Queen")) {
                     Queen queen = new Queen(this, White);
-                    placePiece(queen, thisPiece.substring(thisPiece.length() - 2));
-                    queen.setPosition(thisPiece.substring(thisPiece.length() - 2));
+                    placePiece(queen, position);
+                    queen.setPosition(position);
                 }
 
                 if (thisPiece.contains("White King")) {
                     King king = new King(this, White);
-                    placePiece(king, thisPiece.substring(thisPiece.length() - 2));
-                    king.setPosition(thisPiece.substring(thisPiece.length() - 2));
+                    placePiece(king, position);
+                    king.setPosition(position);
                 }
 
                 if (thisPiece.contains("White Champion")) {
                     Champion champion = new Champion(this, White);
-                    placePiece(champion, thisPiece.substring(thisPiece.length() - 2));
-                    champion.setPosition(thisPiece.substring(thisPiece.length() - 2));
+                    placePiece(champion, position);
+                    champion.setPosition(position);
                 }
 
                 if (thisPiece.contains("White Wizard")) {
                     Wizard wizard = new Wizard(this, White);
-                    placePiece(wizard, thisPiece.substring(thisPiece.length() - 2));
-                    wizard.setPosition(thisPiece.substring(thisPiece.length() - 2));
+                    placePiece(wizard, position);
+                    wizard.setPosition(position);
                 }
             }
         } catch (IllegalPositionException ipe) { System.err.println("Error caught while trying to place pieces on board in populateBoard() call of GameplayController's getBoardState " + boardState.get(0).substring(boardState.get(0).length() - 2) ); }
