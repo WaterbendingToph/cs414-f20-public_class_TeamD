@@ -173,7 +173,7 @@ export default class BoardGame extends Component{
     }
 
     squareClick(color, isPiece, position=""){
-        if(color !== white){
+        if(color !== white && this.state.yourTurn){
             if(this.state.pieceSelected === "" && isPiece)
                 this.setState({pieceSelected: position});
             else if(this.state.pieceSelected.length === 2 && !isPiece){
@@ -182,6 +182,8 @@ export default class BoardGame extends Component{
                     .then(data => {
                         console.log(data);
                         // this.setBoard(data.board);
+                        if(data.error === "")
+                            this.setState({yourTurn: false});
                         this.setState({pieceSelected: ""});
                     });
             }
@@ -193,6 +195,9 @@ export default class BoardGame extends Component{
             // else
             //     console.log("Empty square clicked!");
             // console.log("@ position: " + position);
+        }
+        else{
+            console.log("Probably clicked on white space or not your turn!");
         }
     }
 
