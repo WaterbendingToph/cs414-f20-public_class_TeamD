@@ -34,7 +34,6 @@ export default class BoardGame extends Component{
             timers: [],
             start_search_date: new Date(),
             yourTurn: null,
-            testResults: "unchanged"
         }
         this.setupDefaultWizardRowWhite = this.setupDefaultWizardRowWhite.bind(this);
         this.setupDefaultBackRowWhite = this.setupDefaultBackRowWhite.bind(this);
@@ -87,8 +86,8 @@ export default class BoardGame extends Component{
         const gameID = this.state.gameID;
         fetch("/getBoardState?gameID=" + gameID)
             .then(res => res.text() )
-            .then(board => {
-                console.log(board)
+            .then(boardState => {
+                console.log(boardState)
             })
     }
 
