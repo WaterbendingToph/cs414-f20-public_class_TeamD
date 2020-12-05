@@ -70,6 +70,8 @@ export default class InviteBox extends Component {
             let invites = this.state.invites.map(user => {
                 if(user !== "")
                     return(<li key={user}>{user} <CheckIcon onClick={this.acceptInvite.bind(this, user)}/> <NotInterestedIcon onClick={this.deleteUser.bind(this, user)}/></li>);
+                else
+                    return(<li></li>);
             });
             return(
                 <div>

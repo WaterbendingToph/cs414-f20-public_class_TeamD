@@ -445,6 +445,22 @@ public class Database {
         return results;
     }
 
+    public static boolean setBoardState(String gameID, String board){
+        Connection conn = null;
+        Statement query = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "UPDATE chessGames SET board=\""+ board +"\" WHERE gameID=\"" + gameID + "\";";
+            query.executeUpdate(queryStatement);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error while Setting Updated Board: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return false;
+    }
     public static void main(String[] args) {
         // getAllUsers();
         // enterNewGame(20, "me", "not me");

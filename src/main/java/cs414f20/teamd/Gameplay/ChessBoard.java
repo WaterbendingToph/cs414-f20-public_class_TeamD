@@ -190,6 +190,15 @@ public class ChessBoard {
         return returnString;
     }
 
+    public void databaseToChessBoard(ArrayList<String> board){
+        // TODO change database board to actual chessboard
+    }
+
+    public String chessBoardTodatabase(){
+        // TODO change actual chessboard to database board (Convert to HashTable<String, String> then call toString on that)
+        return "";
+    }
+
     //Taken from the a2 assignment specification - for testing purposes only
     public static void main(String[] args) {
         ChessBoard board = new ChessBoard();

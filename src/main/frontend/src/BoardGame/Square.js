@@ -4,6 +4,9 @@ export default class Square extends Component{
 
     constructor(props){
         super(props);
+        this.state = {
+            position: this.props.position
+        }
         this.backgroundColor = props.backgroundColor;
         this.backgroundImage = null;
         this.setDisplayedPiece(this.props.color, this.props.piece)
@@ -64,9 +67,10 @@ export default class Square extends Component{
                 else if (pieceColor === "black")
                     this.backgroundImage = "url(https://upload.wikimedia.org/wikipedia/commons/7/7e/Chess_wdt45.svg)";
                 break;
+            default:
+                break;
         }
     }
-
 
     render(){
         return (
@@ -76,7 +80,7 @@ export default class Square extends Component{
                 height: '50px',
                 border: "2px solid",
                 borderColor : this.props.backgroundColor,
-                backgroundImage: this.backgroundImage} } >
+                backgroundImage: this.backgroundImage}} onClick={this.props.onClick}>
             </div>);
     }
 }

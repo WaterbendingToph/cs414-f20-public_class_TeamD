@@ -14,18 +14,6 @@ export default class BoardGame extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            row0: this.setupDefaultWizardRowWhite(),
-            row1: this.setupDefaultBackRowWhite(),
-            row2: this.setupPawnsRow9(),
-            row3: this.setupBlankRow1(),
-            row4: this.setupBlankRow2(),
-            row5: this.setupBlankRow1(),
-            row6: this.setupBlankRow2(),
-            row7: this.setupBlankRow1(),
-            row8: this.setupBlankRow2(),
-            row9: this.setupPawnsRow2(),
-            row10: this.setupDefaultBackRowBlack(),
-            row11: this.setupDefaultWizardRowBlack(),
             userID: this.props.location.state.userID,
             password: this.props.location.state.password,
             gameID: this.props.location.state.gameID,
@@ -34,18 +22,19 @@ export default class BoardGame extends Component{
             timers: [],
             start_search_date: new Date(),
             yourTurn: null,
+            pieceSelected: "",
+            board: [],
+            wizardSpots: []
         }
         this.setupDefaultWizardRowWhite = this.setupDefaultWizardRowWhite.bind(this);
-        this.setupDefaultBackRowWhite = this.setupDefaultBackRowWhite.bind(this);
-        this.setupPawnsRow2 = this.setupPawnsRow2.bind(this);
-        this.setupBlankRow1 = this.setupBlankRow1.bind(this);
-        this.setupBlankRow2 = this.setupBlankRow2.bind(this);
-        this.setupPawnsRow9 = this.setupPawnsRow9.bind(this);
-        this.setupDefaultBackRowBlack = this.setupDefaultBackRowBlack.bind(this);
         this.setupDefaultWizardRowBlack = this.setupDefaultWizardRowBlack.bind(this);
         this.pingForNewMatch = this.pingForNewMatch.bind(this);
         this.getWhoseTurn = this.getWhoseTurn.bind(this);
-        this.getBoard = this.getBoard.bind(this);
+    }
+
+    componentDidMount(){
+        this.getBoard();
+        this.getWhoseTurn()
     }
 
     pingForNewMatch(current, players){
@@ -82,12 +71,29 @@ export default class BoardGame extends Component{
             });
     }
 
+    setBoard(board){
+        let wizardSpots = new Array(4).fill("");
+        let actualBoard = new Array(10).fill("").map(() => new Array(10).fill(""));
+        Object.keys(board).forEach(piece => {
+            let column = board[piece].charCodeAt(0) - 97;
+            let row = parseInt(board[piece].charAt(1), 10);
+            if(board[piece].charAt(0) === 'w')
+                wizardSpots[row-1] = piece;
+            else{
+                row = 9 - row;
+                actualBoard[row][column] = piece;
+            }
+        });
+        this.setState({board: actualBoard, wizardSpots});
+    }
+
     getBoard() {
         const gameID = this.state.gameID;
         fetch("/getBoardState?gameID=" + gameID)
             .then(res => res.text() )
-            .then(boardState => {
-                console.log(boardState)
+            .then(board => {
+                board = JSON.parse(board);
+                this.setBoard(board);
             })
     }
 
@@ -97,152 +103,139 @@ export default class BoardGame extends Component{
         })
     }
 
+    getWhiteSpace(){
+        return(
+            <>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+                <td><Square backgroundColor={white}/></td>
+            </>
+        );
+    }
+
     setupDefaultWizardRowWhite(){
+        let w2 = (<Square backgroundColor={orange} onClick={this.squareClick.bind(this, orange, false, "w2")}/>);
+        let w1 = (<Square backgroundColor={yellow} onClick={this.squareClick.bind(this, yellow, false, "w1")}/>);
+        if(this.state.wizardSpots.length > 0){
+            if(this.state.wizardSpots[1] !== ""){
+                let piece = this.state.wizardSpots[1].toLowerCase();
+                piece = piece.substring(0, piece.length-1);
+                piece = piece.split(" ")
+                w2 = (<Square backgroundColor={orange} color={piece[0]} piece={piece[1]} onClick={this.squareClick.bind(this, orange, true, "w2")}/>);
+            }
+            if(this.state.wizardSpots[0] !== ""){
+                let piece = this.state.wizardSpots[0].toLowerCase();
+                piece = piece.substring(0, piece.length-1);
+                piece = piece.split(" ")
+                w1 = (<Square backgroundColor={yellow} color={piece[0]} piece={piece[1]} onClick={this.squareClick.bind(this, yellow, false, "w1")}/>);
+            }
+        }
         return(
             <tr>
-                <td><Square backgroundColor={yellow} color={"white"} piece={"wizard"}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={orange} color={"white"} piece={"wizard"}/></td>
+                <td>{w1}</td>
+                {this.getWhiteSpace()}
+                <td>{w2}</td>
             </tr>
         );
     }
 
     setupDefaultWizardRowBlack(){
+        let w4 = (<Square backgroundColor={orange} onClick={this.squareClick.bind(this, orange, false, "w4")}/>);
+        let w3 = (<Square backgroundColor={yellow} onClick={this.squareClick.bind(this, yellow, false, "w3")}/>);
+        if(this.state.wizardSpots.length > 0){
+            if(this.state.wizardSpots[3] !== ""){
+                let piece = this.state.wizardSpots[2].toLowerCase();
+                piece = piece.substring(0, piece.length-1);
+                piece = piece.split(" ")
+                w4 = (<Square backgroundColor={orange} color={piece[0]} piece={piece[1]} onClick={this.squareClick.bind(this, orange, true, "w4")}/>);
+            }
+            if(this.state.wizardSpots[2] !== ""){
+                let piece = this.state.wizardSpots[3].toLowerCase();
+                piece = piece.substring(0, piece.length-1);
+                piece = piece.split(" ")
+                w3 = (<Square backgroundColor={yellow} color={piece[0]} piece={piece[1]} onClick={this.squareClick.bind(this, yellow, true, "w3")}/>);
+            }
+        }
         return (
             <tr>
-                <td><Square backgroundColor={orange} color={"black"} piece={"wizard"}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={yellow} color={"black"} piece={"wizard"}/></td>
+                <td>{w4}</td>
+                {this.getWhiteSpace()}
+                <td>{w3}</td>
             </tr>
         );
     }
 
-    setupDefaultBackRowWhite() {
-        return (
-            <tr >
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={yellow} color={"white"} piece={"champion"}/></td>
-                <td><Square backgroundColor={orange} color={"white"} piece={"rook"}/></td>
-                <td><Square backgroundColor={yellow} color={"white"} piece={"knight"}/></td>
-                <td><Square backgroundColor={orange} color={"white"} piece={"bishop"}/></td>
-                <td><Square backgroundColor={yellow} color={"white"} piece={"queen"}/></td>
-                <td><Square backgroundColor={orange} color={"white"} piece={"king"}/></td>
-                <td><Square backgroundColor={yellow} color={"white"} piece={"bishop"}/></td>
-                <td><Square backgroundColor={orange} color={"white"} piece={"knight"}/></td>
-                <td><Square backgroundColor={yellow} color={"white"} piece={"rook"}/></td>
-                <td><Square backgroundColor={orange} color={"white"} piece={"champion"}/></td>
-            </tr>
-        );
+    squareClick(color, isPiece, position=""){
+        if(color !== white){
+            if(this.state.pieceSelected === "" && isPiece)
+                this.setState({pieceSelected: position});
+            else if(this.state.pieceSelected.length === 2 && !isPiece){
+                fetch("/move?gameID="+ this.state.gameID+ "&from=" + this.state.pieceSelected + "&to=" + position)
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        // this.setBoard(data.board);
+                        this.setState({pieceSelected: ""});
+                    });
+            }
+            else
+                this.setState({pieceSelected: ""});
 
+            // if(isPiece)
+            //     console.log("Some piece clicked!");
+            // else
+            //     console.log("Empty square clicked!");
+            // console.log("@ position: " + position);
+        }
     }
 
-    setupDefaultBackRowBlack() {
+    renderBoard(){
+        let rowN = 0;
+        let boardDisplay = [];
+        this.state.board.forEach(row =>{
+            let color = orange;
+            if(rowN%2 === 0)
+                color = yellow;
+
+            let colN = 0;
+            row = row.map(piece => {
+                let position = String.fromCharCode(97+colN)+ (9-rowN);
+                colN++;
+                if(color === orange)
+                    color = yellow;
+                else
+                    color = orange;
+                if(piece === ""){
+                    return (<td><Square backgroundColor={color} onClick={this.squareClick.bind(this, color, false, position)}/></td>);
+                }
+                else{
+                    piece = piece.toLowerCase();
+                    piece = piece.substring(0, piece.length-1);
+                    piece = piece.split(" ");
+                    return (<td><Square backgroundColor={color} color={piece[0]} piece={piece[1]} onClick={this.squareClick.bind(this, color, true, position)}/></td>);
+                }
+            });
+
+            boardDisplay.push(
+                <tr key={9-rowN}>
+                    <td key={"a"+(9-rowN)}><Square backgroundColor={white}/></td>
+                    {row}
+                    <td key={"j"+(9-rowN)}><Square backgroundColor={white}/></td>
+                </tr>
+            );
+            rowN++;
+        });
         return(
-            <tr>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={orange} color={"black"} piece={"champion"}/></td>
-                <td><Square backgroundColor={yellow} color={"black"} piece={"rook"}/></td>
-                <td><Square backgroundColor={orange} color={"black"} piece={"knight"}/></td>
-                <td><Square backgroundColor={yellow} color={"black"} piece={"bishop"}/></td>
-                <td><Square backgroundColor={orange} color={"black"} piece={"queen"}/></td>
-                <td><Square backgroundColor={yellow} color={"black"} piece={"king"}/></td>
-                <td><Square backgroundColor={orange} color={"black"} piece={"bishop"}/></td>
-                <td><Square backgroundColor={yellow} color={"black"} piece={"knight"}/></td>
-                <td><Square backgroundColor={orange} color={"black"} piece={"rook"}/></td>
-                <td><Square backgroundColor={yellow} color={"black"} piece={"champion"}/></td>
-            </tr>
-
-        );
-    }
-
-    setupPawnsRow9() {
-        return(
-            <tr>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={orange} color={"white"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={yellow} color={"white"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={orange} color={"white"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={yellow} color={"white"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={orange} color={"white"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={yellow} color={"white"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={orange} color={"white"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={yellow} color={"white"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={orange} color={"white"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={yellow} color={"white"} piece={"pawn"}/></td>
-            </tr>
-        );
-    }
-
-    setupPawnsRow2() {
-        return(
-            <tr >
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={yellow} color={"black"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={yellow} color={"black"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={yellow} color={"black"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={yellow} color={"black"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={yellow} color={"black"} piece={"pawn"}/></td>
-                <td><Square backgroundColor={orange} color={"black"} piece={"pawn"}/></td>
-        </tr>
-        );
-    }
-
-    setupBlankRow1(){
-        return (
-            <tr >
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={yellow} /></td>
-                <td><Square backgroundColor={orange} /></td>
-                <td><Square backgroundColor={yellow} /></td>
-                <td><Square backgroundColor={orange} /></td>
-                <td><Square backgroundColor={yellow} /></td>
-                <td><Square backgroundColor={orange} /></td>
-                <td><Square backgroundColor={yellow} /></td>
-                <td><Square backgroundColor={orange} /></td>
-                <td><Square backgroundColor={yellow} /></td>
-                <td><Square backgroundColor={orange} /></td>
-            </tr>
-        );
-    }
-
-    setupBlankRow2(){
-        return(
-            <tr>
-                <td><Square backgroundColor={white}/></td>
-                <td><Square backgroundColor={orange}/></td>
-                <td><Square backgroundColor={yellow}/></td>
-                <td><Square backgroundColor={orange}/></td>
-                <td><Square backgroundColor={yellow}/></td>
-                <td><Square backgroundColor={orange}/></td>
-                <td><Square backgroundColor={yellow}/></td>
-                <td><Square backgroundColor={orange}/></td>
-                <td><Square backgroundColor={yellow}/></td>
-                <td><Square backgroundColor={orange}/></td>
-                <td><Square backgroundColor={yellow}/></td>
-            </tr>
-
+            <>
+                {boardDisplay}
+            </>
         );
     }
 
@@ -259,33 +252,26 @@ export default class BoardGame extends Component{
             );
         }
         else{
-            this.clearTimers();
-            this.getWhoseTurn();
-            this.getBoard();
-            let turn = <h1>It is your turn, {this.state.userID}</h1>;
-            if (!this.state.yourTurn)
-                turn = <h1>It is not your turn, {this.state.userID}</h1>
+            if(this.state.board.length > 0){
+                let turn = <h1>It is your turn, {this.state.userID}</h1>;
+                if (!this.state.yourTurn)
+                    turn = <h1>It is not your turn, {this.state.userID}</h1>
                 return (
                     <Grid>
                         {turn}
                         <table className="App" style={{width: "auto"}} align={'center'}>
                             <tbody>
-                            {this.state.row11}
-                            {this.state.row10}
-                            {this.state.row9}
-                            {this.state.row8}
-                            {this.state.row7}
-                            {this.state.row6}
-                            {this.state.row5}
-                            {this.state.row4}
-                            {this.state.row3}
-                            {this.state.row2}
-                            {this.state.row1}
-                            {this.state.row0}
+                                {this.setupDefaultWizardRowBlack()}
+                                {this.renderBoard()}
+                                {this.setupDefaultWizardRowWhite()}
                             </tbody>
                         </table>
                     </Grid>
                 );
+            }
+            else{
+                return(<h1>Loading...</h1>)
+            }
         }
     }
 }
