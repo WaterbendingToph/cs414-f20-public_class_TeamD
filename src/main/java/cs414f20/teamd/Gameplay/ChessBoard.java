@@ -201,9 +201,11 @@ public class ChessBoard {
             ChessPiece newPiece = null;
             ChessPiece.Color temp = ChessPiece.Color.WHITE;
             String[] colorAndPiece = piece.split(" ");
-            if(colorAndPiece[0] == "black")
+            if(colorAndPiece[0].equals("black"))
                 temp = ChessPiece.Color.BLACK;
-            switch(colorAndPiece[1].substring(0, colorAndPiece[1].length()-1)){
+            String temp_piece = colorAndPiece[1].split("=")[0];
+            System.out.println(temp_piece.substring(0, temp_piece.length()-1));
+            switch(temp_piece.substring(0, temp_piece.length()-1)){
                 case "bishop":
                     newPiece = new Bishop(this, temp);
                     break;
@@ -253,8 +255,10 @@ public class ChessBoard {
             return "Bishop";
         }
         else if(piece instanceof King){
-            return "Queen";
+            return "King";
         }
+        else if(piece == null)
+            return "Null piece";
         else {
             return "Pawn";
         }
@@ -263,35 +267,42 @@ public class ChessBoard {
     public String chessBoardTodatabase(){
         // TODO change actual chessboard to database board (Convert to HashTable<String, String> then call toString on that)
         Hashtable<String, String> newBoard = new Hashtable<>();
-        System.out.println("[BOARD INFO]: # row: " + board.length);
+        // System.out.println("[BOARD INFO]: # row: " + board.length);
         for(int i = 0; i<board.length; i++){
-            System.out.println("[BOARD INFO]: # columns in row: " + board[i].length);
-            for(int j = 0; i < board[i].length; i++){
+            // System.out.println("[BOARD INFO]: # columns in row: " + board[i].length);
+            for(int j = 0; j < board[i].length; j++){
                 ChessPiece piece = board[i][j];
+                System.out.println("");
+                // System.out.println("[DEBUG]: Current piece: " + whatPiece(piece));
                 if(piece != null){
                     String key = "White ";
                     if(piece.getColor() == Color.BLACK)
                         key = "Black ";
-
-                    System.out.println("[DEBUG]: Current Piece is: " + whatPiece(piece));
                     key += whatPiece(piece);
                     if(piece instanceof Pawn){
                         String[] columns = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" };
                         for(String col : columns){
-                            if(!newBoard.contains(key+col)){
+                            if(!newBoard.containsKey(key+col)){
                                 newBoard.put(key+col, piece.getPosition());
+                                break;
                             }
                         }
                     }
                     else{
-                        if(newBoard.contains(key+"0"))
+                        // System.out.println("[DEBUG]: Current key: " + key);
+                        if(newBoard.containsKey(key+"0")){
                             newBoard.put(key+"1", piece.getPosition());
-                        else
+                            // System.out.println("Added second piece: " + key + "1");
+                        }
+                        else{
                             newBoard.put(key+"0", piece.getPosition());
+                            // System.out.println("Added first piece: " + key + "0");
+                        }
                     }
                 }
             }
         }
+        // System.out.println("[DEBUG]: Size of the hashtable: " + newBoard.size());
         return newBoard.toString();
     }
 
