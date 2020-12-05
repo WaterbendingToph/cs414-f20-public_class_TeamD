@@ -461,6 +461,33 @@ public class Database {
         }
         return false;
     }
+
+    public static boolean switchWhoseTurn(String gameID){
+        Connection conn = null;
+        Statement query = null;
+        String currentTurn = getWhoseTurn(gameID);
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT * FROM chessGames WHERE gameID= \'" + gameID + "\';";
+            ResultSet queryResults = query.executeQuery(queryStatement);
+            while(queryResults.next()){
+                String white = queryResults.getString("white_player");
+                if(white.equals(currentTurn))
+                    currentTurn = queryResults.getString("black_player");
+                else
+                    currentTurn = white;
+            }
+            queryStatement = "UPDATE chessGames SET whose_turn=\""+ currentTurn +"\" WHERE gameID=\"" + gameID + "\";";
+            query.executeUpdate(queryStatement);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error while Switching: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return false;
+    }
     public static void main(String[] args) {
         // getAllUsers();
         // enterNewGame(20, "me", "not me");
@@ -468,15 +495,16 @@ public class Database {
         // setupBoard(board);
         // System.out.println("Size of board: " + board.size());
         // System.out.println(board);
-        String testDate = "2020-09-11 13:43:38";
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            java.util.Date date = formatter.parse(testDate);
-            System.out.println("Normal date: " + date);
-            java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
-            System.out.println("SQL date: " + sqlDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        // String testDate = "2020-09-11 13:43:38";
+        // SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // try {
+        //     java.util.Date date = formatter.parse(testDate);
+        //     System.out.println("Normal date: " + date);
+        //     java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
+        //     System.out.println("SQL date: " + sqlDate);
+        // } catch (ParseException e) {
+        //     e.printStackTrace();
+        // }
+        System.out.println(switchWhoseTurn("1867185800"));
     }
 }

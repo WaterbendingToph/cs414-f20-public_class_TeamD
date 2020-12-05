@@ -196,9 +196,6 @@ export default class BoardGame extends Component{
             //     console.log("Empty square clicked!");
             // console.log("@ position: " + position);
         }
-        else{
-            console.log("Probably clicked on white space or not your turn!");
-        }
     }
 
     renderBoard(){
