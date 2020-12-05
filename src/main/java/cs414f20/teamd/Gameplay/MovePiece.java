@@ -28,15 +28,17 @@ public class MovePiece {
         ChessBoard board = new ChessBoard();
         trimProperly(dbBoard);
         board.databaseToChessBoard(dbBoard);
-        // try{
-        //     board.move(from, to);
-        //     Database.setBoardState(gameID, board.chessBoardTodatabase());
-        //     Database.switchWhoseTurn(gameID);
-        //     this.board = trimProperly(Database.getBoardState(gameID));
-        // }
-        // catch(IllegalMoveException e){
-        //     error = e.getMessage();
-        // }
+        try{
+            board.move(from, to);
+            System.out.println(board);
+            System.out.println(board.chessBoardTodatabase());
+            // Database.setBoardState(gameID, board.chessBoardTodatabase());
+            // Database.switchWhoseTurn(gameID);
+            // this.board = trimProperly(Database.getBoardState(gameID));
+        }
+        catch(IllegalMoveException e){
+            error = e.getMessage();
+        }
     }
 
     private static void trimProperly(ArrayList<String> board) {

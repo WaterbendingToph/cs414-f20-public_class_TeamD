@@ -1,7 +1,10 @@
 package cs414f20.teamd.Gameplay;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
+
+import cs414f20.teamd.Gameplay.ChessPiece.Color;
 
 public class ChessBoard {
     private ChessPiece[][] board;
@@ -228,12 +231,68 @@ public class ChessBoard {
             }
             placePiece(newPiece, piece.split("=")[1]);
         }
-        System.out.println(toString());
+    }
+
+    private String whatPiece(ChessPiece piece){
+        if(piece instanceof Rook){
+           return "Rook";
+        }
+        else if(piece instanceof Queen){
+            return "Queen";
+        }
+        else if(piece instanceof Wizard){
+            return "Wizard";
+        }
+        else if(piece instanceof Champion){
+            return "Champion";
+        }
+        else if(piece instanceof Knight){
+            return "Knight";
+        }
+        else if(piece instanceof Bishop){
+            return "Bishop";
+        }
+        else if(piece instanceof King){
+            return "Queen";
+        }
+        else {
+            return "Pawn";
+        }
     }
 
     public String chessBoardTodatabase(){
         // TODO change actual chessboard to database board (Convert to HashTable<String, String> then call toString on that)
-        return "";
+        Hashtable<String, String> newBoard = new Hashtable<>();
+        System.out.println("[BOARD INFO]: # row: " + board.length);
+        for(int i = 0; i<board.length; i++){
+            System.out.println("[BOARD INFO]: # columns in row: " + board[i].length);
+            for(int j = 0; i < board[i].length; i++){
+                ChessPiece piece = board[i][j];
+                if(piece != null){
+                    String key = "White ";
+                    if(piece.getColor() == Color.BLACK)
+                        key = "Black ";
+
+                    System.out.println("[DEBUG]: Current Piece is: " + whatPiece(piece));
+                    key += whatPiece(piece);
+                    if(piece instanceof Pawn){
+                        String[] columns = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" };
+                        for(String col : columns){
+                            if(!newBoard.contains(key+col)){
+                                newBoard.put(key+col, piece.getPosition());
+                            }
+                        }
+                    }
+                    else{
+                        if(newBoard.contains(key+"0"))
+                            newBoard.put(key+"1", piece.getPosition());
+                        else
+                            newBoard.put(key+"0", piece.getPosition());
+                    }
+                }
+            }
+        }
+        return newBoard.toString();
     }
 
     //Taken from the a2 assignment specification - for testing purposes only
