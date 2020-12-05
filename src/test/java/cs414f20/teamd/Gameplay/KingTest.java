@@ -17,14 +17,14 @@ class KingTest {
         assertEquals("\u265A", king.toString());
     }
 
-    // @Test
-    // void legalMoves() {
-    //     testFreeMovement();
-    //     testCornerMovement();
-    //     testSharedSpaceMovement();
-    //     //testCastling();
+    @Test
+    void legalMoves() {
+        testFreeMovement();
+        testCornerMovement();
+        testSharedSpaceMovement();
+        //testCastling();
 
-    // }
+    }
 
     private void testFreeMovement() {
         requisiteBoard = new ChessBoard();
@@ -48,10 +48,10 @@ class KingTest {
         King king = new King(requisiteBoard, ChessPiece.Color.WHITE);
         requisiteBoard.placePiece(king, "b2");
 
-    //     Pawn allyPawn = new Pawn(requisiteBoard, ChessPiece.Color.WHITE);
-    //     requisiteBoard.placePiece(allyPawn, "b1");
-    //     Pawn foePawn = new Pawn(requisiteBoard, ChessPiece.Color.BLACK);
-    //     requisiteBoard.placePiece(foePawn, "b3");
+        Pawn allyPawn = new Pawn(requisiteBoard, ChessPiece.Color.WHITE);
+        requisiteBoard.placePiece(allyPawn, "b1");
+        Pawn foePawn = new Pawn(requisiteBoard, ChessPiece.Color.BLACK);
+        requisiteBoard.placePiece(foePawn, "b3");
 
         String[] expectedMoves = {"a1", "a2", "a3", "b3", "c1", "c2", "c3"};
 
