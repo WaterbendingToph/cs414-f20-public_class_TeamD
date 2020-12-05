@@ -1,4 +1,4 @@
-package cs414f20.teamd.OngoingMatches;
+package cs414f20.teamd.MatchHistory;
 
 import cs414f20.teamd.DatabaseConnection.Database;
 
@@ -6,15 +6,15 @@ import java.util.List;
 
 // import javax.xml.crypto.Data;
 
-public class OngoingMatches {
+public class MatchHistory {
     private String userID;
     private String password;
-    private List<List<String>> matches;
+    private List<List<String>> history;
 
-    public OngoingMatches() { 
+    public MatchHistory() { 
     }
 
-    public OngoingMatches(String userID, String password) {
+    public MatchHistory(String userID, String password) {
         this.userID = userID;
         this.password = password;
     }
@@ -27,12 +27,12 @@ public class OngoingMatches {
         return this.password;
     }
 
-    public boolean hasMatches() {
-        return !this.matches.isEmpty();
+    public boolean hasHistory() {
+        return !this.history.isEmpty();
     }
 
-    public List<List<String>> getMatches() {
-        return this.matches;
+    public List<List<String>> getHistory() {
+        return this.history;
     }
 
     public boolean attemptLogin() {
@@ -46,14 +46,15 @@ public class OngoingMatches {
             " userID='" + getUserID() + "'" +
             " password='" + getPassword() + "'" +
             " logged in ='" + attemptLogin() + "'" +
-            ", has ongoing matches='" + hasMatches() + "'" +
-            ", match list='" + getMatches() + "'" +
+            ", has ongoing matches='" + hasHistory() + "'" +
+            ", match list='" + getHistory() + "'" +
             "}";
     }
 
     public void queryDatabase() {
         if (attemptLogin()) {
-            this.matches = Database.getOngoingMatches(this.userID);
+            this.history = Database.getMatchHistory(this.userID);
         }
     }
+
 }
