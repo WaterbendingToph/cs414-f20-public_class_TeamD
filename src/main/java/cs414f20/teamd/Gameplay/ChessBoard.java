@@ -192,6 +192,43 @@ public class ChessBoard {
 
     public void databaseToChessBoard(ArrayList<String> board){
         // TODO change database board to actual chessboard
+        System.out.println(board.toString());
+        for(String piece : board){
+            piece = piece.toLowerCase();
+            ChessPiece newPiece = null;
+            ChessPiece.Color temp = ChessPiece.Color.WHITE;
+            String[] colorAndPiece = piece.split(" ");
+            if(colorAndPiece[0] == "black")
+                temp = ChessPiece.Color.BLACK;
+            switch(colorAndPiece[1].substring(0, colorAndPiece[1].length()-1)){
+                case "bishop":
+                    newPiece = new Bishop(this, temp);
+                    break;
+                case "champion":
+                    newPiece = new Champion(this, temp);
+                    break;
+                case "rook":
+                    newPiece = new Rook(this, temp);
+                    break;
+                case "knight":
+                    newPiece = new Knight(this, temp);
+                    break;
+                case "king":
+                    newPiece = new King(this, temp);
+                    break;
+                case "queen":
+                    newPiece = new Queen(this, temp);
+                    break;
+                case "wizard":
+                    newPiece = new Wizard(this, temp);
+                    break;
+                default:
+                    newPiece = new Pawn(this, temp);
+                    break;
+            }
+            placePiece(newPiece, piece.split("=")[1]);
+        }
+        System.out.println(toString());
     }
 
     public String chessBoardTodatabase(){
