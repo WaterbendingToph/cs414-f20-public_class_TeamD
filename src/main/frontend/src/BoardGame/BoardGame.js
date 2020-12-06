@@ -79,7 +79,7 @@ export default class BoardGame extends Component{
             });
     }
 
-    setBoard(board){
+    setBoard(board, addOns={}){
         let wizardSpots = new Array(4).fill("");
         let actualBoard = new Array(10).fill("").map(() => new Array(10).fill(""));
         Object.keys(board).forEach(piece => {
@@ -92,16 +92,18 @@ export default class BoardGame extends Component{
                 actualBoard[row][column] = piece;
             }
         });
-        this.setState({board: actualBoard, wizardSpots});
+        let newState = {board: actualBoard, wizardSpots};
+        let combined = {...newState, ...addOns};
+        this.setState(combined);
     }
 
-    getBoard() {
+    getBoard(addOns={}) {
         const gameID = this.state.gameID;
         fetch("/getBoardState?gameID=" + gameID)
             .then(res => res.text() )
             .then(board => {
                 board = JSON.parse(board);
-                this.setBoard(board);
+                this.setBoard(board, addOns);
             })
     }
 
@@ -188,12 +190,12 @@ export default class BoardGame extends Component{
                 fetch("/move?gameID="+ this.state.gameID+ "&from=" + this.state.pieceSelected + "&to=" + position)
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
-                        this.setBoard(data.board);
-                        if(data.error === "")
-                            this.setState({yourTurn: false});
+                        if(data.error === ""){
+                            this.getBoard({yourTurn: false});
+                        }
                         this.setState({pieceSelected: ""});
-                    });
+                    })
+                    .then(() => window.location.reload(false));
             }
             else
                 this.setState({pieceSelected: ""});
