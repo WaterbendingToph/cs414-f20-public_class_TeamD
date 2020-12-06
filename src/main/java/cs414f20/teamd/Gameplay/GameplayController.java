@@ -31,7 +31,7 @@ public class GameplayController {
     @GetMapping("/getBoardState")
     public String getBoardState(@RequestParam(value = "gameID")String gameID) {
         ArrayList<String> boardState = Database.getBoardState(gameID);
-        trimProperly(boardState);
+        Helper.trimProperly(boardState);
         JSONObject pieces = new JSONObject();
         for(String square : boardState){
             String[] pieceAndPosition = square.split("=");
@@ -40,14 +40,6 @@ public class GameplayController {
         return pieces.toString();
     }
 
-    private static void trimProperly(ArrayList<String> board) {
-        String replacement = board.get(0).substring(1, board.get(0).length() - 1);
-        String[] temp = replacement.split(",");
-        for(int i = 0; i<temp.length; i++)
-            temp[i] = temp[i].trim();
-        board.clear();
-        Collections.addAll(board, temp);
-    }
 
 
 }

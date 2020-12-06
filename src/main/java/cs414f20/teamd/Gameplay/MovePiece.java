@@ -26,7 +26,7 @@ public class MovePiece {
     public void movePiece(){
         ArrayList<String> dbBoard = Database.getBoardState(gameID);
         ChessBoard board = new ChessBoard();
-        trimProperly(dbBoard);
+        Helper.trimProperly(dbBoard);
         board.databaseToChessBoard(dbBoard);
         try{
             board.move(from, to);
@@ -42,14 +42,7 @@ public class MovePiece {
 
     private String returnNewBoard(){
         ArrayList<String> boardState = Database.getBoardState(gameID);
-
-        String replacement = boardState.get(0).substring(1, boardState.get(0).length() - 1);
-        String[] temp = replacement.split(",");
-        for(int i = 0; i<temp.length; i++)
-            temp[i] = temp[i].trim();
-        boardState.clear();
-        Collections.addAll(boardState, temp);
-
+        Helper.trimProperly(boardState);
         JSONObject pieces = new JSONObject();
         for(String square : boardState){
             String[] pieceAndPosition = square.split("=");
@@ -58,14 +51,6 @@ public class MovePiece {
         return pieces.toString();
     }
 
-    private static void trimProperly(ArrayList<String> board) {
-        String replacement = board.get(0).substring(1, board.get(0).length() - 1);
-        String[] temp = replacement.split(",");
-        for(int i = 0; i<temp.length; i++)
-            temp[i] = temp[i].trim();
-        board.clear();
-        Collections.addAll(board, temp);
-    }
 
     public String getFrom() {
         return from;
