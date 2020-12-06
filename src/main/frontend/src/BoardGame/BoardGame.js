@@ -35,9 +35,11 @@ export default class BoardGame extends Component{
     }
 
     componentDidMount(){
-        this.getBoard();
-        this.getWhoseTurn();
-        this.getPlayerColor();
+        if(!this.state.searching){
+            this.getBoard();
+            this.getWhoseTurn();
+            this.getPlayerColor();
+        }
     }
 
     getPlayerColor(){
@@ -53,6 +55,10 @@ export default class BoardGame extends Component{
             .then(data => {
                 if(data.isNewMatchCreated){
                     this.setState({searching: false, gameID: data.gameID});
+                    this.getBoard();
+                    this.getWhoseTurn();
+                    this.getPlayerColor();
+                    this.forceUpdate();
                 }
                 else{
                     try{
