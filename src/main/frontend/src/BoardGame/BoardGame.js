@@ -26,7 +26,7 @@ export default class BoardGame extends Component{
             pieceSelectedColor: "",
             board: [],
             wizardSpots: [],
-            playerColor: ""
+            playerColor: "",
         }
         this.setupDefaultWizardRowWhite = this.setupDefaultWizardRowWhite.bind(this);
         this.setupDefaultWizardRowBlack = this.setupDefaultWizardRowBlack.bind(this);
@@ -189,7 +189,7 @@ export default class BoardGame extends Component{
                 this.setState({pieceSelected: position});
                 this.setState({pieceSelectedColor: pieceColor})
             }
-            else if(this.state.pieceSelected.length === 2 && (!isPiece || pieceColor != this.state.playerColor) ){
+            else if(this.state.pieceSelected.length === 2 && (!isPiece || pieceColor !== this.state.playerColor) ){
                 fetch("/move?gameID="+ this.state.gameID+ "&from=" + this.state.pieceSelected + "&to=" + position)
                     .then(res => res.json())
                     .then(data => {
@@ -202,13 +202,19 @@ export default class BoardGame extends Component{
             }
             else
                 this.setState({pieceSelected: ""});
-
-            // if(isPiece)
-            //     console.log("Some piece clicked!");
-            // else
-            //     console.log("Empty square clicked!");
-            // console.log("@ position: " + position);
         }
+    }
+
+    waitForYourTurn(){
+        let timer = setInterval(() => {
+            if(this.state.yourTurn){
+                clearInterval(timer);
+                window.location.reload(false);
+            }
+            else{
+                this.getWhoseTurn();
+            }
+        }, 5000);
     }
 
     renderBoard(){
@@ -269,8 +275,10 @@ export default class BoardGame extends Component{
         else{
             if(this.state.board.length > 0){
                 let turn = <h1>It is your turn, {this.state.userID}</h1>;
-                if (!this.state.yourTurn)
+                if (!this.state.yourTurn){
                     turn = <h1>It is not your turn, {this.state.userID}</h1>
+                    this.waitForYourTurn();
+                }
 
                 let color = <h1>Your color is: {this.state.playerColor}</h1>;
                 return (
