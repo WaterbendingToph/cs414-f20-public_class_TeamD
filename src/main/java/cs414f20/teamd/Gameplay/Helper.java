@@ -2,6 +2,7 @@ package cs414f20.teamd.Gameplay;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Helper {
@@ -165,5 +166,15 @@ public class Helper {
             x = newX;
             y = newY;
         }
+    }
+
+    public static ArrayList<String> trimProperly(ArrayList<String> board) {
+        String replacement = board.get(0).substring(1, board.get(0).length() - 1);
+        String[] temp = replacement.split(",");
+        for(int i = 0; i<temp.length; i++)
+            temp[i] = temp[i].trim();
+        board.clear();
+        Collections.addAll(board, temp);
+        return board;
     }
 }
