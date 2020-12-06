@@ -4,6 +4,7 @@ import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
 import Login from "./Login/Login";
 import Lobby from "./Lobby/Lobby";
 import OngoingMatches from './Lobby/Ongoing Matches/OngoingMatches';
+import MatchHistory from './Lobby/Match History/MatchHistory';
 import BoardGame from './BoardGame/BoardGame';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
             <Route exact path="/" component={Login} />
             <Route exact path="/lobby" component={Lobby} />
             <Route exact path="/matches" component={OngoingMatches} />
+            <Route exact path="/history" component={MatchHistory} />
             <Route exact path="/game" component={BoardGame} />
           </Switch>
         </div>

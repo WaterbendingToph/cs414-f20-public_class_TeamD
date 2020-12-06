@@ -13,6 +13,7 @@ export default class Lobby extends Component {
             password: this.props.location.state.password,
         }
         this.ongoingMatches = this.ongoingMatches.bind(this);
+        this.matchHistory = this.matchHistory.bind(this);
     }
 
     goToGamePlay(wait = true, players=[], id=null){
@@ -67,6 +68,24 @@ export default class Lobby extends Component {
             })
     }
 
+    matchHistory() {
+        fetch("/lobby?userID=" + this.state.userID + "&password=" + this.state.password)
+            .then(res => res.json())
+            .then(result => {
+                if (result.loginSuccess) {
+                    this.props.history.push({
+                        pathname: "/history",
+                        state: {
+                            userID: this.state.userID,
+                            password: this.state.password,
+                        }
+                    });
+                } else {
+                    this.setState({ loginFailed: true })
+                }
+            })
+    }
+
     render() {
         return(
             <Grid>
@@ -77,6 +96,7 @@ export default class Lobby extends Component {
                 <Grid item>
                     <CreateMatchBox currentUser={this.state.userID} toGame={this.goToGamePlay.bind(this)} />
                     <Button onClick={this.ongoingMatches} type='button'>Ongoing Matches</Button>
+                    <Button onClick={this.matchHistory} type='button'>Match History</Button>
                 </Grid>
             </Grid>
 

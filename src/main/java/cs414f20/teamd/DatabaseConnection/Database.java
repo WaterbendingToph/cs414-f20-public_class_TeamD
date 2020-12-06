@@ -2,10 +2,7 @@ package cs414f20.teamd.DatabaseConnection;
 
 import static java.sql.DriverManager.getConnection;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.text.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,8 +10,6 @@ import java.util.Hashtable;
 import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
-
-import java.sql.ResultSet;
 
 public class Database {
     // connection information when using port forwarding from local host
@@ -300,7 +295,7 @@ public class Database {
             query = conn.createStatement();
 
             String queryStatement = "SELECT gameID, white_player, black_player, whose_turn FROM "
-                    + "chessGames WHERE white_player = '" + username + "' OR black_player = '" + username + "';";
+                                  + "chessGames WHERE completed = 0 AND (white_player = '" + username + "' OR black_player = '" + username + "');";
             ResultSet results = query.executeQuery(queryStatement);
 
             while (results.next()) {
@@ -325,6 +320,43 @@ public class Database {
             closeConnections(conn, query);
         }
         return matches;
+    }
+    
+    public static List<List<String>> getMatchHistory(String username) {
+        List<List<String>> history = new ArrayList<>();
+        Connection conn = null;
+        Statement query = null;
+
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+
+            String queryStatement = "SELECT gameID, white_player, black_player, whose_turn FROM "
+                                  + "chessGames WHERE completed = 1 AND (white_player = '" + username + "' OR black_player = '" + username + "');";
+            ResultSet results = query.executeQuery(queryStatement);
+
+            while (results.next()) {
+                List<String> match = new ArrayList<>();
+
+                String gameID = results.getString("gameID");
+                String whitePlayer = results.getString("white_player");
+                String blackPlayer = results.getString("black_player");
+                String whoseTurn = results.getString("whose_turn");
+
+                String opponent = whitePlayer.equals(username) ? blackPlayer : whitePlayer;
+
+                match.add(gameID);
+                match.add(opponent);
+                match.add(whoseTurn);
+
+                history.add(match);
+            }
+        } catch (Exception e) {
+            System.err.println("Error while Getting Invites to User: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return history;
     }
 
     public static boolean getIsSearching(String player) {
@@ -403,6 +435,117 @@ public class Database {
         return "";
     }
 
+    public static String getWhoseTurn(String gameID) {
+        Connection conn = null;
+        Statement query = null;
+        String playerWhoseTurnItIs = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT * FROM chessGames WHERE gameID= \"" + gameID + "\";";
+            ResultSet results = query.executeQuery(queryStatement);
+            while ( results.next() ) {
+                playerWhoseTurnItIs = results.getString("whose_turn");
+            }
+        } catch (Exception e) {
+            System.err.println("Error while getting whose turn it is " + e.getMessage());
+            playerWhoseTurnItIs = "ERROR";
+        } finally {
+            closeConnections(conn, query);
+        }
+        return playerWhoseTurnItIs;
+    }
+
+    public static ArrayList<String> getBoardState(String gameID) {
+        Connection conn = null;
+        Statement query = null;
+        ArrayList<String> results = new ArrayList<>();
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT board FROM chessGames WHERE gameID= \'" + gameID + "\';";
+            ResultSet queryResults = query.executeQuery(queryStatement);
+            while (queryResults.next() ) {
+                results.add(queryResults.getString("board"));
+            }
+            String temp = results.get(0);
+            results.clear();
+            for(String s: temp.split("'"))
+                results.add(s.trim() );
+
+        } catch (Exception e) {
+            System.err.println("Error while getting state of the board" + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+
+        return results;
+    }
+
+    public static boolean setBoardState(String gameID, String board){
+        Connection conn = null;
+        Statement query = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "UPDATE chessGames SET board=\""+ board +"\" WHERE gameID=\"" + gameID + "\";";
+            query.executeUpdate(queryStatement);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error while Setting Updated Board: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return false;
+    }
+
+    public static boolean switchWhoseTurn(String gameID){
+        Connection conn = null;
+        Statement query = null;
+        String currentTurn = getWhoseTurn(gameID);
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT * FROM chessGames WHERE gameID= \'" + gameID + "\';";
+            ResultSet queryResults = query.executeQuery(queryStatement);
+            while(queryResults.next()){
+                String white = queryResults.getString("white_player");
+                if(white.equals(currentTurn))
+                    currentTurn = queryResults.getString("black_player");
+                else
+                    currentTurn = white;
+            }
+            queryStatement = "UPDATE chessGames SET whose_turn=\""+ currentTurn +"\" WHERE gameID=\"" + gameID + "\";";
+            query.executeUpdate(queryStatement);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error while Switching: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return false;
+    }
+
+    public static String getUserColor(String gameID, String userID){
+        Connection conn = null;
+        Statement query = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT * FROM chessGames WHERE gameID= \'" + gameID + "\';";
+            ResultSet queryResults = query.executeQuery(queryStatement);
+            while(queryResults.next()){
+                if(queryResults.getString("white_player").equals(userID))
+                    return "white";
+                return "black";
+            }
+        } catch (Exception e) {
+            System.err.println("Error while Switching: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return "";
+    }
     public static void main(String[] args) {
         // getAllUsers();
         // enterNewGame(20, "me", "not me");
@@ -410,15 +553,16 @@ public class Database {
         // setupBoard(board);
         // System.out.println("Size of board: " + board.size());
         // System.out.println(board);
-        String testDate = "2020-09-11 13:43:38";
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            java.util.Date date = formatter.parse(testDate);
-            System.out.println("Normal date: " + date);
-            java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
-            System.out.println("SQL date: " + sqlDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        // String testDate = "2020-09-11 13:43:38";
+        // SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // try {
+        //     java.util.Date date = formatter.parse(testDate);
+        //     System.out.println("Normal date: " + date);
+        //     java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
+        //     System.out.println("SQL date: " + sqlDate);
+        // } catch (ParseException e) {
+        //     e.printStackTrace();
+        // }
+        System.out.println(switchWhoseTurn("1867185800"));
     }
 }
