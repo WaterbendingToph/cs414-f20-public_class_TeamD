@@ -23,6 +23,7 @@ export default class BoardGame extends Component{
             start_search_date: new Date(),
             yourTurn: null,
             pieceSelected: "",
+            pieceSelectedColor: "",
             board: [],
             wizardSpots: [],
             playerColor: ""
@@ -138,13 +139,13 @@ export default class BoardGame extends Component{
                 let piece = this.state.wizardSpots[1].toLowerCase();
                 piece = piece.substring(0, piece.length-1);
                 piece = piece.split(" ")
-                w2 = (<Square backgroundColor={orange} color={piece[0]} piece={piece[1]} onClick={this.squareClick.bind(this, orange, true, "w2")}/>);
+                w2 = (<Square backgroundColor={orange} color={piece[0]} piece={piece[1]} onClick={this.squareClick.bind(this, orange, true, "w2", piece[0])}/>);
             }
             if(this.state.wizardSpots[0] !== ""){
                 let piece = this.state.wizardSpots[0].toLowerCase();
                 piece = piece.substring(0, piece.length-1);
                 piece = piece.split(" ")
-                w1 = (<Square backgroundColor={yellow} color={piece[0]} piece={piece[1]} onClick={this.squareClick.bind(this, yellow, false, "w1")}/>);
+                w1 = (<Square backgroundColor={yellow} color={piece[0]} piece={piece[1]} onClick={this.squareClick.bind(this, yellow, false, "w1", piece[0])}/>);
             }
         }
         return(
@@ -164,13 +165,13 @@ export default class BoardGame extends Component{
                 let piece = this.state.wizardSpots[2].toLowerCase();
                 piece = piece.substring(0, piece.length-1);
                 piece = piece.split(" ")
-                w4 = (<Square backgroundColor={orange} color={piece[0]} piece={piece[1]} onClick={this.squareClick.bind(this, orange, true, "w4")}/>);
+                w4 = (<Square backgroundColor={orange} color={piece[0]} piece={piece[1]} onClick={this.squareClick.bind(this, orange, true, "w4", piece[0])}/>);
             }
             if(this.state.wizardSpots[2] !== ""){
                 let piece = this.state.wizardSpots[3].toLowerCase();
                 piece = piece.substring(0, piece.length-1);
                 piece = piece.split(" ")
-                w3 = (<Square backgroundColor={yellow} color={piece[0]} piece={piece[1]} onClick={this.squareClick.bind(this, yellow, true, "w3")}/>);
+                w3 = (<Square backgroundColor={yellow} color={piece[0]} piece={piece[1]} onClick={this.squareClick.bind(this, yellow, true, "w3", piece[0])}/>);
             }
         }
         return (
@@ -182,10 +183,12 @@ export default class BoardGame extends Component{
         );
     }
 
-    squareClick(color, isPiece, position=""){
-        if(color !== white && this.state.yourTurn){
-            if(this.state.pieceSelected === "" && isPiece)
+    squareClick(squareColor, isPiece, position="", pieceColor=""){
+        if(squareColor !== white && this.state.yourTurn){
+            if(this.state.pieceSelected === "" && isPiece && pieceColor === this.state.playerColor) {
                 this.setState({pieceSelected: position});
+                this.setState({pieceSelectedColor: pieceColor})
+            }
             else if(this.state.pieceSelected.length === 2 && !isPiece){
                 fetch("/move?gameID="+ this.state.gameID+ "&from=" + this.state.pieceSelected + "&to=" + position)
                     .then(res => res.json())
@@ -231,7 +234,7 @@ export default class BoardGame extends Component{
                     piece = piece.toLowerCase();
                     piece = piece.substring(0, piece.length-1);
                     piece = piece.split(" ");
-                    return (<td><Square backgroundColor={color} color={piece[0]} piece={piece[1]} onClick={this.squareClick.bind(this, color, true, position)}/></td>);
+                    return (<td><Square backgroundColor={color} color={piece[0]} piece={piece[1]} onClick={this.squareClick.bind(this, color, true, position, piece[0])}/></td>);
                 }
             });
 

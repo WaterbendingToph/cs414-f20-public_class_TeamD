@@ -194,7 +194,6 @@ public class ChessBoard {
     }
 
     public void databaseToChessBoard(ArrayList<String> board){
-        // TODO change database board to actual chessboard
         System.out.println(board.toString());
         for(String piece : board){
             piece = piece.toLowerCase();
@@ -265,7 +264,6 @@ public class ChessBoard {
     }
 
     public String chessBoardTodatabase(){
-        // TODO change actual chessboard to database board (Convert to HashTable<String, String> then call toString on that)
         Hashtable<String, String> newBoard = new Hashtable<>();
         // System.out.println("[BOARD INFO]: # row: " + board.length);
         for(int i = 0; i<board.length; i++){
