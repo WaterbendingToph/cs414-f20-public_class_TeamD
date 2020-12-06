@@ -26,21 +26,32 @@ This Sprint, we want to complete Stories
 | 11/30 | *None* | *#51, #79, #163, #168* | *PR backlog, Victor can't test PRs that require connectivity.* |
 | 12/2 | *#51, #79, #163* | *#164, #165, #166, #168* | *None* |
 | 12/4 | *#150, #164, #165, #166, #173* | *#60, #68, #72, #73, #74, #84, #85, #183* | *None* |
-| 11/2 | *asdf* | *asdf* | *asdf* |
+| 12/6 | *#59, #60, #61, #62, #68, #72, #73, #74, #84, #85* | *None* | *None* |
 
 ## Review
 
-#### Completed epics in Sprint Backlog
-- asdf
+#### Completed stories in Sprint Backlog
+- 42 Create Match
+- 64 Make Move
+- 43 Choose Opponent
+- 140 Board Display
 
-#### Incomplete epics in Sprint Backlog
-- asdf
+
+#### Incomplete stories in Sprint Backlog
+- None. 
 
 
 ## Retrospective
 
 #### What went well
-- asdf
+- Communication improved a lot. 
+- Work was done over break. 
+- We asked each other for help much more often. 
+- We tended to split into teams of 2 between frontend and backend, and the focus helped progress. 
 
 #### Problems encountered and resolutions
-- Letting PRs pile up. 
+- There could/should have been more technical planning, as with setting up database tables. 
+- Things like the class diagram could have been done earlier. 
+- Letting PRs pile up at some point. 
+- We had a week less than we thought, so the Sprint was extended. 
+- We were able to adapt from a plan earlier in the semester that was insufficient and didn't really apply. 
