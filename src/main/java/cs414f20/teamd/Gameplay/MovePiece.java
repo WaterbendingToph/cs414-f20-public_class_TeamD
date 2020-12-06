@@ -30,15 +30,32 @@ public class MovePiece {
         board.databaseToChessBoard(dbBoard);
         try{
             board.move(from, to);
-            System.out.println(board);
-            System.out.println(board.chessBoardTodatabase());
             Database.setBoardState(gameID, board.chessBoardTodatabase());
             Database.switchWhoseTurn(gameID);
-            this.board = board.chessBoardTodatabase();
+
+            this.board = returnNewBoard();
         }
         catch(IllegalMoveException e){
             error = "Illegal Move";
         }
+    }
+
+    private String returnNewBoard(){
+        ArrayList<String> boardState = Database.getBoardState(gameID);
+
+        String replacement = boardState.get(0).substring(1, boardState.get(0).length() - 1);
+        String[] temp = replacement.split(",");
+        for(int i = 0; i<temp.length; i++)
+            temp[i] = temp[i].trim();
+        boardState.clear();
+        Collections.addAll(boardState, temp);
+
+        JSONObject pieces = new JSONObject();
+        for(String square : boardState){
+            String[] pieceAndPosition = square.split("=");
+            pieces.put(pieceAndPosition[0], pieceAndPosition[1]);
+        }
+        return pieces.toString();
     }
 
     private static void trimProperly(ArrayList<String> board) {

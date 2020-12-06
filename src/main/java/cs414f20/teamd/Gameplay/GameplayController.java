@@ -13,6 +13,11 @@ import java.util.Collections;
 @RestController
 public class GameplayController {
 
+    @GetMapping("/getPlayerColor")
+    public String getPlayerColor(@RequestParam(value = "gameID")String gameID, @RequestParam(value = "current")String current){
+        return Database.getUserColor(gameID, current);
+    }
+
     @GetMapping("/move")
     public MovePiece move(@RequestParam(value = "gameID")String gameID, @RequestParam(value = "from")String from, @RequestParam(value = "to")String to) {
         return new MovePiece(gameID, from, to);

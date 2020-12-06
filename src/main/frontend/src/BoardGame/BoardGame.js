@@ -24,7 +24,8 @@ export default class BoardGame extends Component{
             yourTurn: null,
             pieceSelected: "",
             board: [],
-            wizardSpots: []
+            wizardSpots: [],
+            playerColor: ""
         }
         this.setupDefaultWizardRowWhite = this.setupDefaultWizardRowWhite.bind(this);
         this.setupDefaultWizardRowBlack = this.setupDefaultWizardRowBlack.bind(this);
@@ -34,7 +35,14 @@ export default class BoardGame extends Component{
 
     componentDidMount(){
         this.getBoard();
-        this.getWhoseTurn()
+        this.getWhoseTurn();
+        this.getPlayerColor();
+    }
+
+    getPlayerColor(){
+        fetch("/getPlayerColor?gameID=" + this.state.gameID + "&current="+ this.state.userID)
+            .then(res => res.text())
+            .then(color => this.setState({playerColor: color}));
     }
 
     pingForNewMatch(current, players){
@@ -181,7 +189,7 @@ export default class BoardGame extends Component{
                     .then(res => res.json())
                     .then(data => {
                         console.log(data);
-                        // this.setBoard(data.board);
+                        this.setBoard(data.board);
                         if(data.error === "")
                             this.setState({yourTurn: false});
                         this.setState({pieceSelected: ""});
@@ -258,9 +266,12 @@ export default class BoardGame extends Component{
                 let turn = <h1>It is your turn, {this.state.userID}</h1>;
                 if (!this.state.yourTurn)
                     turn = <h1>It is not your turn, {this.state.userID}</h1>
+
+                let color = <h1>Your color is: {this.state.playerColor}</h1>;
                 return (
                     <Grid>
                         {turn}
+                        {color}
                         <table className="App" style={{width: "auto"}} align={'center'}>
                             <tbody>
                                 {this.setupDefaultWizardRowBlack()}

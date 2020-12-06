@@ -488,6 +488,27 @@ public class Database {
         }
         return false;
     }
+
+    public static String getUserColor(String gameID, String userID){
+        Connection conn = null;
+        Statement query = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            query = conn.createStatement();
+            String queryStatement = "SELECT * FROM chessGames WHERE gameID= \'" + gameID + "\';";
+            ResultSet queryResults = query.executeQuery(queryStatement);
+            while(queryResults.next()){
+                if(queryResults.getString("white_player").equals(userID))
+                    return "white";
+                return "black";
+            }
+        } catch (Exception e) {
+            System.err.println("Error while Switching: " + e.getMessage());
+        } finally {
+            closeConnections(conn, query);
+        }
+        return "";
+    }
     public static void main(String[] args) {
         // getAllUsers();
         // enterNewGame(20, "me", "not me");
