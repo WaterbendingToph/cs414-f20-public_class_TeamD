@@ -189,7 +189,7 @@ export default class BoardGame extends Component{
                 this.setState({pieceSelected: position});
                 this.setState({pieceSelectedColor: pieceColor})
             }
-            else if(this.state.pieceSelected.length === 2 && !isPiece){
+            else if(this.state.pieceSelected.length === 2 && (!isPiece || pieceColor != this.state.playerColor) ){
                 fetch("/move?gameID="+ this.state.gameID+ "&from=" + this.state.pieceSelected + "&to=" + position)
                     .then(res => res.json())
                     .then(data => {
