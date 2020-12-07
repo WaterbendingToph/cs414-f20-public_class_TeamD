@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>cs414f20.teamd.CreateMatch.CreateMatchController</OriginalElement>
+  <nodes>
+    <node x="1604.6851508542356" y="0.0">cs414f20.teamd.Gameplay.IllegalPositionException</node>
+    <node x="1079.7549999999997" y="782.0">cs414f20.teamd.Gameplay.Pawn</node>
+    <node x="3699.7073809523804" y="2014.5">cs414f20.teamd.Login.Login</node>
+    <node x="4794.20738095238" y="1981.0">cs414f20.teamd.Registration.Registration</node>
+    <node x="4188.95738095238" y="2422.0">cs414f20.teamd.OngoingMatches.OngoingMatchesController</node>
+    <node x="4541.95738095238" y="2003.5">cs414f20.teamd.MatchHistory.MatchHistory</node>
+    <node x="4473.95738095238" y="2422.0">cs414f20.teamd.MatchHistory.MatchHistoryController</node>
+    <node x="3725.7073809523804" y="2422.0">cs414f20.teamd.Login.LoginController</node>
+    <node x="3618.8708651399493" y="1182.0">cs414f20.teamd.DatabaseConnection.Database</node>
+    <node x="3905.45738095238" y="2014.5">cs414f20.teamd.Lobby.Lobby</node>
+    <node x="5409.20738095238" y="2014.0">cs414f20.teamd.CreateMatch.CreateMatch</node>
+    <node x="345.75499999999965" y="804.5">cs414f20.teamd.Gameplay.Queen</node>
+    <node x="2973.498928953945" y="328.33238129239544">cs414f20.teamd.TeamDApplication</node>
+    <node x="1985.6145238095232" y="826.5">cs414f20.teamd.Gameplay.Wizard</node>
+    <node x="3509.7073809523804" y="2058.5">cs414f20.teamd.RetrievePlayers</node>
+    <node x="1446.3642857142856" y="1291.5">cs414f20.teamd.Gameplay.ChessBoard</node>
+    <node x="1384.7549999999997" y="826.5">cs414f20.teamd.Gameplay.Bishop</node>
+    <node x="1024.4349999999995" y="1992.0">cs414f20.teamd.Gameplay.ChessPiece</node>
+    <node x="4729.95738095238" y="2422.0">cs414f20.teamd.Registration.RegistrationController</node>
+    <node x="3930.70738095238" y="2422.0">cs414f20.teamd.Lobby.LobbyController</node>
+    <node x="3159.3323809523804" y="2378.0">cs414f20.teamd.Invites.InvitesController</node>
+    <node x="2700.25738095238" y="2389.0">cs414f20.teamd.Gameplay.GameplayController</node>
+    <node x="2593.25738095238" y="2014.5">cs414f20.teamd.Gameplay.MovePiece</node>
+    <node x="2887.998928953945" y="114.33238129239544">org.springframework.boot.autoconfigure.SpringBootApplication</node>
+    <node x="4266.45738095238" y="2003.5">cs414f20.teamd.OngoingMatches.OngoingMatches</node>
+    <node x="3084.7073809523804" y="2047.5">cs414f20.teamd.Invites.AcceptInvite</node>
+    <node x="5239.20738095238" y="2058.5">cs414f20.teamd.CreateMatch.Searching</node>
+    <node x="1633.2930952380948" y="120.0">cs414f20.teamd.Gameplay.Helper</node>
+    <node x="2874.7073809523804" y="2058.0">cs414f20.teamd.Invites.GetInvites</node>
+    <node x="522.6598807426681" y="561.0">cs414f20.teamd.Gameplay.ChessPiece.Color</node>
+    <node x="4086.45738095238" y="2092.5">org.springframework.web.bind.annotation.RestController</node>
+    <node x="2137.6145238095232" y="572.0">cs414f20.teamd.Gameplay.Helper.PseudoTuple</node>
+    <node x="112.75499999999965" y="837.5">cs414f20.teamd.Gameplay.Knight</node>
+    <node x="736.7549999999997" y="826.5">cs414f20.teamd.Gameplay.Rook</node>
+    <node x="3298.7073809523804" y="2025.0">cs414f20.teamd.Invites.SendInvite</node>
+    <node x="1727.7549999999997" y="826.5">cs414f20.teamd.Gameplay.King</node>
+    <node x="2331.25738095238" y="872.0">cs414f20.teamd.Gameplay.IllegalMoveException</node>
+    <node x="1504.0642857142855" y="2388.5">cs414f20.teamd.Gameplay.Champion</node>
+    <node x="5117.019674663758" y="2400.0">cs414f20.teamd.CreateMatch.CreateMatchController</node>
+    <node x="5017.20738095238" y="1992.0">cs414f20.teamd.CreateMatch.Ping</node>
+    <node x="3279.998928953945" y="114.33238129239544">cs414f20.teamd.Player</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="cs414f20.teamd.Gameplay.MovePiece" target="cs414f20.teamd.Gameplay.IllegalMoveException">
+      <point x="0.0" y="-105.0" />
+      <point x="2704.75738095238" y="1162.0" />
+      <point x="2504.5907142857136" y="1162.0" />
+      <point x="69.33333333333326" y="15.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Knight" target="cs414f20.teamd.Gameplay.ChessPiece">
+      <point x="-42.600000000000364" y="49.5" />
+      <point x="176.6549999999993" y="1152.0" />
+      <point x="236.8902701115676" y="1152.0" />
+      <point x="236.8902701115676" y="1891.0" />
+      <point x="1089.2349999999997" y="1891.0" />
+      <point x="-43.19999999999982" y="-127.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Helper.PseudoTuple" target="cs414f20.teamd.Gameplay.Helper">
+      <point x="0.0" y="-49.5" />
+      <point x="2218.6145238095232" y="511.0" />
+      <point x="1938.426428571428" y="511.0" />
+      <point x="106.13333333333321" y="170.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessBoard" target="cs414f20.teamd.Gameplay.ChessPiece.Color">
+      <point x="-79.82142857142856" y="-215.0" />
+      <point x="1515.542857142857" y="1082.0" />
+      <point x="726.2549999999997" y="1082.0" />
+      <point x="726.2549999999997" y="752.0" />
+      <point x="610.4098807426681" y="752.0" />
+      <point x="6.75" y="60.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Rook" target="cs414f20.teamd.Gameplay.ChessBoard">
+      <point x="129.19999999999982" y="60.5" />
+      <point x="1027.4549999999995" y="1052.0" />
+      <point x="1547.4714285714285" y="1052.0" />
+      <point x="-47.89285714285711" y="-215.0" />
+    </edge>
+    <edge source="cs414f20.teamd.CreateMatch.CreateMatchController" target="cs414f20.teamd.CreateMatch.CreateMatch">
+      <point x="126.85714285714289" y="-49.0" />
+      <point x="5391.876817520902" y="2358.0" />
+      <point x="5577.20738095238" y="2358.0" />
+      <point x="56.0" y="105.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Wizard" target="cs414f20.teamd.Gameplay.ChessPiece.Color">
+      <point x="-113.20000000000005" y="-60.5" />
+      <point x="2013.9145238095232" y="702.0" />
+      <point x="677.9098807426681" y="702.0" />
+      <point x="74.25" y="60.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Queen" target="cs414f20.teamd.Gameplay.ChessBoard">
+      <point x="148.0" y="82.5" />
+      <point x="678.7549999999997" y="1092.0" />
+      <point x="1504.9" y="1092.0" />
+      <point x="-90.46428571428567" y="-215.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessBoard" target="cs414f20.teamd.Gameplay.ChessPiece">
+      <point x="-14.900000000000091" y="215.0" />
+      <point x="1580.4642857142856" y="1921.0" />
+      <point x="1201.5549999999994" y="1921.0" />
+      <point x="69.11999999999989" y="-127.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Knight" target="cs414f20.teamd.Gameplay.ChessPiece.Color">
+      <point x="71.0" y="-49.5" />
+      <point x="290.25499999999965" y="762.0" />
+      <point x="583.4098807426681" y="762.0" />
+      <point x="-20.25" y="60.5" />
+    </edge>
+    <edge source="cs414f20.teamd.OngoingMatches.OngoingMatchesController" target="org.springframework.web.bind.annotation.RestController">
+      <point x="-88.33333333333326" y="-27.0" />
+      <point x="4233.124047619047" y="2358.0" />
+      <point x="4176.45738095238" y="2358.0" />
+      <point x="10.0" y="27.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Bishop" target="cs414f20.teamd.Gameplay.Helper">
+      <point x="107.66666666666697" y="-60.5" />
+      <point x="1653.9216666666666" y="762.0" />
+      <point x="1749.0136034449004" y="762.0" />
+      <point x="1749.0136034449004" y="541.0" />
+      <point x="1805.759761904761" y="541.0" />
+      <point x="-26.533333333333758" y="170.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Lobby.Lobby" target="cs414f20.teamd.DatabaseConnection.Database">
+      <point x="0.0" y="-105.0" />
+      <point x="3985.95738095238" y="1961.0" />
+      <point x="3796.8041984732827" y="1961.0" />
+      <point x="20.933333333333337" y="324.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Login.Login" target="cs414f20.teamd.DatabaseConnection.Database">
+      <point x="0.0" y="-105.0" />
+      <point x="3778.7073809523804" y="1961.0" />
+      <point x="3775.8708651399493" y="1961.0" />
+      <point x="0.0" y="324.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Bishop" target="cs414f20.teamd.Gameplay.IllegalPositionException">
+      <point x="0.0" y="-60.5" />
+      <point x="1546.2549999999997" y="100.0" />
+      <point x="1706.2236123926975" y="100.0" />
+      <point x="-18.46153846153811" y="15.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Rook" target="cs414f20.teamd.Gameplay.Helper">
+      <point x="107.66666666666652" y="-60.5" />
+      <point x="1005.9216666666662" y="762.0" />
+      <point x="1015.0302701115672" y="762.0" />
+      <point x="1015.0302701115672" y="521.0" />
+      <point x="1752.6930952380944" y="521.0" />
+      <point x="-79.60000000000036" y="170.5" />
+    </edge>
+    <edge source="cs414f20.teamd.CreateMatch.CreateMatchController" target="cs414f20.teamd.CreateMatch.Ping">
+      <point x="-42.28571428571422" y="-49.0" />
+      <point x="5222.733960378045" y="2308.0" />
+      <point x="5168.70738095238" y="2308.0" />
+      <point x="50.5" y="127.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Wizard" target="cs414f20.teamd.Gameplay.Helper">
+      <point x="-56.59999999999991" y="-60.5" />
+      <point x="2070.5145238095233" y="762.0" />
+      <point x="2056.6145238095232" y="762.0" />
+      <point x="2056.6145238095232" y="521.0" />
+      <point x="1911.8930952380952" y="521.0" />
+      <point x="79.60000000000036" y="170.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Invites.InvitesController" target="org.springframework.web.bind.annotation.RestController">
+      <point x="116.09999999999991" y="-71.0" />
+      <point x="3404.4323809523803" y="2338.0" />
+      <point x="4116.45738095238" y="2338.0" />
+      <point x="-50.0" y="27.0" />
+    </edge>
+    <edge source="cs414f20.teamd.MatchHistory.MatchHistoryController" target="org.springframework.web.bind.annotation.RestController">
+      <point x="-78.66666666666652" y="-27.0" />
+      <point x="4513.290714285714" y="2348.0" />
+      <point x="4196.45738095238" y="2348.0" />
+      <point x="30.0" y="27.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.MovePiece" target="cs414f20.teamd.Gameplay.Helper">
+      <point x="44.60000000000002" y="-105.0" />
+      <point x="2749.3573809523805" y="1961.0" />
+      <point x="2765.75738095238" y="1961.0" />
+      <point x="2765.75738095238" y="491.0" />
+      <point x="1991.4930952380946" y="491.0" />
+      <point x="159.19999999999982" y="170.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Pawn" target="cs414f20.teamd.Gameplay.ChessPiece.Color">
+      <point x="-95.0" y="-105.0" />
+      <point x="1127.2549999999997" y="732.0" />
+      <point x="637.4098807426681" y="732.0" />
+      <point x="33.75" y="60.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Login.LoginController" target="cs414f20.teamd.Login.Login">
+      <point x="0.0" y="-27.0" />
+      <point x="39.5" y="105.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.GameplayController" target="org.springframework.web.bind.annotation.RestController">
+      <point x="101.19999999999982" y="-60.0" />
+      <point x="2927.95738095238" y="2328.0" />
+      <point x="4096.45738095238" y="2328.0" />
+      <point x="-70.0" y="27.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Champion" target="cs414f20.teamd.Gameplay.ChessBoard">
+      <point x="-14.150000000000091" y="-60.5" />
+      <point x="1631.4142857142854" y="2358.0" />
+      <point x="1640.0642857142857" y="2358.0" />
+      <point x="44.700000000000045" y="215.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Invites.InvitesController" target="cs414f20.teamd.Invites.GetInvites">
+      <point x="-64.5" y="-71.0" />
+      <point x="3223.8323809523804" y="2298.0" />
+      <point x="3017.2073809523804" y="2298.0" />
+      <point x="47.5" y="61.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Champion" target="cs414f20.teamd.Gameplay.ChessPiece">
+      <point x="-70.75" y="-60.5" />
+      <point x="1574.8142857142855" y="2338.0" />
+      <point x="1186.4349999999995" y="2338.0" />
+      <point x="54.0" y="127.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessBoard" target="cs414f20.teamd.Gameplay.Helper">
+      <point x="58.53571428571422" y="-215.0" />
+      <point x="1653.8999999999999" y="1082.0" />
+      <point x="1951.2549999999997" y="1082.0" />
+      <point x="1951.2549999999997" y="541.0" />
+      <point x="1858.8264285714276" y="541.0" />
+      <point x="26.53333333333285" y="170.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessPiece" target="cs414f20.teamd.Gameplay.IllegalPositionException">
+      <point x="-103.67999999999984" y="-127.5" />
+      <point x="1028.7549999999997" y="1961.0" />
+      <point x="26.0" y="1961.0" />
+      <point x="26.0" y="50.0" />
+      <point x="1613.9159200850052" y="50.0" />
+      <point x="-110.76923076923049" y="15.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Bishop" target="cs414f20.teamd.Gameplay.ChessPiece">
+      <point x="-64.60000000000036" y="60.5" />
+      <point x="1481.6549999999993" y="1162.0" />
+      <point x="1435.8642857142856" y="1162.0" />
+      <point x="1435.8642857142856" y="1871.0" />
+      <point x="1158.3549999999996" y="1871.0" />
+      <point x="25.920000000000073" y="-127.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessBoard" target="cs414f20.teamd.Gameplay.Champion">
+      <point x="14.900000000000091" y="215.0" />
+      <point x="1610.2642857142857" y="1921.0" />
+      <point x="1629.0642857142857" y="1921.0" />
+      <point x="1629.0642857142857" y="2348.0" />
+      <point x="1603.1142857142856" y="2348.0" />
+      <point x="-42.44999999999982" y="-60.5" />
+    </edge>
+    <edge source="cs414f20.teamd.CreateMatch.CreateMatchController" target="org.springframework.web.bind.annotation.RestController">
+      <point x="-126.85714285714289" y="-49.0" />
+      <point x="5138.162531806615" y="2328.0" />
+      <point x="4236.45738095238" y="2328.0" />
+      <point x="70.0" y="27.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Invites.AcceptInvite" target="cs414f20.teamd.DatabaseConnection.Database">
+      <point x="0.0" y="-72.0" />
+      <point x="3181.7073809523804" y="1941.0" />
+      <point x="3713.070865139949" y="1941.0" />
+      <point x="-62.80000000000001" y="324.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.King" target="cs414f20.teamd.Gameplay.ChessPiece">
+      <point x="42.600000000000364" y="60.5" />
+      <point x="1876.855" y="1072.0" />
+      <point x="1893.8349999999998" y="1072.0" />
+      <point x="1893.8349999999998" y="1931.0" />
+      <point x="1210.1949999999997" y="1931.0" />
+      <point x="77.76000000000022" y="-127.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.GameplayController" target="cs414f20.teamd.DatabaseConnection.Database">
+      <point x="50.59999999999991" y="-60.0" />
+      <point x="2877.3573809523805" y="2358.0" />
+      <point x="2853.2073809523804" y="2358.0" />
+      <point x="2853.2073809523804" y="1911.0" />
+      <point x="3650.270865139949" y="1911.0" />
+      <point x="-125.59999999999991" y="324.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Queen" target="cs414f20.teamd.Gameplay.ChessPiece.Color">
+      <point x="123.33333333333326" y="-82.5" />
+      <point x="654.0883333333329" y="762.0" />
+      <point x="596.9098807426681" y="762.0" />
+      <point x="-6.75" y="60.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Invites.InvitesController" target="cs414f20.teamd.DatabaseConnection.Database">
+      <point x="-116.10000000000014" y="-71.0" />
+      <point x="3172.2323809523805" y="2318.0" />
+      <point x="2864.2073809523804" y="2318.0" />
+      <point x="2864.2073809523804" y="1921.0" />
+      <point x="3671.2041984732823" y="1921.0" />
+      <point x="-104.66666666666674" y="324.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessBoard" target="cs414f20.teamd.Gameplay.Bishop">
+      <point x="5.321428571428669" y="-215.0" />
+      <point x="1600.6857142857143" y="1032.0" />
+      <point x="1610.855" y="1032.0" />
+      <point x="64.60000000000036" y="60.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Knight" target="cs414f20.teamd.Gameplay.Helper">
+      <point x="0.0" y="-49.5" />
+      <point x="219.25499999999965" y="702.0" />
+      <point x="125.73999999999978" y="702.0" />
+      <point x="125.73999999999978" y="501.0" />
+      <point x="1699.6264285714278" y="501.0" />
+      <point x="-132.66666666666697" y="170.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessPiece" target="cs414f20.teamd.Gameplay.ChessBoard">
+      <point x="43.19999999999982" y="-127.5" />
+      <point x="1175.6349999999993" y="1891.0" />
+      <point x="1491.0642857142857" y="1891.0" />
+      <point x="-104.29999999999995" y="215.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Queen" target="cs414f20.teamd.Gameplay.Helper">
+      <point x="0.0" y="-82.5" />
+      <point x="530.7549999999997" y="712.0" />
+      <point x="414.90988074266807" y="712.0" />
+      <point x="414.90988074266807" y="511.0" />
+      <point x="1726.1597619047616" y="511.0" />
+      <point x="-106.13333333333321" y="170.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Champion" target="cs414f20.teamd.Gameplay.IllegalPositionException">
+      <point x="127.34999999999991" y="-60.5" />
+      <point x="1772.9142857142854" y="2358.0" />
+      <point x="2582.75738095238" y="2358.0" />
+      <point x="2582.75738095238" y="50.0" />
+      <point x="1835.4543816234661" y="50.0" />
+      <point x="110.76923076923049" y="15.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.King" target="cs414f20.teamd.Gameplay.IllegalPositionException">
+      <point x="71.0" y="-60.5" />
+      <point x="1905.2549999999997" y="762.0" />
+      <point x="2045.6145238095232" y="762.0" />
+      <point x="2045.6145238095232" y="90.0" />
+      <point x="1761.6082277773128" y="90.0" />
+      <point x="36.92307692307713" y="15.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Queen" target="cs414f20.teamd.Gameplay.ChessPiece">
+      <point x="-148.0" y="82.5" />
+      <point x="382.75499999999965" y="1162.0" />
+      <point x="415.4349999999995" y="1162.0" />
+      <point x="415.4349999999995" y="1881.0" />
+      <point x="1097.8749999999995" y="1881.0" />
+      <point x="-34.559999999999945" y="-127.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Pawn" target="cs414f20.teamd.Gameplay.IllegalPositionException">
+      <point x="0.0" y="-105.0" />
+      <point x="1222.2549999999997" y="90.0" />
+      <point x="1687.7620739311585" y="90.0" />
+      <point x="-36.92307692307713" y="15.0" />
+    </edge>
+    <edge source="cs414f20.teamd.CreateMatch.Ping" target="cs414f20.teamd.DatabaseConnection.Database">
+      <point x="0.0" y="-127.5" />
+      <point x="5118.20738095238" y="1921.0" />
+      <point x="3880.537531806616" y="1921.0" />
+      <point x="104.66666666666669" y="324.5" />
+    </edge>
+    <edge source="cs414f20.teamd.CreateMatch.CreateMatchController" target="cs414f20.teamd.CreateMatch.Searching">
+      <point x="42.28571428571422" y="-49.0" />
+      <point x="5307.305388949473" y="2338.0" />
+      <point x="5351.70738095238" y="2338.0" />
+      <point x="37.5" y="61.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Rook" target="cs414f20.teamd.Gameplay.ChessPiece.Color">
+      <point x="-107.66666666666652" y="-60.5" />
+      <point x="790.5883333333331" y="742.0" />
+      <point x="623.9098807426681" y="742.0" />
+      <point x="20.25" y="60.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Registration.RegistrationController" target="cs414f20.teamd.Registration.Registration">
+      <point x="76.66666666666674" y="-27.0" />
+      <point x="4921.624047619047" y="2358.0" />
+      <point x="4946.45738095238" y="2358.0" />
+      <point x="50.75" y="138.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Champion" target="cs414f20.teamd.Gameplay.Helper.PseudoTuple">
+      <point x="42.44999999999982" y="-60.5" />
+      <point x="1688.0142857142853" y="2328.0" />
+      <point x="2549.75738095238" y="2328.0" />
+      <point x="2549.75738095238" y="752.0" />
+      <point x="2238.8645238095232" y="752.0" />
+      <point x="20.25" y="49.5" />
+    </edge>
+    <edge source="cs414f20.teamd.TeamDApplication" target="org.springframework.boot.autoconfigure.SpringBootApplication">
+      <point x="0.0" y="-27.0" />
+      <point x="0.0" y="82.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessBoard" target="cs414f20.teamd.Gameplay.Rook">
+      <point x="-58.53571428571422" y="-215.0" />
+      <point x="1536.8285714285714" y="1062.0" />
+      <point x="962.8549999999996" y="1062.0" />
+      <point x="64.59999999999991" y="60.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Lobby.LobbyController" target="cs414f20.teamd.Lobby.Lobby">
+      <point x="0.0" y="-27.0" />
+      <point x="40.25" y="105.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Helper" target="cs414f20.teamd.Gameplay.ChessBoard">
+      <point x="53.066666666666606" y="170.5" />
+      <point x="1885.3597619047614" y="531.0" />
+      <point x="1961.8978571428565" y="531.0" />
+      <point x="1961.8978571428565" y="1092.0" />
+      <point x="1664.542857142857" y="1092.0" />
+      <point x="69.17857142857133" y="-215.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Invites.InvitesController" target="cs414f20.teamd.RetrievePlayers">
+      <point x="90.29999999999995" y="-71.0" />
+      <point x="3378.63238095238" y="2318.0" />
+      <point x="3637.2073809523804" y="2318.0" />
+      <point x="42.5" y="61.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Pawn" target="cs414f20.teamd.Gameplay.Helper">
+      <point x="95.0" y="-105.0" />
+      <point x="1317.2549999999997" y="762.0" />
+      <point x="1339.0302701115672" y="762.0" />
+      <point x="1339.0302701115672" y="531.0" />
+      <point x="1779.2264285714282" y="531.0" />
+      <point x="-53.066666666666606" y="170.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Registration.Registration" target="cs414f20.teamd.DatabaseConnection.Database">
+      <point x="0.0" y="-138.5" />
+      <point x="4895.70738095238" y="1931.0" />
+      <point x="3859.6041984732824" y="1931.0" />
+      <point x="83.73333333333335" y="324.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Invites.InvitesController" target="cs414f20.teamd.Invites.SendInvite">
+      <point x="38.700000000000045" y="-71.0" />
+      <point x="3327.0323809523807" y="2298.0" />
+      <point x="3441.9573809523804" y="2298.0" />
+      <point x="47.75" y="94.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Invites.GetInvites" target="cs414f20.teamd.DatabaseConnection.Database">
+      <point x="0.0" y="-61.5" />
+      <point x="2969.7073809523804" y="1931.0" />
+      <point x="3692.1375318066157" y="1931.0" />
+      <point x="-83.73333333333335" y="324.5" />
+    </edge>
+    <edge source="cs414f20.teamd.CreateMatch.Searching" target="cs414f20.teamd.DatabaseConnection.Database">
+      <point x="0.0" y="-61.0" />
+      <point x="5314.20738095238" y="1911.0" />
+      <point x="3901.4708651399487" y="1911.0" />
+      <point x="125.60000000000002" y="324.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessPiece" target="cs414f20.teamd.Gameplay.ChessPiece.Color">
+      <point x="-60.48000000000002" y="-127.5" />
+      <point x="1071.9549999999995" y="1911.0" />
+      <point x="102.25499999999965" y="1911.0" />
+      <point x="102.25499999999965" y="752.0" />
+      <point x="569.9098807426681" y="752.0" />
+      <point x="-33.75" y="60.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Queen" target="cs414f20.teamd.Gameplay.IllegalPositionException">
+      <point x="-123.33333333333326" y="-82.5" />
+      <point x="407.4216666666664" y="712.0" />
+      <point x="403.90988074266807" y="712.0" />
+      <point x="403.90988074266807" y="70.0" />
+      <point x="1650.8389970080814" y="70.0" />
+      <point x="-73.84615384615427" y="15.0" />
+    </edge>
+    <edge source="cs414f20.teamd.OngoingMatches.OngoingMatches" target="cs414f20.teamd.DatabaseConnection.Database">
+      <point x="0.0" y="-116.0" />
+      <point x="4376.45738095238" y="1951.0" />
+      <point x="3817.737531806616" y="1951.0" />
+      <point x="41.866666666666674" y="324.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.King" target="cs414f20.teamd.Gameplay.ChessBoard">
+      <point x="0.0" y="60.5" />
+      <point x="1834.2549999999997" y="1072.0" />
+      <point x="1643.2571428571428" y="1072.0" />
+      <point x="47.89285714285711" y="-215.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.King" target="cs414f20.teamd.Gameplay.Helper">
+      <point x="0.0" y="-60.5" />
+      <point x="1834.2549999999997" y="541.0" />
+      <point x="1832.2930952380948" y="541.0" />
+      <point x="0.0" y="170.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Login.LoginController" target="org.springframework.web.bind.annotation.RestController">
+      <point x="61.666666666666515" y="-27.0" />
+      <point x="3879.874047619047" y="2348.0" />
+      <point x="4136.45738095238" y="2348.0" />
+      <point x="-30.0" y="27.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Bishop" target="cs414f20.teamd.Gameplay.ChessBoard">
+      <point x="129.19999999999982" y="60.5" />
+      <point x="1675.4549999999995" y="1042.0" />
+      <point x="1611.3285714285714" y="1042.0" />
+      <point x="15.96428571428578" y="-215.0" />
+    </edge>
+    <edge source="cs414f20.teamd.OngoingMatches.OngoingMatchesController" target="cs414f20.teamd.OngoingMatches.OngoingMatches">
+      <point x="88.33333333333326" y="-27.0" />
+      <point x="4409.790714285713" y="2358.0" />
+      <point x="4431.45738095238" y="2358.0" />
+      <point x="55.0" y="116.0" />
+    </edge>
+    <edge source="cs414f20.teamd.MatchHistory.MatchHistory" target="cs414f20.teamd.DatabaseConnection.Database">
+      <point x="0.0" y="-116.0" />
+      <point x="4641.95738095238" y="1941.0" />
+      <point x="3838.670865139949" y="1941.0" />
+      <point x="62.80000000000001" y="324.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Helper" target="cs414f20.teamd.Gameplay.IllegalPositionException">
+      <point x="99.5" y="-170.5" />
+      <point x="1931.7930952380948" y="100.0" />
+      <point x="1743.1466893157738" y="100.0" />
+      <point x="18.46153846153811" y="15.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Pawn" target="cs414f20.teamd.Gameplay.ChessBoard">
+      <point x="114.0" y="105.0" />
+      <point x="1336.2549999999997" y="1022.0" />
+      <point x="1579.3999999999999" y="1022.0" />
+      <point x="-15.96428571428578" y="-215.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessBoard" target="cs414f20.teamd.Gameplay.Wizard">
+      <point x="90.46428571428578" y="-215.0" />
+      <point x="1685.8285714285714" y="1112.0" />
+      <point x="2070.5145238095233" y="1112.0" />
+      <point x="-56.59999999999991" y="60.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessBoard" target="cs414f20.teamd.Gameplay.Queen">
+      <point x="-101.10714285714278" y="-215.0" />
+      <point x="1494.2571428571428" y="1102.0" />
+      <point x="604.7549999999997" y="1102.0" />
+      <point x="74.0" y="82.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Rook" target="cs414f20.teamd.Gameplay.ChessPiece">
+      <point x="-129.19999999999982" y="60.5" />
+      <point x="769.0549999999998" y="1162.0" />
+      <point x="797.0349999999999" y="1162.0" />
+      <point x="797.0349999999999" y="1861.0" />
+      <point x="1115.1549999999993" y="1861.0" />
+      <point x="-17.2800000000002" y="-127.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Invites.SendInvite" target="cs414f20.teamd.DatabaseConnection.Database">
+      <point x="0.0" y="-94.5" />
+      <point x="3394.2073809523804" y="1951.0" />
+      <point x="3734.0041984732825" y="1951.0" />
+      <point x="-41.866666666666674" y="324.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessPiece.Color" target="cs414f20.teamd.Gameplay.ChessPiece">
+      <point x="-47.25" y="60.5" />
+      <point x="556.4098807426681" y="742.0" />
+      <point x="93.61499999999955" y="742.0" />
+      <point x="93.61499999999955" y="1921.0" />
+      <point x="1063.3149999999996" y="1921.0" />
+      <point x="-69.11999999999989" y="-127.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessBoard" target="cs414f20.teamd.Gameplay.Pawn">
+      <point x="-26.60714285714289" y="-215.0" />
+      <point x="1568.7571428571428" y="1032.0" />
+      <point x="1279.2549999999997" y="1032.0" />
+      <point x="57.0" y="105.0" />
+    </edge>
+    <edge source="cs414f20.teamd.CreateMatch.CreateMatch" target="cs414f20.teamd.DatabaseConnection.Database">
+      <point x="0.0" y="-105.5" />
+      <point x="5521.20738095238" y="1901.0" />
+      <point x="3922.404198473282" y="1901.0" />
+      <point x="146.53333333333336" y="324.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Invites.InvitesController" target="cs414f20.teamd.Invites.AcceptInvite">
+      <point x="-12.900000000000091" y="-71.0" />
+      <point x="3275.4323809523803" y="2278.0" />
+      <point x="3230.2073809523804" y="2278.0" />
+      <point x="48.5" y="72.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Wizard" target="cs414f20.teamd.Gameplay.ChessPiece">
+      <point x="56.59999999999991" y="60.5" />
+      <point x="2183.714523809523" y="1122.0" />
+      <point x="2207.694523809523" y="1122.0" />
+      <point x="2207.694523809523" y="1951.0" />
+      <point x="1227.4749999999995" y="1951.0" />
+      <point x="95.03999999999996" y="-127.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessBoard" target="cs414f20.teamd.Gameplay.King">
+      <point x="37.25" y="-215.0" />
+      <point x="1632.6142857142856" y="1062.0" />
+      <point x="1791.6549999999993" y="1062.0" />
+      <point x="-42.600000000000364" y="60.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Champion" target="cs414f20.teamd.Gameplay.ChessPiece.Color">
+      <point x="-127.34999999999991" y="-60.5" />
+      <point x="1518.2142857142856" y="2358.0" />
+      <point x="15.0" y="2358.0" />
+      <point x="15.0" y="722.0" />
+      <point x="529.4098807426681" y="722.0" />
+      <point x="-74.25" y="60.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessBoard" target="cs414f20.teamd.Gameplay.IllegalMoveException">
+      <point x="143.67857142857133" y="-215.0" />
+      <point x="1739.042857142857" y="1162.0" />
+      <point x="2435.25738095238" y="1162.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Champion" target="cs414f20.teamd.Gameplay.Helper">
+      <point x="99.05000000000018" y="-60.5" />
+      <point x="1744.6142857142856" y="2348.0" />
+      <point x="2571.75738095238" y="2348.0" />
+      <point x="2571.75738095238" y="501.0" />
+      <point x="1964.9597619047618" y="501.0" />
+      <point x="132.66666666666697" y="170.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessBoard" target="cs414f20.teamd.Gameplay.IllegalPositionException">
+      <point x="122.39285714285711" y="-215.0" />
+      <point x="1717.7571428571428" y="1142.0" />
+      <point x="2320.75738095238" y="1142.0" />
+      <point x="2320.75738095238" y="60.0" />
+      <point x="1816.992843161928" y="60.0" />
+      <point x="92.30769230769238" y="15.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessBoard" target="cs414f20.teamd.Gameplay.Knight">
+      <point x="-133.03571428571422" y="-215.0" />
+      <point x="1462.3285714285714" y="1132.0" />
+      <point x="261.855" y="1132.0" />
+      <point x="42.600000000000364" y="49.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.GameplayController" target="cs414f20.teamd.Gameplay.MovePiece">
+      <point x="-50.59999999999991" y="-60.0" />
+      <point x="2776.1573809523807" y="2358.0" />
+      <point x="2760.50738095238" y="2358.0" />
+      <point x="55.75" y="105.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Registration.RegistrationController" target="org.springframework.web.bind.annotation.RestController">
+      <point x="-76.66666666666674" y="-27.0" />
+      <point x="4768.290714285713" y="2338.0" />
+      <point x="4216.45738095238" y="2338.0" />
+      <point x="50.0" y="27.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Knight" target="cs414f20.teamd.Gameplay.IllegalPositionException">
+      <point x="-71.0" y="-49.5" />
+      <point x="148.25499999999965" y="712.0" />
+      <point x="114.73999999999978" y="712.0" />
+      <point x="114.73999999999978" y="60.0" />
+      <point x="1632.3774585465433" y="60.0" />
+      <point x="-92.30769230769238" y="15.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.MovePiece" target="cs414f20.teamd.DatabaseConnection.Database">
+      <point x="89.20000000000005" y="-105.0" />
+      <point x="2793.9573809523804" y="1901.0" />
+      <point x="3629.3375318066155" y="1901.0" />
+      <point x="-146.53333333333333" y="324.5" />
+    </edge>
+    <edge source="cs414f20.teamd.RetrievePlayers" target="cs414f20.teamd.DatabaseConnection.Database">
+      <point x="0.0" y="-61.0" />
+      <point x="3594.7073809523804" y="1961.0" />
+      <point x="3754.937531806616" y="1961.0" />
+      <point x="-20.933333333333337" y="324.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Helper" target="cs414f20.teamd.Gameplay.ChessPiece">
+      <point x="-185.73333333333358" y="170.5" />
+      <point x="1646.5597619047612" y="481.0" />
+      <point x="34.639999999999645" y="481.0" />
+      <point x="34.639999999999645" y="1951.0" />
+      <point x="1037.3949999999995" y="1951.0" />
+      <point x="-95.03999999999996" y="-127.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Lobby.LobbyController" target="org.springframework.web.bind.annotation.RestController">
+      <point x="63.666666666666515" y="-27.0" />
+      <point x="4089.874047619047" y="2358.0" />
+      <point x="4156.45738095238" y="2358.0" />
+      <point x="-10.0" y="27.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.MovePiece" target="cs414f20.teamd.Gameplay.ChessBoard">
+      <point x="-44.59999999999991" y="-105.0" />
+      <point x="2660.1573809523807" y="1911.0" />
+      <point x="1729.4642857142858" y="1911.0" />
+      <point x="134.10000000000014" y="215.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.GameplayController" target="cs414f20.teamd.Gameplay.Helper">
+      <point x="0.0" y="-60.0" />
+      <point x="2826.75738095238" y="481.0" />
+      <point x="2018.0264285714284" y="481.0" />
+      <point x="185.73333333333358" y="170.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Rook" target="cs414f20.teamd.Gameplay.IllegalPositionException">
+      <point x="0.0" y="-60.5" />
+      <point x="898.2549999999997" y="80.0" />
+      <point x="1669.3005354696204" y="80.0" />
+      <point x="-55.384615384615245" y="15.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Wizard" target="cs414f20.teamd.Gameplay.ChessBoard">
+      <point x="0.0" y="60.5" />
+      <point x="2127.1145238095232" y="1122.0" />
+      <point x="1696.4714285714285" y="1122.0" />
+      <point x="101.10714285714289" y="-215.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Wizard" target="cs414f20.teamd.Gameplay.IllegalPositionException">
+      <point x="0.0" y="-60.5" />
+      <point x="2127.1145238095232" y="80.0" />
+      <point x="1780.069766238851" y="80.0" />
+      <point x="55.384615384615245" y="15.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Wizard" target="cs414f20.teamd.Gameplay.Helper.PseudoTuple">
+      <point x="113.20000000000005" y="-60.5" />
+      <point x="2240.314523809523" y="762.0" />
+      <point x="2198.3645238095232" y="762.0" />
+      <point x="-20.25" y="49.5" />
+    </edge>
+    <edge source="cs414f20.teamd.MatchHistory.MatchHistoryController" target="cs414f20.teamd.MatchHistory.MatchHistory">
+      <point x="78.66666666666652" y="-27.0" />
+      <point x="4670.624047619047" y="2358.0" />
+      <point x="4691.95738095238" y="2358.0" />
+      <point x="50.0" y="116.0" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Bishop" target="cs414f20.teamd.Gameplay.ChessPiece.Color">
+      <point x="-107.66666666666697" y="-60.5" />
+      <point x="1438.5883333333327" y="722.0" />
+      <point x="650.9098807426681" y="722.0" />
+      <point x="47.25" y="60.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.King" target="cs414f20.teamd.Gameplay.ChessPiece.Color">
+      <point x="-71.0" y="-60.5" />
+      <point x="1763.2549999999997" y="712.0" />
+      <point x="664.4098807426681" y="712.0" />
+      <point x="60.75" y="60.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Pawn" target="cs414f20.teamd.Gameplay.ChessPiece">
+      <point x="-114.0" y="105.0" />
+      <point x="1108.2549999999997" y="1162.0" />
+      <point x="1132.4349999999995" y="1162.0" />
+      <point x="0.0" y="-127.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.ChessPiece" target="cs414f20.teamd.Gameplay.Helper">
+      <point x="-86.40000000000009" y="-127.5" />
+      <point x="1046.0349999999994" y="1941.0" />
+      <point x="43.279999999999745" y="1941.0" />
+      <point x="43.279999999999745" y="491.0" />
+      <point x="1673.093095238095" y="491.0" />
+      <point x="-159.19999999999982" y="170.5" />
+    </edge>
+    <edge source="cs414f20.teamd.Gameplay.Knight" target="cs414f20.teamd.Gameplay.ChessBoard">
+      <point x="85.19999999999982" y="49.5" />
+      <point x="304.4549999999995" y="1122.0" />
+      <point x="1472.9714285714285" y="1122.0" />
+      <point x="-122.39285714285711" y="-215.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.26724442872302795" x="2817.0" y="1260.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
